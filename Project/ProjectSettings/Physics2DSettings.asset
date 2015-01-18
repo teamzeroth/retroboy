@@ -12,7 +12,7 @@ Physics2DSettings:
   m_MaxAngularCorrection: 8
   m_MaxTranslationSpeed: 100
   m_MaxRotationSpeed: 360
-  m_MinPenetrationForPenalty: .00999999978
+  m_MinPenetrationForPenalty: 9.99999975e-05
   m_BaumgarteScale: .200000003
   m_BaumgarteTimeOfImpactScale: .75
   m_TimeToSleep: .5
