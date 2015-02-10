@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="4" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16">
+  <image source="tiles.png" width="256" height="256"/>
+ </tileset>
+ <layer name="Camada de Tiles 1" width="10" height="4">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgYGBgYoAAFgYEEIPSbFDaEYidgNgZD+0CxIFAHATEwXjoECBOBOIkIE7GQ6cAMQDRYQ2ioAAAAA==
+  </data>
+ </layer>
+</map>

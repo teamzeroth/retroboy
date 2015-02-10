@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="isometric" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="32">
+ <tileset firstgid="1" source="rltiles-pack/64x64.xml"/>
+ <tileset firstgid="193" source="Level1/brick4.xml"/>
+ <layer name="Floor" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy7ysDAcHUUj+JRPIpH8SgmEQMA5u5M4A==
+  </data>
+ </layer>
+ <layer name="Layer 0" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy7wMDAcAEPvkRAHhtGByewiBEDaGXeOSR8iQrmUQuMmjdq3qh5o+bR2jxqYgChgUNX
+  </data>
+ </layer>
+ <objectgroup name="Doors">
+  <object name="Treasure Door" x="128" y="96" width="32" height="32"/>
+  <object name="North" x="256" y="0" width="32" height="32">
+   <properties>
+    <property name="add component1" value="IsometricTrigger2DLoadMap"/>
+    <property name="send message1" value="SetNextMap|IsoDungeon"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="WallColliders">
+  <object x="160" y="32">
+   <polygon points="0,0 0,96 32,96 32,0"/>
+  </object>
+  <object x="32" y="96">
+   <polygon points="0,0 96,0 96,32 0,32"/>
+  </object>
+ </objectgroup>
+ <layer name="Layer 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYKA+2EkDM0fBKBgFo2AUDC4AAE4IALo=
+  </data>
+ </layer>
+ <imagelayer name="Test" x="32" y="32">
+  <image source="../../Sprites/healdrunks.png"/>
+ </imagelayer>
+</map>

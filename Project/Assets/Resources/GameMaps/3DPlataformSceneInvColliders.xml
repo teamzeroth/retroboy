@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="left-up" width="128" height="32" tilewidth="32" tileheight="32">
+ <objectgroup name="InvisibleColliders">
+  <object name="Big" type="Collider" x="0" y="0" width="4096" height="1024">
+   <properties>
+    <property name="layer" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

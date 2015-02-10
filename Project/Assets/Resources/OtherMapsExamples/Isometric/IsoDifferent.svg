@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="IsoDifferent.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4862676"
+     inkscape:cx="177.17957"
+     inkscape:cy="2.7904632"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="746"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#cccccc;stroke:none"
+       d="m 32,1052.3622 -32,32 32,32 32,-32 z"
+       id="path2985"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest01.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path2997"
+       d="m 96,1052.3622 -32,32 32,32 32,-32 z"
+       style="fill:#ff0000;stroke:none"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest01.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#0000ff;stroke:none"
+       d="m 160,1052.3622 -32,32 32,32 32,-32 z"
+       id="path2999"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest01.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#b3b3b3;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 50,1022.3622 50,15 -50,15 -50,-15 z"
+       id="rect3005"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path3010"
+       d="m 44,1116.3622 84,12 -44,52 -84,-12 z"
+       style="fill:#b3b3b3;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 172,1116.3622 84,12 -44,52 -84,-12 z"
+       id="path3012"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       id="path3014"
+       d="m 300,1116.3622 84,12 -44,52 -84,-12 z"
+       style="fill:#0000ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       style="fill:#008000;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 428,1116.3622 84,12 -44,52 -84,-12 z"
+       id="path3016"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:connector-curvature="0"
+       id="path3026"
+       d="m 150,1022.3622 50,15 -50,15 -50,-15 z"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+    <path
+       style="fill:#0000ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 250,1022.3622 50,15 -50,15 -50,-15 z"
+       id="path3028"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:connector-curvature="0"
+       id="path3030"
+       d="m 350,1022.3622 50,15 -50,15 -50,-15 z"
+       style="fill:#008000;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:connector-curvature="0"
+       id="path3032"
+       d="m 450,1022.3622 50,15 -50,15 -50,-15 z"
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 450,1024.3486 43.379,13.0136 -43.379,13.0136 -43.379,-13.0136 z"
+       id="path3034"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:connector-curvature="0"
+       id="path3036"
+       d="m 450,1024.4447 37.03548,11.1106 L 450,1046.6659 412.96452,1035.5553 z"
+       style="fill:#1a1a1a;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+    <path
+       style="fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 450,1024.2824 31.48492,9.4454 -31.48492,9.4454 -31.48492,-9.4454 z"
+       id="path3038"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:connector-curvature="0"
+       id="path3040"
+       d="m 450,1024.3377 25.53786,7.6613 -25.53786,7.6613 -25.53786,-7.6613 z"
+       style="fill:#808080;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+    <path
+       style="fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="m 450,1024.3087 18.4014,5.5204 -18.4014,5.5204 -18.4014,-5.5204 z"
+       id="path3042"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:connector-curvature="0"
+       id="path3046"
+       d="m 450,1024.2247 13.35518,4.0065 -13.35518,4.0065 -13.35518,-4.0065 z"
+       style="fill:#f2f2f2;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\Guilherme\Development\X-UniTMX-Unity2D\Assets\Resources\Examples\Isometric\differentIsoTest02.png"
+       inkscape:connector-curvature="0"
+       id="path3044"
+       d="m 450,1024.1406 3.26275,0.9788 -3.26275,0.9788 -3.26275,-0.9788 z"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none" />
+  </g>
+</svg>

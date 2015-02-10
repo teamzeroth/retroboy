@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="left-up" width="128" height="32" tilewidth="32" tileheight="32">
+ <objectgroup name="Plataforms">
+  <object name="Plataform" type="Collider" x="480" y="448" width="32" height="32">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="230,230,230,128"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="488" y="456" width="16" height="16">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="255,128,0"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="1024" y="320" width="288" height="32">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="200,200,40"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Trigger" x="992" y="288" width="352" height="96">
+   <properties>
+    <property name="add component1" value="ChangeProjectionCamera"/>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="246,0,219,128"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="1696" y="352" width="128" height="32">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="200,200,40"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="1664" y="320" width="192" height="96">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="230,230,230,128"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="1920" y="416" width="128" height="64">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="230,230,230,128"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="1936" y="432" width="96" height="32">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="255,0,0"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Trigger" x="2304" y="544" width="128" height="64">
+   <properties>
+    <property name="add component1" value="ChangeProjectionCamera"/>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="246,0,219,128"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="2320" y="560" width="96" height="32">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="0,255,128"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="3032" y="520" width="96" height="32">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="200,100,200"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Trigger" x="3016" y="504" width="128" height="64">
+   <properties>
+    <property name="add component1" value="ChangeProjectionCamera"/>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="246,0,219,128"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="3368" y="400" width="128" height="64">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="230,230,230,128"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="3384" y="416" width="96" height="32">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="37,89,220"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="2944" y="576" width="32" height="32">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="230,230,230,128"/>
+   </properties>
+  </object>
+  <object name="Plataform" type="Collider" x="2952" y="584" width="16" height="16">
+   <properties>
+    <property name="create mesh3d" value="true"/>
+    <property name="set material color" value="255,128,0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

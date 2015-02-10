@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="4" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16">
+  <image source="tiles.png" width="256" height="256"/>
+ </tileset>
+ <imagelayer name="BG">
+  <image source="icon.png"/>
+ </imagelayer>
+ <layer name="Background" width="10" height="4" visible="0">
+  <data encoding="base64">
+   ywAAAMwAAADNAAAAzgAAAM8AAADQAAAAywAAAMwAAADNAAAAzgAAANsAAADcAAAA3QAAAN4AAADfAAAA4AAAANsAAADcAAAA3QAAAN4AAADrAAAA7AAAAO0AAADuAAAA7wAAAPAAAADrAAAA7AAAAO0AAADuAAAA+wAAAPwAAAD9AAAA/gAAAP8AAAAAAQAA+wAAAPwAAAD9AAAA/gAAAA==
+  </data>
+ </layer>
+ <layer name="Midground" width="10" height="4">
+  <data encoding="base64">
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEAAABCAAAAQwAAAEIAAABDAAAAQgAAAEMAAABEAAAAAAAAAAAAAABRAAAAUgAAAFIAAABSAAAAUgAAAFIAAABSAAAAVAAAAAAAAAAAAAAAYQAAAGIAAABjAAAAYgAAAGMAAABiAAAAYwAAAGQAAAAAAAAAAAAAAA==
+  </data>
+ </layer>
+ <layer name="Foreground" width="10" height="4">
+  <data encoding="base64">
+   RgAAAEUAAABVAAAAZQAAAHUAAABmAAAAdgAAAFYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABHAAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARwAAAAAAAABHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEcAAAAAAAAARwAAAA==
+  </data>
+ </layer>
+ <objectgroup name="Colliders">
+  <object x="112" y="16" width="16" height="48"/>
+  <object x="144" y="32" width="16" height="32"/>
+  <object x="7" y="9">
+   <polyline points="0,0 9,-6 104,-6 114,-1"/>
+  </object>
+  <object x="16" y="48" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object x="48" y="48" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object x="80" y="48" width="16" height="16">
+   <ellipse/>
+  </object>
+  <object x="8" y="22">
+   <polygon points="0,0 33,-2 95,-1 101,15 4,17"/>
+  </object>
+  <object x="16" y="32" width="80" height="16">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Prefabs">
+  <object name="Red Potion2" type="NoCollider" x="96" y="-16" width="16" height="16">
+   <properties>
+    <property name="0-prefab" value="HealDrunks_Red"/>
+    <property name="0-prefab add collider" value="false"/>
+    <property name="0-prefab detach" value="true"/>
+    <property name="0-prefab path" value="Prefabs/"/>
+    <property name="0-prefab z depth" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
