@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="isometric" renderorder="right-down" width="30" height="43" tilewidth="256" tileheight="160" nextobjectid="154">
+<map version="1.0" orientation="isometric" renderorder="right-down" width="30" height="43" tilewidth="256" tileheight="160" nextobjectid="156">
  <tileset firstgid="1" name="tiledmap (1)" tilewidth="256" tileheight="160">
   <image source="tiledmap.png" width="768" height="640"/>
   <tile id="4">
@@ -139,7 +139,7 @@
    <tile gid="2"/>
    <tile gid="1"/>
    <tile gid="2"/>
-   <tile gid="1"/>
+   <tile gid="4"/>
    <tile gid="2"/>
    <tile gid="1"/>
    <tile gid="2"/>
@@ -1377,6 +1377,15 @@
   <object id="79" x="2240" y="120" width="2280" height="40"/>
   <object id="80" x="2200" y="120" width="40" height="840"/>
  </objectgroup>
+ <objectgroup name="Doors">
+  <object id="154" x="3192.71" y="482.286" width="177.379" height="156.511">
+   <properties>
+    <property name="add component1" value="IsometricTrigger2DLoadMap"/>
+    <property name="send message1" value="SetNextMap|teste"/>
+   </properties>
+  </object>
+  <object id="155" x="3907.83" y="-163.833"/>
+ </objectgroup>
  <layer name="Layer 1" width="30" height="43">
   <data>
    <tile gid="0"/>
@@ -1489,7 +1498,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="4"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>

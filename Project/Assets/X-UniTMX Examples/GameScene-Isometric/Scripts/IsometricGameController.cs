@@ -84,10 +84,12 @@ namespace X_UniTMX.Internal
 			MapObjectLayer mol = _currentMap.GetObjectLayer("Doors");
 			for (int i = 0; i < mol.Objects.Count; i++)
 			{
-				// This is a Left Door - X = 0
+                print(_currentMap);
+                print(fromDoorIndex);
+                // This is a Left Door - X = 0
 				if (mol.Objects[i].Bounds.x < 1)
 				{
-					// And we came from a Right Door!
+                    // And we came from a Right Door!
 					if (fromDoorIndex.x >= lastMapWidth - 1)
 					{
 						_player.transform.localPosition = _currentMap.TiledPositionToWorldPoint(1.5f, mol.Objects[i].Bounds.y + 0.5f);
@@ -96,8 +98,8 @@ namespace X_UniTMX.Internal
 				// This is a Right Door - X = _currentMap.Width - 1
 				if (mol.Objects[i].Bounds.x >= _currentMap.Width - 1)
 				{
-					// And we came from a Left Door!
-					if (fromDoorIndex.x < 1)
+                    // And we came from a Left Door!
+                    if (fromDoorIndex.x < 1)
 					{
 						_player.transform.localPosition = _currentMap.TiledPositionToWorldPoint(mol.Objects[i].Bounds.x - 1, mol.Objects[i].Bounds.y + 0.5f);
 					}
@@ -105,7 +107,7 @@ namespace X_UniTMX.Internal
 				// This is an Up Door - Y = 0
 				if (mol.Objects[i].Bounds.y < 1)
 				{
-					// And we came from a Down Door!
+                    // And we came from a Down Door!
 					if (fromDoorIndex.y >= lastMapHeight - 1)
 					{
 						_player.transform.localPosition = _currentMap.TiledPositionToWorldPoint(mol.Objects[i].Bounds.x + 0.5f, 1.4f);
@@ -114,14 +116,15 @@ namespace X_UniTMX.Internal
 				// This is a Down Door - Y = _currentMap.Height - 1
 				if (mol.Objects[i].Bounds.y >= _currentMap.Height - 1)
 				{
-					// And we came from an Up Door!
+                    // And we came from an Up Door!
 					if (fromDoorIndex.y < 1)
 					{
 						_player.transform.localPosition = _currentMap.TiledPositionToWorldPoint(mol.Objects[i].Bounds.x, mol.Objects[i].Bounds.y - 0.5f);
 					}
 				}
 			}
-
+            // POG do prototipo
+            //_player.transform.localPosition = _currentMap.TiledPositionToWorldPoint(mol.Objects[0].Bounds.x, mol.Objects[0].Bounds.y - 0.5f);
 			_player.gameObject.GetComponent<X_UniTMX.Utils.SortingOrderAutoCalculator>().SetMap(_currentMap);
 		}
 	}

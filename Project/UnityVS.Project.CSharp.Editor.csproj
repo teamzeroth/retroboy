@@ -158,6 +158,7 @@
     <None Include="Assets\Resources\OtherMapsExamples\stress-test.xml" />
     <None Include="Assets\Resources\OtherMapsExamples\stress-test2.xml" />
     <None Include="Assets\Resources\OtherMapsExamples\tileset_forTiled.txt" />
+    <None Include="Assets\Resources\teste.xml" />
     <None Include="Assets\X-UniTMX\ObjectTypesForTiled.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
