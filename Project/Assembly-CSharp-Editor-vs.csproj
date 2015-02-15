@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>J:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>J:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +88,7 @@
      <None Include="Assets\Resources\OtherMapsExamples\small_test-Base64-zlib.xml" />
      <None Include="Assets\Resources\OtherMapsExamples\ortho-rotation-test.xml" />
      <None Include="Assets\Resources\OtherMapsExamples\Isometric\DifferentIsoTest01.xml" />
+     <None Include="Assets\Resources\teste.xml" />
      <None Include="Assets\Resources\GameMaps\FoldersTest\Level1\StaggeredDungeon.xml" />
      <None Include="Assets\Resources\OtherMapsExamples\orthogonal-test4.xml" />
      <None Include="Assets\Resources\GameMaps\FoldersTest\IsoDungeon2.xml" />
@@ -123,28 +124,28 @@
      <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\brick2.xml" />
      <None Include="Assets\Resources\OtherMapsExamples\small_test_multiple_tilesets.xml" />
  <Reference Include="Assembly-UnityScript">
- <HintPath>J:/TZeroth/RetroBoy/Project/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ <HintPath>C:/Users/mithr4nd1r/Dropbox/Superior/Codigos/RetroBoy/Project/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>J:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>J:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/Editor/UnityEditor.UI.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
- <HintPath>J:/TZeroth/RetroBoy/Project/Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+ <HintPath>C:/Users/mithr4nd1r/Dropbox/Superior/Codigos/RetroBoy/Project/Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
  </Reference>
  <Reference Include="SyntaxTree.VisualStudio.Unity.Messaging">
- <HintPath>J:/TZeroth/RetroBoy/Project/Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Messaging.dll</HintPath>
+ <HintPath>C:/Users/mithr4nd1r/Dropbox/Superior/Codigos/RetroBoy/Project/Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Messaging.dll</HintPath>
  </Reference>
  <Reference Include="UnityVS.VersionSpecific">
- <HintPath>J:/TZeroth/RetroBoy/Project/Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Graphs">
- <HintPath>J:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+ <HintPath>C:/Users/mithr4nd1r/Dropbox/Superior/Codigos/RetroBoy/Project/Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll</HintPath>
  </Reference>
  <Reference Include="Ionic.Zlib">
- <HintPath>J:/TZeroth/RetroBoy/Project/Assets/X-UniTMX/Ionic.Zlib.dll</HintPath>
+ <HintPath>C:/Users/mithr4nd1r/Dropbox/Superior/Codigos/RetroBoy/Project/Assets/X-UniTMX/Ionic.Zlib.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

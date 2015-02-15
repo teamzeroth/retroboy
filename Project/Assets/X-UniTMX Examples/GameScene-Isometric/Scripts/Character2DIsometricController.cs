@@ -116,5 +116,12 @@ namespace X_UniTMX.Internal
 				_velocityVector = Vector3.ClampMagnitude(vetorHorizontal + vetorVertical, _velocity); ;
 			}
 		}
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            print(collision.gameObject.name + "|" + _stateAnimation);
+            if (collision.gameObject.name.Contains("Left") && _stateAnimation == EnumPlayerState.LEFT)
+                this.transform.position = new Vector3(this.transform.position.x - 1.25f, this.transform.position.y, this.transform.position.z);
+        }
 	}
 }

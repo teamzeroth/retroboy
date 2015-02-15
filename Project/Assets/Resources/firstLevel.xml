@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="isometric" renderorder="right-down" width="30" height="43" tilewidth="256" tileheight="160" nextobjectid="156">
+<map version="1.0" orientation="isometric" renderorder="right-down" width="30" height="43" tilewidth="256" tileheight="160" nextobjectid="172">
  <tileset firstgid="1" name="tiledmap (1)" tilewidth="256" tileheight="160">
   <image source="tiledmap.png" width="768" height="640"/>
   <tile id="4">
@@ -203,7 +203,7 @@
    <tile gid="2"/>
    <tile gid="1"/>
    <tile gid="2"/>
-   <tile gid="1"/>
+   <tile gid="10"/>
    <tile gid="2"/>
    <tile gid="1"/>
    <tile gid="2"/>
@@ -1321,7 +1321,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Walls">
+ <objectgroup name="WallColliders">
   <object id="10" x="3200" y="5760" width="40" height="1000"/>
   <object id="11" x="3120" y="6800"/>
   <object id="12" x="2240" y="6720" width="1000" height="40"/>
@@ -1378,13 +1378,28 @@
   <object id="80" x="2200" y="120" width="40" height="840"/>
  </objectgroup>
  <objectgroup name="Doors">
-  <object id="154" x="3192.71" y="482.286" width="177.379" height="156.511">
+  <object id="154" name="Center" x="3198.24" y="481.671" width="177.379" height="156.511">
    <properties>
     <property name="add component1" value="IsometricTrigger2DLoadMap"/>
     <property name="send message1" value="SetNextMap|teste"/>
    </properties>
   </object>
-  <object id="155" x="3907.83" y="-163.833"/>
+ </objectgroup>
+ <objectgroup name="Obstacles">
+  <object id="142" x="2885.38" y="5920.68" width="156.061" height="322.727"/>
+  <object id="145" x="2880.95" y="2055.62" width="319.107" height="23.4717"/>
+  <object id="146" x="3130.36" y="1889.35" width="1.43338" height="1.43338"/>
+  <object id="148" x="3173.81" y="1759.9" width="25.5321" height="318.48"/>
+  <object id="149" x="2914.46" y="1832.91"/>
+  <object id="151" x="2401.12" y="6544.88" width="319.5" height="14.5"/>
+  <object id="152" x="2702.12" y="6240.88" width="17.875" height="319.125"/>
+  <object id="153" x="3290.48" y="3488.8"/>
+  <object id="157" x="3883.27" y="883.797"/>
+  <object id="163" x="3960.58" y="862.204"/>
+  <object id="168" x="3932.79" y="853.943"/>
+  <object id="169" x="3951.42" y="866.559"/>
+  <object id="170" x="3918.07" y="830.214"/>
+  <object id="171" name="Left" x="3878.67" y="809.373" width="142.841" height="35.4738" rotation="-291.368"/>
  </objectgroup>
  <layer name="Layer 1" width="30" height="43">
   <data>
@@ -2680,16 +2695,6 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Obstacles">
-  <object id="142" x="2885.38" y="5920.68" width="156.061" height="322.727"/>
-  <object id="145" x="2880.95" y="2055.62" width="319.107" height="23.4717"/>
-  <object id="146" x="3130.36" y="1889.35" width="1.43338" height="1.43338"/>
-  <object id="148" x="3173.81" y="1759.9" width="25.5321" height="318.48"/>
-  <object id="149" x="2914.46" y="1832.91"/>
-  <object id="151" x="2401.12" y="6544.88" width="319.5" height="14.5"/>
-  <object id="152" x="2702.12" y="6240.88" width="17.875" height="319.125"/>
-  <object id="153" x="3290.48" y="3488.8"/>
- </objectgroup>
  <objectgroup name="Player" visible="0">
   <object id="2" x="2560" y="6240" width="160" height="160"/>
   <object id="3" x="2440" y="5680"/>
