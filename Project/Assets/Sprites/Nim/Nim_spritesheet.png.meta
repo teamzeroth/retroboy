@@ -1,0 +1,535 @@
+fileFormatVersion: 2
+guid: 12576537fdf5c194f92a7d5cbb065883
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: walk_N_0
+    21300002: walk_N_1
+    21300004: walk_N_2
+    21300006: walk_N_3
+    21300008: walk_N_3
+    21300010: walk_N_5
+    21300012: walk_N_6
+    21300014: walk_N_7
+    21300016: walk_S_0
+    21300018: walk_S_1
+    21300020: walk_S_2
+    21300022: walk_S_3
+    21300024: walk_S_4
+    21300026: walk_S_5
+    21300028: walk_S_6
+    21300030: walk_S_7
+    21300032: walk_E_0
+    21300034: walk_E_1
+    21300036: walk_E_2
+    21300038: walk_E_3
+    21300040: walk_E_4
+    21300042: walk_E_5
+    21300044: walk_E_6
+    21300046: walk_E_7
+    21300048: idle_E_0
+    21300050: idle_E_1
+    21300052: idle_E_2
+    21300054: idle_E_3
+    21300056: idle_S_0
+    21300058: idle_S_1
+    21300060: idle_S_2
+    21300062: idle_S_3
+    21300064: idle_N_0
+    21300066: idle_N_1
+    21300068: idle_N_2
+    21300070: idle_N_3
+    21300072: draw_E_0
+    21300074: draw_E_1
+    21300076: draw_E_2
+    21300078: draw_E_0
+    21300080: draw_E_4
+    21300082: draw_E_5
+    21300084: draw_E_6
+    21300086: draw_E_7
+    21300088: walk_E_3
+    21300090: idle_E_7
+    21300092: draw_E_3
+    21300094: walk_N_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -2
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 25
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: walk_N_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 324
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_N_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 324
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_N_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 324
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_N_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 324
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_N_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 324
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_N_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 324
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_N_6
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 324
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_N_7
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 324
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_S_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 270
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_S_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 270
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_S_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 270
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_S_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 270
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_S_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 270
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_S_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 270
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_S_6
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 270
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_S_7
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 270
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_E_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 216
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_E_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 216
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_E_3
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 216
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_E_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 216
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_E_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 216
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_E_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 216
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_E_6
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 216
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_E_7
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 216
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_E_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 162
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_E_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 162
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_E_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 162
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_E_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 162
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_S_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 108
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_S_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 108
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_S_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 108
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_S_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 108
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_N_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 54
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_N_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 54
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_N_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 54
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle_N_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 54
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_E_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_E_1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_E_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_E_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_E_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_E_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 0
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_E_6
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_E_7
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 0
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
