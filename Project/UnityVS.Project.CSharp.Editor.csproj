@@ -16,7 +16,7 @@
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Editor:5</UnityProjectType>
-    <UnityBuildTarget>WebPlayer:6</UnityBuildTarget>
+    <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>4.6.2f1</UnityVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -25,7 +25,7 @@
     <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>DEBUG;TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_WEBPLAYER;WEBPLUG;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,7 +33,7 @@
     <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_WEBPLAYER;WEBPLUG;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+    <DefineConstants>TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -70,9 +70,6 @@
     <Reference Include="Ionic.Zlib">
       <HintPath>Assets\X-UniTMX\Ionic.Zlib.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-UnityScript">
-      <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityVS.Project.CSharp.csproj">
@@ -81,84 +78,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\X-UniTMX Examples\OtherExampleScenes\Scripts\Editor\ExamplesEditor.cs" />
     <Compile Include="Assets\X-UniTMX\Editor\GUIHelpers.cs" />
     <Compile Include="Assets\X-UniTMX\Editor\TiledMapComponentEditor.cs" />
     <Compile Include="Assets\X-UniTMX\Editor\TiledMapObjectsWindow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Resources\firstLevel.xml" />
-    <None Include="Assets\Resources\GameMaps\3DPlataformSceneInvColliders.xml" />
-    <None Include="Assets\Resources\GameMaps\3DPlataformSceneMain.xml" />
-    <None Include="Assets\Resources\GameMaps\3DPlataformScenePlataforms1.xml" />
-    <None Include="Assets\Resources\GameMaps\3DPlataformScenePlataforms2.xml" />
-    <None Include="Assets\Resources\GameMaps\Desert1.xml" />
-    <None Include="Assets\Resources\GameMaps\Desert2.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\IsoDungeon.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\IsoDungeon2.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\IsoDungeon3.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\IsoDungeon4.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\IsoDungeon5.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\Level1\brick4.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\Level1\StaggeredDungeon.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\64x64.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\brick.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\brick1.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\brick2.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\brick3.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\brick4.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\brick5.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\brick6.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\catacomb.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\cocutos.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\crypt.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\gallery.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\gehena.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\hive.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\lair.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\lapis.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\moss.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\mucus.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\normal.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\pandem1.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\readme.txt" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\rock.xml" />
-    <None Include="Assets\Resources\GameMaps\FoldersTest\rltiles-pack\tunnel.xml" />
-    <None Include="Assets\Resources\GameMaps\Game2DPlataformerWithTiledCollision.xml" />
-    <None Include="Assets\Resources\GameMaps\minimalist-collision.xml" />
-    <None Include="Assets\Resources\GameMaps\PlataformScene.xml" />
-    <None Include="Assets\Resources\GameMaps\TileFlipTest.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\Isometric\DifferentIsoTest01.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\Isometric\DifferentIsoTest02.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\Isometric\Home.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\Isometric\iso-staggered-test.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\Isometric\iso-test2.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\Isometric\iso-test-objectgroup.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\orthogonal-test1.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\orthogonal-test1_tileset.txt" />
-    <None Include="Assets\Resources\OtherMapsExamples\orthogonal-test3.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\orthogonal-test4.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\orthogonal-test5.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\ortho-objects.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\ortho-rotation-test.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\ortho-rotation-test2.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\ortho-tile-property.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\RenderOrderTest\LeftBottom.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\RenderOrderTest\LeftTop.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\RenderOrderTest\RightBottom.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\RenderOrderTest\RightTop.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\small_test.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\small_test_multiple_tilesets.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\small_test_multipleLayers.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\small_test-Base64-gzip.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\small_test-Base64-uncompressed.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\small_test-Base64-zlib.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\small_test-CSV.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\small_test-tile_collisions.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\stress-test.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\stress-test2.xml" />
-    <None Include="Assets\Resources\OtherMapsExamples\tileset_forTiled.txt" />
-    <None Include="Assets\Resources\teste.xml" />
+    <None Include="Assets\Resources\Maps\firstLevel.xml" />
+    <None Include="Assets\Resources\Maps\teste.xml" />
     <None Include="Assets\X-UniTMX\ObjectTypesForTiled.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
