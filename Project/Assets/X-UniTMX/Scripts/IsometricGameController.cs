@@ -84,8 +84,6 @@ namespace X_UniTMX.Internal
 			MapObjectLayer mol = _currentMap.GetObjectLayer("Doors");
 			for (int i = 0; i < mol.Objects.Count; i++)
 			{
-                print(_currentMap);
-                print(fromDoorIndex);
                 // This is a Left Door - X = 0
 				if (mol.Objects[i].Bounds.x < 1)
 				{
