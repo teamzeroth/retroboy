@@ -36,7 +36,7 @@ namespace X_UniTMX.Internal
 			_horizontalAxisAbsolute = 0,
 			_verticalAxis = 0,
 			_verticalAxisAbsolute = 0;
-
+        
 		// Use this for initialization
 		void Start()
 		{
@@ -52,6 +52,8 @@ namespace X_UniTMX.Internal
 		void Update()
 		{
 			UpdateInput();
+            if (Input.GetKeyDown(KeyCode.Space))
+                this.gameObject.transform.Find("Dialog").gameObject.SetActive(true);
 		}
 
 		void FixedUpdate()
