@@ -50,6 +50,54 @@ TextureImporter:
     21300090: idle_E_7
     21300092: draw_E_3
     21300094: walk_N_4
+    21300096: draw_S_0
+    21300098: draw_S_1
+    21300100: draw_S_2
+    21300102: draw_S_3
+    21300104: draw_S_4
+    21300106: draw_S_5
+    21300108: draw_S_6
+    21300110: draw_S_7
+    21300112: draw_N_0
+    21300114: draw_N_1
+    21300116: draw_N_2
+    21300118: draw_N_3
+    21300120: draw_N_4
+    21300122: draw_N_5
+    21300124: draw_N_6
+    21300126: draw_N_7
+    21300128: draw_SE_0
+    21300130: draw_SE_1
+    21300132: draw_SE_2
+    21300134: draw_SE_3
+    21300136: draw_SE_4
+    21300138: draw_SE_5
+    21300140: draw_SE_6
+    21300142: draw_SE_7
+    21300144: draw_NE_0
+    21300146: draw_NE_1
+    21300148: draw_NE_2
+    21300150: draw_NE_3
+    21300152: draw_NE_4
+    21300154: draw_NE_5
+    21300156: draw_NE_6
+    21300158: draw_NE_7
+    21300160: shoot_E_0
+    21300162: shoot_E_1
+    21300164: shoot_E_2
+    21300166: shoot_E_3
+    21300168: shoot_E_4
+    21300170: shoot_E_5
+    21300172: shoot_E_6
+    21300174: shoot_E_7
+    21300176: spark_E_0
+    21300178: spark_E_1
+    21300180: spark_E_2
+    21300182: Nim_spritesheet_87
+    21300184: Nim_spritesheet_88
+    21300186: shoot_3
+    21300188: shoot_2
+    21300190: shoot_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -95,79 +143,79 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 324
-        width: 50
-        height: 54
+        y: 840
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_N_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 324
-        width: 50
-        height: 54
+        x: 60
+        y: 840
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_N_2
       rect:
         serializedVersion: 2
-        x: 100
-        y: 324
-        width: 50
-        height: 54
+        x: 120
+        y: 840
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_N_3
       rect:
         serializedVersion: 2
-        x: 150
-        y: 324
-        width: 50
-        height: 54
+        x: 180
+        y: 840
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_N_4
       rect:
         serializedVersion: 2
-        x: 200
-        y: 324
-        width: 50
-        height: 54
+        x: 240
+        y: 840
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_N_5
       rect:
         serializedVersion: 2
-        x: 250
-        y: 324
-        width: 50
-        height: 54
+        x: 300
+        y: 840
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_N_6
       rect:
         serializedVersion: 2
-        x: 300
-        y: 324
-        width: 50
-        height: 54
+        x: 360
+        y: 840
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_N_7
       rect:
         serializedVersion: 2
-        x: 350
-        y: 324
-        width: 50
-        height: 54
+        x: 420
+        y: 840
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,79 +223,79 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 270
-        width: 50
-        height: 54
+        y: 780
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_S_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 270
-        width: 50
-        height: 54
+        x: 60
+        y: 780
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_S_2
       rect:
         serializedVersion: 2
-        x: 100
-        y: 270
-        width: 50
-        height: 54
+        x: 120
+        y: 780
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_S_3
       rect:
         serializedVersion: 2
-        x: 150
-        y: 270
-        width: 50
-        height: 54
+        x: 180
+        y: 780
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_S_4
       rect:
         serializedVersion: 2
-        x: 200
-        y: 270
-        width: 50
-        height: 54
+        x: 240
+        y: 781
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_S_5
       rect:
         serializedVersion: 2
-        x: 250
-        y: 270
-        width: 50
-        height: 54
+        x: 300
+        y: 780
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_S_6
       rect:
         serializedVersion: 2
-        x: 300
-        y: 270
-        width: 50
-        height: 54
+        x: 360
+        y: 780
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_S_7
       rect:
         serializedVersion: 2
-        x: 350
-        y: 270
-        width: 50
-        height: 54
+        x: 420
+        y: 780
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,79 +303,79 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 216
-        width: 50
-        height: 54
+        y: 720
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_E_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 216
-        width: 50
-        height: 54
+        x: 60
+        y: 720
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: walk_E_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 720
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_E_3
       rect:
         serializedVersion: 2
-        x: 100
-        y: 216
-        width: 50
-        height: 54
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: walk_E_3
-      rect:
-        serializedVersion: 2
-        x: 150
-        y: 216
-        width: 50
-        height: 54
+        x: 180
+        y: 720
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_E_4
       rect:
         serializedVersion: 2
-        x: 200
-        y: 216
-        width: 50
-        height: 54
+        x: 240
+        y: 720
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_E_5
       rect:
         serializedVersion: 2
-        x: 250
-        y: 216
-        width: 50
-        height: 54
+        x: 300
+        y: 720
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_E_6
       rect:
         serializedVersion: 2
-        x: 300
-        y: 216
-        width: 50
-        height: 54
+        x: 360
+        y: 720
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: walk_E_7
       rect:
         serializedVersion: 2
-        x: 350
-        y: 216
-        width: 50
-        height: 54
+        x: 420
+        y: 720
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -335,39 +383,39 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 162
-        width: 50
-        height: 54
+        y: 660
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle_E_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 162
-        width: 50
-        height: 54
+        x: 60
+        y: 660
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle_E_2
       rect:
         serializedVersion: 2
-        x: 100
-        y: 162
-        width: 50
-        height: 54
+        x: 120
+        y: 660
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle_E_3
       rect:
         serializedVersion: 2
-        x: 150
-        y: 162
-        width: 50
-        height: 54
+        x: 180
+        y: 660
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -375,39 +423,39 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 108
-        width: 50
-        height: 54
+        y: 600
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle_S_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 108
-        width: 50
-        height: 54
+        x: 60
+        y: 600
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle_S_2
       rect:
         serializedVersion: 2
-        x: 100
-        y: 108
-        width: 50
-        height: 54
+        x: 120
+        y: 600
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle_S_3
       rect:
         serializedVersion: 2
-        x: 150
-        y: 108
-        width: 50
-        height: 54
+        x: 180
+        y: 600
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -415,39 +463,39 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 54
-        width: 50
-        height: 54
+        y: 540
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle_N_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 54
-        width: 50
-        height: 54
+        x: 60
+        y: 540
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle_N_2
       rect:
         serializedVersion: 2
-        x: 100
-        y: 54
-        width: 50
-        height: 54
+        x: 120
+        y: 540
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle_N_3
       rect:
         serializedVersion: 2
-        x: 150
-        y: 54
-        width: 50
-        height: 54
+        x: 180
+        y: 540
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -455,79 +503,559 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 50
-        height: 54
+        y: 480
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: draw_E_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 0
-        width: 50
-        height: 54
+        x: 60
+        y: 480
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: draw_E_2
       rect:
         serializedVersion: 2
-        x: 100
-        y: 0
-        width: 50
-        height: 54
+        x: 120
+        y: 480
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: draw_E_3
       rect:
         serializedVersion: 2
-        x: 150
-        y: 0
-        width: 50
-        height: 54
+        x: 180
+        y: 480
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: draw_E_4
       rect:
         serializedVersion: 2
-        x: 200
-        y: 0
-        width: 50
-        height: 54
+        x: 240
+        y: 480
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: draw_E_5
       rect:
         serializedVersion: 2
-        x: 250
-        y: 0
-        width: 50
-        height: 54
+        x: 300
+        y: 480
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: draw_E_6
       rect:
         serializedVersion: 2
-        x: 300
-        y: 0
-        width: 50
-        height: 54
+        x: 360
+        y: 480
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: draw_E_7
       rect:
         serializedVersion: 2
-        x: 350
+        x: 420
+        y: 480
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_S_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 420
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_S_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 420
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_S_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 420
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_S_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 420
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_S_4
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 420
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_S_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 420
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_S_6
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 419
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_S_7
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 420
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_N_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 360
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_N_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 360
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_N_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 360
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_N_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 360
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_N_4
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 360
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_N_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 360
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_N_6
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 360
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_N_7
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 360
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_SE_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_SE_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 300
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_SE_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 300
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_SE_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 300
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_SE_4
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 300
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_SE_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 298
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_SE_6
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 300
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_SE_7
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 300
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_NE_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_NE_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 240
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_NE_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 240
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_NE_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 240
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_NE_4
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 240
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_NE_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 240
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_NE_6
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 240
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: draw_NE_7
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 240
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_E_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_E_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_E_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_E_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_E_4
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_E_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_E_6
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_E_7
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 180
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spark_E_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spark_E_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 120
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: spark_E_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 120
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Nim_spritesheet_87
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 60
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Nim_spritesheet_88
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 60
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_3
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
-        width: 50
-        height: 54
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_2
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shoot_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 60
+        height: 60
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

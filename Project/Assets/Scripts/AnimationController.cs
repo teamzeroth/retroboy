@@ -6,7 +6,12 @@ public class AnimationController : MonoBehaviour {
     public float speed = 10f;
     public float multiplier = 10f;
 
+    [HideInInspector]
+    public bool flipped = false;
+
     Animator anim;
+    float deadVertical;
+    float deadHorizontal = 1;
 
     /* Getters And Setters
      * ********************/
@@ -16,10 +21,19 @@ public class AnimationController : MonoBehaviour {
             //if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
                //return true;
 
-            if ((Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical"))) > 0.1f)
+            if ((Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical"))) > 0.3f) {
+                deadVertical = Input.GetAxis("Vertical");
+                deadHorizontal = Input.GetAxis("Horizontal");
                 return true;
-            
+            }
+           
             return false;
+        }
+    }
+
+    public bool onShoot {
+        get {
+            return Input.GetButton("Fire1");
         }
     }
 
@@ -48,7 +62,15 @@ public class AnimationController : MonoBehaviour {
 
         Move(moveVec);
         Animation(mainAxis, moveVec);
-        FlipAnimation(moveVec);
+
+        if(onAnyMoveButton){
+            if(Mathf.Abs(moveVec.x) >= Mathf.Abs(moveVec.y) * 0.42f){
+                if(!flipped && moveVec.x < 0) Flip();
+                if(flipped && moveVec.x > 0) Flip();
+            }else{
+                if (flipped) Flip();
+            }
+        }
     }
 
     public void Move(Vector2 moveVec) {
@@ -60,7 +82,12 @@ public class AnimationController : MonoBehaviour {
         }else
             anim.speed = 1;
 
-        Vector3 deltaMv = moveVec * speed;
+        Vector3 deltaMv;
+        if (!onShoot)
+            deltaMv = moveVec * speed;
+        else
+            deltaMv = Vector3.zero;
+
         rigidbody2D.velocity = deltaMv;
     }
 
@@ -70,17 +97,24 @@ public class AnimationController : MonoBehaviour {
         /// If the player just press any direction button and release fast the estate dont will change to Run Blend
         //bool tapCheck = (Mathf.Abs(moveVec.x) + Mathf.Abs(moveVec.y)) > 0.1f;
         anim.SetBool("OnMoving", onAnyMoveButton);
+        anim.SetBool("OnShoot", onShoot);
 
         anim.SetFloat("MainAxis", mainAxis);
-        anim.SetFloat("Horizontal", moveVec.x);
-        anim.SetFloat("Vertical", moveVec.y);
+
+        if (!onShoot){
+            anim.SetFloat("Horizontal", moveVec.x);
+            anim.SetFloat("Vertical", moveVec.y);
+        }else{
+            anim.SetFloat("Horizontal", deadHorizontal);
+            anim.SetFloat("Vertical", deadVertical);
+        }
     }
 
-    public void FlipAnimation(Vector2 moveVec) {
-        if (onAnyMoveButton)
-            if(Mathf.Abs(moveVec.x) >= Mathf.Abs(moveVec.y) && moveVec.x < 0)
-                transform.localScale = new Vector3(-1, 1, 1);
-            else
-                transform.localScale = new Vector3(1, 1, 1);
+    public void Flip() {
+        flipped = !flipped;
+
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
 }

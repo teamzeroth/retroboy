@@ -15,6 +15,7 @@ public class BetaMovimetation : MonoBehaviour {
 
     private float angle = 0;
     private float lightAngle = 0;
+    private bool flipped = false;
 
     private GameObject _lightSprite;
 
@@ -36,6 +37,9 @@ public class BetaMovimetation : MonoBehaviour {
         );
 
         transform.position = curPos + orbi * distance;
+
+        if (player.GetComponent<AnimationController>().flipped != flipped)
+            Flip();
     }
 
     void Update() {
@@ -43,14 +47,22 @@ public class BetaMovimetation : MonoBehaviour {
         lightAngle = lightAngle % 360;
 
         Vector3 curAngle = _lightSprite.transform.localEulerAngles;
-        curAngle.z = -lightAngle;
+        curAngle.z = flipped ? lightAngle : -lightAngle;
 
         _lightSprite.transform.localEulerAngles = curAngle;
         _lightSprite.particleSystem.startRotation = lightAngle * Mathf.Deg2Rad;
 
-        if (player.GetComponent<AnimationController>().onAnyMoveButton)
-            _lightSprite.particleSystem.startLifetime = 1;
-        else
-            _lightSprite.particleSystem.startLifetime = 0;
+        //if (player.GetComponent<AnimationController>().onAnyMoveButton)
+        _lightSprite.particleSystem.startLifetime = 1;
+        //else
+           //_lightSprite.particleSystem.startLifetime = 0;
+    }
+
+    public void Flip() {
+        flipped = !flipped;
+
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
 }

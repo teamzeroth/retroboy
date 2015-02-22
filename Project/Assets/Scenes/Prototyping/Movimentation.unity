@@ -1590,6 +1590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   multiplier: 10
+  flipped: 0
 --- !u!95 &1256567210
 Animator:
   serializedVersion: 3
@@ -1848,7 +1849,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437472, guid: 95013e725dcaf7149990b8096fece2fe, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5837472, guid: 95013e725dcaf7149990b8096fece2fe, type: 2}
       propertyPath: m_Center.x
