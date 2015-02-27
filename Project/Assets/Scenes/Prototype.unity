@@ -641,7 +641,7 @@ GameObject:
   - 114: {fileID: 212212592}
   - 60: {fileID: 212212593}
   - 50: {fileID: 212212598}
-  - 114: {fileID: 212212597}
+  - 114: {fileID: 212212596}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -717,7 +717,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!114 &212212597
+--- !u!114 &212212596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -725,15 +725,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 212212591}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 606ebf76c7c5c4f409996364638bb189, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dd4fd79f647d044790276e6ca49020c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   life: 100
   damage: 2
   speed: 1
-  minDistance: 3
-  maxDistance: 5
-  behaviour: 2
   target: {fileID: 0}
 --- !u!50 &212212598
 Rigidbody2D:
@@ -3377,8 +3374,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 919448661}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: .72886306}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: .5, y: .5}
