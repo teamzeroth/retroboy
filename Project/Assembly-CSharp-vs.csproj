@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AnimationController.cs" />
      <Compile Include="Assets\Scripts\BetaMovimetation.cs" />
+     <Compile Include="Assets\Scripts\Buttons.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Follow.cs" />
      <Compile Include="Assets\Scripts\Helper.cs" />
