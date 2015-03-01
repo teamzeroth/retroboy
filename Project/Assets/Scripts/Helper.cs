@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Assets.Scripts {
-    public static class Helper {
-        public static void Flip(this Transform transform){
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1;
-            transform.localScale = localScale;
-        }
+public static class Helper {
+
+    /// <summary>
+    /// Return the easing Circular starting with b for d seconds
+    /// </summary>
+    /// <param name="t">Current in time</param>
+    /// <param name="b">Start value</param>
+    /// <param name="c">Change in value</param>
+    /// <param name="d">Duration</param>
+
+    public static float EaseCirc(float t, float b, float c, float d) {
+        t /= d;
+        return -c * (Mathf.Sqrt(1 - t * t) - 1) + 0;
     }
 }
+
