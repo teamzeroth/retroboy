@@ -13,6 +13,9 @@ public class AnimationController : MonoBehaviour {
 
     Vector2 deadMoveVec;
 
+    static private float REPEAT_FIRE_TIME = 0.3f; 
+    float fireTime = 0;
+
     /* Getters And Setters
      * ********************/
 
@@ -45,6 +48,10 @@ public class AnimationController : MonoBehaviour {
         anim = GetComponent<Animator>();
     }
 
+    void FixedUpdate() {
+        if (fireTime > 0) fireTime -= Time.deltaTime;
+    }
+
     void Update() {
         Vector2 moveVec = new Vector2(
             Input.GetAxis("Horizontal"),
@@ -58,18 +65,6 @@ public class AnimationController : MonoBehaviour {
 
         onShootTime = onShoot ? onShootTime + Time.deltaTime : 0;
 
-        if (Input.GetButtonUp("Fire1")) {
-            Vector2 dir = CanMove ? moveVec : deadMoveVec;
-
-            GameObject shoot = Resources.Load<GameObject>("Shoots/shoot-1");
-            Vector3 position = transform.position + (Vector3)(dir.normalized * 0.9f);
-
-            Instantiate(shoot, position, Quaternion.identity);
-
-            ShootMove move = shoot.GetComponent<ShootMove>();
-            move.direction = dir;
-        }
-
         if (CanMove) {
             if(Mathf.Abs(moveVec.x) >= Mathf.Abs(moveVec.y) * 0.42f){
                 if(!flipped && moveVec.x < 0) Flip();
@@ -77,6 +72,19 @@ public class AnimationController : MonoBehaviour {
             }else{
                 if (flipped) Flip();
             }
+        }
+
+        if (Input.GetButtonUp("Fire1") && fireTime <= 0) {
+            fireTime = REPEAT_FIRE_TIME;
+            Vector2 dir = CanMove ? moveVec : deadMoveVec;
+
+            GameObject shoot = Resources.Load<GameObject>("Shoots/Nim/shoot_1");
+            Vector3 position = transform.position + (Vector3)(dir.normalized * 0.9f);
+
+            shoot = (GameObject) Instantiate(shoot, position, Quaternion.identity);
+
+            ShootMove move = shoot.GetComponent<ShootMove>();
+            move.direction = dir;
         }
     }
 
