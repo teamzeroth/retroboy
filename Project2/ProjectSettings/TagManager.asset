@@ -37,6 +37,10 @@ TagManager:
   User Layer 30: 
   User Layer 31: 
   m_SortingLayers:
+  - name: BG
+    userID: 3
+    uniqueID: 2983528921
+    locked: 0
   - name: Background
     userID: 2
     uniqueID: 2968402737
@@ -45,7 +49,23 @@ TagManager:
     userID: 0
     uniqueID: 0
     locked: 0
+  - name: Layer 0
+    userID: 4
+    uniqueID: 3278916925
+    locked: 0
   - name: Player
     userID: 1
     uniqueID: 112778315
+    locked: 0
+  - name: Layer 1
+    userID: 5
+    uniqueID: 3866699787
+    locked: 0
+  - name: Midground
+    userID: 6
+    uniqueID: 2238638787
+    locked: 0
+  - name: Foreground
+    userID: 7
+    uniqueID: 2146557261
     locked: 0
