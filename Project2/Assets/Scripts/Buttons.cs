@@ -27,4 +27,10 @@ public class Buttons : MonoBehaviour {
     {
         Time.timeScale = 1f;
     }
+
+    public void clicked()
+    {
+        if (Debug.isDebugBuild)
+            Debug.Log("Clicked");
+    }
 }
