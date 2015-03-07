@@ -13,6 +13,8 @@ public class RepeatSpriteBoundary : MonoBehaviour {
         SpriteRenderer childSprite = childPrefab.AddComponent<SpriteRenderer>();
         childPrefab.transform.position = transform.position;
         childSprite.sprite = sprite.sprite;
+        childSprite.sortingLayerID = sprite.sortingLayerID;
+
         GameObject child;
         for (int i = 0, h = (int)Mathf.Round(sprite.bounds.size.y); i * spriteSize.y < h; i++) {
             for (int j = 0, w = (int)Mathf.Round(sprite.bounds.size.x); j * spriteSize.x < w; j++) {

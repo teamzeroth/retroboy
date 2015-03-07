@@ -11,15 +11,26 @@ public class AnimationController : MonoBehaviour {
 
     Animator anim;
 
-    Vector2 deadMoveVec;
+    Vector2 deadMoveVec = new Vector2(1, 0);
 
-    static private float REPEAT_FIRE_TIME = 0.3f; 
+    static private float REPEAT_FIRE_TIME = 0.5f;
+    static private float DELIVERY_FIRE_TIME = 0.4f;
     float fireTime = 0;
 
     /* Getters And Setters
      * ********************/
 
-    public string currentAnimState { get { return anim.GetCurrentAnimationClipState(0)[0].clip.name; } }
+    public string currentAnimState {
+        get {
+            try {
+                print(anim.GetCurrentAnimationClipState(0)[0].clip.name);
+                return anim.GetCurrentAnimationClipState(0)[0].clip.name;
+            } catch (System.Exception) {
+                return "";
+            }
+        } 
+    }
+
     public bool CanMove {
         get{
             if ((Mathf.Abs(Input.GetAxis("Horizontal")) + Mathf.Abs(Input.GetAxis("Vertical"))) > 0.2f)
@@ -31,7 +42,7 @@ public class AnimationController : MonoBehaviour {
 
     public bool OnMoving {
         get {
-            if (onShoot || currentAnimState.StartsWith("shoot") || currentAnimState.StartsWith("draw"))
+            if (OnCharge || OnShoot)
                 return false;
 
             return CanMove;
@@ -39,8 +50,11 @@ public class AnimationController : MonoBehaviour {
 
     }
 
-    float onShootTime = 0;
-    public bool onShoot { get { return Input.GetButton("Fire1"); } }
+    //float onShootTime = 0;
+    public bool OnDraw { get { return Input.GetButtonDown("Fire1") && !currentAnimState.StartsWith("draw"); } }
+    public bool OnCharge { get { return Input.GetButton("Fire1"); } }
+    
+    public bool OnShoot { get { return Input.GetButtonUp("Fire1"); } }
 
     /* ******************* */
 
@@ -49,7 +63,8 @@ public class AnimationController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if (fireTime > 0) fireTime -= Time.deltaTime;
+        fireTime = fireTime > 0 ? fireTime - Time.deltaTime : 0;
+        fireTime = fireTime > 0 ? fireTime - Time.deltaTime : 0;
     }
 
     void Update() {
@@ -63,7 +78,7 @@ public class AnimationController : MonoBehaviour {
         Move(moveVec);
         Animation(moveVec);
 
-        onShootTime = onShoot ? onShootTime + Time.deltaTime : 0;
+        //onShootTime = onShoot ? onShootTime + Time.deltaTime : 0;
 
         if (CanMove) {
             if(Mathf.Abs(moveVec.x) >= Mathf.Abs(moveVec.y) * 0.42f){
@@ -98,13 +113,12 @@ public class AnimationController : MonoBehaviour {
             moveVec.Normalize();
         }
 
-        //moveVec = Mathf.Abs(moveVec.x) + Mathf.Abs(moveVec.y) >= 1 ? moveVec.normalized : moveVec;
-
         if (OnMoving) {
             float mainSpeed = Mathf.Abs(moveVec.x) > Mathf.Abs(moveVec.y) ? Mathf.Abs(moveVec.x) : Mathf.Abs(moveVec.y);
             anim.speed = 0.5f + mainSpeed / 2;
-        }else
+        }else{
             anim.speed = 1;
+        }
 
         Vector3 deltaMv = OnMoving ? (Vector3)moveVec * speed : Vector3.zero;
         rigidbody2D.velocity = deltaMv;
@@ -112,8 +126,11 @@ public class AnimationController : MonoBehaviour {
 
     public void Animation(Vector2 moveVec) {
         anim.SetBool("OnMoving", OnMoving);
-        anim.SetBool("OnShoot", onShoot);
-        anim.SetFloat("OnShootTime", onShootTime);
+        anim.SetBool("OnDraw", OnDraw);
+        anim.SetBool("OnCharge", OnCharge);
+        anim.SetBool("OnShoot", OnShoot);
+
+        //anim.SetFloat("OnShootTime", onShootTime);
 
         if (CanMove) {
             anim.SetFloat("Horizontal", moveVec.x);

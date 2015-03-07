@@ -13,6 +13,6 @@ public class SorthingLayer : MonoBehaviour {
     }
 
     void Update() {
-        _renderer.sortingOrder = initialOrder + (int) Mathf.Round(transform.position.y * -2);
+        _renderer.sortingOrder = initialOrder + (int) Mathf.Round(transform.position.y) * -3;
     }
 }

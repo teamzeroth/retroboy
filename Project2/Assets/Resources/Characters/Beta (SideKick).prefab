@@ -91,8 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   smooth: 3
-  distance: .075000003
-  anglesPerSeconds: 10
+  distance: .0850000009
+  anglesPerSeconds: 20
   lightAnglesPerSeconds: 90
 --- !u!114 &11466202
 MonoBehaviour:

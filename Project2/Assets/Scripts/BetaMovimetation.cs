@@ -17,6 +17,8 @@ public class BetaMovimetation : MonoBehaviour {
     private float lightAngle = 0;
     private bool flipped = false;
 
+    private bool disappeared = false;
+
     private GameObject _lightSprite;
     private AnimationController _playerController;
 
@@ -26,27 +28,18 @@ public class BetaMovimetation : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        Vector3 curPos = transform.position;
-        Vector3 toPos = player.position;
-
-        curPos.x = Mathf.Lerp(curPos.x, toPos.x, Time.deltaTime * smooth);
-        curPos.y = Mathf.Lerp(curPos.y, toPos.y, Time.deltaTime * smooth);
-
-        angle += anglesPerSeconds * Time.deltaTime;
-        Vector3 orbi = new Vector3(
-            Mathf.Cos(angle * Mathf.Deg2Rad),
-            Mathf.Sin(angle * Mathf.Deg2Rad),
-            0
-        );
-
-        transform.position = curPos + orbi * distance;
+        if (!disappeared) {
+            CalcPosition();
+        } else {
+            transform.position = player.position;
+        }
 
         if (_playerController.flipped != flipped)
             Flip();
 
-        if (_playerController.onShoot)
+        if (_playerController.OnCharge)
             Desapear();
-        else
+        else if (_playerController.OnMoving)
             Apear();
     }
 
@@ -63,6 +56,22 @@ public class BetaMovimetation : MonoBehaviour {
         _lightSprite.particleSystem.startLifetime = 1;
     }
 
+    void CalcPosition() {
+        Vector3 curPos = transform.position;
+        Vector3 toPos = player.position;
+
+        curPos = Vector3.Lerp(curPos, toPos, Time.deltaTime * smooth);
+
+        angle += anglesPerSeconds * Time.deltaTime;
+        Vector3 orbi = new Vector3(
+            Mathf.Cos(angle * Mathf.Deg2Rad),
+            Mathf.Sin(angle * Mathf.Deg2Rad),
+            0
+        );
+
+        transform.position = curPos + orbi * distance;
+    }
+
     public void Flip() {
         flipped = !flipped;
         checkFlip();
@@ -77,39 +86,55 @@ public class BetaMovimetation : MonoBehaviour {
             localScale.x *= -1;
 
         transform.localScale = localScale;
-    } 
+    }
 
     static float TOTAL_TIME_DESAPEAR = 0.2f;
+    static float EXTRA_TIME_DESAPEAR = 3f;
     static Color pink = new Color((float) 254 / 255, (float) 4 / 255, (float) 110 / 255);
 
-    float desapearTime = 0;
+    float disappearTime = 0;
 
     public void Desapear() {
-        if (desapearTime > .9f){return;}
+        if (disappearTime > TOTAL_TIME_DESAPEAR) {
+            disappeared = true;
+            disappearTime = TOTAL_TIME_DESAPEAR + EXTRA_TIME_DESAPEAR;
+            return;
+        }
+
         checkFlip();
 
         _lightSprite.particleSystem.maxParticles = 0;
-        desapearTime = desapearTime + Time.deltaTime < TOTAL_TIME_DESAPEAR ? desapearTime + Time.deltaTime : TOTAL_TIME_DESAPEAR;
+        disappearTime = disappearTime + Time.deltaTime;
 
-        animSetScale(desapearTime);
+        animSetScale(disappearTime);
     }
 
     public void Apear() {
-        if (desapearTime < 0f) {return; }
+        if (disappearTime < TOTAL_TIME_DESAPEAR && disappeared) {
+            disappeared = false;
+        }
+
+        if (disappearTime <= 0f) _lightSprite.particleSystem.maxParticles = 10;
+
+        if (disappearTime < 0f) { 
+            disappearTime = 0f;  
+            return;
+        }
+
         checkFlip();
 
-        desapearTime = desapearTime - Time.deltaTime > 0f ? desapearTime - Time.deltaTime : 0f;
+        disappearTime = disappearTime - Time.deltaTime;
 
-        if (desapearTime == 0f) _lightSprite.particleSystem.maxParticles = 10;
-
-        animSetScale(desapearTime);
+        animSetScale(disappearTime);
     }
 
     private void animSetScale(float desapearTime){
-        var delta = 1 - Helper.EaseCirc(desapearTime, 0, 1f, TOTAL_TIME_DESAPEAR);
-        var sign = Mathf.Sign(transform.localScale.x);
+        if (desapearTime > TOTAL_TIME_DESAPEAR || desapearTime < 0) return;
 
-        _lightSprite.transform.localScale = new Vector3(_lightSprite.transform.localScale.x, delta * 1.3f, 1);
+        float delta = 1 - Helper.EaseCirc(desapearTime, 0, 1f, TOTAL_TIME_DESAPEAR);
+        float sign = Mathf.Sign(transform.localScale.x);
+
+        _lightSprite.transform.localScale = new Vector3(sign, delta, 1);
         transform.localScale = new Vector3(sign + (1 - delta), delta, 1);
 
         (renderer as SpriteRenderer).color = new Color(1, 1, 1, delta * delta);
