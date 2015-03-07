@@ -3,27 +3,37 @@ using System.Collections;
 
 public class Buttons : MonoBehaviour {
 
-	public void Quit()
+	public void quit()
     {
         Application.Quit();
     }
 
-    public void StartGame()
+    public void mainMenu()
     {
-        ChangeScene(1);
+        changeScene(0);
     }
 
-    public void ChangeScene(int index)
+    public void startGame()
+    {
+        changeScene(1);
+    }
+
+    public void restart()
+    {
+        changeScene(Application.loadedLevel);
+    }
+
+    public void changeScene(int index)
     {
         Application.LoadLevel(index);
     }
 
-    public void Pause()
+    public void pause()
     {
         Time.timeScale = 0f;
     }
 
-    public void Resume()
+    public void resume()
     {
         Time.timeScale = 1f;
     }
@@ -31,6 +41,6 @@ public class Buttons : MonoBehaviour {
     public void clicked()
     {
         if (Debug.isDebugBuild)
-            Debug.Log("Clicked");
+            Debug.Log(this.name + " clicked");
     }
 }
