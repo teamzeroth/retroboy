@@ -23,7 +23,6 @@ public class AnimationController : MonoBehaviour {
     public string currentAnimState {
         get {
             try {
-                print(anim.GetCurrentAnimationClipState(0)[0].clip.name);
                 return anim.GetCurrentAnimationClipState(0)[0].clip.name;
             } catch (System.Exception) {
                 return "";
