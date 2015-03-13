@@ -41,7 +41,9 @@ public class AnimationController : MonoBehaviour {
 
     public bool OnMoving {
         get {
-            if (OnCharge || OnShoot)
+            print(currentAnimState);
+
+            if (OnDraw || OnCharge || OnShoot || fireTime > 0.3f || currentAnimState.StartsWith("shoot"))
                 return false;
 
             return CanMove;
@@ -52,7 +54,6 @@ public class AnimationController : MonoBehaviour {
     //float onShootTime = 0;
     public bool OnDraw { get { return Input.GetButtonDown("Fire1") && !currentAnimState.StartsWith("draw"); } }
     public bool OnCharge { get { return Input.GetButton("Fire1"); } }
-    
     public bool OnShoot { get { return Input.GetButtonUp("Fire1"); } }
 
     /* ******************* */
@@ -62,8 +63,7 @@ public class AnimationController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        fireTime = fireTime > 0 ? fireTime - Time.deltaTime : 0;
-        fireTime = fireTime > 0 ? fireTime - Time.deltaTime : 0;
+        fireTime = fireTime > -0.1f ? fireTime - Time.deltaTime : -0.1f;
     }
 
     void Update() {
