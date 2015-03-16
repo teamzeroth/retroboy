@@ -13,33 +13,44 @@ public class Follow : Enemy {
 	
 	// Update is called once per frame
 	void Update () {
-        if (seek)
+        if (life <= 0)
+            GameObject.Destroy(this.gameObject);
+        else if (seek)
         {
             UpdatePosition();
-            Moviment();
+            Movement();
         }
 	}
     
-    void Moviment()
+    void Movement()
     {
         this.gameObject.transform.position += direction * speed * Time.deltaTime;
         Debug.DrawLine(this.gameObject.transform.position, target.position);
     }
 
-    void Attack(GameObject target)
+    void Attack(GameObject obj)
     {
-        print(target.gameObject.name);
-        if (target.gameObject.tag == "Player")
-        {
-            Debug.LogWarning("Matei!");
-            //Object.Destroy(GameObject.Find("Beta (SideKick)"));
-            Object.Destroy(target.gameObject);
-            seek = false;
-        }
+        print(obj.gameObject.name);
+        if (Debug.isDebugBuild) Debug.LogWarning("Matei!");
+        Object.Destroy(obj.gameObject);
+        obj = null;
+        seek = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Attack(collision.gameObject);       
+        if (collision.gameObject.tag == "Player")
+            Attack(collision.gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D trigger)
+    {
+        print(trigger.gameObject.name);
+        if (trigger.gameObject.name.Contains("shoot"))
+        {
+            this.life -= trigger.gameObject.GetComponent<ShootMove>().damage;
+            Object.Destroy(trigger.gameObject);
+            if (Debug.isDebugBuild) Debug.Log(this.life);
+        } 
     }
 }

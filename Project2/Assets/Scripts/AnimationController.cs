@@ -41,7 +41,7 @@ public class AnimationController : MonoBehaviour {
 
     public bool OnMoving {
         get {
-            print(currentAnimState);
+            //print(currentAnimState);
 
             if (OnDraw || OnCharge || OnShoot || fireTime > 0.3f || currentAnimState.StartsWith("shoot"))
                 return false;
