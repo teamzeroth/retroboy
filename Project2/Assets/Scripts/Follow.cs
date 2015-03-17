@@ -4,17 +4,21 @@ using System.Collections;
 public class Follow : Enemy {
 
     private bool seek;
+    private Camera camera;
 
 	// Use this for initialization
 	void Start () {
         seek = true;
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;        
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (life <= 0)
+        {
             GameObject.Destroy(this.gameObject);
+            Camera.main.GetComponent<Director>().increaseScore();
+        }
         else if (seek)
         {
             UpdatePosition();
@@ -32,7 +36,11 @@ public class Follow : Enemy {
     {
         print(obj.gameObject.name);
         if (Debug.isDebugBuild) Debug.LogWarning("Matei!");
-        Object.Destroy(obj.gameObject);
+        Time.timeScale = 0f;
+        foreach (Transform child in GameObject.Find("UI").transform)
+            child.gameObject.SetActive(true);//.GetComponentInChildren<UnityEngine.UI.Image>().gameObject.name);//.gameObject.SetActive(true);
+
+        //Object.Destroy(obj.gameObject);
         obj = null;
         seek = false;
     }
