@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using Helper;
+
 public class BetaMovimetation : MonoBehaviour {
 
     public Transform player;
@@ -37,9 +39,9 @@ public class BetaMovimetation : MonoBehaviour {
         if (_playerController.flipped != flipped)
             Flip();
 
-        if (_playerController.OnCharge)
+        if (!_playerController.NormalState)
             Desapear();
-        else if (_playerController.OnMoving)
+        else
             Apear();
     }
 
@@ -88,16 +90,16 @@ public class BetaMovimetation : MonoBehaviour {
         transform.localScale = localScale;
     }
 
-    static float TOTAL_TIME_DESAPEAR = 0.2f;
-    static float EXTRA_TIME_DESAPEAR = 3f;
+    static float TIME_DESAPEAR = 0.2f;
+    static float EXTRA_TIME_DESAPEAR = 0.1f;
     static Color pink = new Color((float) 254 / 255, (float) 4 / 255, (float) 110 / 255);
 
     float disappearTime = 0;
 
     public void Desapear() {
-        if (disappearTime > TOTAL_TIME_DESAPEAR) {
+        if (disappearTime > TIME_DESAPEAR) {
             disappeared = true;
-            disappearTime = TOTAL_TIME_DESAPEAR + EXTRA_TIME_DESAPEAR;
+            disappearTime = TIME_DESAPEAR + EXTRA_TIME_DESAPEAR;
             return;
         }
 
@@ -110,7 +112,7 @@ public class BetaMovimetation : MonoBehaviour {
     }
 
     public void Apear() {
-        if (disappearTime < TOTAL_TIME_DESAPEAR && disappeared) {
+        if (disappearTime < TIME_DESAPEAR && disappeared) {
             disappeared = false;
         }
 
@@ -129,9 +131,9 @@ public class BetaMovimetation : MonoBehaviour {
     }
 
     private void animSetScale(float desapearTime){
-        if (desapearTime > TOTAL_TIME_DESAPEAR || desapearTime < 0) return;
+        if (desapearTime > TIME_DESAPEAR || desapearTime < 0) return;
 
-        float delta = 1 - Helper.EaseCirc(desapearTime, 0, 1f, TOTAL_TIME_DESAPEAR);
+        float delta = 1 - Helper.H.EaseCirc(desapearTime, 0, 1f, TIME_DESAPEAR);
         float sign = Mathf.Sign(transform.localScale.x);
 
         _lightSprite.transform.localScale = new Vector3(sign, delta, 1);

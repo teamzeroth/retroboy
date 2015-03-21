@@ -28,6 +28,8 @@ public class Follow : Enemy {
     
     void Movement()
     {
+        // TODO:  Não é recomendado mudar a posição do inimigo, em vez disso o recomendando é adicionar um Rigdibory2D e mudar a velocity dele
+
         this.gameObject.transform.position += direction * speed * Time.deltaTime;
         Debug.DrawLine(this.gameObject.transform.position, target.position);
     }
@@ -37,7 +39,8 @@ public class Follow : Enemy {
         print(obj.gameObject.name);
         if (Debug.isDebugBuild) Debug.LogWarning("Matei!");
         Time.timeScale = 0f;
-        foreach (Transform child in GameObject.Find("UI").transform)
+        // TODO: esse tipo de busca é muito caro, tente evitar
+        foreach (Transform child in GameObject.Find("UI").transform) 
             child.gameObject.SetActive(true);//.GetComponentInChildren<UnityEngine.UI.Image>().gameObject.name);//.gameObject.SetActive(true);
 
         //Object.Destroy(obj.gameObject);

@@ -8,6 +8,10 @@ public class Enemy : MonoBehaviour {
     protected Vector3 heading = Vector3.zero, direction = Vector3.zero;
     protected float distance = 0f;
 
+    // TODO: Acredito que o comportamento tipo Follow deveria ser o padrão
+
+    // TODO: O update deveria estar nessa classe e nela deveria ter a chamadas dos Metodos de Defesa, Attack e Movimento com uma logica simples imbutida
+
     protected void UpdatePosition()
     {
         heading = target.position - this.gameObject.transform.position;
