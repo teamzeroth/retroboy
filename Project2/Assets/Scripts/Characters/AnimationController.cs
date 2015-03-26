@@ -116,7 +116,7 @@ public class AnimationController : MonoBehaviour {
             _anim.speed = 1;
         }
 
-        Vector3 deltaMv = OnMoving ? (Vector3)moveVec * speed : Vector3.zero;
+        Vector3 deltaMv = OnMoving && NormalState ? (Vector3)moveVec * speed : Vector3.zero;
         rigidbody2D.velocity = deltaMv;
     }
 
