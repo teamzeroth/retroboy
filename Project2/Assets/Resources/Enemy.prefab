@@ -11,6 +11,8 @@ GameObject:
   - 212: {fileID: 21214434}
   - 58: {fileID: 5814434}
   - 114: {fileID: 11414434}
+  - 50: {fileID: 5081680}
+  - 95: {fileID: 9558296}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -30,6 +32,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5081680
+Rigidbody2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114434}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_FixedAngle: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
 --- !u!58 &5814434
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -41,6 +58,21 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_Radius: .200000003
   m_Center: {x: 0, y: 0}
+--- !u!95 &9558296
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114434}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a173b969217fce4a9b16a49a38c1118, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11414434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -49,7 +81,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 114434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dd4fd79f647d044790276e6ca49020c, type: 3}
+  m_Script: {fileID: 11500000, guid: 606ebf76c7c5c4f409996364638bb189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   life: 100

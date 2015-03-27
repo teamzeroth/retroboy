@@ -7,6 +7,8 @@ public class AnimationController : MonoBehaviour {
 
     public float speed = 10f;
     public float multiplier = 10f;
+    public float life = 10f;
+    public GameObject ui = null;
 
     [HideInInspector]
     public bool flipped = false;
@@ -44,6 +46,7 @@ public class AnimationController : MonoBehaviour {
 
     void Start(){
         _anim = GetComponent<Animator>();
+        if (ui == null) ui = GameObject.Find("Menu");
     }
 
     void FixedUpdate() {
@@ -144,5 +147,25 @@ public class AnimationController : MonoBehaviour {
         Vector3 localScale = transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
+    }
+
+    public void Hit(float damage)
+    {
+        this.life -= damage;
+        if (this.life <= 0f)
+        {
+            this.life = 0f;
+            Time.timeScale = 0f;
+            ui.SetActive(true);
+        }
+        else
+        {
+            //Vector2 moveVec = new Vector2(
+            //    Input.GetAxis("Horizontal"),
+            //    Input.GetAxis("Vertical")
+            //);
+            //this.gameObject.GetComponent<Rigidbody2D>().AddForce(moveVec * -50, ForceMode2D.Impulse);
+        }
+        Camera.main.GetComponent<Director>().updateLife(this.life);
     }
 }
