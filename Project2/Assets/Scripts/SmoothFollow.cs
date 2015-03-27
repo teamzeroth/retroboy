@@ -11,13 +11,13 @@ public class SmoothFollow : MonoBehaviour {
     public Vector3 cameraOffset;
     public bool useFixedUpdate = false;
 
-    private CharacterController2D _playerController;
+    //private CharacterController2D _playerController;
     private Vector3 _smoothDampVelocity;
 
 
     void Awake() {
         transform = gameObject.transform;
-        _playerController = target.GetComponent<CharacterController2D>();
+        //_playerController = target.GetComponent<CharacterController2D>();
     }
 
 
@@ -34,9 +34,11 @@ public class SmoothFollow : MonoBehaviour {
 
 
     void updateCameraPosition() {
-        if (_playerController == null) {
-            transform.position = Vector3.SmoothDamp(transform.position, target.position - cameraOffset, ref _smoothDampVelocity, smoothDampTime);
-            return;
+        transform.position = Vector3.SmoothDamp(transform.position, target.position - cameraOffset, ref _smoothDampVelocity, smoothDampTime);
+        return;
+
+        /*if (_playerController == null) {
+            
         }
 
         if (_playerController.velocity.x > 0) {
@@ -45,7 +47,7 @@ public class SmoothFollow : MonoBehaviour {
             var leftOffset = cameraOffset;
             leftOffset.x *= -1;
             transform.position = Vector3.SmoothDamp(transform.position, target.position - leftOffset, ref _smoothDampVelocity, smoothDampTime);
-        }
+        }*/
     }
 
 }
