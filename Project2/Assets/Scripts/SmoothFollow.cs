@@ -5,49 +5,52 @@ using System.Collections;
 
 public class SmoothFollow : MonoBehaviour {
     public Transform target;
-    public float smoothDampTime = 0.2f;
-    [HideInInspector]
-    public new Transform transform;
     public Vector3 cameraOffset;
+
+    public float smoothDampTime = 0.2f;
     public bool useFixedUpdate = false;
 
-    //private CharacterController2D _playerController;
     private Vector3 _smoothDampVelocity;
-
-
-    void Awake() {
-        transform = gameObject.transform;
-        //_playerController = target.GetComponent<CharacterController2D>();
-    }
-
+    private float timer;
+    private int onQuake;
 
     void LateUpdate() {
-        if (!useFixedUpdate)
-            updateCameraPosition();
+        if (!useFixedUpdate) updateCameraPosition();
     }
 
 
     void FixedUpdate() {
-        if (useFixedUpdate)
-            updateCameraPosition();
+        if (useFixedUpdate) updateCameraPosition();
     }
 
 
-    void updateCameraPosition() {
-        transform.position = Vector3.SmoothDamp(transform.position, target.position - cameraOffset, ref _smoothDampVelocity, smoothDampTime);
-        return;
+    public void Quake(int level) {
+        print("QUake in level: " + level);
+        onQuake = level;
+        timer = 0;
+    }
 
-        /*if (_playerController == null) {
-            
+    Vector3 getTargetPosition() {
+        if (onQuake == 0) return target.position;
+
+        timer += Time.deltaTime;
+
+        if (timer >= 0.5f) {
+            onQuake = 0;
+            return target.position;
         }
 
-        if (_playerController.velocity.x > 0) {
-            transform.position = Vector3.SmoothDamp(transform.position, target.position - cameraOffset, ref _smoothDampVelocity, smoothDampTime);
-        } else {
-            var leftOffset = cameraOffset;
-            leftOffset.x *= -1;
-            transform.position = Vector3.SmoothDamp(transform.position, target.position - leftOffset, ref _smoothDampVelocity, smoothDampTime);
-        }*/
+        return target.position + new Vector3(
+            Random.value * onQuake / 7,
+            Random.value * onQuake / 7,
+            Random.value * onQuake / 7
+        );
     }
 
+    void updateCameraPosition() {
+        Vector3 targetPos = getTargetPosition();
+
+        transform.position = Vector3.SmoothDamp(transform.position, targetPos - cameraOffset, ref _smoothDampVelocity, onQuake == 0 ? smoothDampTime : -1);
+        return;
+    }
 }

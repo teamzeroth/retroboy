@@ -205,6 +205,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5878284, guid: 570b3fef458dd814f8d12ddb91caeec6, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: fffca7641f17636429764a81cd50a519, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 570b3fef458dd814f8d12ddb91caeec6, type: 2}
   m_RootGameObject: {fileID: 1540063125}
@@ -307,9 +311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1540063127}
-  smoothDampTime: .200000003
-  transform: {fileID: 0}
   cameraOffset: {x: 0, y: 0, z: 10}
+  smoothDampTime: .200000003
   useFixedUpdate: 1
 --- !u!1 &751964433
 GameObject:
@@ -1661,7 +1664,7 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 18395768}
   m_GameObject: {fileID: 1540063125}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fffca7641f17636429764a81cd50a519, type: 2}
   m_IsTrigger: 0
   m_Radius: .589999974
   m_Center: {x: -.159999996, y: -.819999993}
@@ -1679,6 +1682,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   multiplier: 10
+  life: 10
+  ui: {fileID: 0}
   flipped: 0
 --- !u!114 &1540063132
 MonoBehaviour:

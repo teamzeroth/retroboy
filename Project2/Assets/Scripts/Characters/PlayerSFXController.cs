@@ -11,12 +11,12 @@ public class PlayerSFXController : MonoBehaviour {
     
     AnimationController _animControl;
 
-    float timer = 0;
+    float timer = 0.0f;
+    float wait = 0.2f;
 
     void Awake() {
-        GameObject gameObject = (GameObject) Instantiate(new GameObject("SFX"));
+        GameObject gameObject = (GameObject) Instantiate(new GameObject("SFX"), Vector3.zero, Quaternion.identity);
         gameObject.transform.parent = transform;
-        gameObject.transform.position = Vector3.zero;
 
         shootEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
         shootEmitter.Init(shoot);
@@ -24,31 +24,48 @@ public class PlayerSFXController : MonoBehaviour {
         _animControl = GetComponent<AnimationController>();
     }
 
+    /*void FixedUpdate() {
+        shooted = _animControl.OnShoot;
+    }*/
+
     void Update() {
         ShootSFX();
     }
 
     private bool shooted = false;
+    private bool initShoot = false;
 
     void ShootSFX() {
+
+        if (shootEmitter.HasStoped()) shootEmitter.Play();
+
         if (_animControl.OnCharge) {
             if (timer == 0) {
-                shootEmitter.Stop();
-                shootEmitter.SetParameter("shoot", .0f);
-                shootEmitter.Play();
+                shootEmitter.SetParameter("shoot", 0.0f);
             }
-
             timer += Time.deltaTime;
         }
 
-        if (_animControl.OnShoot){// && !shooted) {
+        if (shooted) {
             if (timer > 0) {
-                var value = Mathf.Min(3, Mathf.CeilToInt(timer));
+                var value = timer >= 1f ? timer >= 2f ? 3 : 2 : 1;
+
                 shootEmitter.SetParameter("shoot", value);
+                Camera.main.BroadcastMessage("Quake", value);
             }
 
             timer = 0;
-            shooted = true;
+            shooted = false;
         }
+
+        if (_animControl.NormalState) shootEmitter.Stop();
     }
+
+    #region getMessages
+
+    public void HadShoot() {
+        shooted = true;
+    }
+
+    #endregion
 }

@@ -13,8 +13,26 @@ public class FMOD_CustonEmitter : FMOD_StudioEventEmitter {
         startEventOnAwake = false;
     }
 
+    void Start() {
+        base.Start();
+        transform.position = transform.parent.TransformPoint(Vector3.zero);
+    }
+
     public void SetParameter(string name, float value) {
         FMOD.Studio.ParameterInstance parameter = getParameter(name);
         parameter.setValue(value);
+    }
+
+    public bool HasStoped() {
+        return getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPED || getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPING;
+    }
+
+    public void Release() {
+        if (evt != null) {
+            ERRCHECK(evt.release());
+        } else {
+            FMOD.Studio.UnityUtil.Log("Tried to play event without a valid instance: " + path);
+            return;
+        }
     }
 }

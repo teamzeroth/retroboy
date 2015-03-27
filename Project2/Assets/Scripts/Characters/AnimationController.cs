@@ -40,7 +40,7 @@ public class AnimationController : MonoBehaviour {
 
     public bool OnDraw { get { return Input.GetButtonDown("Fire1") && !_anim.CurrentAnimState().StartsWith("draw"); } }
     public bool OnCharge { get { return Input.GetButton("Fire1"); } }
-    public bool OnShoot { get { return Input.GetButtonUp("Fire1"); } }
+    public bool OnShoot { get { return Input.GetButtonUp("Fire1") && fireTime <= 0; } }
 
     #endregion
 
@@ -85,6 +85,8 @@ public class AnimationController : MonoBehaviour {
     }
 
     public void shoot() {
+        BroadcastMessage("HadShoot");
+
         Vector2 moveVec = new Vector2(
             Input.GetAxis("Horizontal"),
             Input.GetAxis("Vertical")
@@ -127,7 +129,7 @@ public class AnimationController : MonoBehaviour {
         _anim.SetBool("OnMoving", OnMoving);
         _anim.SetBool("OnDraw", OnDraw);
         _anim.SetBool("OnCharge", OnCharge);
-        _anim.SetBool("OnShoot", OnShoot && fireTime <= 0);
+        _anim.SetBool("OnShoot", OnShoot);
         //anim.SetBool("NormalState", NormalState);
 
         //anim.SetFloat("OnShootTime", onShootTime);

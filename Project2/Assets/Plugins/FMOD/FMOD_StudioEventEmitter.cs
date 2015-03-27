@@ -11,7 +11,8 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 	public bool startEventOnAwake = true;
 
     protected FMOD.Studio.EventInstance evt;
-    protected bool hasStarted = false;
+    [HideInInspector]
+    public bool hasStarted = false;
 
     protected Rigidbody cachedRigidBody;
 
@@ -66,6 +67,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 
 	public void Start() 
 	{
+
 		if (evt == null || !evt.isValid())
 		{
 			CacheEventInstance();
@@ -197,7 +199,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 	}
     #endif
 	
-	FMOD.RESULT ERRCHECK(FMOD.RESULT result)
+	public FMOD.RESULT ERRCHECK(FMOD.RESULT result)
 	{
 		FMOD.Studio.UnityUtil.ERRCHECK(result);
 		return result;
