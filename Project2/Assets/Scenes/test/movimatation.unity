@@ -236,14 +236,14 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 58745906}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!124 &58745908
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 58745906}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!92 &58745909
 Behaviour:
   m_ObjectHideFlags: 0
@@ -1577,6 +1577,8 @@ GameObject:
   - 95: {fileID: 1540063128}
   - 114: {fileID: 1540063131}
   - 114: {fileID: 1540063132}
+  - 114: {fileID: 1540063133}
+  - 114: {fileID: 1540063134}
   m_Layer: 0
   m_Name: Nim (Player)
   m_TagString: Player
@@ -1690,6 +1692,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8708499225a68e4ba15905782af2d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1540063133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1540063125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8a2d1663ab00c41b1960ce5c6d6212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shoot: {fileID: 11400000, guid: 1167ef6056d917e4a881357441696316, type: 2}
+--- !u!114 &1540063134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1540063125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b53f9f56d3aa10428633e1b0a7ca552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pluginPaths: []
 --- !u!1 &2108054364
 GameObject:
   m_ObjectHideFlags: 0
