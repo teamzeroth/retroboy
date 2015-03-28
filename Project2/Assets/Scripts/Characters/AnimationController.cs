@@ -85,7 +85,7 @@ public class AnimationController : MonoBehaviour {
     }
 
     public void shoot() {
-        BroadcastMessage("HadShoot");
+        //BroadcastMessage("HadShoot");
 
         Vector2 moveVec = new Vector2(
             Input.GetAxis("Horizontal"),
@@ -151,7 +151,7 @@ public class AnimationController : MonoBehaviour {
         transform.localScale = localScale;
     }
 
-    public void Hit(float damage)
+    public void Hit(float damage, Vector2 direction)
     {
         this.life -= damage;
         if (this.life <= 0f)
@@ -161,13 +161,8 @@ public class AnimationController : MonoBehaviour {
             ui.SetActive(true);
         }
         else
-        {
-            //Vector2 moveVec = new Vector2(
-            //    Input.GetAxis("Horizontal"),
-            //    Input.GetAxis("Vertical")
-            //);
-            //this.gameObject.GetComponent<Rigidbody2D>().AddForce(moveVec * -50, ForceMode2D.Impulse);
-        }
+            this.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * -2, ForceMode2D.Impulse);
+        
         Camera.main.GetComponent<Director>().updateLife(this.life);
     }
 }

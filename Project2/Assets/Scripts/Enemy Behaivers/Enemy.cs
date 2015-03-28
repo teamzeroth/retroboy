@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour {
             if (Debug.isDebugBuild)
                 Debug.Log(this.gameObject.name + " attacks " + obj.name + " for " + this.damage + " damage points");
 
-            obj.GetComponent<AnimationController>().Hit(this.damage);            
+            obj.GetComponent<AnimationController>().Hit(this.damage, this.direction);            
         }
     }
 
