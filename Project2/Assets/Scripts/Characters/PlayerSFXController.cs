@@ -24,10 +24,6 @@ public class PlayerSFXController : MonoBehaviour {
         _animControl = GetComponent<AnimationController>();
     }
 
-    /*void FixedUpdate() {
-        shooted = _animControl.OnShoot;
-    }*/
-
     void Update() {
         ShootSFX();
     }
@@ -37,28 +33,26 @@ public class PlayerSFXController : MonoBehaviour {
 
     void ShootSFX() {
 
-        if (shootEmitter.HasStoped()) shootEmitter.Play();
+        if (_animControl.OnCharge && shootEmitter.HasStoped()) shootEmitter.Play();
 
-        if (_animControl.OnCharge) {
-            if (timer == 0) {
-                shootEmitter.SetParameter("shoot", 0.0f);
-            }
-            timer += Time.deltaTime;
+        if (Input.GetButtonDown("Fire1")) {
+            shootEmitter.TimelinePosition = 0000001;
+            shootEmitter.SetParameter("shoot", 0.1f);   
         }
 
-        if (shooted) {
-            if (timer > 0) {
-                var value = timer >= 1f ? timer >= 2f ? 3 : 2 : 1;
+        if (_animControl.OnCharge)
+            timer += Time.deltaTime;
 
-                shootEmitter.SetParameter("shoot", value);
-                Camera.main.BroadcastMessage("Quake", value);
-            }
+        if (shooted) {
+            var value = timer >= 1f ? timer >= 2f ? 3 : 2 : 1;
+
+            shootEmitter.SetParameter("shoot", value);
+            shootEmitter.Play();
+            Camera.main.BroadcastMessage("Quake", value);
 
             timer = 0;
             shooted = false;
         }
-
-        if (_animControl.NormalState) shootEmitter.Stop();
     }
 
     #region getMessages

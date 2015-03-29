@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Helper;
+using DG.Tweening;
 
 public class AnimationController : MonoBehaviour {
 
@@ -33,12 +34,16 @@ public class AnimationController : MonoBehaviour {
     }}
 
     public bool NormalState {get{
-        return _anim.CurrentAnimState().StartsWith("idle") || _anim.CurrentAnimState().StartsWith("walk");
+        return _anim.CurrentAnimState().StartsWith("idle") || _anim.CurrentAnimState().StartsWith("walk") || _anim.CurrentAnimState().StartsWith("friction");
     }}
 
-    public bool OnMoving { get { return CanMove && ForcingMove; } }
+    public bool DrawState {get{
+        return _anim.CurrentAnimState().StartsWith("draw");
+    }}
 
-    public bool OnDraw { get { return Input.GetButtonDown("Fire1") && !_anim.CurrentAnimState().StartsWith("draw"); } }
+    public bool OnMoving { get { return CanMove && (Input.GetButton("Horizontal") || Input.GetButton("Vertical")); } }
+
+    public bool OnDraw { get { return Input.GetButtonDown("Fire1") && !DrawState; } }
     public bool OnCharge { get { return Input.GetButton("Fire1"); } }
     public bool OnShoot { get { return Input.GetButtonUp("Fire1") && fireTime <= 0; } }
 
@@ -85,7 +90,7 @@ public class AnimationController : MonoBehaviour {
     }
 
     public void shoot() {
-        //BroadcastMessage("HadShoot");
+        BroadcastMessage("HadShoot");
 
         Vector2 moveVec = new Vector2(
             Input.GetAxis("Horizontal"),
@@ -109,6 +114,8 @@ public class AnimationController : MonoBehaviour {
             deadMoveVec = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
+    private float frictionValue;
+
     public void Move(Vector2 moveVec) {
         if (Mathf.Abs(moveVec.x) + Mathf.Abs(moveVec.y) >= 1) {
             moveVec.Normalize();
@@ -121,8 +128,18 @@ public class AnimationController : MonoBehaviour {
             _anim.speed = 1;
         }
 
-        Vector3 deltaMv = OnMoving && NormalState ? (Vector3)moveVec * speed : Vector3.zero;
-        rigidbody2D.velocity = deltaMv;
+        Vector2 dir = (NormalState ? moveVec : Vector2.zero) * speed;
+        Vector2 curDir = rigidbody2D.velocity;
+
+        float value = Mathf.Abs(
+            (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) % 360 -
+            (Mathf.Atan2(curDir.y, curDir.x) * Mathf.Rad2Deg) % 360
+        );
+
+        frictionValue = moveVec == Vector2.zero ? 0 : value / 180;
+        
+        print(value + " : " + frictionValue);
+        rigidbody2D.velocity = Vector2.Lerp(curDir, dir, Mathf.Max(0.1f, 1 - frictionValue) * 20 * Time.deltaTime);
     }
 
     public void Animation(Vector2 moveVec) {
@@ -130,10 +147,9 @@ public class AnimationController : MonoBehaviour {
         _anim.SetBool("OnDraw", OnDraw);
         _anim.SetBool("OnCharge", OnCharge);
         _anim.SetBool("OnShoot", OnShoot);
-        //anim.SetBool("NormalState", NormalState);
 
-        //anim.SetFloat("OnShootTime", onShootTime);
-
+        _anim.SetFloat("Friction", frictionValue);
+        
         if (ForcingMove) {
             _anim.SetFloat("Horizontal", moveVec.x);
             _anim.SetFloat("Vertical", moveVec.y);
@@ -151,16 +167,16 @@ public class AnimationController : MonoBehaviour {
         transform.localScale = localScale;
     }
 
-    public void Hit(float damage, Vector2 direction)
-    {
+    public void Hit(float damage, Vector2 direction){
+
         this.life -= damage;
-        if (this.life <= 0f)
-        {
+        
+        if (this.life <= 0f){
             this.life = 0f;
             Time.timeScale = 0f;
             ui.SetActive(true);
-        }
-        else
+
+        }else
             this.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * -2, ForceMode2D.Impulse);
         
         Camera.main.GetComponent<Director>().updateLife(this.life);

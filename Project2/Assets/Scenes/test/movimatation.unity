@@ -209,6 +209,14 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: fffca7641f17636429764a81cd50a519, type: 2}
+    - target: {fileID: 11478284, guid: 570b3fef458dd814f8d12ddb91caeec6, type: 2}
+      propertyPath: friction
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11478284, guid: 570b3fef458dd814f8d12ddb91caeec6, type: 2}
+      propertyPath: speed
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 570b3fef458dd814f8d12ddb91caeec6, type: 2}
   m_RootGameObject: {fileID: 1540063125}
@@ -1680,7 +1688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40d209f8a9fb1f94cb4cca6f5fab9682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 8
   multiplier: 10
   life: 10
   ui: {fileID: 0}

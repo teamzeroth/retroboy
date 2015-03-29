@@ -25,7 +25,6 @@ public class SmoothFollow : MonoBehaviour {
 
 
     public void Quake(int level) {
-        print("QUake in level: " + level);
         onQuake = level;
         timer = 0;
     }
@@ -49,8 +48,6 @@ public class SmoothFollow : MonoBehaviour {
 
     void updateCameraPosition() {
         Vector3 targetPos = getTargetPosition();
-
         transform.position = Vector3.SmoothDamp(transform.position, targetPos - cameraOffset, ref _smoothDampVelocity, onQuake == 0 ? smoothDampTime : -1);
-        return;
     }
 }

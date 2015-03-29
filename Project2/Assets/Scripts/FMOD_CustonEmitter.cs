@@ -35,4 +35,9 @@ public class FMOD_CustonEmitter : FMOD_StudioEventEmitter {
             return;
         }
     }
+
+    public int TimelinePosition {
+        get { int outValue; evt.getTimelinePosition(out outValue); return outValue; }
+        set { evt.setTimelinePosition(value); }
+    }
 }
