@@ -4,18 +4,18 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 
     public float life = 100f, damage = 2f, speed = 1f;
-    public Transform target = null;
+    public GameObject target = null;
     protected Vector3 heading = Vector3.zero, direction = Vector3.zero;
     protected float distance = 0f;
-    protected bool seek;
-    protected Rigidbody2D body;  
+    protected bool seek = false, destroy = false;
+    protected Rigidbody2D body = null;  
 
-    void Start()
+    protected virtual void Start()
     {
         seek = true;
         body = this.gameObject.GetComponent<Rigidbody2D>();
         if (target == null)
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            target = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
@@ -30,13 +30,13 @@ public class Enemy : MonoBehaviour {
             UpdatePosition();
             Movement();
             Defense();
-            Attack(null);
+            Attack(target);
         }
     }
 
     protected void UpdatePosition()
     {
-        heading = target.position - this.gameObject.transform.position;
+        heading = target.transform.position - this.gameObject.transform.position;
         distance = heading.magnitude;
         direction = heading / distance;	  
     }
@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour {
             if (Debug.isDebugBuild)
             {
                 //Debug.Log("Direction: " + direction + " | Velocity: " + body.velocity);
-                Debug.DrawLine(this.gameObject.transform.position, target.position);
+                Debug.DrawLine(this.gameObject.transform.position, target.transform.position);
             }
         }
     }
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void Attack(GameObject obj) 
     {
-        if (obj != null)
+        if (obj != null && destroy)
         {
             if (Debug.isDebugBuild)
                 Debug.Log(this.gameObject.name + " attacks " + obj.name + " for " + this.damage + " damage points");
@@ -67,31 +67,48 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    IEnumerator Wait(int delay)
+    IEnumerator Wait(float delay)
     {
         yield return new WaitForSeconds(delay);
         seek = true;
-        this.gameObject.GetComponent<Animator>().enabled = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
-            Attack(collision.gameObject);
+        {
+            destroy = true;
+            target = collision.gameObject;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D trigger)
     {
         if (trigger.gameObject.name.Contains("shoot"))
         {
-            this.life -= trigger.gameObject.GetComponent<ShootMove>().damage;
-            Object.Destroy(trigger.gameObject);
-            if (Debug.isDebugBuild)
-                Debug.Log("Enemy Life: " + this.life);
-            body.AddForce(new Vector2(direction.x * -2f, direction.y * -2f), ForceMode2D.Impulse);
-            seek = false;
-            this.gameObject.GetComponent<Animator>().enabled = false;
-            StartCoroutine("Wait", 1f);
+            Vector3 h = trigger.transform.position - this.gameObject.transform.position;
+            Vector2 d = h / h.magnitude;
+            print(d);
+
+            if (d.x < 0 || d.y < 0)
+            {
+                this.life -= trigger.gameObject.GetComponent<ShootMove>().damage;
+                Object.Destroy(trigger.gameObject);
+                if (Debug.isDebugBuild)
+                    Debug.Log("Enemy Life: " + this.life);
+                body.AddForce(new Vector2(direction.x * -1f, direction.y * -1f), ForceMode2D.Impulse);
+                seek = false;
+                this.gameObject.GetComponent<Animator>().enabled = false;
+                StartCoroutine("Wait", 0.5f);
+                this.gameObject.GetComponent<Animator>().enabled = true;
+            }
+            else
+                print("meu tiro");
+        }
+        else if (trigger.gameObject.tag == "Player")
+        {
+            destroy = true;
+            target = trigger.gameObject;
         }
     }    
 }

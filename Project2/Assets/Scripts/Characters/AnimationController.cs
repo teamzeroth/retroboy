@@ -90,7 +90,7 @@ public class AnimationController : MonoBehaviour {
     }
 
     public void shoot() {
-        BroadcastMessage("HadShoot");
+//        BroadcastMessage("HadShoot");
 
         Vector2 moveVec = new Vector2(
             Input.GetAxis("Horizontal"),
@@ -138,7 +138,7 @@ public class AnimationController : MonoBehaviour {
 
         frictionValue = moveVec == Vector2.zero ? 0 : value / 180;
         
-        print(value + " : " + frictionValue);
+        //print(value + " : " + frictionValue);
         rigidbody2D.velocity = Vector2.Lerp(curDir, dir, Mathf.Max(0.1f, 1 - frictionValue) * 20 * Time.deltaTime);
     }
 
