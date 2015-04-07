@@ -170,7 +170,9 @@ public class AnimationController : MonoBehaviour {
     public void Hit(float damage, Vector2 direction){
 
         this.life -= damage;
-        
+        if (Debug.isDebugBuild)
+            Debug.Log("Player Life: " + this.life);
+
         if (this.life <= 0f){
             this.life = 0f;
             Time.timeScale = 0f;
@@ -181,4 +183,12 @@ public class AnimationController : MonoBehaviour {
         
         Camera.main.GetComponent<Director>().updateLife(this.life);
     }
+
+    void OnTriggerEnter2D(Collider2D trigger)
+    {
+        print(trigger.gameObject.name);
+        ShootMove s = trigger.gameObject.GetComponent<ShootMove>();
+        if (trigger.gameObject.name.Contains("shoot") && !s.isAlly)
+            Hit(0f, Vector2.zero);
+    }   
 }

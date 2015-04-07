@@ -3,7 +3,6 @@ using System.Collections;
 
 public class MachineDog : Enemy {
 
-    string state = null;
     float movementDirection = 0f;
     Vector3 localScale = Vector3.zero;
 
@@ -22,7 +21,7 @@ public class MachineDog : Enemy {
             seek = false;
             movementDirection *= -1f;
             this.gameObject.transform.localScale = localScale;
-            StartCoroutine("Wait", 1.5f);
+            StartCoroutine(Wait(1f,seek));
             localScale.x *= -1;
         }
     }
@@ -31,15 +30,16 @@ public class MachineDog : Enemy {
     {
         if (obj != null && destroy)
         {
-            //GameObject shoot = Resources.Load<GameObject>("Shoots/Nim/shoot_1");
-            //Vector3 position = transform.position + new Vector3(body.velocity.x, body.velocity.y, 0f);
+            GameObject shoot = Resources.Load<GameObject>("Shoots/Nim/shoot_1");
+            Vector3 position = transform.position + new Vector3(body.velocity.x, body.velocity.y, 0f);
 
-            //shoot = (GameObject)Instantiate(shoot, position, Quaternion.identity);
+            shoot = (GameObject)Instantiate(shoot, position, Quaternion.identity);
             
-            //ShootMove move = shoot.GetComponent<ShootMove>();
-            //move.direction = body.velocity;
-            //destroy = false;
-            //StartCoroutine("Wait", 1f);
+            ShootMove move = shoot.GetComponent<ShootMove>();
+            move.direction = body.velocity;
+            move.isAlly = false;
+            destroy = false;
+            StartCoroutine(Wait(1f,destroy));
         }
     }
 }

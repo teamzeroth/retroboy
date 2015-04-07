@@ -67,10 +67,10 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    IEnumerator Wait(float delay)
+    protected IEnumerator Wait(float delay, bool v)
     {
         yield return new WaitForSeconds(delay);
-        seek = true;
+        v = !v;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -82,33 +82,41 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D trigger)
+    public void onTriggerExternal(GameObject sensor, Collider2D trigger)
     {
-        if (trigger.gameObject.name.Contains("shoot"))
+        print(sensor.name + " " + trigger.name + " | " + sensor.gameObject.GetComponent<Collider2D>().collider2D + " | " + trigger.collider2D);
+        if (sensor == this.gameObject && trigger.gameObject.name.Contains("shoot"))
         {
-            Vector3 h = trigger.transform.position - this.gameObject.transform.position;
-            Vector2 d = h / h.magnitude;
-            print(d);
-
-            if (d.x < 0 || d.y < 0)
-            {
-                this.life -= trigger.gameObject.GetComponent<ShootMove>().damage;
-                Object.Destroy(trigger.gameObject);
-                if (Debug.isDebugBuild)
-                    Debug.Log("Enemy Life: " + this.life);
-                body.AddForce(new Vector2(direction.x * -1f, direction.y * -1f), ForceMode2D.Impulse);
-                seek = false;
-                this.gameObject.GetComponent<Animator>().enabled = false;
-                StartCoroutine("Wait", 0.5f);
-                this.gameObject.GetComponent<Animator>().enabled = true;
-            }
-            else
-                print("meu tiro");
+            this.life -= trigger.gameObject.GetComponent<ShootMove>().damage;
+            Object.Destroy(trigger.gameObject);
+            if (Debug.isDebugBuild)
+                Debug.Log("Enemy Life: " + this.life);
+            body.AddForce(new Vector2(direction.x * -1f, direction.y * -1f), ForceMode2D.Impulse);
+            seek = false;
+            this.gameObject.GetComponent<Animator>().enabled = false;
+            StartCoroutine(Wait(0.5f,seek));
+            StartCoroutine(Wait(0.5f, this.gameObject.GetComponent<Animator>().enabled));             
         }
-        else if (trigger.gameObject.tag == "Player")
+        else if (sensor.name.Contains("Detection") && trigger.gameObject.tag == "Player")
         {
             destroy = true;
+            seek = false;
+            body.velocity = Vector2.zero;
             target = trigger.gameObject;
         }
-    }    
+    }
+
+    void OnTriggerEnter2D(Collider2D trigger)
+    {
+        onTriggerExternal(this.gameObject, trigger);
+    }
+    
+    void OnTriggerExit2D(Collider2D trigger)
+    {
+        if (trigger.tag == "Player")
+        {
+            destroy = false;
+            seek = true;
+        }
+    }
 }
