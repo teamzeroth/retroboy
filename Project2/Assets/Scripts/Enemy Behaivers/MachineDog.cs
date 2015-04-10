@@ -42,18 +42,23 @@ public class MachineDog : Enemy {
             StartCoroutine("changeSeek",1f);
             localScale.x *= -1;
         }
+        else if (destroy)
+        {
+            if (count == 2)
+            {
+                StopAllCoroutines();
+                count = 0;
+                destroy = false;
+                seek = true;
+            }
+            else
+                StartCoroutine("rotate", rotationDelay);
+        }
     }
 
     protected override void Attack(GameObject obj)
     {
-        if (count == 2)
-        {
-            StopAllCoroutines();
-            count = 0;
-            destroy = false;
-            seek = true;
-        }
-        else if (obj != null && destroy)
+        if (obj != null && destroy)
         {
             z = this.gameObject.transform.rotation.eulerAngles.z;
             bullet = prefab.Spawn();
@@ -63,8 +68,7 @@ public class MachineDog : Enemy {
             bullet.direction = Quaternion.Euler(0, 0, z) * Vector2.right * -movementDirection;           
 
             destroy = false;
-            StartCoroutine("changeDestroy", shootDelay);
-            StartCoroutine("rotate", rotationDelay);
+            StartCoroutine("changeDestroy", shootDelay);            
         }
     }
 }
