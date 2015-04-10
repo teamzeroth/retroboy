@@ -2691,7 +2691,11 @@ namespace X_UniTMX
 				string[] menssage = messageToSend.Split('|');
 				if (menssage.Length == 2)
 				{
-					gameObject.BroadcastMessage(menssage[0], menssage[1]);
+                    if (menssage[1] == "self")
+                        gameObject.BroadcastMessage(menssage[0], obj);
+                    else 
+                        gameObject.BroadcastMessage(menssage[0], menssage[1]);
+					
 				}
 				if (menssage.Length == 1)
 				{

@@ -12,7 +12,7 @@ TagManager:
   Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
-  User Layer 8: 
+  User Layer 8: Game
   User Layer 9: 
   User Layer 10: 
   User Layer 11: 
@@ -37,35 +37,35 @@ TagManager:
   User Layer 30: 
   User Layer 31: 
   m_SortingLayers:
-  - name: BG
-    userID: 3
-    uniqueID: 2983528921
-    locked: 0
-  - name: Background
-    userID: 2
-    uniqueID: 2968402737
-    locked: 0
   - name: Default
     userID: 0
     uniqueID: 0
     locked: 0
-  - name: Layer 0
+  - name: Background
+    userID: 3
+    uniqueID: 2983528921
+    locked: 0
+  - name: BackgroundDetail
+    userID: 2
+    uniqueID: 2968402737
+    locked: 0
+  - name: Foreground
     userID: 4
     uniqueID: 3278916925
     locked: 0
-  - name: Player
+  - name: ForegroundDetail
+    userID: 5
+    uniqueID: 4068179441
+    locked: 0
+  - name: Assets
+    userID: 6
+    uniqueID: 2666144631
+    locked: 0
+  - name: Tales
+    userID: 7
+    uniqueID: 3529121795
+    locked: 0
+  - name: Game
     userID: 1
     uniqueID: 112778315
-    locked: 0
-  - name: Layer 1
-    userID: 5
-    uniqueID: 3866699787
-    locked: 0
-  - name: Midground
-    userID: 6
-    uniqueID: 2238638787
-    locked: 0
-  - name: Foreground
-    userID: 7
-    uniqueID: 2146557261
     locked: 0

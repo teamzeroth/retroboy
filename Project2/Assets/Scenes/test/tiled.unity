@@ -286,13 +286,13 @@ MonoBehaviour:
   clipperEndType: 0
   clipperDeltaOffset: 0
   GenerateTileCollisions: 1
-  foldoutTileCollisions: 0
+  foldoutTileCollisions: 1
   TileCollisionsZDepth: 0
   TileCollisionsWidth: 1
   TileCollisionsIsInner: 0
   TileCollisionsIsTrigger: 0
   TileCollisionsIs2D: 1
-  generateCollider: 01010100
+  generateCollider: 01010101
   collidersZDepth:
   - 0
   - 0
@@ -4588,10 +4588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd4fd79f647d044790276e6ca49020c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 100
-  damage: 2
-  speed: 1
-  target: {fileID: 2047252457}
 --- !u!1 &1410214228
 GameObject:
   m_ObjectHideFlags: 0
@@ -5975,6 +5971,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   multiplier: 10
+  life: 10
+  ui: {fileID: 0}
   flipped: 0
 --- !u!212 &2047252456
 SpriteRenderer:
@@ -6005,7 +6003,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2047252452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.7999992, y: -12, z: -1}
+  m_LocalPosition: {x: 19.2800007, y: -7.65999985, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 687237863}
