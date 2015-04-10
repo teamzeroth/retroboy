@@ -3,43 +3,68 @@ using System.Collections;
 
 public class MachineDog : Enemy {
 
-    float movementDirection = 0f;
-    Vector3 localScale = Vector3.zero;
+    public float rotateStep = 5f, maxRotation = 45f, rotationDelay = 0.25f;
+    int count;
+    float movementDirection, z;
+    Vector3 localScale;
+    ShootMove bullet = null;
 
 	// Use this for initialization
     protected override void Start () {
         base.Start();
         movementDirection = 1f;
+        count = 0;
+        z = 0f;
+        localScale = Vector3.zero;
         localScale = this.gameObject.transform.localScale;
 	}
-    		
+
+    protected IEnumerator rotate(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        z = this.gameObject.transform.rotation.eulerAngles.z;
+        if (z > maxRotation)
+        {
+            rotateStep *= -1;
+            count++;
+        }
+        this.gameObject.transform.Rotate(0,0,rotateStep);
+    }
+
     protected override void Movement()
     {
         if (seek)
         {
-            body.velocity = new Vector2(movementDirection, 0);
+            body.velocity = Vector2.right * movementDirection;
             seek = false;
             movementDirection *= -1f;
             this.gameObject.transform.localScale = localScale;
-            StartCoroutine(Wait(1f,seek));
+            StartCoroutine("changeSeek",1f);
             localScale.x *= -1;
         }
     }
 
     protected override void Attack(GameObject obj)
     {
-        if (obj != null && destroy)
+        if (count == 2)
         {
-            GameObject shoot = Resources.Load<GameObject>("Shoots/Nim/shoot_1");
-            Vector3 position = transform.position + new Vector3(body.velocity.x, body.velocity.y, 0f);
-
-            shoot = (GameObject)Instantiate(shoot, position, Quaternion.identity);
-            
-            ShootMove move = shoot.GetComponent<ShootMove>();
-            move.direction = body.velocity;
-            move.isAlly = false;
+            StopAllCoroutines();
+            count = 0;
             destroy = false;
-            StartCoroutine(Wait(1f,destroy));
+            seek = true;
+        }
+        else if (obj != null && destroy)
+        {
+            z = this.gameObject.transform.rotation.eulerAngles.z;
+            bullet = prefab.Spawn();
+            Vector3 position = transform.position + Quaternion.Euler(0, 0, z) * -Vector3.right;
+            bullet.transform.position = position;
+            print(z);
+            bullet.direction = Quaternion.Euler(0, 0, z) * Vector2.right * -movementDirection;           
+
+            destroy = false;
+            StartCoroutine("changeDestroy", shootDelay);
+            StartCoroutine("rotate", rotationDelay);
         }
     }
 }

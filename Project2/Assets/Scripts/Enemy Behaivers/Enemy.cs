@@ -3,16 +3,18 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-    public float life = 100f, damage = 2f, speed = 1f;
+    public float life = 100f, damage = 2f, speed = 1f, shootDelay = 0.25f;
     public GameObject target = null;
+    public ShootMove prefab = null;
     protected Vector3 heading = Vector3.zero, direction = Vector3.zero;
     protected float distance = 0f;
     protected bool seek = false, destroy = false;
-    protected Rigidbody2D body = null;  
+    protected Rigidbody2D body = null;
 
     protected virtual void Start()
     {
         seek = true;
+        prefab.CreatePool();
         body = this.gameObject.GetComponent<Rigidbody2D>();
         if (target == null)
             target = GameObject.FindGameObjectWithTag("Player");
@@ -67,10 +69,22 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    protected IEnumerator Wait(float delay, bool v)
+    protected IEnumerator changeSeek(float delay)
     {
         yield return new WaitForSeconds(delay);
-        v = !v;
+        seek = !seek;
+    }
+
+    protected IEnumerator changeDestroy(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        destroy = !destroy;
+    }
+
+    protected IEnumerator changeAnimator(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        this.gameObject.GetComponent<Animator>().enabled = !this.gameObject.GetComponent<Animator>().enabled;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -84,7 +98,7 @@ public class Enemy : MonoBehaviour {
 
     public void onTriggerExternal(GameObject sensor, Collider2D trigger)
     {
-        print(sensor.name + " " + trigger.name + " | " + sensor.gameObject.GetComponent<Collider2D>().collider2D + " | " + trigger.collider2D);
+        //print(sensor.name + " | " + trigger.name + " | " + sensor.gameObject.GetComponent<Collider2D>().collider2D + " | " + trigger.collider2D);
         if (sensor == this.gameObject && trigger.gameObject.name.Contains("shoot"))
         {
             this.life -= trigger.gameObject.GetComponent<ShootMove>().damage;
@@ -94,13 +108,14 @@ public class Enemy : MonoBehaviour {
             body.AddForce(new Vector2(direction.x * -1f, direction.y * -1f), ForceMode2D.Impulse);
             seek = false;
             this.gameObject.GetComponent<Animator>().enabled = false;
-            StartCoroutine(Wait(0.5f,seek));
-            StartCoroutine(Wait(0.5f, this.gameObject.GetComponent<Animator>().enabled));             
+            StartCoroutine("changeSeek", 0.5f);
+            StartCoroutine("changeAnimator", 0.5f);
         }
         else if (sensor.name.Contains("Detection") && trigger.gameObject.tag == "Player")
         {
             destroy = true;
             seek = false;
+            StopAllCoroutines();
             body.velocity = Vector2.zero;
             target = trigger.gameObject;
         }

@@ -712,7 +712,12 @@ MonoBehaviour:
   life: 100
   damage: 2
   speed: 1
+  shootDelay: .5
   target: {fileID: 0}
+  prefab: {fileID: 11458350, guid: 1e18bc9a481dbab40ae2193114a9ee77, type: 2}
+  rotateStep: 10
+  maxRotation: 45
+  rotationDelay: .25
 --- !u!1 &377230351
 GameObject:
   m_ObjectHideFlags: 0

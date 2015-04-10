@@ -16,4 +16,9 @@ public class ShootMove : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {}
+
+    void OnBecameInvisible()
+    {
+        Destroy(this.gameObject);
+    }
 }

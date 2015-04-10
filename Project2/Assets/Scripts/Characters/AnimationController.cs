@@ -186,9 +186,9 @@ public class AnimationController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D trigger)
     {
-        print(trigger.gameObject.name);
+        //print(trigger.gameObject.name);
         ShootMove s = trigger.gameObject.GetComponent<ShootMove>();
-        if (trigger.gameObject.name.Contains("shoot") && !s.isAlly)
-            Hit(0f, Vector2.zero);
+        if (trigger.gameObject.name.Contains("bullet") && !s.isAlly)
+            Hit(s.damage, Vector2.zero);
     }   
 }
