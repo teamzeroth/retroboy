@@ -21,6 +21,7 @@ public class AnimationController : MonoBehaviour {
     Animator _anim;
     Vector2 deadMoveVec = new Vector2(1, 0);
     Vector2 fixedMoveVec = Vector2.zero;
+    Vector2 currentMoveVec = Vector2.zero;
 
     float fireTime = 0;
     bool firstShoot = true;
@@ -76,29 +77,23 @@ public class AnimationController : MonoBehaviour {
             FixedMoveUpdate();
     }
 
-    /*public void FixedUpdate() {
+    public void FixedUpdate() {
         if (fixedMoveVec != Vector2.zero) return;
-
-        Vector2 moveVec = new Vector2(
-           Input.GetAxis("Horizontal"),
-           Input.GetAxis("Vertical")
-        );
-
-            
-    }*/
+        
+        Move(currentMoveVec);
+    }
 
     public void NormalUpdate() {
-        Vector2 moveVec = new Vector2(
+        currentMoveVec = new Vector2(
            Input.GetAxis("Horizontal"),
            Input.GetAxis("Vertical")
         );
 
         calcDeadMove();  
-
         checkVariations();
-        Animation(moveVec);
-        Move(moveVec);
-        CheckFlip(moveVec);  
+
+        Animation(currentMoveVec);
+        CheckFlip(currentMoveVec);  
 
         if (Input.GetButtonUp("Fire1") && fireTime <= 0) {
             if (firstShoot) {
@@ -142,8 +137,8 @@ public class AnimationController : MonoBehaviour {
 
         frictionValue = moveVec == Vector2.zero || curDir == Vector2.zero ? 0 : value / 180;
 
-        if (_anim.CurrentAnimState().StartsWith("idle")) {
-            rigidbody2D.velocity = Vector2.Lerp(curDir, dir, 0.9f);
+        if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical")) {
+            rigidbody2D.velocity = Vector2.Lerp(curDir, dir, 1);
             return;
         }
 
@@ -193,11 +188,16 @@ public class AnimationController : MonoBehaviour {
             _anim.SetFloat("Friction", frictionValue);
         }
 
+        //Vector2 pv = rigidbody2D.GetPointVelocity((Vector2) collider2D.bounds.center);
+
         _anim.speed = 0.5f + Mathf.Clamp01(rigidbody2D.velocity.magnitude) * 0.5f;
         
-        if (ForcingMove) {
+        if (NormalState) {
             _anim.SetFloat("Horizontal", rigidbody2D.velocity.normalized.x);
             _anim.SetFloat("Vertical", rigidbody2D.velocity.normalized.y);
+        }else if(ForcingMove){
+            _anim.SetFloat("Horizontal", moveVec.normalized.x);
+            _anim.SetFloat("Vertical", moveVec.normalized.y);
         }else{
             _anim.SetFloat("Horizontal", deadMoveVec.x);
             _anim.SetFloat("Vertical", deadMoveVec.y);
