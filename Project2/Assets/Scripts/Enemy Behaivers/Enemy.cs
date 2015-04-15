@@ -36,6 +36,15 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    protected void lookAt2D(Vector3 target)
+    {
+        Vector3 diff = transform.position - Camera.main.ScreenToWorldPoint(target);
+        diff.Normalize();
+
+        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+    }
+
     protected void UpdatePosition()
     {
         heading = target.transform.position - this.gameObject.transform.position;
@@ -114,6 +123,7 @@ public class Enemy : MonoBehaviour {
         else if (sensor.name.Contains("Detection") && trigger.gameObject.tag == "Player")
         {
             destroy = true;
+            lookAt2D(target.transform.position);
             seek = false;
             StopAllCoroutines();
             body.velocity = Vector2.zero;

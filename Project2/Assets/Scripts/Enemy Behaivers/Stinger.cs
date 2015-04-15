@@ -4,16 +4,18 @@ using System.Collections;
 public class Stinger : Enemy
 {
 
-    public float rotateStep = 5f, maxRotation = 45f, rotationDelay = 0.25f, torque = 5f;
+    public float rotateStep = -5f, maxRotation = 45f, rotationDelay = 0.25f, torque = 5f;
     int count;
     float movementDirection, z;
     Vector3 localScale;
     ShootMove bullet = null;
+    Transform t;
 
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
+        t = null;
         movementDirection = 1f;
         count = 0;
         z = 0f;
@@ -32,11 +34,14 @@ public class Stinger : Enemy
         }
         this.gameObject.transform.Rotate(0, 0, rotateStep);
     }
-
+    
     protected override void Movement()
     {
+        Debug.DrawLine(this.gameObject.transform.position, target.transform.position - new Vector3(0f, 0.4f, 0f));
+            
         if (seek)
         {
+            //lookAt2D(Vector3.forward);   
             body.velocity = Vector2.right * movementDirection;
             seek = false;
             movementDirection *= -1f;
@@ -47,9 +52,17 @@ public class Stinger : Enemy
         else if (destroy)
         {
             if (this.transform.rotation.eulerAngles.z > maxRotation)
+            {
                 rotateStep *= -1f;
+                count++;
+            }
+
+            t = target.transform;
             
-            this.transform.RotateAround(target.transform.position, Vector3.forward, rotateStep);
+            Vector3 position = (target.transform.position - this.gameObject.transform.position - new Vector3(0f,0.4f,0f));
+            print(target.transform.position + " | " + position + " | " + position.magnitude + " | " + position / position.magnitude + " | " + (position / position.magnitude).magnitude);
+            this.gameObject.transform.RotateAround(t.position - new Vector3(0f,0.4f,0f), Vector3.forward,1 * rotateStep);
+//            lookAt2D(t.position);            
 
             if (count == 2)
             {
