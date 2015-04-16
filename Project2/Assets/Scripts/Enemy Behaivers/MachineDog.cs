@@ -64,7 +64,6 @@ public class MachineDog : Enemy {
             bullet = prefab.Spawn();
             Vector3 position = transform.position + Quaternion.Euler(0, 0, z) * -Vector3.right;
             bullet.transform.position = position;
-            print(z);
             bullet.direction = Quaternion.Euler(0, 0, z) * Vector2.right * -movementDirection;           
 
             destroy = false;
