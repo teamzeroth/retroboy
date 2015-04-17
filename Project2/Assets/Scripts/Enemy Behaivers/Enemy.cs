@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour {
     public ShootMove prefab = null;
     protected Vector3 heading = Vector3.zero, direction = Vector3.zero;
     protected float distance = 0f;
-    protected bool seek = false, destroy = false;
+    protected bool seek = false, destroy = false, melee = false;
     protected Rigidbody2D body = null;
 
     protected virtual void Start()
@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour {
         {
             GameObject.Destroy(this.gameObject);
             Camera.main.GetComponent<Director>().increaseScore();
+            StopAllCoroutines();
         }
         else
         {
@@ -54,14 +55,11 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void Movement()
     {
-        if (seek)
+        body.velocity = new Vector2(direction.x * speed, direction.y * speed);
+        if (Debug.isDebugBuild)
         {
-            body.velocity = new Vector2(direction.x * speed, direction.y * speed);
-            if (Debug.isDebugBuild)
-            {
-                //Debug.Log("Direction: " + direction + " | Velocity: " + body.velocity);
-                Debug.DrawLine(this.gameObject.transform.position, target.transform.position);
-            }
+//            Debug.Log("Direction: " + direction + " | Velocity: " + body.velocity);
+            Debug.DrawLine(this.gameObject.transform.position, target.transform.position);
         }
     }
 
@@ -69,13 +67,10 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void Attack(GameObject obj) 
     {
-        if (obj != null && destroy)
-        {
-            if (Debug.isDebugBuild)
-                Debug.Log(this.gameObject.name + " attacks " + obj.name + " for " + this.damage + " damage points");
+        if (Debug.isDebugBuild)
+            Debug.Log(this.gameObject.name + " attacks " + obj.name + " for " + this.damage + " damage points");
 
-            obj.GetComponent<AnimationController>().Hit(this.damage, this.direction);            
-        }
+        obj.GetComponent<AnimationController>().Hit(this.damage, this.direction);
     }
 
     protected IEnumerator changeSeek(float delay)
@@ -101,6 +96,7 @@ public class Enemy : MonoBehaviour {
         if (collision.gameObject.tag == "Player")
         {
             destroy = true;
+            melee = true;
             target = collision.gameObject;
         }
     }
@@ -109,6 +105,7 @@ public class Enemy : MonoBehaviour {
     {
         //print(sensor.name + " | " + trigger.name + " | " + sensor.gameObject.GetComponent<Collider2D>().collider2D + " | " + trigger.collider2D);
         if (sensor == this.gameObject && trigger.gameObject.name.Contains("shoot"))
+        //Colizão com object tiro (Hit)
         {
             this.life -= trigger.gameObject.GetComponent<ShootMove>().damage;
             Object.Destroy(trigger.gameObject);
@@ -121,9 +118,9 @@ public class Enemy : MonoBehaviour {
             StartCoroutine("changeAnimator", 0.5f);
         }
         else if (sensor.name.Contains("Detection") && trigger.gameObject.tag == "Player")
+        //Colizão com o object DetectionRange (Found)
         {
             destroy = true;
-            lookAt2D(target.transform.position);
             seek = false;
             StopAllCoroutines();
             body.velocity = Vector2.zero;

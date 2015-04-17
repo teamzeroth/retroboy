@@ -4,7 +4,7 @@ using System.Collections;
 public class Stinger : Enemy
 {
 
-    public float rotateStep = -5f, maxRotation = 45f, rotationDelay = 0.25f, torque = 5f;
+    public float rotateStep = -5f, maxRotation = 45f;
     int count;
     float movementDirection, z;
     Vector3 localScale;

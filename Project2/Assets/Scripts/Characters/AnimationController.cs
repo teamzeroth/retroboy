@@ -19,6 +19,8 @@ public class AnimationController : MonoBehaviour {
     public bool flipped = false;
 
     Animator _anim;
+    GameObject _chargeParticles;
+
     Vector2 deadMoveVec = new Vector2(1, 0);
     Vector2 fixedMoveVec = Vector2.zero;
     Vector2 currentMoveVec = Vector2.zero;
@@ -61,6 +63,8 @@ public class AnimationController : MonoBehaviour {
 
     void Start(){
         _anim = GetComponent<Animator>();
+        _chargeParticles = transform.Find("Charge Particles").gameObject;
+
         if (ui == null) ui = GameObject.Find("Menu");
     }
 
@@ -188,17 +192,25 @@ public class AnimationController : MonoBehaviour {
             _anim.SetFloat("Friction", frictionValue);
         }
 
+        _chargeParticles.SetActive(OnCharge);
+
         //Vector2 pv = rigidbody2D.GetPointVelocity((Vector2) collider2D.bounds.center);
 
-        _anim.speed = 0.5f + Mathf.Clamp01(rigidbody2D.velocity.magnitude) * 0.5f;
         
-        if (NormalState) {
+
+        if (NormalState && ForcingMove) {
+            _anim.speed = 0.3f + Mathf.Clamp01(rigidbody2D.velocity.magnitude) * 0.7f;
+
             _anim.SetFloat("Horizontal", rigidbody2D.velocity.normalized.x);
             _anim.SetFloat("Vertical", rigidbody2D.velocity.normalized.y);
         }else if(ForcingMove){
+            _anim.speed = 1;
+
             _anim.SetFloat("Horizontal", moveVec.normalized.x);
             _anim.SetFloat("Vertical", moveVec.normalized.y);
         }else{
+            _anim.speed = 1;
+
             _anim.SetFloat("Horizontal", deadMoveVec.x);
             _anim.SetFloat("Vertical", deadMoveVec.y);
         }
