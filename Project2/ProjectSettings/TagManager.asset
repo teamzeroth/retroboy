@@ -13,7 +13,7 @@ TagManager:
   Builtin Layer 6: 
   Builtin Layer 7: 
   User Layer 8: Game
-  User Layer 9: 
+  User Layer 9: Foreground
   User Layer 10: 
   User Layer 11: 
   User Layer 12: 
@@ -68,4 +68,12 @@ TagManager:
   - name: Game
     userID: 1
     uniqueID: 112778315
+    locked: 0
+  - name: Particles
+    userID: 9
+    uniqueID: 1470551667
+    locked: 0
+  - name: UI
+    userID: 8
+    uniqueID: 83145165
     locked: 0
