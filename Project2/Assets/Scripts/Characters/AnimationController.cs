@@ -7,8 +7,11 @@ using System.Collections;
 
 public class AnimationController : MonoBehaviour {
 
+
     static private float REPEAT_FIRE_TIME = 0.5f;
     static private float DELIVERY_FIRE_TIME = 0.4f;
+
+    static public NPCController currentNPC;
 
     public float speed = 10f;
     public float multiplier = 10f;
@@ -106,6 +109,11 @@ public class AnimationController : MonoBehaviour {
             } else {
                 shoot();
             }
+        }
+
+        if (Input.GetButtonUp("Fire2")) {
+            if (NPCController.interactions.Count > 0)
+                NPCController.interactions[0].Interact(transform.position);
         }
     }
 

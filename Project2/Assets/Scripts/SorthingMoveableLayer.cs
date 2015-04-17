@@ -2,17 +2,23 @@
 using System.Collections;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class SorthingLayer : MonoBehaviour {
+public class SorthingMoveableLayer : MonoBehaviour {
 
     Renderer _renderer = null;
-    int initialOrder;
+    Transform _positionPoint;
+
+    int _initialOrder;
 
     void Awake() {
         _renderer = GetComponent<SpriteRenderer>();
-        initialOrder = _renderer.sortingOrder;
+
+        _positionPoint = transform.Find("Feets");
+        if (_positionPoint == null) _positionPoint = transform;
+
+        _initialOrder = _renderer.sortingOrder;
     }
 
     void Update() {
-        _renderer.sortingOrder = initialOrder + (int) Mathf.Round(transform.position.y) * -3;
+        _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(_positionPoint.position.y * -5);
     }
 }
