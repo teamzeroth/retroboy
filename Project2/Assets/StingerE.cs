@@ -42,6 +42,7 @@ public class StingerE : Enemy
     {
         if (melee)
         {
+            StopAllCoroutines();
             StartCoroutine("explode", explodeDelay);
             body.fixedAngle = true;
             melee = false;
