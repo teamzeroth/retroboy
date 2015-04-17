@@ -134,7 +134,7 @@
     </object>
     <object class="SustainPoint" id="{b62284bd-880c-4e7d-bccc-4451ffc578ff}">
         <property name="position">
-            <value>0.72476272648835205</value>
+            <value>1.2812769628990508</value>
         </property>
         <relationship name="timeline">
             <destination>{7019380b-fee0-471c-8a55-d2d6a4fed4f2}</destination>

@@ -33,7 +33,6 @@
         </relationship>
         <relationship name="banks">
             <destination>{a5e96c5a-88e3-4008-83d4-fe98a1a60a03}</destination>
-            <destination>{c8c6528b-60d4-4ca5-bb35-445aef7c6e30}</destination>
         </relationship>
     </object>
     <object class="EventMixer" id="{5faecc19-6042-48c6-9295-8debab9448f9}">
@@ -102,7 +101,7 @@
     </object>
     <object class="MultiSound" id="{c8d278f8-e07b-4819-be47-64e6925725af}">
         <property name="start">
-            <value>0</value>
+            <value>1.0000000474974513</value>
         </property>
         <property name="length">
             <value>0.04999999888241291</value>
@@ -136,7 +135,7 @@
     </object>
     <object class="AutomationScale" id="{67e6ecc7-4116-4f1b-9bb3-3402aec098f8}">
         <property name="curve">
-            <value>LinearCurveStrategy{(0.000000,0.000000)(1.000000,1.000000)}</value>
+            <value>LinearCurveStrategy{(0.000000,0.000000)(1.000000,2.000000)}</value>
         </property>
         <property name="associatedClassName">
             <value>GameParameter</value>
