@@ -11,7 +11,7 @@
             <value>8.0999999999999996</value>
         </property>
         <property name="lastModifiedDate">
-            <value>0</value>
+            <value>1429123932</value>
         </property>
         <property name="audioFilePath">
             <value>$(AUDIO_BIN_DIR)/wind {d2266e2c-7cc2-4859-94bb-758b89784b72}.wav</value>

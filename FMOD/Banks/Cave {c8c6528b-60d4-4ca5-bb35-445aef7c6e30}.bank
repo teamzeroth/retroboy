@@ -32,6 +32,9 @@
         <property name="type">
             <value>Vorbis</value>
         </property>
+        <property name="quality">
+            <value>100</value>
+        </property>
     </object>
     <object class="PCMCompressionSetting" id="{0e9ef30c-2365-430c-820f-793e3a796269}">
         <property name="type">
