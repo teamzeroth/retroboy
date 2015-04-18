@@ -630,7 +630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &331245858
 Animator:
   serializedVersion: 3
@@ -657,7 +657,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 0
   m_FixedAngle: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1086,6 +1086,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 5007984, guid: b2b6eb078dfaa9d41a84f1d6e99e3824, type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 107984, guid: b2b6eb078dfaa9d41a84f1d6e99e3824, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b2b6eb078dfaa9d41a84f1d6e99e3824, type: 2}
   m_RootGameObject: {fileID: 1319172809}
@@ -1110,7 +1118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1319172810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1184,7 +1192,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 0
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -2405,7 +2413,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1456498791}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Radius: .200000003
   m_Center: {x: -.0199999996, y: .0250000004}
 --- !u!114 &1456498794
@@ -2422,12 +2430,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 100
   damage: 2
-  speed: 1
+  speed: 10
   shootDelay: .25
   target: {fileID: 0}
   prefab: {fileID: 11458350, guid: 1e18bc9a481dbab40ae2193114a9ee77, type: 2}
-  rotateStep: 5
-  maxRotation: 45
+  rotateStep: 10
+  maxRotation: 360
 --- !u!95 &1456498795
 Animator:
   serializedVersion: 3
@@ -3267,6 +3275,30 @@ Prefab:
     - target: {fileID: 419578, guid: 8edd6212050dacb49b7403ad486f9053, type: 2}
       propertyPath: m_RootOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 11419578, guid: 8edd6212050dacb49b7403ad486f9053, type: 2}
+      propertyPath: rotateStep
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11419578, guid: 8edd6212050dacb49b7403ad486f9053, type: 2}
+      propertyPath: maxRotation
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 5019578, guid: 8edd6212050dacb49b7403ad486f9053, type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11419578, guid: 8edd6212050dacb49b7403ad486f9053, type: 2}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819578, guid: 8edd6212050dacb49b7403ad486f9053, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819578, guid: 8edd6212050dacb49b7403ad486f9053, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8edd6212050dacb49b7403ad486f9053, type: 2}
