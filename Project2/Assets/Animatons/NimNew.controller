@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Nim
+  m_Name: NimNew
   serializedVersion: 2
   m_AnimatorParameters:
   - m_Name: Vertical
@@ -1947,27 +1947,14 @@ StateMachine:
       second:
       - {fileID: 110167416}
     data:
-      first: {fileID: 110265014}
-      second:
-      - {fileID: 110174626}
-      - {fileID: 110126920}
-      - {fileID: 110150832}
-    data:
-      first: {fileID: 110278942}
-      second:
-      - {fileID: 110130664}
-      - {fileID: 110110426}
-    data:
-      first: {fileID: 110276370}
-      second:
-      - {fileID: 110111440}
-      - {fileID: 110135200}
-      - {fileID: 110104404}
-      - {fileID: 110198654}
-    data:
       first: {fileID: 110232696}
       second:
       - {fileID: 110148078}
+    data:
+      first: {fileID: 110252000}
+      second:
+      - {fileID: 110163812}
+      - {fileID: 110153878}
     data:
       first: {fileID: 110252564}
       second:
@@ -1979,10 +1966,23 @@ StateMachine:
       - {fileID: 110190254}
       - {fileID: 110186358}
     data:
-      first: {fileID: 110252000}
+      first: {fileID: 110265014}
       second:
-      - {fileID: 110163812}
-      - {fileID: 110153878}
+      - {fileID: 110174626}
+      - {fileID: 110126920}
+      - {fileID: 110150832}
+    data:
+      first: {fileID: 110276370}
+      second:
+      - {fileID: 110111440}
+      - {fileID: 110135200}
+      - {fileID: 110104404}
+      - {fileID: 110198654}
+    data:
+      first: {fileID: 110278942}
+      second:
+      - {fileID: 110130664}
+      - {fileID: 110110426}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 372, y: -360, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

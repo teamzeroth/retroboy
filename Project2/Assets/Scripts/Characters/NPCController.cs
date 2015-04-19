@@ -6,9 +6,11 @@ using System;
 public class NPCController : MonoBehaviour {
 
     public static List<NPCController> interactions = new List<NPCController>();
-    
-    public Vector2 defaltDirection;
+
     public bool flipAnimation = true;
+    public bool backToDefault = false;
+
+    private Vector2 defaltDirection;
 
     Collider2D _interactionArea;
     Animator _animation;
@@ -18,6 +20,9 @@ public class NPCController : MonoBehaviour {
     #region MonoBehavior
 
     void Awake() {
+        defaltDirection = (Vector2) (transform.Find("Look").position - transform.Find("Feets").position);
+        print(defaltDirection);
+
         _interactionArea = Array.Find<Collider2D>(GetComponents<Collider2D>(), x => x.isTrigger);
         _animation = GetComponent<Animator>();
 
@@ -41,11 +46,6 @@ public class NPCController : MonoBehaviour {
         Gizmos.DrawWireSphere(
             transform.position + (Vector3) coll.center,
             coll.radius
-        );
-
-        Gizmos.DrawSphere(
-            transform.position + (Vector3) (coll.center + defaltDirection),
-            0.03f
         );
     }
 

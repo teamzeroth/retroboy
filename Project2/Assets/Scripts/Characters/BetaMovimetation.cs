@@ -133,10 +133,10 @@ public class BetaMovimetation : MonoBehaviour {
     private void animSetScale(float desapearTime){
         if (desapearTime > TIME_DESAPEAR || desapearTime < 0) return;
 
-        float delta = 1 - Helper.H.EaseCirc(desapearTime, 0, 1f, TIME_DESAPEAR);
+        float delta = 1 - Helper.H.EaseCirc(desapearTime, 0, 1, TIME_DESAPEAR);
         float sign = Mathf.Sign(transform.localScale.x);
 
-        _lightSprite.transform.localScale = new Vector3(sign, delta, 1);
+        _lightSprite.transform.localScale = new Vector3(sign * 0.5f, delta * 0.5f, 1);
         transform.localScale = new Vector3(sign + (1 - delta), delta, 1);
 
         (renderer as SpriteRenderer).color = new Color(1, 1, 1, delta * delta);

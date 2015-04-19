@@ -37,7 +37,7 @@ public class AnimationController : MonoBehaviour {
     public bool OnHurt = false;
 
     public bool CanMove {get {
-        return !(OnDraw || OnCharge || OnShoot || fireTime > 0.3f || _anim.CurrentAnimState().StartsWith("shoot"));
+        return !(OnDraw || OnCharge || OnShoot || fireTime > 0.3f || _anim.CurrentAnimState().StartsWith("Nim-shoot"));
     }}
 
     public bool ForcingMove {get{
@@ -45,11 +45,11 @@ public class AnimationController : MonoBehaviour {
     }}
 
     public bool NormalState {get{
-        return _anim.CurrentAnimState().StartsWith("idle") || _anim.CurrentAnimState().StartsWith("walk") || _anim.CurrentAnimState().StartsWith("friction");
+        return _anim.CurrentAnimState().StartsWith("Nim-idle") || _anim.CurrentAnimState().StartsWith("Nim-walk") || _anim.CurrentAnimState().StartsWith("Nim-friction");
     }}
 
     public bool DrawState {get{
-        return _anim.CurrentAnimState().StartsWith("draw");
+        return _anim.CurrentAnimState().StartsWith("Nim-draw");
     }}
 
     public bool OnMoving { get { return CanMove && (Input.GetButton("Horizontal") || Input.GetButton("Vertical")); } }
@@ -150,12 +150,13 @@ public class AnimationController : MonoBehaviour {
         frictionValue = moveVec == Vector2.zero || curDir == Vector2.zero ? 0 : value / 180;
 
         if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical")) {
-            rigidbody2D.velocity = Vector2.Lerp(curDir, dir, 1);
+            print("OUT!!!");
+            rigidbody2D.velocity = Vector2.Lerp(curDir, dir, 0.8f);
             return;
         }
 
         if (moveVec != curDir)
-            rigidbody2D.velocity = Vector2.Lerp(curDir, dir, Mathf.Max(0.1f, 1 - frictionValue) * 20 * Time.deltaTime);
+            rigidbody2D.velocity = Vector2.Lerp(curDir, dir, Mathf.Max(0.3f, 1 - frictionValue) * 20 * Time.deltaTime);
     }
 
     public void MakeFixedMove(Vector2 position, float duration, Color color) {
