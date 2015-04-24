@@ -20,15 +20,16 @@ public class AnimationController : MonoBehaviour {
 
     [HideInInspector]
     public bool flipped = false;
+    [HideInInspector]
+    public float fireTime = 0;
 
     Animator _anim;
-    GameObject _chargeParticles;
+    //GameObject _chargeParticles;
 
     Vector2 deadMoveVec = new Vector2(1, 0);
     Vector2 fixedMoveVec = Vector2.zero;
     Vector2 currentMoveVec = Vector2.zero;
 
-    float fireTime = 0;
     bool firstShoot = true;
     float frictionValue;
 
@@ -66,7 +67,7 @@ public class AnimationController : MonoBehaviour {
 
     void Start(){
         _anim = GetComponent<Animator>();
-        _chargeParticles = transform.Find("Charge Particles").gameObject;
+        //_chargeParticles = transform.Find("Charge Particles").gameObject;
 
         if (ui == null) ui = GameObject.Find("Menu");
     }
@@ -84,21 +85,18 @@ public class AnimationController : MonoBehaviour {
             FixedMoveUpdate();
     }
 
-    public void FixedUpdate() {
-        if (fixedMoveVec != Vector2.zero) return;
-        
-        Move(currentMoveVec);
-    }
-
     public void NormalUpdate() {
         currentMoveVec = new Vector2(
            Input.GetAxis("Horizontal"),
            Input.GetAxis("Vertical")
         );
 
+        if (OnDraw) waitDraw = true;
+
         calcDeadMove();  
         checkVariations();
 
+        Move(currentMoveVec);
         Animation(currentMoveVec);
         CheckFlip(currentMoveVec);  
 
@@ -150,8 +148,7 @@ public class AnimationController : MonoBehaviour {
         frictionValue = moveVec == Vector2.zero || curDir == Vector2.zero ? 0 : value / 180;
 
         if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical")) {
-            print("OUT!!!");
-            rigidbody2D.velocity = Vector2.Lerp(curDir, dir, 0.8f);
+            rigidbody2D.velocity = Vector2.Lerp(curDir, dir, 20 * Time.deltaTime);
             return;
         }
 
@@ -190,22 +187,27 @@ public class AnimationController : MonoBehaviour {
         GetComponent<Collider2D>().enabled = true;
     }
 
+    private bool waitDraw = false;
     public void Animation(Vector2 moveVec) {
         _anim.SetBool("OnMoving", OnMoving && (rigidbody2D.velocity != Vector2.zero || DrawState));
         _anim.SetBool("OnHurt", OnHurt);
 
         if (fixedMoveVec == Vector2.zero) {
-            _anim.SetBool("OnDraw", OnDraw);
+            if(waitDraw == true && rigidbody2D.velocity == Vector2.zero){
+                _anim.SetBool("OnDraw", true);
+                waitDraw = false;
+            } else {
+                _anim.SetBool("OnDraw", false);
+            }
+
             _anim.SetBool("OnCharge", OnCharge);
             _anim.SetBool("OnShoot", OnShoot);
             _anim.SetFloat("Friction", frictionValue);
         }
 
-        _chargeParticles.SetActive(OnCharge);
+        //_chargeParticles.SetActive(OnCharge && !NormalState);
 
         //Vector2 pv = rigidbody2D.GetPointVelocity((Vector2) collider2D.bounds.center);
-
-        
 
         if (NormalState && ForcingMove) {
             _anim.speed = 0.3f + Mathf.Clamp01(rigidbody2D.velocity.magnitude) * 0.7f;
@@ -287,7 +289,10 @@ public class AnimationController : MonoBehaviour {
         fireTime = REPEAT_FIRE_TIME;
         Vector2 dir = ForcingMove ? moveVec : deadMoveVec;
 
-        GameObject shoot = Resources.Load<GameObject>("Shoots/Nim/shoot_1");
+        float timer = GetComponent<PlayerSFXController>().timer;
+        int type = timer >= 1f ? timer >= 2f ? 3 : 2 : 1;
+
+        GameObject shoot = Resources.Load<GameObject>("Shoots/Nim/shoot_" + type);
         Vector3 position = transform.position + (Vector3)(dir.normalized * 0.9f);
 
         shoot = (GameObject)Instantiate(shoot, position, Quaternion.identity);

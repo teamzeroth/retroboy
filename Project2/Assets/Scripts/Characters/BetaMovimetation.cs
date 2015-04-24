@@ -5,7 +5,7 @@ using Helper;
 
 public class BetaMovimetation : MonoBehaviour {
 
-    public Transform player;
+    public Transform target;
 
     [Range(1f, 10f)]
     public float smooth = 1f;
@@ -22,18 +22,22 @@ public class BetaMovimetation : MonoBehaviour {
     private bool disappeared = false;
 
     private GameObject _lightSprite;
+    private GameObject _lightParticle;
     private AnimationController _playerController;
 
     void Awake() {
+        if (target == null) target = GameObject.FindWithTag("Player").transform;
+
         _lightSprite = transform.FindChild("light").gameObject;
-        _playerController = player.GetComponent<AnimationController>();
+        _lightParticle = transform.FindChild("particles").gameObject;
+        _playerController = target.GetComponent<AnimationController>();
     }
 
     void FixedUpdate() {
         if (!disappeared) {
             CalcPosition();
         } else {
-            transform.position = player.position;
+            transform.position = target.position;
         }
 
         if (_playerController.flipped != flipped)
@@ -53,14 +57,14 @@ public class BetaMovimetation : MonoBehaviour {
         curAngle.z = flipped ? lightAngle : -lightAngle;
 
         _lightSprite.transform.localEulerAngles = curAngle;
-        _lightSprite.particleSystem.startRotation = lightAngle * Mathf.Deg2Rad;
 
-        _lightSprite.particleSystem.startLifetime = 1;
+        _lightParticle.particleSystem.startRotation = lightAngle * Mathf.Deg2Rad;
+        _lightParticle.particleSystem.startLifetime = 1;
     }
 
     void CalcPosition() {
         Vector3 curPos = transform.position;
-        Vector3 toPos = player.position;
+        Vector3 toPos = target.position;
 
         curPos = Vector3.Lerp(curPos, toPos, Time.deltaTime * smooth);
 
@@ -105,7 +109,7 @@ public class BetaMovimetation : MonoBehaviour {
 
         checkFlip();
 
-        _lightSprite.particleSystem.maxParticles = 0;
+        _lightParticle.particleSystem.maxParticles = 0;
         disappearTime = disappearTime + Time.deltaTime;
 
         animSetScale(disappearTime);
@@ -116,7 +120,7 @@ public class BetaMovimetation : MonoBehaviour {
             disappeared = false;
         }
 
-        if (disappearTime <= 0f) _lightSprite.particleSystem.maxParticles = 10;
+        if (disappearTime <= 0f) _lightParticle.particleSystem.maxParticles = 10;
 
         if (disappearTime < 0f) { 
             disappearTime = 0f;  

@@ -19,6 +19,6 @@ public class SorthingMoveableLayer : MonoBehaviour {
     }
 
     void Update() {
-        _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(_positionPoint.position.y * -5);
+        _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(_positionPoint.position.y * -10);
     }
 }

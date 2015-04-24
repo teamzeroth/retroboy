@@ -71,7 +71,8 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   speed: 10
   damage: 10
-  isAlly: 0
+  isAlly: 1
+  flipped: 0
 --- !u!212 &21258350
 SpriteRenderer:
   m_ObjectHideFlags: 1

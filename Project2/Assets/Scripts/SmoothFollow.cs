@@ -10,7 +10,7 @@ public class SmoothFollow : MonoBehaviour {
 
     private Vector3 _smoothDampVelocity;
     private float timer;
-    private int onQuake;
+    private float onQuake;
 
     void LateUpdate() {
         if (!useFixedUpdate) updateCameraPosition();
@@ -22,7 +22,7 @@ public class SmoothFollow : MonoBehaviour {
     }
 
 
-    public void Quake(int level) {
+    public void Quake(float level) {
         onQuake = level;
         timer = 0;
     }
