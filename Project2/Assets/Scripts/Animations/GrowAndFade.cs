@@ -24,5 +24,6 @@ public class GrowAndFade : MonoBehaviour {
 
     private void disabling() {
         gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
     }
 }
