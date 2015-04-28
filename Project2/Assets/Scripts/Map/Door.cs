@@ -45,8 +45,9 @@ namespace MapResources {
 
         private AnimationController _player = null;
 
-        void Start(){
+        void Awake(){
             if (!string.IsNullOrEmpty(id)) doors.Add(id, this);
+            
         }
 
         public void Init(MapObject door) {
@@ -75,28 +76,31 @@ namespace MapResources {
         }
 
         public void OnTriggerEnter2D(Collider2D other) {
-            if (other.tag == "Player" && _player == null) {
-                _player = other.gameObject.GetComponent<AnimationController>();
-                GetIn();
+            if (other.tag == "Player" && _player == null && !string.IsNullOrEmpty(goTo)) {
+                GetIn(other.gameObject.GetComponent<AnimationController>());
             }
         }
 
         public void AfterEnter() {
-            doors[this.goTo].GetOut(_player);
             _player = null;
         }
 
         public void AfterOut() {
+            if (string.IsNullOrEmpty(goTo)) collider2D.isTrigger = false;
             _player = null;
         }
 
 
-        public void GetIn() {
+        public void GetIn(AnimationController player) {
+            Camera.main.GetComponent<SmoothFollow>().target = transform;
+            
             _player.MakeFixedMove(CalcInDirection(), 1, new Color(0, 0, 0, 0.3f));
             Invoke("AfterEnter", 1.1f);
         }
 
         public void GetOut(AnimationController player) {
+            Camera.main.GetComponent<SmoothFollow>().target = player.transform;
+
             _player = player;
             _player.MakeFixedMove(MapUtils.GetDirectionVector(Out), 1, new Color(1, 1, 1, 1));
             _player.DeadVector = MapUtils.GetDirectionVector(Out);

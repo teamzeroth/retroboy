@@ -15,7 +15,9 @@ public class FMOD_CustonEmitter : FMOD_StudioEventEmitter {
 
     void Start() {
         base.Start();
-        transform.position = transform.parent.TransformPoint(Vector3.zero);
+
+        if(transform.parent != null)
+            transform.position = transform.parent.TransformPoint(Vector3.zero);
     }
 
     public void SetParameter(string name, float value) {

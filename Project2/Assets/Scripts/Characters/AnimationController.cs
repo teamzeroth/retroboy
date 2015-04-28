@@ -38,7 +38,7 @@ public class AnimationController : MonoBehaviour {
     public bool OnHurt = false;
 
     public bool CanMove {get {
-        return !(OnDraw || OnCharge || OnShoot || fireTime > 0.3f || _anim.CurrentAnimState().StartsWith("Nim-shoot"));
+        return !(OnCharge || fireTime > 0.3f || _anim.CurrentAnimState().StartsWith("Nim-shoot"));
     }}
 
     public bool ForcingMove {get{
@@ -46,7 +46,8 @@ public class AnimationController : MonoBehaviour {
     }}
 
     public bool NormalState {get{
-        return _anim.CurrentAnimState().StartsWith("Nim-idle") || _anim.CurrentAnimState().StartsWith("Nim-walk") || _anim.CurrentAnimState().StartsWith("Nim-friction");
+        bool animation_test = (_anim.CurrentAnimState().StartsWith("Nim-idle") || _anim.CurrentAnimState().StartsWith("Nim-walk") || _anim.CurrentAnimState().StartsWith("Nim-friction"));
+        return animation_test && fixedMoveVec == Vector2.zero;
     }}
 
     public bool DrawState {get{
@@ -65,7 +66,7 @@ public class AnimationController : MonoBehaviour {
 
     #region MonoBehaviour Methods
 
-    void Start(){
+    void Awake(){
         _anim = GetComponent<Animator>();
         //_chargeParticles = transform.Find("Charge Particles").gameObject;
 

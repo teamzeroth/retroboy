@@ -27,12 +27,12 @@ public class Director : MonoBehaviour {
     public void increaseScore()
     {
         this.score++;
-        ui.GetComponentsInChildren<UnityEngine.UI.Text>()[1].text = "Score - " + score;
+        //ui.GetComponentsInChildren<UnityEngine.UI.Text>()[1].text = "Score - " + score;
     }
 
     public void updateLife(float life)
     {
-        ui.GetComponentInChildren<UnityEngine.UI.Text>().text = "Life - " + life;
+        //ui.GetComponentInChildren<UnityEngine.UI.Text>().text = "Life - " + life;
     }
 
     IEnumerator SpawnEnemy(int seconds)
@@ -44,8 +44,11 @@ public class Director : MonoBehaviour {
             float distance = 0;
             do
             {
-                f.transform.position = new Vector3((Random.value * 2 - 1) * 10f, (Random.value * 2 - 1) * 5f, 0);
-                distance = (player.transform.position - f.transform.position).magnitude;                
+                //f.transform.position = new Vector3((Random.value * 2 - 1) * 10f, (Random.value * 2 - 1) * 5f, 0);
+                f.transform.position = new Vector3(Random.Range(-18, 7f), Random.Range(3f, -10), 0);
+                distance = (player.transform.position - f.transform.position).magnitude;
+                f.target = player.gameObject;
+
             } while (distance < 8 || distance > 15);
         }
     }

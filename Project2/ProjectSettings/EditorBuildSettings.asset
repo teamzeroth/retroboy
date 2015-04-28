@@ -11,5 +11,9 @@ EditorBuildSettings:
     path: Assets/Scenes/test/movimatation.unity
   - enabled: 0
     path: Assets/Scenes/test/tiled.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/test/movimentation (Victor).unity
+  - enabled: 1
+    path: Assets/Scenes/intro.unity
+  - enabled: 1
+    path: Assets/Scenes/test/cave-test.unity

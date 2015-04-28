@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asset: {fileID: 11400000, guid: 8f6718ded3be37b489d01b59667dd929, type: 2}
   path: 
-  startEventOnAwake: 1
+  startEventOnAwake: 0
   hasStarted: 0
 --- !u!114 &863139145
 MonoBehaviour:

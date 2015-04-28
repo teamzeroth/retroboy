@@ -46,7 +46,7 @@ public class PlayerSFXController : MonoBehaviour {
 
     void ShootSFX() {
 
-        if (_animControl.OnCharge && shootEmitter.HasStoped()) { print("BEGIN"); shootEmitter.Play(); }
+        if (_animControl.OnCharge && shootEmitter.HasStoped()) {shootEmitter.Play(); }
 
         if (shooted) {
             var value = timer >= 1.5f ? timer >= 3f ? 3 : 2 : 1;
@@ -68,8 +68,8 @@ public class PlayerSFXController : MonoBehaviour {
             showParticle = false;
         }
 
-        if (Input.GetButtonDown("Fire1")) waitingTime = true;
-        if (_animControl.OnCharge && _animControl.fireTime < 0) timer += Time.deltaTime;
+        if (Input.GetButtonDown("Fire1") && _animControl.fireTime < 0) waitingTime = true;
+        if (_animControl.OnCharge) timer += Time.deltaTime;
         if (waitToStart > 0.2f) restartShootSFX(timer);
         if (waitingTime) waitToStart += Time.deltaTime;
 

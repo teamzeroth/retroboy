@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="isometric" renderorder="right-down" width="88" height="70" tilewidth="64" tileheight="32" backgroundcolor="#242927" nextobjectid="99">
+<map version="1.0" orientation="isometric" renderorder="right-down" width="88" height="70" tilewidth="64" tileheight="32" backgroundcolor="#242927" nextobjectid="105">
  <tileset firstgid="1" name="CaveSolo" tilewidth="64" tileheight="32">
   <image source="terrain.png" trans="ff00ff" width="640" height="640"/>
   <terraintypes>
@@ -26874,7 +26874,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="212"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -26882,12 +26881,10 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="218"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="212"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -26983,7 +26980,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="218"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -27165,7 +27161,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="225"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -27232,7 +27227,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="211"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -27323,7 +27317,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="213"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -27401,7 +27394,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="242"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -27417,12 +27409,10 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="218"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="213"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -27490,7 +27480,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="241"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -27668,7 +27657,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="211"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -27676,7 +27664,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="218"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -27858,7 +27845,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="215"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -27934,7 +27920,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="213"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -28107,14 +28092,12 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="215"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="213"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -28127,7 +28110,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="211"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -28384,7 +28366,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="213"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -28549,7 +28530,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="211"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -28644,7 +28624,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="215"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -28831,7 +28810,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="212"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -29084,14 +29062,12 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="211"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="212"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -29101,7 +29077,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="225"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -29163,7 +29138,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="212"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -29254,7 +29228,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="215"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -29270,7 +29243,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="215"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -29436,7 +29408,35 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="218"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -37074,8 +37074,8 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Door Action" visible="0">
-  <object id="19" name="Main Door" type="Trigger" x="127.834" y="514.833" width="32" height="64">
+ <objectgroup name="Door Action">
+  <object id="19" name="Main Door" type="Trigger" x="384.107" y="928.015" width="32" height="64">
    <properties>
     <property name="add component1" value="Door"/>
     <property name="in" value="NO"/>
@@ -37083,28 +37083,10 @@
     <property name="send message1" value="Init|self"/>
    </properties>
   </object>
-  <object id="22" name="Downhill" type="Trigger" x="642.239" y="416.878" width="32" height="32"/>
-  <object id="23" name="Door Trigger (below entrance)" type="Trigger" x="382" y="885.5" width="64" height="32"/>
  </objectgroup>
- <objectgroup name="Quest" visible="0">
-  <object id="30" name="Giovanni" type="NPC" x="173.25" y="361.25" width="37.5" height="37.5">
-   <ellipse/>
-  </object>
-  <object id="31" name="First Wheel" type="Item" x="319.833" y="1109.83" width="38.3333" height="38.3333">
-   <ellipse/>
-  </object>
-  <object id="32" name="Second Wheel (hidden)" type="Item" x="857.583" y="673.083" width="38.3333" height="38.3333">
-   <ellipse/>
-  </object>
-  <object id="33" name="Third Wheel" type="Item" x="1359.83" y="1489.83" width="38.3333" height="38.3333">
-   <ellipse/>
-  </object>
-  <object id="34" name="Fourth Wheel" type="Item" x="1491.5" y="2002.16" width="38.3333" height="38.3333">
-   <ellipse/>
-  </object>
- </objectgroup>
- <objectgroup name="Enemies" visible="0">
-  <object id="80" name="Mobile-mine" type="Trigger" x="778" y="421.333" width="19.3333" height="19.3333">
+ <objectgroup name="Quest" visible="0"/>
+ <objectgroup name="Enemies">
+  <object id="91" name="Mobile-mine" type="Enemy" x="920.333" y="1017.66" width="19.3333" height="19.3333">
    <properties>
     <property name="0-prefab" value="Test"/>
     <property name="0-prefab path" value="Characters/Enemy/"/>
@@ -37112,7 +37094,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="88" name="Mobile-mine" type="Trigger" x="773.333" y="708.667" width="19.3333" height="19.3333">
+  <object id="92" name="Mobile-mine" type="Enemy" x="771.667" y="859.667" width="19.3333" height="19.3333">
    <properties>
     <property name="0-prefab" value="Test"/>
     <property name="0-prefab path" value="Characters/Enemy/"/>
@@ -37120,83 +37102,18 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="89" name="Mobile-mine" type="Trigger" x="1149" y="909" width="19.3333" height="19.3333">
+  <object id="93" name="Mobile-mine" type="Enemy" x="674.333" y="1013" width="19.3333" height="19.3333">
    <properties>
-    <property name="0-prefab" value="Test"/>
+    <property name="0-prefab" value="Test1"/>
     <property name="0-prefab path" value="Characters/Enemy/"/>
-    <property name="add component1" value="DestroyOnStart"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="90" name="Mobile-mine" type="Trigger" x="1028.33" y="779" width="19.3333" height="19.3333">
-   <properties>
-    <property name="0-prefab" value="Test"/>
-    <property name="0-prefab path" value="Characters/Enemy/"/>
-    <property name="add component1" value="DestroyOnStart"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="91" name="Mobile-mine" type="Trigger" x="827" y="1068.33" width="19.3333" height="19.3333">
-   <properties>
-    <property name="0-prefab" value="Test"/>
-    <property name="0-prefab path" value="Characters/Enemy/"/>
-    <property name="add component1" value="DestroyOnStart"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="92" name="Mobile-mine" type="Trigger" x="757" y="949" width="19.3333" height="19.3333">
-   <properties>
-    <property name="0-prefab" value="Test"/>
-    <property name="0-prefab path" value="Characters/Enemy/"/>
-    <property name="add component1" value="DestroyOnStart"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="93" name="Mobile-mine" type="Trigger" x="674.333" y="1013" width="19.3333" height="19.3333">
-   <properties>
-    <property name="0-prefab" value="Test"/>
-    <property name="0-prefab path" value="Characters/Enemy/"/>
-    <property name="add component1" value="DestroyOnStart"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="94" name="Mobile-mine" type="Trigger" x="1226.33" y="1567.67" width="19.3333" height="19.3333">
-   <properties>
-    <property name="0-prefab" value="Test"/>
-    <property name="0-prefab path" value="Characters/Enemy/"/>
-    <property name="add component1" value="DestroyOnStart"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="95" name="Mobile-mine" type="Trigger" x="1383" y="1963" width="19.3333" height="19.3333">
-   <properties>
-    <property name="0-prefab" value="Test"/>
-    <property name="0-prefab path" value="Characters/Enemy/"/>
-    <property name="add component1" value="DestroyOnStart"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object id="96" name="Mobile-mine" type="Trigger" x="1307" y="2049.67" width="19.3333" height="19.3333">
-   <properties>
-    <property name="0-prefab" value="Test"/>
-    <property name="0-prefab path" value="Characters/Enemy/"/>
-    <property name="add component1" value="DestroyOnStart"/>
+    <property name="add component1" value="DestroyOnEditor"/>
    </properties>
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="Colliders" visible="0">
-  <object id="56" type="Collider" x="59.5" y="647.5"/>
-  <object id="60" type="Collider" x="153.833" y="734.833"/>
-  <object id="61" type="Collider" x="157.25" y="741.75"/>
-  <object id="63" type="Collider" x="159" y="351">
-   <polyline points="0,0 0.83333,163.667"/>
-  </object>
-  <object id="64" type="Collider" x="159.833" y="567.5">
-   <polyline points="-0.015625,11.2656 -0.0757609,231.349 735.5,230.5 736.333,-205 514.833,-212.167 514.29,-150.681"/>
-  </object>
-  <object id="98" type="Collider" x="159.83" y="567.5">
-   <polyline points="514.363,-118.606 516.083,-16.0833 321.333,-17.3333 255.605,-56.1042 160.167,-151.5 128.5,-151.167 65.1667,-215.833 -0.666667,-216.667"/>
+ <objectgroup name="Colliders">
+  <object id="99" type="Collider" x="415.75" y="736.25">
+   <polyline points="0.375,191.792 0.0719697,-0.17803 800.312,-0.8125 864,11.5 864.75,1056.25 832.375,1088.12 13.75,1088.25 0,1075 -1.125,992.125 0.375,256.125"/>
   </object>
  </objectgroup>
 </map>

@@ -33,6 +33,10 @@ public class BetaMovimetation : MonoBehaviour {
         _playerController = target.GetComponent<AnimationController>();
     }
 
+    void Start() {
+        transform.position = _playerController.transform.position;
+    }
+
     void FixedUpdate() {
         if (!disappeared) {
             CalcPosition();

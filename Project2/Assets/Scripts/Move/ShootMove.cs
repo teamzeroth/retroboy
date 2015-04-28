@@ -19,11 +19,16 @@ public class ShootMove : MonoBehaviour {
 
     void Update() {
         rigidbody2D.velocity = direction.normalized * speed;
-        //rigidbody2D.rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     }
 
-    void OnTriggerEnter2D(Collider2D other) {}
+    public void OnCollisionEnter2D(Collision2D coll) {
+        if (coll.gameObject.tag == "Enemy") {
+            Destroy(coll.gameObject);
+        }
 
+        Destroy(gameObject);
+    }
+  
     public void Flip() {
         flipped = !flipped;
 
@@ -33,8 +38,7 @@ public class ShootMove : MonoBehaviour {
     }
 
 
-    void OnBecameInvisible()
-    {
+    void OnBecameInvisible(){
         Destroy(this.gameObject);
     }
 }

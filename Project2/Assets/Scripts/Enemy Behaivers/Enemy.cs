@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour {
     public float life = 100f, damage = 2f, speed = 1f, shootDelay = 0.25f;
     public GameObject target = null;
     public ShootMove prefab = null;
+
     protected Vector3 heading = Vector3.zero, direction = Vector3.zero;
     protected float distance = 0f;
     protected bool seek = false, destroy = false, melee = false;
@@ -14,8 +15,10 @@ public class Enemy : MonoBehaviour {
     protected virtual void Start()
     {
         seek = true;
-        prefab.CreatePool();
-        body = this.gameObject.GetComponent<Rigidbody2D>();
+        
+        prefab.CreatePool(); // O que isso faz?
+
+        body = /*this.gameObject.*/GetComponent<Rigidbody2D>(); // O this.gameObject é muito desnecessario quando se usa o unity
         if (target == null)
             target = GameObject.FindGameObjectWithTag("Player");
     }
@@ -37,7 +40,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    protected void lookAt2D(Vector3 target)
+    protected void lookAt2D(Vector3 target) // Isso normalmente vai ser controlado por animações
     {
         Vector3 diff = transform.position - Camera.main.ScreenToWorldPoint(target);
         diff.Normalize();
@@ -48,14 +51,20 @@ public class Enemy : MonoBehaviour {
 
     protected void UpdatePosition()
     {
-        heading = target.transform.position - this.gameObject.transform.position;
+        heading = target.transform.position - /*this.gameObject.*/transform.position;
         distance = heading.magnitude;
-        direction = heading / distance;	  
+        direction = /*heading / distance;*/ heading.normalized;
     }
 
     protected virtual void Movement()
     {
-        body.velocity = new Vector2(direction.x * speed, direction.y * speed);
+        //body.velocity = new Vector2(direction.x * speed, direction.y * speed);
+        
+        body.velocity = (Vector2)direction * speed;
+
+        Debug.DrawLine(this.gameObject.transform.position, target.transform.position);
+        
+
         if (Debug.isDebugBuild)
         {
 //            Debug.Log("Direction: " + direction + " | Velocity: " + body.velocity);

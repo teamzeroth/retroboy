@@ -68,8 +68,6 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 	public void Start() 
 	{
 
-        print(evt);
-
 		if (evt == null || !evt.isValid())
 		{
 			CacheEventInstance();
@@ -85,9 +83,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 	{
 		if (asset != null)
 		{
-            print("asset " + asset.id);
 			evt = FMOD_StudioSystem.instance.GetEvent(asset.id);
-            print(FMOD_StudioSystem.instance.GetEvent(asset.id));	
 		}
 		else if (!String.IsNullOrEmpty(path))
 		{

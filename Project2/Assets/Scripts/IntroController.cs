@@ -12,11 +12,13 @@ public class IntroController : MonoBehaviour {
 
     void Start() {
         _anim = GetComponent<Animator>();
-        _fmod = GetComponent<FMOD_CustonEmitter>();        
+        _fmod = GetComponent<FMOD_CustonEmitter>();
+
+        _fmod.StartEvent();
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.Return) && _anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= TIME_TO_PRESS_START){
+        if (Input.GetButtonDown("Submit") && _anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= TIME_TO_PRESS_START) {
             _fmod.SetParameter("startGame", 1.0f);
             _anim.SetInteger("Video", 1);
         }
