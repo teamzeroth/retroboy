@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{921128e2-38bb-45c6-91be-6bef15df62bf}">
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>1.1965079365079365</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/shield_06 {0032edfb-cf0b-436b-9aa3-dc0ce019ebc2}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{5ad3d851-d723-468a-a6a2-d9807d155e6b}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{b353c500-a24b-413c-ac38-8ca71254c3db}">
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.4477324263038549</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/hurt_03 {ed3002b2-61e4-44ab-8df9-49b1a84cbef4}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{4eff017f-35b7-49aa-a8a8-c7dafb1cc828}</destination>
+        </relationship>
+    </object>
+</objects>

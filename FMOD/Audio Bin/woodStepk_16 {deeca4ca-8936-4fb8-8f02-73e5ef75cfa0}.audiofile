@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{deeca4ca-8936-4fb8-8f02-73e5ef75cfa0}">
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.37167800453514738</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/woodStepk_16 {e6a5b520-5152-4a8c-a464-c4b34061f93d}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{2ccaa2d5-42af-4b83-ada3-dd82ca18e651}</destination>
+        </relationship>
+    </object>
+</objects>

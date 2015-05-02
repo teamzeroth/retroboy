@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{b121968e-d44c-43b7-bf2e-c7b3c2d349ac}">
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.88099773242630386</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/woodWreck_39 {36bcf141-08b3-4607-b46c-8efec0e6486e}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{1505cd41-a11b-4cb2-9c7c-1012c5a695ef}</destination>
+        </relationship>
+    </object>
+</objects>
