@@ -249,19 +249,19 @@ public class AnimationController : MonoBehaviour {
 
     public void Hit(float damage, Vector2 direction){
 
-        this.life -= damage;
+        life -= damage;
         if (Debug.isDebugBuild)
-            Debug.Log("Player Life: " + this.life);
+            Debug.Log("Player Life: " + life);
 
-        if (this.life <= 0f){
-            this.life = 0f;
+        if (life <= 0f){
+            life = 0f;
             Time.timeScale = 0f;
             ui.SetActive(true);
 
         }else
-            this.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * -2, ForceMode2D.Impulse);
+//            rigidbody2D.AddForce(direction * -2, ForceMode2D.Impulse);
         
-        Camera.main.GetComponent<Director>().updateLife(this.life);
+        Camera.main.GetComponent<Director>().updateLife(life);
     }
 
     void OnTriggerEnter2D(Collider2D trigger){
