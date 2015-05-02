@@ -32,6 +32,9 @@
         <relationship name="parameters">
             <destination>{5a9768a0-907e-40af-a7af-144c0c395559}</destination>
         </relationship>
+        <relationship name="banks">
+            <destination>{366d4c14-91a4-4bb0-a2a1-744340c3ab50}</destination>
+        </relationship>
     </object>
     <object class="EventMixer" id="{f8702a47-97b1-489d-9b75-858f15ab1e40}">
         <relationship name="masterBus">
@@ -65,7 +68,7 @@
     <object class="Timeline" id="{76bd038f-21c7-46c4-80a8-530944cae33f}"/>
     <object class="GameParameter" id="{5a9768a0-907e-40af-a7af-144c0c395559}">
         <property name="name">
-            <value>Walk</value>
+            <value>walk</value>
         </property>
         <relationship name="modules">
             <destination>{068a3aa8-3404-4be7-9b46-da02e9005aca}</destination>
