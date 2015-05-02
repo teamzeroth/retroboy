@@ -16,29 +16,29 @@ public class MachineDog : Enemy {
         count = 0;
         z = 0f;
         localScale = Vector3.zero;
-        localScale = this.gameObject.transform.localScale;
+        localScale = transform.localScale;
 	}
 
     protected IEnumerator rotate(float delay)
     {
         yield return new WaitForSeconds(delay);
-        z = this.gameObject.transform.rotation.eulerAngles.z;
+        z = transform.rotation.eulerAngles.z;
         if (z > maxRotation)
         {
             rotateStep *= -1;
             count++;
         }
-        this.gameObject.transform.Rotate(0,0,rotateStep);
+        transform.Rotate(0,0,rotateStep);
     }
 
     protected override void Movement()
     {
         if (seek)
         {
-            body.velocity = Vector2.right * movementDirection;
+            rigidbody2D.velocity = Vector2.right * movementDirection;
             seek = false;
             movementDirection *= -1f;
-            this.gameObject.transform.localScale = localScale;
+            transform.localScale = localScale;
             StartCoroutine("changeSeek",1f);
             localScale.x *= -1;
         }
@@ -60,7 +60,7 @@ public class MachineDog : Enemy {
     {
         if (obj != null && destroy)
         {
-            z = this.gameObject.transform.rotation.eulerAngles.z;
+            z = transform.rotation.eulerAngles.z;
             bullet = prefab.Spawn();
             Vector3 position = transform.position + Quaternion.Euler(0, 0, z) * -Vector3.right;
             bullet.transform.position = position;

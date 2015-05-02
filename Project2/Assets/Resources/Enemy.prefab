@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &414434
 Transform:
   m_ObjectHideFlags: 1
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114434}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.04415417, y: -6.01791573, z: 0}
+  m_LocalPosition: {x: -16.6100006, y: -6.4000001, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,7 +55,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 114434}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Radius: .079474926
   m_Center: {x: 0, y: 0}
 --- !u!95 &9558296
@@ -89,7 +89,7 @@ MonoBehaviour:
   speed: 1
   shootDelay: .25
   target: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 11458350, guid: 1e18bc9a481dbab40ae2193114a9ee77, type: 2}
 --- !u!212 &21214434
 SpriteRenderer:
   m_ObjectHideFlags: 1
