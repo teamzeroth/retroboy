@@ -259,15 +259,9 @@ public class AnimationController : MonoBehaviour {
             ui.SetActive(true);
 
         }else
-//            rigidbody2D.AddForce(direction * -2, ForceMode2D.Impulse);
+            rigidbody2D.AddForce(direction * 2f, ForceMode2D.Impulse);
         
         Camera.main.GetComponent<Director>().updateLife(life);
-    }
-
-    void OnTriggerEnter2D(Collider2D trigger){
-        ShootMove s = trigger.gameObject.GetComponent<ShootMove>();
-        if (trigger.gameObject.name.Contains("bullet") && !s.isAlly)
-            Hit(s.damage, Vector2.zero);
     }
 
     #endregion
