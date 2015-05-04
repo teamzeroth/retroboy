@@ -64,12 +64,19 @@ public class PlayerSFXController : MonoBehaviour {
             Camera.main.BroadcastMessage("Quake", value * 0.5f);
 
             timer = 0;
+            UiController.self.charge = 0;
+             
             shooted = false;
             showParticle = false;
         }
 
         if (Input.GetButtonDown("Fire1") && _animControl.fireTime < 0) waitingTime = true;
-        if (_animControl.OnCharge) timer += Time.deltaTime;
+        
+        if (_animControl.OnCharge) {
+            timer += Time.deltaTime;
+            UiController.self.charge = timer / 3;
+        }
+
         if (waitToStart > 0.2f) restartShootSFX(timer);
         if (waitingTime) waitToStart += Time.deltaTime;
 

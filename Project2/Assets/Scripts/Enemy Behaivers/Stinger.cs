@@ -7,10 +7,9 @@ public class Stinger : Enemy
 	float z = 0f;
     ShootMove bullet = null;
 
-    // Use this for initialization
     protected override void Movement()
     {
-        Debug.Log("V: " + rigidbody2D.velocity + " | Vm(2): " + (double)rigidbody2D.velocity.sqrMagnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm(2): " + (double)target.rigidbody2D.velocity.sqrMagnitude + " | D: " + distance);
+        //Debug.Log("V: " + rigidbody2D.velocity + " | Vm(2): " + (double)rigidbody2D.velocity.sqrMagnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm(2): " + (double)target.rigidbody2D.velocity.sqrMagnitude + " | D: " + distance);
 
         if (target.rigidbody2D.velocity.sqrMagnitude < 3f && distance <= 1.5f)
 		{

@@ -128,7 +128,7 @@ public sealed class ObjectPool : MonoBehaviour
 			}
 			obj = (GameObject)Object.Instantiate(prefab);
 			trans = obj.transform;
-			trans.parent = parent;
+			trans.SetParent(parent);
 			trans.localPosition = position;
 			trans.localRotation = rotation;
 			instance.spawnedObjects.Add(obj, prefab);
@@ -181,7 +181,7 @@ public sealed class ObjectPool : MonoBehaviour
 	{
 		instance.pooledObjects[prefab].Add(obj);
 		instance.spawnedObjects.Remove(obj);
-		obj.transform.parent = instance.transform;
+		obj.transform.SetParent(instance.transform);
 		obj.SetActive(false);
 	}
 

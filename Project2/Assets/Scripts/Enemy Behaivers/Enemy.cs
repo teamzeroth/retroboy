@@ -11,10 +11,14 @@ public class Enemy : MonoBehaviour {
     protected float distance = 0f;
     protected bool seek = false, destroy = false;
 
-    protected virtual void Start()
+    public void Start()
     {
         destroy = false;
         prefab.CreatePool();
+
+        if (target == null)
+            target = GameObject.FindGameObjectWithTag("Player");
+
     }
 
     void Update()
@@ -65,15 +69,15 @@ public class Enemy : MonoBehaviour {
         if (distance > 1.5f)
             //Movimento de follow funcional (não se antecipa tanto a voce)
             //rigidbody2D.velocity = (futureDirection * (speed + distance/1.5f)) + (Vector3)target.rigidbody2D.velocity.normalized;
+            
             rigidbody2D.velocity = futureDirection + (Vector3)target.rigidbody2D.velocity.normalized * (speed * target.rigidbody2D.velocity.magnitude * distance) / 1.1f;
 			//Cerca o player com uma rotação em circulo ao redor do player (cerca a "saida" do player)
 			//Debug.DrawLine(transform.position, target.rigidbody2D.velocity.normalized + (Vector2)transform.up * futureHeading.magnitude, Color.magenta);
-
     }
 
     protected virtual void Defense() { }
 
-    protected virtual void Attack(GameObject obj) 
+    protected virtual void Attack(GameObject obj)
     {
 		if (destroy)
 		{

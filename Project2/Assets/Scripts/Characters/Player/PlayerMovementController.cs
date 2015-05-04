@@ -2,8 +2,6 @@
 using System.Collections;
 using System;
 
-using Helper;
-
 public class PlayerMovementController : MonoBehaviour {
 
     private Animator _anim;
