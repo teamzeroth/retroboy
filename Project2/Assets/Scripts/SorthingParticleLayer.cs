@@ -5,11 +5,11 @@ public class SorthingParticleLayer : MonoBehaviour {
 
     public string sorthingLayer;
 
-    void Start() {
+    public void Start() {
         particleSystem.renderer.sortingLayerName = sorthingLayer;
     }
 
     void Update() {
-        transform.localScale = transform.parent.localScale;
+        //transform.localScale = transform.parent.localScale;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-using Helper;
 using DG.Tweening;
 using System.Collections;
 
@@ -94,12 +93,12 @@ public class AnimationController : MonoBehaviour {
 
         if (OnDraw) waitDraw = true;
 
-        calcDeadMove();  
+        calcDeadMove();
         checkVariations();
 
         Move(currentMoveVec);
         Animation(currentMoveVec);
-        CheckFlip(currentMoveVec);  
+        CheckFlip(currentMoveVec);
 
         if (Input.GetButtonUp("Fire1") && fireTime <= 0) {
             if (firstShoot) {
@@ -126,7 +125,7 @@ public class AnimationController : MonoBehaviour {
         _anim.SetFloat("Vertical", fixedMoveVec.y);
 
         rigidbody2D.velocity = (Vector3)fixedMoveVec;
-        CheckFlip(fixedMoveVec);        
+        CheckFlip(fixedMoveVec);
     }
 
     #endregion
@@ -142,7 +141,7 @@ public class AnimationController : MonoBehaviour {
         Vector2 curDir = rigidbody2D.velocity;
 
         float value = Mathf.Abs(Mathf.DeltaAngle(
-            Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg, 
+            Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg,
             Mathf.Atan2(curDir.y, curDir.x) * Mathf.Rad2Deg
         ));
 
@@ -166,12 +165,12 @@ public class AnimationController : MonoBehaviour {
 
     public void MakeFixedMove(Vector2 position, float duration, bool hurt = false, float animSpeed = 1) {
         _anim.speed = animSpeed;
-        
+
         OnHurt = hurt;
 
         fixedMoveVec = position;
         frictionValue = 0;
-        
+
         GetComponent<Collider2D>().enabled = false;
 
         StartCoroutine(resetTween(duration));
@@ -179,7 +178,7 @@ public class AnimationController : MonoBehaviour {
 
     IEnumerator resetTween(float waitTime){
         yield return new WaitForSeconds(waitTime);
-        
+
         fixedMoveVec = Vector2.zero;
         rigidbody2D.velocity = Vector2.zero;
         _anim.speed = 1;
@@ -248,6 +247,7 @@ public class AnimationController : MonoBehaviour {
     }
 
     public void Hit(float damage, Vector2 direction){
+        return;
 
         life -= damage;
         if (Debug.isDebugBuild)
@@ -256,12 +256,12 @@ public class AnimationController : MonoBehaviour {
         if (life <= 0f){
             life = 0f;
             Time.timeScale = 0f;
-            ui.SetActive(true);
+            if(ui != null) ui.SetActive(true);
 
-        }else
+        }
 //            rigidbody2D.AddForce(direction * -2, ForceMode2D.Impulse);
-        
-        Camera.main.GetComponent<Director>().updateLife(life);
+
+        //Camera.main.GetComponent<Director>().updateLife(this.life);
     }
 
     void OnTriggerEnter2D(Collider2D trigger){
@@ -294,7 +294,7 @@ public class AnimationController : MonoBehaviour {
         int type = timer >= 1f ? timer >= 2f ? 3 : 2 : 1;
 
         GameObject shoot = Resources.Load<GameObject>("Shoots/Nim/shoot_" + type);
-        Vector3 position = transform.position + (Vector3)(dir.normalized * 0.9f);
+        Vector3 position = transform.position + (Vector3)(dir.normalized * 0.38f);
 
         shoot = (GameObject)Instantiate(shoot, position, Quaternion.identity);
 
@@ -302,7 +302,7 @@ public class AnimationController : MonoBehaviour {
         move.direction = dir;
     }
 
-    void calcDeadMove() {   
+    void calcDeadMove() {
         if (ForcingMove)
             deadMoveVec = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }

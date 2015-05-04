@@ -11,10 +11,15 @@ public class Enemy : MonoBehaviour {
     protected float distance = 0f;
     protected bool seek = false, destroy = false, melee = false;
 
-    protected virtual void Start()
+    public void Start()
     {
         seek = true;
         prefab.CreatePool();
+
+        //body = /*this.gameObject.*/GetComponent<Rigidbody2D>(); // O this.gameObject é muito desnecessario quando se usa o unity
+        if (target == null)
+            target = GameObject.FindGameObjectWithTag("Player");
+
     }
 
     void Update()
@@ -62,6 +67,9 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void Movement()
     {
+        //body.velocity = new Vector2(direction.x * speed, direction.y * speed);
+
+        rigidbody2D.velocity = (Vector2)direction * speed;
 
 	    //rigidbody2D.velocity = new Vector2(direction.x * speed, direction.y * speed);
         rigidbody2D.velocity = (Vector2)futureDirection * speed / 3f;
@@ -74,7 +82,7 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void Defense() { }
 
-    protected virtual void Attack(GameObject obj) 
+    protected virtual void Attack(GameObject obj)
     {
 		if (obj != null)
 		{
@@ -149,7 +157,7 @@ public class Enemy : MonoBehaviour {
 			Attack(target);
 		}
     }
-    
+
     void OnTriggerExit2D(Collider2D trigger)
     {
 //        if (trigger.tag == "Player")

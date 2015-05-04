@@ -5,6 +5,6 @@ using UnityEditor;
 public class DestroyOnEditorEditor : Editor {
     
     public void OnEnable() {
-        Destroy((target as GameObject).GetComponent<DestroyOnEditor>());
+        Destroy(target as GameObject);
     }
 }

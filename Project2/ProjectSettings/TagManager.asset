@@ -5,7 +5,7 @@ TagManager:
   tags:
   - Fungus
   - Enemy
-  - 
+  - UI
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -16,7 +16,7 @@ TagManager:
   Builtin Layer 6: 
   Builtin Layer 7: 
   User Layer 8: Level
-  User Layer 9: 
+  User Layer 9: Enemy
   User Layer 10: 
   User Layer 11: 
   User Layer 12: 
@@ -60,15 +60,15 @@ TagManager:
     userID: 5
     uniqueID: 4068179441
     locked: 0
-  - name: Assets
-    userID: 6
-    uniqueID: 2666144631
-    locked: 0
   - name: Tales
     userID: 7
     uniqueID: 3529121795
     locked: 0
-  - name: Particles0
+  - name: Assets
+    userID: 6
+    uniqueID: 2666144631
+    locked: 0
+  - name: BackParticles
     userID: 10
     uniqueID: 1976078283
     locked: 0
@@ -76,7 +76,7 @@ TagManager:
     userID: 1
     uniqueID: 112778315
     locked: 0
-  - name: Particles1
+  - name: ForeParticles
     userID: 9
     uniqueID: 1470551667
     locked: 0

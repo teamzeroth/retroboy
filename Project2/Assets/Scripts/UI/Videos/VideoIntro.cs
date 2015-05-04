@@ -3,7 +3,7 @@ using System.Collections;
 
 using DG.Tweening;
 
-public class IntroController : MonoBehaviour {
+public class VideoIntro : MonoBehaviour {
 
     static float TIME_TO_PRESS_START = 228f / 302f;
 

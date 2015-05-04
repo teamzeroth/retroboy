@@ -10,7 +10,7 @@ public class MachineDog : Enemy {
     ShootMove bullet = null;
 
 	// Use this for initialization
-    protected override void Start () {
+    /*protected override*/void Start () {
         base.Start();
         movementDirection = 1f;
         count = 0;

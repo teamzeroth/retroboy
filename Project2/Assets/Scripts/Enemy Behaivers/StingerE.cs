@@ -8,7 +8,7 @@ public class StingerE : Enemy
     float movementDirection;
     Vector3 localScale;
     
-    protected override void Start()
+    /*protected override*/void Start()
     {
         base.Start();
         movementDirection = 1f;

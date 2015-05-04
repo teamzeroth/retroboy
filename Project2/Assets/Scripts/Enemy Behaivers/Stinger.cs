@@ -11,7 +11,7 @@ public class Stinger : Enemy
     Transform t;
 
     // Use this for initialization
-    protected override void Start()
+    /*protected override*/void Start()
     {
         base.Start();
 		this.speed = 2f;
