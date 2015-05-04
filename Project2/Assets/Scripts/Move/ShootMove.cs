@@ -8,7 +8,7 @@ public class ShootMove : MonoBehaviour {
     public float speed;
     public float damage;
 
-    public bool isAlly;
+    public bool isPlayerAlly;
 
     [HideInInspector]
     public bool flipped;
@@ -21,10 +21,16 @@ public class ShootMove : MonoBehaviour {
         rigidbody2D.velocity = direction.normalized * speed;
     }
 
+    public void OnTriggerEnter2D(Collider2D trigger)
+    {
+        if (trigger.gameObject.tag == "Enemy" && isPlayerAlly)
+            trigger.gameObject.GetComponent<Enemy>().Hit(damage, direction);        
+    }
+
     public void OnCollisionEnter2D(Collision2D coll) {
-        if (coll.gameObject.tag == "Enemy") {
-            Destroy(coll.gameObject);
-        }
+        
+        if (coll.gameObject.tag == "Player" && !isPlayerAlly)
+            coll.gameObject.GetComponent<AnimationController>().Hit(damage, direction);
 
         Destroy(gameObject);
     }
@@ -39,6 +45,6 @@ public class ShootMove : MonoBehaviour {
 
 
     void OnBecameInvisible(){
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
