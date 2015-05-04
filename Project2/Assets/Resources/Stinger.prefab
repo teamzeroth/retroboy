@@ -15,11 +15,11 @@ GameObject:
   - 114: {fileID: 11479034}
   m_Layer: 0
   m_Name: Stinger
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &479034
 Transform:
   m_ObjectHideFlags: 1
@@ -56,8 +56,8 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Radius: .200000003
-  m_Center: {x: -.0199999996, y: .0250000004}
+  m_Radius: .0900000036
+  m_Center: {x: 0, y: 0}
 --- !u!95 &9579034
 Animator:
   serializedVersion: 3
@@ -86,8 +86,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 100
   damage: 2
-  speed: 10
-  shootDelay: .25
+  speed: 1
+  attackDelay: .5
   target: {fileID: 0}
   prefab: {fileID: 11458350, guid: 1e18bc9a481dbab40ae2193114a9ee77, type: 2}
   amplitude: .200000003

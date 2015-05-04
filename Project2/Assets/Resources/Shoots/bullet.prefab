@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11458350}
   m_Layer: 0
   m_Name: bullet
-  m_TagString: Untagged
+  m_TagString: Shoot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +54,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 158350}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Size: {x: .319999993, y: .319999993}
   m_Center: {x: 0, y: 0}
 --- !u!114 &11458350
@@ -71,7 +71,7 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   speed: 10
   damage: 10
-  isAlly: 1
+  isPlayerAlly: 0
   flipped: 0
 --- !u!212 &21258350
 SpriteRenderer:

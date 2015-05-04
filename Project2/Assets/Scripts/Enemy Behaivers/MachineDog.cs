@@ -67,7 +67,7 @@ public class MachineDog : Enemy {
             bullet.direction = Quaternion.Euler(0, 0, z) * Vector2.right * -movementDirection;           
 
             destroy = false;
-            StartCoroutine("changeDestroy", shootDelay);            
+            StartCoroutine("changeDestroy", attackDelay);            
         }
     }
 }

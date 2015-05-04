@@ -3,26 +3,26 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-    public float life = 100f, damage = 2f, speed = 1f, shootDelay = 0.25f;
+    public float life = 100f, damage = 2f, speed = 1f, attackDelay = 0.25f;
     public GameObject target = null;
     public ShootMove prefab = null;
 
     protected Vector3 heading = Vector3.zero, direction = Vector3.zero, futureDirection = Vector3.zero, futureHeading = Vector3.zero;
     protected float distance = 0f;
-    protected bool seek = false, destroy = false, melee = false;
+    protected bool seek = false, destroy = false;
 
     protected virtual void Start()
     {
-        seek = true;
+        destroy = false;
         prefab.CreatePool();
     }
 
     void Update()
     {
-		Debug.DrawLine(transform.position, target.transform.position, Color.red);
-		Debug.DrawLine(transform.position, transform.position + direction, Color.blue);
-		Debug.DrawLine(transform.position, target.transform.position + (Vector3)target.rigidbody2D.velocity, Color.green);
-		Debug.DrawLine(transform.position, transform.position + futureDirection, Color.yellow);
+        //Debug.DrawLine(transform.position, target.transform.position, Color.red);
+        //Debug.DrawLine(transform.position, transform.position + direction, Color.blue);
+        //Debug.DrawLine(transform.position, target.transform.position + (Vector3)target.rigidbody2D.velocity, Color.green);
+        //Debug.DrawLine(transform.position, transform.position + futureDirection, Color.yellow);
 
 		if (life <= 0)
         {
@@ -36,14 +36,13 @@ public class Enemy : MonoBehaviour {
 			updateFuturePosition();
 			Movement();
             Defense();
-            Attack(null);
+            Attack(target);
         }
     }
 
 	protected void updateFuturePosition()
 	{
 		futureHeading = (target.transform.position + (Vector3)target.rigidbody2D.velocity.normalized) - transform.position;
-		//futureHeading = (target.transform.position + (Vector3)target.rigidbody2D.velocity) - transform.position;
 		futureDirection = futureHeading.normalized;
 	}
 
@@ -56,106 +55,65 @@ public class Enemy : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-//		Debug.Log("Atan2: " + (double)Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
 		rigidbody2D.MoveRotation(Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
 	}
 
     protected virtual void Movement()
     {
+        //Debug.Log("V: " + rigidbody2D.velocity + " | Vm: " + (double)rigidbody2D.velocity.magnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm: " + (double)target.rigidbody2D.velocity.magnitude + " | D: " + distance);
+        
+        if (distance > 1.5f)
+            //Movimento de follow funcional (não se antecipa tanto a voce)
+            //rigidbody2D.velocity = (futureDirection * (speed + distance/1.5f)) + (Vector3)target.rigidbody2D.velocity.normalized;
+            rigidbody2D.velocity = futureDirection + (Vector3)target.rigidbody2D.velocity.normalized * (speed * target.rigidbody2D.velocity.magnitude * distance) / 1.1f;
+			//Cerca o player com uma rotação em circulo ao redor do player (cerca a "saida" do player)
+			//Debug.DrawLine(transform.position, target.rigidbody2D.velocity.normalized + (Vector2)transform.up * futureHeading.magnitude, Color.magenta);
 
-	    //rigidbody2D.velocity = new Vector2(direction.x * speed, direction.y * speed);
-        rigidbody2D.velocity = (Vector2)futureDirection * speed / 3f;
-		if (target.rigidbody2D.velocity.sqrMagnitude > 0.2f)
-//		rigidbody2D.velocity += ((Vector2)futureDirection + target.rigidbody2D.velocity.normalized).normalized;
-			rigidbody2D.velocity = (futureDirection * speed) + ((Vector3)target.rigidbody2D.velocity.normalized * distance);
-		else if (rigidbody2D.velocity.sqrMagnitude < 0.2f)
-			rigidbody2D.velocity = ((futureDirection * speed) + (Vector3)rigidbody2D.velocity) * distance / 3f;
     }
 
     protected virtual void Defense() { }
 
     protected virtual void Attack(GameObject obj) 
     {
-		if (obj != null)
+		if (destroy)
 		{
-	        if (Debug.isDebugBuild)
-	            Debug.Log(name + " attacks " + obj.name + " for " + this.damage + " damage points");
+            destroy = false;
+            StopAllCoroutines();
+            obj.GetComponent<AnimationController>().Hit(this.damage, this.direction);
 
-	        obj.GetComponent<AnimationController>().Hit(this.damage, this.direction);
+            if (Debug.isDebugBuild)
+	            Debug.Log(name + " attacks " + obj.name + " for " + this.damage + " damage points");
 		}
     }
-
-    protected IEnumerator changeSeek(float delay)
+    
+    protected IEnumerator turnAttack(float delay)
     {
         yield return new WaitForSeconds(delay);
-        seek = !seek;
+        destroy = true;
     }
 
-    protected IEnumerator changeDestroy(float delay)
+    protected IEnumerator turnAnimation(float delay)
     {
         yield return new WaitForSeconds(delay);
-        destroy = !destroy;
-    }
-
-    protected IEnumerator changeAnimator(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        GetComponent<Animator>().enabled = !GetComponent<Animator>().enabled;
-    }
-
-//    void OnCollisionEnter2D(Collision2D collision)
-//    {
-//        if (collision.gameObject.tag == "Player")
-//        {
-//            destroy = true;
-//            melee = true;
-//            target = collision.gameObject;
-//        }
-//    }
-
-    public void onTriggerExternal(GameObject sensor, Collider2D trigger)
-    {
-//        //print(sensor.name + " | " + trigger.name + " | " + sensor.gameObject.GetComponent<Collider2D>().collider2D + " | " + trigger.collider2D);
-//        if (sensor == this.gameObject && trigger.gameObject.name.Contains("shoot"))
-//        //Colizão com object tiro (Hit)
-//        {
-//            this.life -= trigger.gameObject.GetComponent<ShootMove>().damage;
-//            Object.Destroy(trigger.gameObject);
-//            if (Debug.isDebugBuild)
-//                Debug.Log("Enemy Life: " + this.life);
-//            rigidbody2D.AddForce(new Vector2(direction.x * -1f, direction.y * -1f), ForceMode2D.Impulse);
-//            seek = false;
-//            GetComponent<Animator>().enabled = false;
-//            StartCoroutine("changeSeek", 0.5f);
-//            StartCoroutine("changeAnimator", 0.5f);
-//        }
-//        else if (sensor.name.Contains("Detection") && trigger.gameObject.tag == "Player")
-//        //Colizão com o object DetectionRange (Found)
-//        {
-//            destroy = true;
-//            seek = false;
-//            StopAllCoroutines();
-//            rigidbody2D.velocity = Vector2.zero;
-//            target = trigger.gameObject;
-//        }
+        GetComponent<Animator>().enabled = true;
     }
 
     void OnTriggerEnter2D(Collider2D trigger)
     {
 		if (trigger.gameObject.tag == "Player")
-		{
-			destroy = true;
-			melee = true;
-			Attack(target);
-		}
+		    StartCoroutine(turnAttack(attackDelay));
     }
-    
-    void OnTriggerExit2D(Collider2D trigger)
+
+    public void Hit(float damage, Vector2 direction)
     {
-//        if (trigger.tag == "Player")
-//        {
-//            destroy = false;
-//            seek = true;
-//        }
+        StopAllCoroutines(); 
+        life -= damage;
+        if (Debug.isDebugBuild)
+            Debug.Log("Enemy Life: " + life);
+        rigidbody2D.AddForce(direction * -2f, ForceMode2D.Impulse);
+        GetComponent<Animator>().enabled = false;
+        destroy = false;
+        StartCoroutine(turnAnimation(0.5f));
+        StartCoroutine(turnAttack(attackDelay));
     }
 }

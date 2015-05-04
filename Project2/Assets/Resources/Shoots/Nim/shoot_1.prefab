@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11435506}
   m_Layer: 0
   m_Name: shoot_1
-  m_TagString: Untagged
+  m_TagString: Shoot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   speed: 10
   damage: 10
-  isAlly: 1
+  isPlayerAlly: 1
   flipped: 0
 --- !u!212 &21235506
 SpriteRenderer:
