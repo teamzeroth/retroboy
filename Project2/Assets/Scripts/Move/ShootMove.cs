@@ -40,7 +40,7 @@ public class ShootMove : MonoBehaviour {
 
     void LateUpdate() {
         if (_particles == null) return;
-        setParticlesVelocity(direction.normalized * speed * 0.5f);
+            _particles.SetParticlesVelocity(direction.normalized * speed * 0.5f);
     }
 
     public void OnTriggerEnter2D(Collider2D trigger){
@@ -93,23 +93,13 @@ public class ShootMove : MonoBehaviour {
 
     #region private Methods
 
-    private void setParticlesVelocity(Vector2 velocity) {
-        ParticleSystem.Particle[] p = new ParticleSystem.Particle[_particles.particleCount + 1];
-        int l = _particles.GetParticles(p);
-
-        for (int i = 0; i < l; i++)
-            p[i].velocity = velocity * (1 + 0.3f * Random.value);
-
-        _particles.SetParticles(p, l);
-    }
-
     private void setCollisionPartiles() {
         if (_collisionParticles == null) return;
 
         _collisionParticles.transform.parent = transform.parent;
         _collisionParticles.gameObject.SetActive(true);
 
-        int count = Random.Range(4, 6);
+        int count = Random.Range(3, 8);
         _collisionParticles.Emit(count);
         ParticleSystem.Particle[] p = new ParticleSystem.Particle[count];
         _collisionParticles.GetParticles(p);
@@ -117,7 +107,7 @@ public class ShootMove : MonoBehaviour {
         Vector2 v = direction.normalized * -speed * 0.5f;
 
         for (int i = 0; i < count; i++) {
-            p[i].velocity = Quaternion.AngleAxis(Random.Range(-40, 40), Vector3.forward) * v;
+            p[i].velocity = Quaternion.AngleAxis(Random.Range(-45, 45), Vector3.forward) * v;
             //print(p[i].velocity);
         }
 
