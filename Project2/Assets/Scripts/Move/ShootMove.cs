@@ -27,11 +27,8 @@ public class ShootMove : MonoBehaviour {
         destroied = false;
         transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
 
-        if(transform.Find("Particles"))
-            _particles = transform.Find("Particles").particleSystem;
-        
-        if(transform.Find("Collision Particles"))
-            _collisionParticles = transform.Find("Collision Particles").particleSystem;
+        if(transform.Find("Particles")) _particles = transform.Find("Particles").particleSystem;
+        if(transform.Find("Collision Particles")) _collisionParticles = transform.Find("Collision Particles").particleSystem;
 
         _anim = GetComponent<Animator>();
     }
@@ -46,29 +43,19 @@ public class ShootMove : MonoBehaviour {
         setParticlesVelocity(direction.normalized * speed * 0.5f);
     }
 
-    public void OnTriggerEnter2D(Collider2D trigger)
-    {
-        if (trigger.gameObject.tag == "Enemy" && isPlayerAlly)
-            trigger.gameObject.GetComponent<Enemy>().Hit(damage, direction);        
-    }
-
-    private void setParticlesVelocity(Vector2 velocity){
-        ParticleSystem.Particle[] p = new ParticleSystem.Particle[_particles.particleCount + 1];
-        int l = _particles.GetParticles(p);
-
-        for (int i = 0; i < l; i++)
-            p[i].velocity = velocity * (1 + 0.3f * Random.value);
-
-        _particles.SetParticles(p, l);
-    }
+    public void OnTriggerEnter2D(Collider2D trigger){
+        if (trigger.gameObject.tag == "Enemy" && isPlayerAlly) { 
+            trigger.gameObject.GetComponent<Enemy>().Hit(damage, direction);
+            DestroyMove();
+        }
+    }   
 
     public void OnCollisionEnter2D(Collision2D coll) {
-        
-        if (coll.gameObject.tag == "Player" && !isPlayerAlly)
+        if (coll.gameObject.tag == "Player" && !isPlayerAlly) {
             coll.gameObject.GetComponent<AnimationController>().Hit(damage, direction);
-        
+            DestroyMove();
+        }
 
-        DestroyMove();
     }
 
     #endregion
@@ -88,11 +75,14 @@ public class ShootMove : MonoBehaviour {
     }
 
     public void DestroyMove() {
+        if (_anim != null)
+            _anim.SetTrigger("Collided");
+        else
+            OnFinishDestroyAnimation();
+
         if (_particles != null) {
             setCollisionPartiles();
             _particles.gameObject.SetActive(false);
-            
-            DOTween.To(x => setParticlesVelocity(direction.normalized * speed * x), 0.5f, 0, 0.5f).SetEase(Ease.OutQuint);
         }
 
         destroied = true;
@@ -102,6 +92,16 @@ public class ShootMove : MonoBehaviour {
     #endregion
 
     #region private Methods
+
+    private void setParticlesVelocity(Vector2 velocity) {
+        ParticleSystem.Particle[] p = new ParticleSystem.Particle[_particles.particleCount + 1];
+        int l = _particles.GetParticles(p);
+
+        for (int i = 0; i < l; i++)
+            p[i].velocity = velocity * (1 + 0.3f * Random.value);
+
+        _particles.SetParticles(p, l);
+    }
 
     private void setCollisionPartiles() {
         if (_collisionParticles == null) return;

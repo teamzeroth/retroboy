@@ -57,8 +57,6 @@ public class UiController : MonoBehaviour {
             _ui = GameObject.FindWithTag("UI").transform;
             _lifeHud = _ui.Find("Health Panel/life");
             _chargeHud = _ui.Find("Health Panel/charge-slider");
-
-            print(_lifeHud);
         }
 
     private void changeCharge() {
@@ -67,8 +65,6 @@ public class UiController : MonoBehaviour {
     }
 
     private void changeLifeCounter(){
-        print("life: " + life + " " + _lifeHud.childCount + " => " + (life < _lifeHud.childCount));
-
         var lifePoints = _lifeHud.childCount;
 
         if (life > lifePoints)
