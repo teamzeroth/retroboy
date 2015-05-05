@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 using System.Collections;
 
 public class Stinger : Enemy
@@ -24,7 +24,7 @@ public class Stinger : Enemy
 
     protected override void Attack(GameObject obj)
     {
-        if (destroy)
+        if (false)
         {
             destroy = false;
             StopAllCoroutines();
