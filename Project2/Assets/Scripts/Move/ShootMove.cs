@@ -21,6 +21,8 @@ public class ShootMove : MonoBehaviour {
     private ParticleSystem _collisionParticles;
     private Animator _anim;
 
+    #region MonoBehaviour
+
     void Start() {
         destroied = false;
         transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
@@ -64,46 +66,14 @@ public class ShootMove : MonoBehaviour {
         
         if (coll.gameObject.tag == "Player" && !isPlayerAlly)
             coll.gameObject.GetComponent<AnimationController>().Hit(damage, direction);
+        
 
-        DestroyMove(-coll.contacts[0].normal);
+        DestroyMove();
     }
 
-    public void DestroyMove(Vector2 contactDirection) {
-        if (_particles != null) {
-//            _collisionParticles.transform.parent = transform.parent;
-            //transform.DetachChildren();
-            setCollisionPartiles(contactDirection);
-            _particles.gameObject.SetActive(false);
-            
-            DOTween.To(x => setParticlesVelocity(direction.normalized * speed * x), 0.5f, 0, 0.5f).SetEase(Ease.OutQuint);
-            
-//            Destroy(_collisionParticles.gameObject, 0.5f);
-        }
+    #endregion
 
-        destroied = true;
-        rigidbody2D.velocity = Vector3.zero;
-//        _anim.SetTrigger("Collided");
-    }
-
-    private void setCollisionPartiles(Vector2 contactDirection) {
-        if (_collisionParticles == null) return;
-        _collisionParticles.transform.parent = transform.parent;
-        _collisionParticles.gameObject.SetActive(true);
-
-        int count = Random.Range(4, 6);
-        _collisionParticles.Emit(count);
-        ParticleSystem.Particle[] p = new ParticleSystem.Particle[count];
-        _collisionParticles.GetParticles(p);
-
-        Vector2 v = contactDirection * -speed * 0.5f;
-
-        for (int i = 0; i < count; i++) {
-            p[i].velocity = Quaternion.AngleAxis(Random.Range(-40, 40), Vector3.forward) * v;
-            print(p[i].velocity);
-        }
-
-        _collisionParticles.SetParticles(p, count);
-    }
+    #region Messages
 
     public void OnFinishDestroyAnimation() {
         Destroy(gameObject);
@@ -117,7 +87,43 @@ public class ShootMove : MonoBehaviour {
         transform.localScale = localScale;
     }
 
-    void OnBecameInvisible(){
-        // Destroy(gameObject);
+    public void DestroyMove() {
+        if (_particles != null) {
+            setCollisionPartiles();
+            _particles.gameObject.SetActive(false);
+            
+            DOTween.To(x => setParticlesVelocity(direction.normalized * speed * x), 0.5f, 0, 0.5f).SetEase(Ease.OutQuint);
+        }
+
+        destroied = true;
+        rigidbody2D.velocity = Vector3.zero;
     }
+
+    #endregion
+
+    #region private Methods
+
+    private void setCollisionPartiles() {
+        if (_collisionParticles == null) return;
+
+        _collisionParticles.transform.parent = transform.parent;
+        _collisionParticles.gameObject.SetActive(true);
+
+        int count = Random.Range(4, 6);
+        _collisionParticles.Emit(count);
+        ParticleSystem.Particle[] p = new ParticleSystem.Particle[count];
+        _collisionParticles.GetParticles(p);
+
+        Vector2 v = direction.normalized * -speed * 0.5f;
+
+        for (int i = 0; i < count; i++) {
+            p[i].velocity = Quaternion.AngleAxis(Random.Range(-40, 40), Vector3.forward) * v;
+            //print(p[i].velocity);
+        }
+
+        _collisionParticles.SetParticles(p, count);
+        Destroy(_collisionParticles.gameObject, 0.5f);
+    }
+
+    #endregion
 }
