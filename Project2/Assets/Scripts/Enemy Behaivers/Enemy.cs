@@ -3,38 +3,36 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
-    public float life = 100f, damage = 2f, speed = 1f, attackDelay = 0.25f, pointDistance = 1f;
+    public float life = 100f, damage = 2f, speed = 1f, attackDelay = 0.25f, pointDistance = 1f, seekDistance = 2f;
     public GameObject target = null;
     public ShootMove prefab = null;
 
-    protected Vector3 heading = Vector3.zero, direction = Vector3.zero, futureDirection = Vector3.zero, futureHeading = Vector3.zero;
+    protected int nearestPointIndex = -1;
+    protected Vector3 heading = Vector3.zero, direction = Vector3.zero, futureDirection = Vector3.zero, futureHeading = Vector3.zero, destinationHeading = Vector3.zero, destinationDirection;
     protected float distance = 0f;
-    protected bool seek = false, destroy = false;
-	protected Vector2[] points;
+    protected bool seek = false, destroy = false, pointSet = false;
+	protected Vector3[] points;
 
     public void Start()
     {
         destroy = false;
-		points = new Vector2[4];
+		points = new Vector3[4];
         prefab.CreatePool();
 
         if (target == null)
             target = GameObject.FindGameObjectWithTag("Player");
+
+        updatePoints();
     }
 
-	void UpdatePoints()
-	{
-		Vector2 t = {-1,1};
-		points [0] = target.transform.position + Vector2.one;
-		points [1] = target.transform.position + t;
-		points [2] = target.transform.position - Vector2.one;
-		points [3] = target.transform.position - t;
-	}
-
-    void Update()
+	void Update()
     {
-        //Debug.DrawLine(transform.position, target.transform.position, Color.red);
-        //Debug.DrawLine(transform.position, transform.position + direction, Color.blue);
+        Debug.DrawLine(transform.position, target.transform.position, Color.yellow);
+        Debug.DrawLine(transform.position, transform.position + heading, Color.red);
+        Debug.DrawLine(transform.position, transform.position + direction, Color.magenta);
+        Debug.DrawLine(transform.position, transform.position + destinationDirection, Color.blue);
+        Debug.DrawLine(transform.position, transform.position + destinationHeading, Color.cyan);
+        
         //Debug.DrawLine(transform.position, target.transform.position + (Vector3)target.rigidbody2D.velocity, Color.green);
         //Debug.DrawLine(transform.position, transform.position + futureDirection, Color.yellow);
 
@@ -48,14 +46,29 @@ public class Enemy : MonoBehaviour {
         {
 			updatePosition();
 			updateFuturePosition();
+            if (nearestPointIndex == -1)
+                nearestPoint();
+            updateDestinationPosition();
 			Movement();
             Defense();
             Attack(target);
         }
     }
 
-	protected void updateTargetPosition(Vector2 p)
+    protected void updatePoints()
+    {
+        Vector3 t = new Vector3(-1, 1, 0);
+        points[0] = target.transform.position + (Vector3)Vector2.one;
+        points[1] = target.transform.position + t;
+        points[2] = target.transform.position - (Vector3)Vector2.one;
+        points[3] = target.transform.position - t;
+    }
+
+	protected void updateDestinationPosition()
 	{
+        destinationHeading = points[nearestPointIndex] - transform.position;
+       // destinationDistance = destinationHeading.magnitude;
+        destinationDirection = destinationHeading.normalized;
 	}
 
 	protected void updateFuturePosition()
@@ -76,45 +89,37 @@ public class Enemy : MonoBehaviour {
 		rigidbody2D.MoveRotation(Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
 	}
 
-	Vector2 nearestPoint()
+	void nearestPoint()
 	{
 		float minDistance = 100f, d;
-		int j = 0;
-		for (int i = 0; i < points.GetLength; i++) {
-			d = transform.position - points [i].sqrMagnitude;
+		for (int i = 0; i < points.GetLength(0); i++) {
+			d = (transform.position - points [i]).sqrMagnitude;
 			if (d < minDistance)
 			{
 				minDistance = d;
-				j = i;
+				nearestPointIndex = i;
 			}
 		}
-		return points [j];
 	}
 
     protected virtual void Movement()
     {
-        Debug.Log("V: " + rigidbody2D.velocity + " | Vm: " + (double)rigidbody2D.velocity.magnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm: " + (double)target.rigidbody2D.velocity.magnitude + " | D: " + distance);
+        //Debug.Log("V: " + rigidbody2D.velocity + " | Vm: " + (double)rigidbody2D.velocity.magnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm: " + (double)target.rigidbody2D.velocity.magnitude + " | TD: " + distance + " | Dest: " + destinationHeading + " | DestM: " + destinationHeading.magnitude);
         
-		if (distance < 3f) // se aproximar
+		if (pointSet) // se aproximar
 		{
-			updateFuturePosition(nearestPoint());
-			if (futureDirection.magnitude > 0.2f) // se parado
-				rigidbody2D.velocity = futureDirection * speed;
-		}
+            if (destinationHeading.magnitude > 0.2f)
+                rigidbody2D.velocity = destinationDirection * speed * destinationHeading.magnitude / pointDistance;
+            else if (heading.magnitude > seekDistance)  // se parado
+                pointSet = false;
+        }
 		else // se afastar
-		{
-			updateFuturePosition(nearestPoint());
+        {
+            updatePoints();
+            nearestPointIndex = -1;
+            pointSet = true;			
 			// Delay para procurar o inimigo dnovo
 		}
-
-
-            //Movimento de follow funcional (não se antecipa tanto a voce)
-            //rigidbody2D.velocity = (futureDirection * (speed + distance/1.5f)) + (Vector3)target.rigidbody2D.velocity.normalized;
-//			rigidbody2D.velocity = futureDirection + (Vector3)target.rigidbody2D.velocity.normalized * (speed * target.rigidbody2D.velocity.magnitude * distance) / 1.1f;
-//			rigidbody2D.velocity = futureDirection + (Vector3)target.rigidbody2D.velocity.normalized * (speed * target.rigidbody2D.velocity.magnitude * futureHeading.magnitude) / 1.1f;
-//			rigidbody2D.velocity = futureDirection + (Vector3)target.rigidbody2D.velocity * ((speed + futureHeading.magnitude) * distance / 1.1f);
-			//Cerca o player com uma rotação em circulo ao redor do player (cerca a "saida" do player)
-			//Debug.DrawLine(transform.position, target.rigidbody2D.velocity.normalized + (Vector2)transform.up * futureHeading.magnitude, Color.magenta);
     }
 
     protected virtual void Defense() { }
