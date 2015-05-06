@@ -24,11 +24,11 @@ public class Enemy : MonoBehaviour {
 
 	void UpdatePoints()
 	{
-		Vector2 t = {-1,1};
-		points [0] = target.transform.position + Vector2.one;
-		points [1] = target.transform.position + t;
-		points [2] = target.transform.position - Vector2.one;
-		points [3] = target.transform.position - t;
+		Vector3 t = new Vector3(-1, 1);
+		points[0] = target.transform.position + (Vector3) Vector2.one;
+		points[1] = target.transform.position + t;
+        points[2] = target.transform.position - (Vector3) Vector2.one;
+		points[3] = target.transform.position - t;
 	}
 
     void Update()
@@ -80,8 +80,9 @@ public class Enemy : MonoBehaviour {
 	{
 		float minDistance = 100f, d;
 		int j = 0;
-		for (int i = 0; i < points.GetLength; i++) {
-			d = transform.position - points [i].sqrMagnitude;
+		for (int i = 0; i < points.Length; i++) {
+			///d = transform.position - points [i].sqrMagnitude; ????? Vc esta transformando float com vector3
+            d = Vector3.Distance(transform.position, points[i]);
 			if (d < minDistance)
 			{
 				minDistance = d;
@@ -97,13 +98,13 @@ public class Enemy : MonoBehaviour {
         
 		if (distance < 3f) // se aproximar
 		{
-			updateFuturePosition(nearestPoint());
+			updateFuturePosition(/*nearestPoint()*/);  // Essa função não receve nenhum argumento
 			if (futureDirection.magnitude > 0.2f) // se parado
 				rigidbody2D.velocity = futureDirection * speed;
 		}
 		else // se afastar
 		{
-			updateFuturePosition(nearestPoint());
+            updateFuturePosition(/*nearestPoint()*/);  // Essa função não receve nenhum argumento
 			// Delay para procurar o inimigo dnovo
 		}
 
