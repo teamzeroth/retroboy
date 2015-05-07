@@ -105,19 +105,23 @@ public class Enemy : MonoBehaviour {
     protected virtual void Movement()
     {
         //Debug.Log("V: " + rigidbody2D.velocity + " | Vm: " + (double)rigidbody2D.velocity.magnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm: " + (double)target.rigidbody2D.velocity.magnitude + " | TD: " + distance + " | Dest: " + destinationHeading + " | DestM: " + destinationHeading.magnitude);
-        
-		if (pointSet) // se aproximar
+        if (distance > 5f)
+            rigidbody2D.velocity = Vector2.zero;
+        else if (pointSet) // se aproximar
 		{
             if (destinationHeading.magnitude > 0.2f)
                 rigidbody2D.velocity = destinationDirection * speed * destinationHeading.magnitude / pointDistance;
-            else if (heading.magnitude > seekDistance)  // se parado
+            else if (heading.magnitude > seekDistance)
                 pointSet = false;
+            else // se parado
+                turnAttack(attackDelay);
         }
 		else // se afastar
         {
             updatePoints();
             nearestPointIndex = -1;
-            pointSet = true;			
+            pointSet = true;
+            destroy = false;
 			// Delay para procurar o inimigo dnovo
 		}
     }
