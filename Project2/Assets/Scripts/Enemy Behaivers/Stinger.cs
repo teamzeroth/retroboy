@@ -11,7 +11,7 @@ public class Stinger : Enemy
     {
         //Debug.Log("V: " + rigidbody2D.velocity + " | Vm(2): " + (double)rigidbody2D.velocity.sqrMagnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm(2): " + (double)target.rigidbody2D.velocity.sqrMagnitude + " | D: " + distance);
 
-        if (target.rigidbody2D.velocity.sqrMagnitude < 3f && distance <= 1.5f)
+        if (target.rigidbody2D.velocity.sqrMagnitude < 3f && distance <= seekDistance)
 		{
 			rigidbody2D.velocity = Vector2.zero; // Tem que ser zero pra o efeito ficar certo, mas causa problemas ao aplicar uma força (i.e. quando o inimigo toma um tiro)
             //Debug.DrawLine(transform.position, transform.position + transform.up, Color.cyan);
@@ -24,7 +24,7 @@ public class Stinger : Enemy
 
     protected override void Attack(GameObject obj)
     {
-        if (false)
+        if (destroy)
         {
             destroy = false;
             StopAllCoroutines();
