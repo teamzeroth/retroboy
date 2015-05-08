@@ -15,21 +15,15 @@ public class Enemy : MonoBehaviour {
 
     public void Start() {
         destroy = false;
+        seek = true;
         points = new Vector3[4];
         prefab.CreatePool();
 
         if (target == null)
             target = GameObject.FindGameObjectWithTag("Player");
-    }
 
-	void UpdatePoints()
-	{
-		Vector3 t = new Vector3(-1, 1);
-		points[0] = target.transform.position + (Vector3) Vector2.one;
-		points[1] = target.transform.position + t;
-        points[2] = target.transform.position - (Vector3) Vector2.one;
-		points[3] = target.transform.position - t;
-	}
+        updatePoints();
+    }
 
 	void Update()
     {
@@ -64,10 +58,10 @@ public class Enemy : MonoBehaviour {
     protected void updatePoints()
     {
         Vector3 t = new Vector3(-1, 1, 0);
-        points[0] = target.transform.position + (Vector3)Vector2.one;
-        points[1] = target.transform.position + t;
-        points[2] = target.transform.position - (Vector3)Vector2.one;
-        points[3] = target.transform.position - t;
+        points[0] = target.transform.position + (Vector3)Vector2.one * pointDistance;
+        points[1] = target.transform.position + t * pointDistance;
+        points[2] = target.transform.position - (Vector3)Vector2.one * pointDistance;
+        points[3] = target.transform.position - t * pointDistance;
     }
 
 	protected void updateDestinationPosition()
@@ -92,7 +86,8 @@ public class Enemy : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		rigidbody2D.MoveRotation(Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
+        if (seek)
+		    rigidbody2D.MoveRotation(Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
 	}
 
 	void nearestPoint()
@@ -110,17 +105,18 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void Movement()
     {
-        //Debug.Log("V: " + rigidbody2D.velocity + " | Vm: " + (double)rigidbody2D.velocity.magnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm: " + (double)target.rigidbody2D.velocity.magnitude + " | TD: " + distance + " | Dest: " + destinationHeading + " | DestM: " + destinationHeading.magnitude);
+        Debug.Log("V: " + rigidbody2D.velocity + " | Vm: " + (double)rigidbody2D.velocity.magnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm: " + (double)target.rigidbody2D.velocity.sqrMagnitude + " | TD: " + distance + " | Dest: " + destinationHeading + " | DestM: " + destinationHeading.sqrMagnitude);
+        
         if (distance > 5f)
             rigidbody2D.velocity = Vector2.zero;
-        else if (pointSet) // se aproximar
+        else if (pointSet) 
 		{
             if (destinationHeading.magnitude > 0.2f)
                 rigidbody2D.velocity = destinationDirection * speed * destinationHeading.magnitude / pointDistance;
-            else if (heading.magnitude > seekDistance)
+            else if (heading.magnitude > seekDistance) // se aproximar
                 pointSet = false;
             else // se parado
-                turnAttack(attackDelay);
+                StartCoroutine(turnAttack(attackDelay));
         }
 		else // se afastar
         {
@@ -170,7 +166,7 @@ public class Enemy : MonoBehaviour {
         StopAllCoroutines(); 
         life -= damage;
         if (Debug.isDebugBuild)
-            Debug.Log("Enemy Life: " + life);
+            //Debug.Log("Enemy Life: " + life);
         rigidbody2D.AddForce(direction * -2f, ForceMode2D.Impulse);
         GetComponent<Animator>().enabled = false;
         destroy = false;

@@ -106,6 +106,10 @@ MonoBehaviour:
   prefab: {fileID: 11458350, guid: 1e18bc9a481dbab40ae2193114a9ee77, type: 2}
   amplitude: .200000003
   frequency: .850000024
+  maxWalkTime: .100000001
+  rotationDelay: .00999999978
+  rotateStep: 5
+  maxRotation: 45
 --- !u!212 &21279034
 SpriteRenderer:
   m_ObjectHideFlags: 1
