@@ -86,8 +86,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 100
   damage: 2
-  speed: .5
+  speed: 1
   attackDelay: 1.25
+  pointDistance: 1
+  seekDistance: 2
   target: {fileID: 0}
   prefab: {fileID: 11458350, guid: 1e18bc9a481dbab40ae2193114a9ee77, type: 2}
   explosionRadius: 3
