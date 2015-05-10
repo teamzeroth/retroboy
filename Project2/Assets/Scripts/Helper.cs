@@ -72,5 +72,19 @@ public static class Helper {
 
         _particles.SetParticles(p, l);
     }
+
+    /// <sumary>
+    /// Flip the Transform using the scale
+    /// </sumary>
+    /// <param name="_transform">this paramether of the Transform Object</param>
+    /// <param name="flipped">the current flipped state of the element</param>
+
+    public static void Flip(this Transform _transform, ref bool flipped) {
+        flipped = !flipped;
+
+        Vector3 localScale = _transform.localScale;
+        localScale.x *= -1;
+        _transform.localScale = localScale;
+    }
 }
 

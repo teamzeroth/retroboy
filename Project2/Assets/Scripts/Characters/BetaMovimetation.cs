@@ -32,7 +32,7 @@ public class BetaMovimetation : MonoBehaviour {
     }
 
     void Start() {
-        transform.position = _playerController.transform.position;
+        transform.position = target.position;
     }
 
     void FixedUpdate() {
@@ -42,13 +42,14 @@ public class BetaMovimetation : MonoBehaviour {
             transform.position = target.position;
         }
 
-        if (_playerController.flipped != flipped)
-            Flip();
+        //if (_playerController.flipped != flipped)
+        //    Flip();
 
-        if (!_playerController.NormalState)
+        /*if (!_playerController.NormalState)
             Desapear();
         else
             Apear();
+         * */
     }
 
     void Update() {

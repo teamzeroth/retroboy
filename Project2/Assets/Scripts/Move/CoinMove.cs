@@ -42,8 +42,6 @@ public class CoinMove : MonoBehaviour {
         _renderer.localPosition = v;
         transform.position += (Vector3) velocity * (Time.deltaTime * (2 - timer) / 2);
 
-        print(transform.position);
-
         if (timer >= 2) disableMove = true;
     }
 }
