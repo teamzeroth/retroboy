@@ -17,7 +17,7 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: 0
+    - time: -0
       value: {fileID: 21300024, guid: 2d3336a4f3ebd714983836aa44563863, type: 3}
     - time: .142857149
       value: {fileID: 21300026, guid: 2d3336a4f3ebd714983836aa44563863, type: 3}
@@ -26,7 +26,7 @@ AnimationClip:
     - time: .428571433
       value: {fileID: 21300030, guid: 2d3336a4f3ebd714983836aa44563863, type: 3}
     attribute: m_Sprite
-    path: 
+    path: renderer
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 7
@@ -36,7 +36,7 @@ AnimationClip:
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
     genericBindings:
-    - path: 0
+    - path: 4053377436
       attribute: 0
       script: {fileID: 0}
       classID: 212

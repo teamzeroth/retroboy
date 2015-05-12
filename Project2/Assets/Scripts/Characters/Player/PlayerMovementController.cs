@@ -17,6 +17,9 @@ public class PlayerMovementController : MonoBehaviour {
         public bool OnCharging;
         public bool OnShooting;
 
+        public float TimeInCharge;
+        public float LastTimeInCharge;
+
         public Vector3 Update() {
             deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
@@ -35,6 +38,9 @@ public class PlayerMovementController : MonoBehaviour {
             OnCharging = Input.GetButton("Fire1");
             OnShooting = Input.GetButtonUp("Fire1");
 
+            TimeInCharge = OnCharging ? TimeInCharge + Time.deltaTime : 0;
+            if (OnCharging) LastTimeInCharge = TimeInCharge;
+
             return deltaDirection;
         }
 
@@ -42,22 +48,31 @@ public class PlayerMovementController : MonoBehaviour {
 
     public float speed = 3;
     
-    [HideInInspector]
-    public bool flipped = false;
-    [HideInInspector]
-    public Vector2 fixedMove = Vector2.zero;
+    [HideInInspector] public bool flipped = false;
+    [HideInInspector] public Vector2 fixedMove = Vector2.zero;
 
     private bool OnHurt = false;
 
+    private bool waitToMove = false;
+    private bool waitShootFinish = false;
+
     private ControllerStates controller = new ControllerStates();
+    private Coroutine watchShoot;
 
     private Animator _anim;
     private Rigidbody2D _rigidbody;
+    private PlayerSFXController _sfx;
+
+
+    public Vector2 DeadDirection {
+        get { return controller.deadDirection; }
+    }
 
 
     public void Start() {
         _anim = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _sfx = GetComponent<PlayerSFXController>();
     }
 
     public void Update() {
@@ -68,24 +83,26 @@ public class PlayerMovementController : MonoBehaviour {
 
         UpdateMove();
         UpdateAnimation();
+        UpdateSound();
     }
 
     
-
     public void UpdateAnimation() {
         _anim.SetFloat("Horizontal", controller.Direction.x);
         _anim.SetFloat("Vertical", controller.Direction.y);
 
-        _anim.SetBool("InMoving", controller.InMoving);
-
-        if (controller.OnCharging && !waitShootFinish) _anim.SetTrigger("OnDraw");
+        
+        //Checa o estado de carregar e atirar
+        if ((controller.OnCharging) && !waitShootFinish) _anim.SetTrigger("OnDraw");
         if (controller.OnShooting && !waitShootFinish) {
             _anim.SetTrigger("OnShoot");
             _anim.SetBool("OnDraw", false);
 
-            StartCoroutine(WaitShootAnimation());
+            if (watchShoot != null) StopCoroutine(watchShoot);
+            watchShoot = StartCoroutine(WaitShootAnimation());
         }
 
+        //Checa o estado de se machucar
         if (OnHurt) {
             waitShootFinish = false;
 
@@ -95,14 +112,24 @@ public class PlayerMovementController : MonoBehaviour {
 
         _anim.SetBool("OnHurt", OnHurt);
 
+        //Checa se o jogador move
+        _anim.SetBool("InMoving", controller.InMoving && !waitToMove);
+
         checkFlip();
+    }
+
+    public void UpdateSound() {
+        if (controller.OnCharging && _anim.CurrentAnimState().StartsWith("Nim-draw")) 
+            _sfx.Charge();
+        else if (_anim.CurrentAnimState().StartsWith("Nim-shoot")) //TODO: Controlar o tempo entre cada tiro
+            _sfx.Shoot(controller.LastTimeInCharge);
     }
 
     public void UpdateMove() {
         Vector2 deltaMovement = controller.Update();
 
         if (fixedMove == Vector2.zero){
-            if (controller.OnCharging || controller.OnShooting || waitShootFinish)
+            if (controller.OnCharging || controller.OnShooting || waitToMove)
                 deltaMovement = Vector2.zero;
             else {
                 deltaMovement *= speed;
@@ -142,11 +169,16 @@ public class PlayerMovementController : MonoBehaviour {
         });
     }
 
-    bool waitShootFinish = false;
     IEnumerator WaitShootAnimation() {
         waitShootFinish = true;
+        waitToMove = true;
+
         while (!_anim.CurrentAnimState().EndsWith("last") && waitShootFinish)
             yield return null;
+
         waitShootFinish = false;
+        yield return new WaitForSeconds(0.35f);
+        waitToMove = false;
+        watchShoot = null;        
     }
 }

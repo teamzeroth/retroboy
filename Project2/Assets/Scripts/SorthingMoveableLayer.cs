@@ -3,13 +3,19 @@ using System.Collections;
 
 public class SorthingMoveableLayer : MonoBehaviour {
 
-    Renderer _renderer = null;
-    Transform _positionPoint;
+    public Transform _positionPoint;
 
+    Renderer _renderer = null;
+    
     int _initialOrder;
 
     void Awake() {
-        Transform t = transform.Find("Renderer") != null ? transform.Find("Renderer") : transform;
+        Transform t;
+
+        t = transform.Find("Renderer");
+        if (t == null) t = transform.Find("renderer");
+        if (t == null) t = transform;
+
         _renderer = t.GetComponent<SpriteRenderer>();
 
         if (_renderer == null) {
@@ -20,7 +26,7 @@ public class SorthingMoveableLayer : MonoBehaviour {
 
         _initialOrder = _renderer.sortingOrder;
 
-        _positionPoint = transform.Find("Feets");
+        if (_positionPoint == null) _positionPoint = transform.Find("Feets");
         if (_positionPoint == null) _positionPoint = transform.Find("feets");
         if (_positionPoint == null) _positionPoint = transform;
 
@@ -37,7 +43,9 @@ public class SorthingMoveableLayer : MonoBehaviour {
     }
 
     void OnDrawGizmosSelected() {
-        Transform positionPoint = transform.Find("Feets");
+        Transform positionPoint = _positionPoint;
+
+        if (positionPoint == null) positionPoint = transform.Find("Feets");
         if (positionPoint == null) positionPoint = transform.Find("feets");
         if (positionPoint == null) positionPoint = GetComponent<Transform>();
 

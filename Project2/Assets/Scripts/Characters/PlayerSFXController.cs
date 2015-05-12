@@ -7,6 +7,60 @@ public class PlayerSFXController : MonoBehaviour {
 
     public FMODAsset shoot;
 
+    private Coroutine watchCharge;
+    private bool inCharge = false;
+    private bool inShoot = false;
+
+    private FMOD_CustonEmitter shootEmitter;
+
+    private AnimationController _animControl;
+    
+    void Awake() {
+        GameObject gameObject = (GameObject) Instantiate(new GameObject("SFX"), Vector3.zero, Quaternion.identity);
+        gameObject.transform.parent = transform;
+
+        shootEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
+        shootEmitter.Init(shoot);
+
+        _animControl = GetComponent<AnimationController>();
+    }
+
+    public void Charge() {
+        if (inCharge) return;
+
+        inCharge = true;
+
+        shootEmitter.SetParameter("Shoot", 0f);
+        shootEmitter.SetParameter("Reset", 1f);
+
+        if (watchCharge != null) StopCoroutine(watchCharge);
+        watchCharge = StartCoroutine(WaitPlayerConfirm());
+    }
+
+        void playShoot() {
+            if (shootEmitter.HasStoped()) shootEmitter.Play();
+        }
+
+    public void Shoot(float forceTime) {
+        inCharge = false;
+        inShoot = true;
+
+        shootEmitter.SetParameter("Shoot", forceTime >= 1.5f ? forceTime >= 3f ? 3 : 2 : 1);
+        shootEmitter.SetParameter("Reset", 0f);
+
+        playShoot();
+    }
+
+    IEnumerator WaitPlayerConfirm() {
+        yield return new WaitForSeconds(0.1f);
+        if (inCharge && !inShoot) playShoot();
+
+        watchCharge = null;
+    }
+
+    /*
+    public FMODAsset shoot;
+
     [HideInInspector]
     public float timer = 0.0f;
 
@@ -21,17 +75,6 @@ public class PlayerSFXController : MonoBehaviour {
     private bool shooted = false;
     private bool waitingTime = false;
     private bool showParticle = false;
-
-
-    void Awake() {
-        GameObject gameObject = (GameObject) Instantiate(new GameObject("SFX"), Vector3.zero, Quaternion.identity);
-        gameObject.transform.parent = transform;
-
-        shootEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        shootEmitter.Init(shoot);
-
-        _animControl = GetComponent<AnimationController>();
-    }
 
     void Start() {
         _chargeParticles = transform.Find("Charge Particles").gameObject;
@@ -115,5 +158,5 @@ public class PlayerSFXController : MonoBehaviour {
     }
     
     #endregion
-
+    */
 }
