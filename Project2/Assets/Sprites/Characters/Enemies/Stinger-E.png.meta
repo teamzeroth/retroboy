@@ -1,20 +1,21 @@
 fileFormatVersion: 2
-guid: 47022e7201069434b96a39f566bfa7ac
+guid: 0a63b2eb3cd0a724298c7432c8968c32
 TextureImporter:
   fileIDToRecycleName:
-    21300000: assets_cave_0
-    21300002: assets_cave_1
-    21300004: assets_cave_2
-    21300006: assets_cave_3
-    21300008: assets_cave_4
-    21300010: assets_cave_5
-    21300012: assets_cave_6
-    21300014: assets_cave_7
-    21300016: assets_cave_8
+    21300000: Stinger-E_0
+    21300002: Stinger-E_1
+    21300004: Stinger-E_2
+    21300006: Stinger-E_3
+    21300008: Stinger-E_4
+    21300010: Stinger-E_5
+    21300012: Stinger-E_6
+    21300014: Stinger-E_7
+    21300016: Stinger-E_8
+    21300018: Stinger-E_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -52,95 +53,105 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: assets_cave_0
+    - name: Stinger-E_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 261
-        width: 40
-        height: 39
+        y: 0
+        width: 60
+        height: 45
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 12, y: 4, z: 13, w: 4}
+    - name: Stinger-E_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 60
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: assets_cave_1
+    - name: Stinger-E_2
       rect:
         serializedVersion: 2
-        x: 40
-        y: 256
-        width: 21
-        height: 44
+        x: 120
+        y: 0
+        width: 60
+        height: 45
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: assets_cave_2
+    - name: Stinger-E_3
       rect:
         serializedVersion: 2
-        x: 61
-        y: 256
-        width: 21
-        height: 44
+        x: 180
+        y: 0
+        width: 60
+        height: 45
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: assets_cave_3
+    - name: Stinger-E_4
       rect:
         serializedVersion: 2
-        x: 82
-        y: 275
-        width: 20
-        height: 25
+        x: 240
+        y: 0
+        width: 60
+        height: 45
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: assets_cave_4
+    - name: Stinger-E_5
       rect:
         serializedVersion: 2
-        x: 82
-        y: 249
-        width: 20
-        height: 25
+        x: 300
+        y: 0
+        width: 60
+        height: 45
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: assets_cave_5
+    - name: Stinger-E_6
       rect:
         serializedVersion: 2
-        x: 102
-        y: 245
-        width: 41
-        height: 55
+        x: 360
+        y: 0
+        width: 60
+        height: 45
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: assets_cave_6
+    - name: Stinger-E_7
       rect:
         serializedVersion: 2
-        x: 143
-        y: 248
-        width: 28
-        height: 52
+        x: 420
+        y: 0
+        width: 60
+        height: 45
       alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 1, z: 0, w: 0}
-    - name: assets_cave_7
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 237
-        width: 23
-        height: 24
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: assets_cave_8
+    - name: Stinger-E_8
       rect:
         serializedVersion: 2
-        x: 23
-        y: 234
-        width: 24
-        height: 22
+        x: 480
+        y: 0
+        width: 60
+        height: 45
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Stinger-E_9
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0
+        width: 60
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
