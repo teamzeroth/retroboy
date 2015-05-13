@@ -19,6 +19,9 @@ public class OldBetaMovimetation : MonoBehaviour {
 
     private bool disappeared = false;
 
+    private GameObject _lightSprite;
+    private GameObject _lightParticle;
+    private Transform _renderer;
 
     private AnimationController _playerController;
 

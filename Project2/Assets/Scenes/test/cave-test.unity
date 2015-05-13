@@ -191,7 +191,7 @@ MonoBehaviour:
   visible: 0
   smoothMove: 2
   smoothRotation: 3
-  distance: .600000024
+  totalDistance: .600000024
   anglesPerSeconds: 90
 --- !u!95 &15348395
 Animator:
@@ -1063,6 +1063,30 @@ Prefab:
       propertyPath: _positionPoint
       value: 
       objectReference: {fileID: 1844136249}
+    - target: {fileID: 446820, guid: 90d1352b89af8004c8924757618c676b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19846820, guid: 90d1352b89af8004c8924757618c676b, type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 19846820, guid: 90d1352b89af8004c8924757618c676b, type: 2}
+      propertyPath: EmissionModule.rate.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 446820, guid: 90d1352b89af8004c8924757618c676b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 446820, guid: 90d1352b89af8004c8924757618c676b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19846820, guid: 90d1352b89af8004c8924757618c676b, type: 2}
+      propertyPath: InitialModule.startSize.scalar
+      value: .49000001
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 21266200, guid: 90d1352b89af8004c8924757618c676b, type: 2}
     - {fileID: 11466200, guid: 90d1352b89af8004c8924757618c676b, type: 2}
@@ -2410,7 +2434,7 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: .5
+      scalar: .49000001
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2477,7 +2501,7 @@ ParticleSystem:
       minMaxState: 0
     gravityModifier: 0
     inheritVelocity: 0
-    maxNumParticles: 1000
+    maxNumParticles: 50
   ShapeModule:
     serializedVersion: 2
     enabled: 0
@@ -4848,7 +4872,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 112778315
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300024, guid: 2d3336a4f3ebd714983836aa44563863, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!43 &1808682933

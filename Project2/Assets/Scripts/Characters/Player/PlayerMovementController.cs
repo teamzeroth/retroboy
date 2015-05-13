@@ -63,10 +63,17 @@ public class PlayerMovementController : MonoBehaviour {
     private Rigidbody2D _rigidbody;
     private PlayerSFXController _sfx;
 
-
+    #region Getters and Setters
+    
     public Vector2 DeadDirection {
         get { return controller.deadDirection; }
     }
+
+    public bool BetaVisible {
+        get { return _anim.CurrentAnimState().StartsWith("Nim-idle") || _anim.CurrentAnimState().StartsWith("Nim-run"); }
+    }
+
+    #endregion
 
 
     public void Start() {
@@ -93,18 +100,21 @@ public class PlayerMovementController : MonoBehaviour {
 
         
         //Checa o estado de carregar e atirar
-        if ((controller.OnCharging) && !waitShootFinish) _anim.SetTrigger("OnDraw");
-        if (controller.OnShooting && !waitShootFinish) {
-            _anim.SetTrigger("OnShoot");
-            _anim.SetBool("OnDraw", false);
+        if ((controller.OnCharging) && !waitShootFinish) {
+            _anim.SetTrigger("OnDraw");
 
             if (watchShoot != null) StopCoroutine(watchShoot);
             watchShoot = StartCoroutine(WaitShootAnimation());
         }
 
+        if (controller.OnShooting) {
+            _anim.SetTrigger("OnShoot");
+            _anim.SetBool("OnDraw", false);
+        }
+
         //Checa o estado de se machucar
         if (OnHurt) {
-            waitShootFinish = false;
+            waitToMove = false;
 
             _anim.SetBool("OnShoot", false);
             _anim.SetBool("OnDraw", false);
@@ -161,10 +171,12 @@ public class PlayerMovementController : MonoBehaviour {
         if (fixedMove != Vector2.zero)
             lastFixedTween.Kill();
 
+        waitToMove = true;
         fixedMove = fixedMove + start;
 
         lastFixedTween = DOTween.To(() => fixedMove, x => fixedMove = x, to, time).SetEase(ease).OnComplete(() => {
             OnHurt = false;
+            waitToMove = false;
             fixedMove = Vector2.zero;
         });
     }

@@ -8,23 +8,29 @@ public class BetaController : MonoBehaviour {
     public Transform target;
 
     [HideInInspector] public bool flipped = false;
-    [HideInInspector] public bool visible = true;
+    [HideInInspector] public bool visible = false;
 
     [Range(1f, 10f)] public float smoothMove = 1f;
     [Range(1f, 10f)] public float smoothRotation = 1f;
-    [Range(0, 1f)] public float distance = 1f;
+    [Range(0, 1f)] public float totalDistance = 1f;
 
     public float anglesPerSeconds = 180;
 
     private float angle = 0;
     private float lightAngle = 0;
+    private float distance = 0;
+    private float visibleDelta = 0;
 
     private Transform _lightSprite;
     private Transform _lightParticle;
     private Transform _renderer;
     private PlayerMovementController _player;
 
-    void Awake() {        
+    Tween DoDisappear;
+
+    void Awake() {
+        distance = totalDistance;
+
         _lightSprite = transform.FindChild("light");
         _lightParticle = transform.FindChild("particles");
         _renderer = transform.FindChild("renderer");
@@ -46,6 +52,7 @@ public class BetaController : MonoBehaviour {
     void UpdateAnimation() {
         CalcRotation();
         checkFlip();
+        checkVisibility();
     }
 
     void UpdateMove() {
@@ -87,11 +94,56 @@ public class BetaController : MonoBehaviour {
         transform.position = Vector3.Lerp(curPos, toPos, Time.deltaTime * smoothMove);
     }
 
-    public void checkFlip() {
+    void checkFlip() {
         if (!_player.flipped) {  
             if (flipped) _renderer.Flip(ref flipped);
         } else{
             if (!flipped) _renderer.Flip(ref flipped);
         }
+    }
+
+    void checkVisibility() {
+        if ((_player.BetaVisible && !visible) || (!_player.BetaVisible && visible)) {
+            visible = !visible;
+
+            var time = 0f;
+            var to = visible ? 1f : 0;
+                
+            if(DoDisappear != null){
+                time = DoDisappear.fullPosition;
+                DoDisappear.Kill();
+            }
+
+            if (!visible) _lightParticle.particleSystem.maxParticles = 0;
+
+            DoDisappear = DOTween.To(() => visibleDelta, x => Disappear(x), to, Game.TIME_BETA_DISAPPEAR - time)
+                .SetEase(visible ? Ease.OutQuad : Ease.InQuad)
+                .OnComplete(() => {
+                    if (visible) _lightParticle.particleSystem.maxParticles = 50;
+                    DoDisappear = null;
+                });
+        }
+    }
+
+    public void Disappear(float delta) {
+        visibleDelta = delta;
+
+        Color c;
+
+        c = _lightSprite.GetComponent<SpriteRenderer>().color;
+        c.a = delta;
+        _lightSprite.GetComponent<SpriteRenderer>().color = c;
+
+        c = _renderer.GetComponent<SpriteRenderer>().color;
+        c.a = delta;
+        _renderer.GetComponent<SpriteRenderer>().color = c;
+
+        Vector3 t;
+
+        t = _lightSprite.localScale;
+        t.y = delta * 0.5f;
+        _lightSprite.localScale = t;
+
+        distance = totalDistance * delta;
     }
 }
