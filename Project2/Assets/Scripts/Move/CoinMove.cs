@@ -6,7 +6,7 @@ using DG.Tweening;
 public class CoinMove : MonoBehaviour {
 
     [HideInInspector]
-    public float currentValue;
+    public float currentValue = 10f;
 
     Vector2 ground;
     Vector2 velocity;

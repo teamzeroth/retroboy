@@ -36,6 +36,8 @@ public class UiController : MonoBehaviour {
     private Transform _lifeHud;
     private Transform _chargeHud;
 
+    private Transform _pausePanel;
+
     private int hideLifePoints = 0;
 
     void Awake() {
@@ -57,7 +59,33 @@ public class UiController : MonoBehaviour {
             _ui = GameObject.FindWithTag("UI").transform;
             _lifeHud = _ui.Find("Health Panel/life");
             _chargeHud = _ui.Find("Health Panel/charge-slider");
+
+            _pausePanel = _ui.Find("Pause Panel");
         }
+
+    #region UI Buttons messegens
+
+    public void OnClickResume(){
+        print("Resume");
+    }
+
+    public void OnClickRestart() {
+        print("Restart");
+    }
+
+    public void OnClickQuit() {
+        print("Quit");
+    }
+
+    #endregion
+
+    public void TogglePauseGame(bool show) {
+        if (show) {
+            _pausePanel.gameObject.SetActive(true);
+        } else {
+            _pausePanel.gameObject.SetActive(false);
+        }
+    }
 
     private void changeCharge() {
         RectTransform chargeTransform = _chargeHud.transform as RectTransform;
@@ -78,4 +106,6 @@ public class UiController : MonoBehaviour {
                 _lifeHud.GetChild(_lifeHud.childCount - i).gameObject.Recycle();
             }
     }   
+
+
 }

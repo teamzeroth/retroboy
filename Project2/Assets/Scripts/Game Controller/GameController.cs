@@ -6,13 +6,17 @@ using MapResources;
 public static class Game {
     public const float TIME = 0;
     public const float TIME_BETA_DISAPPEAR = 0.3f;
+    public const float TIME_PLAYER_SHOOTING = 0.5f;
 }
 
 public class GameController : MonoBehaviour {
 
     public static GameController self;
 
+    private Coroutine pauseRoutine;
+
     private SmoothFollow _camera;
+    private UiController _ui;
     private AnimationController _player;
 
     void Awake() {
@@ -21,6 +25,9 @@ public class GameController : MonoBehaviour {
 
     void Start() {
         _camera = Camera.main.GetComponent<SmoothFollow>();
+        _ui = GetComponent<UiController>();
+
+        return;
 
         if (GameObject.FindWithTag("Player"))
             _player = GameObject.FindWithTag("Player").GetComponent<AnimationController>();
@@ -34,12 +41,58 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public void Update() {
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            Pause = !Pause;
+        }
+    }
+
     public void StartStage() {
         _player.gameObject.SetActive(true);
 
-        if (Door.doors.ContainsKey("MainDoor")){
+        if (Door.doors.ContainsKey("MainDoor")) {
             (_player.renderer as SpriteRenderer).color = new Color(0, 0, 0, 0.3f);
             Door.doors["MainDoor"].GetOut(_player);
         }
+    } 
+
+    public void PauseGame(bool pause) {
+        if (pause) {
+            Time.timeScale = 0;
+            _ui.TogglePauseGame(pause);
+
+            pauseRoutine = StartCoroutine(IgnoreTimeUpdate());
+        } else {
+            Time.timeScale = 1;
+            _ui.TogglePauseGame(pause);
+
+            StopCoroutine(pauseRoutine);
+        }
     }
+
+    IEnumerator IgnoreTimeUpdate() {
+        yield return new WaitForSeconds(0.1f);
+
+        while (Pause) {
+            Update();
+            yield return null;
+        }
+    }
+
+    #region getters and setters
+    
+    private bool _pause;
+    public bool Pause {
+        get {
+            return _pause;
+        }
+        set {
+            if (_pause != value) {
+                _pause = value;
+                PauseGame(value);
+            }
+        }
+    }
+
+    #endregion
 }

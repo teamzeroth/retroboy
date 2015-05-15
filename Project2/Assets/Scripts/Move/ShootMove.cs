@@ -44,19 +44,42 @@ public class ShootMove : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D trigger){
-        if (trigger.gameObject.tag == "Enemy" && isPlayerAlly) { 
-            trigger.gameObject.GetComponent<Enemy>().Hit(damage, direction);
+        print("Collide with " + trigger.gameObject.name);
+
+        if (trigger.tag == "Enemy" && isPlayerAlly) {
+
+            if (trigger.GetComponent<Enemy>() != null) {
+                trigger.GetComponent<Enemy>().Hit(damage, direction);
+                DestroyMove();
+            }
+
+            if (trigger.GetComponent<BaseEnemy>() != null) {
+                trigger.GetComponent<BaseEnemy>().OnTakeDamage(this, trigger);
+                DestroyMove();
+            }
+
+        }
+
+        if (trigger.tag == "Player" && !isPlayerAlly) {
+            trigger.GetComponent<PlayerMovementController>().OnGetHit();
+            DestroyMove();
+        }
+
+        if (trigger.gameObject.layer == LayerMask.NameToLayer("Level")) {
             DestroyMove();
         }
     }   
 
-    public void OnCollisionEnter2D(Collision2D coll) {
+    /*public void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag == "Player" && !isPlayerAlly) {
             coll.gameObject.GetComponent<AnimationController>().Hit(damage, direction);
             DestroyMove();
         }
 
-    }
+        if (coll.gameObject.layer == LayerMask.NameToLayer("Level")) {
+            DestroyMove();
+        }   
+    }*/
 
     #endregion
 

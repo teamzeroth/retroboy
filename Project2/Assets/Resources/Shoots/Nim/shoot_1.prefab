@@ -11,7 +11,7 @@ GameObject:
   - 198: {fileID: 19816698}
   - 199: {fileID: 19916698}
   - 114: {fileID: 11416698}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ GameObject:
   - 114: {fileID: 11440326}
   - 61: {fileID: 6140326}
   - 95: {fileID: 9516698}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: shoot_1
   m_TagString: Shoot
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - 198: {fileID: 19840326}
   - 199: {fileID: 19940326}
   - 114: {fileID: 11440328}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collision Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.3555059, y: -5.23764086, z: 0}
+  m_LocalPosition: {x: -13.2444115, y: -7.84968901, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 416698}
@@ -117,7 +117,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 140326}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: .146770924, y: .0502421074}
   m_Center: {x: .055513382, y: .000558376312}
 --- !u!95 &9516698

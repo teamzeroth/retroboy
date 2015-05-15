@@ -16,16 +16,24 @@ public class StingerExploder : BaseEnemy {
     }
 
     void Update() {
-        //Senoide
         _renderer.localPosition = initialPos + new Vector3(0,0.2f,0) * Mathf.Sin((randomTime + Time.time) * 2);
 
-        if (target != null) UpdateMove();
+        UpdateMove();
         UpdateAnimation();
+
+        _renderer.localRotation = Quaternion.Inverse(transform.localRotation);
     }
 
         void UpdateMove(){
-            rigidbody2D.velocity = (target.position - transform.position).normalized * speed;
-            _renderer.localRotation = Quaternion.Inverse(transform.localRotation);
+            //rigidbody2D.velocity = (target.position - transform.position).normalized * speed;transform.position + (target.position - transform.position).normalized * speed * Time.deltaTime
+            Vector3 direction = Vector3.zero;
+
+            if (target != null) direction = (target.position - transform.position).normalized * speed;
+            Vector3 currentDirection = (direction + impulseForce) / 2;
+
+            print(impulseForce);
+
+            rigidbody2D.MovePosition(transform.position + currentDirection * Time.deltaTime);
         }
 
         void UpdateAnimation() {
@@ -45,6 +53,8 @@ public class StingerExploder : BaseEnemy {
     #region BaseEnemy
 
     public override void LostPlayer(Transform player) { }
+
+    //public override void OnDestroy() { }
     
     #endregion
 }

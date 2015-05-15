@@ -18,7 +18,9 @@ public class PlayerMovementController : MonoBehaviour {
         public bool OnShooting;
 
         public float TimeInCharge;
+        public float TimeLastShoot;
         public float LastTimeInCharge;
+
 
         public Vector3 Update() {
             deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -35,13 +37,23 @@ public class PlayerMovementController : MonoBehaviour {
             }
 
             InMoving = deltaDirection != Vector2.zero;
-            OnCharging = Input.GetButton("Fire1");
-            OnShooting = Input.GetButtonUp("Fire1");
+
+            if (OnCharging && !Input.GetButton("Fire1")) {
+                OnShooting = true;
+                OnCharging = false;
+            } else {
+                OnCharging = Input.GetButton("Fire1");
+                OnShooting = Input.GetButtonUp("Fire1");
+            }
 
             TimeInCharge = OnCharging ? TimeInCharge + Time.deltaTime : 0;
             if (OnCharging) LastTimeInCharge = TimeInCharge;
 
             return deltaDirection;
+        }
+
+        public void registreTime() {
+            LastTimeInCharge = 0;
         }
 
     }
@@ -55,6 +67,7 @@ public class PlayerMovementController : MonoBehaviour {
 
     private bool waitToMove = false;
     private bool waitShootFinish = false;
+    private bool waitToNewShoot = false;
 
     private ControllerStates controller = new ControllerStates();
     private Coroutine watchShoot;
@@ -75,7 +88,6 @@ public class PlayerMovementController : MonoBehaviour {
 
     #endregion
 
-
     public void Start() {
         _anim = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -83,6 +95,8 @@ public class PlayerMovementController : MonoBehaviour {
     }
 
     public void Update() {
+        if (GameController.self.Pause) return;
+
         if (Input.GetKeyDown(KeyCode.Space)) {
             OnHurt = true;
             startFixedMove(Vector2.one, Vector2.zero, 1);
@@ -95,19 +109,25 @@ public class PlayerMovementController : MonoBehaviour {
 
     
     public void UpdateAnimation() {
-        _anim.SetFloat("Horizontal", controller.Direction.x);
-        _anim.SetFloat("Vertical", controller.Direction.y);
+        if(!(waitShootFinish && !waitToMove)){
+            _anim.SetFloat("Horizontal", controller.Direction.x);
+            _anim.SetFloat("Vertical", controller.Direction.y);
 
-        
+            checkFlip();
+        }
+
         //Checa o estado de carregar e atirar
-        if ((controller.OnCharging) && !waitShootFinish) {
+        if (controller.OnCharging && !waitShootFinish) {
             _anim.SetTrigger("OnDraw");
 
             if (watchShoot != null) StopCoroutine(watchShoot);
-            watchShoot = StartCoroutine(WaitShootAnimation());
+            watchShoot = StartCoroutine(WaitShootAnimationFinish());
         }
 
-        if (controller.OnShooting) {
+        if (controller.OnShooting && !waitToNewShoot) {
+            waitToNewShoot = true;
+            StartCoroutine(WaitShootAnimationStart());
+
             _anim.SetTrigger("OnShoot");
             _anim.SetBool("OnDraw", false);
         }
@@ -124,8 +144,6 @@ public class PlayerMovementController : MonoBehaviour {
 
         //Checa se o jogador move
         _anim.SetBool("InMoving", controller.InMoving && !waitToMove);
-
-        checkFlip();
     }
 
     public void UpdateSound() {
@@ -181,16 +199,43 @@ public class PlayerMovementController : MonoBehaviour {
         });
     }
 
-    IEnumerator WaitShootAnimation() {
+    IEnumerator WaitShootAnimationFinish() {
         waitShootFinish = true;
         waitToMove = true;
 
         while (!_anim.CurrentAnimState().EndsWith("last") && waitShootFinish)
             yield return null;
 
-        waitShootFinish = false;
+
         yield return new WaitForSeconds(0.35f);
+        waitShootFinish = false;
+        waitToNewShoot = false;
+        yield return new WaitForSeconds(0.2f);
         waitToMove = false;
         watchShoot = null;        
+    }
+
+    IEnumerator WaitShootAnimationStart() {
+        while (!_anim.CurrentAnimState().StartsWith("Nim-shoot"))
+            yield return null;
+
+        instaceShoot(new Vector2(_anim.GetFloat("Horizontal"), _anim.GetFloat("Vertical")));
+    }
+
+
+    public void OnGetHit() {
+
+    }
+
+    private void instaceShoot(Vector3 v){
+        GameObject shootGO = (GameObject) Instantiate(
+            Resources.Load<GameObject>("Shoots/Nim/shoot_1"),
+            transform.position + v.normalized * 0.3f,
+            Quaternion.identity
+        );
+
+        ShootMove shoot = shootGO.GetComponent<ShootMove>();
+        shoot.direction = v;
+        shoot.damage = controller.LastTimeInCharge >= 1.5f ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
     }
 }
