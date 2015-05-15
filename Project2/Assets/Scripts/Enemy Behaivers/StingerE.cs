@@ -12,9 +12,12 @@ public class StingerE : Enemy
         if (distance <= 1f)
         {
             rigidbody2D.velocity = Vector2.zero;
-            //Debug.DrawLine(transform.position, transform.position + transform.up, Color.cyan);
             transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;
-            StartCoroutine(turnAttack(attackDelay));
+            if (!attacking)
+            {
+                StartCoroutine(turnAttack(attackDelay));
+                attacking = true;
+            }
         }
         else
             base.Movement();       

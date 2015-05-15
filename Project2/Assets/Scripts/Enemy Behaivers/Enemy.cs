@@ -10,13 +10,13 @@ public class Enemy : MonoBehaviour {
     protected int nearestPointIndex = -1;
     protected Vector3 heading = Vector3.zero, direction = Vector3.zero, futureDirection = Vector3.zero, futureHeading = Vector3.zero, destinationHeading = Vector3.zero, destinationDirection;
     protected float distance = 0f;
-    protected bool seek = false, destroy = false, pointSet = false;
+    protected bool seek = false, destroy = false, pointSet = false, attacking = false;
 	protected Vector3[] points;
 
-    public void Start()
-    {
+    public void Start() {
         destroy = false;
-		points = new Vector3[4];
+        seek = true;
+        points = new Vector3[4];
         prefab.CreatePool();
 
         if (target == null)
@@ -45,10 +45,9 @@ public class Enemy : MonoBehaviour {
         else
         {
 			updatePosition();
-			updateFuturePosition();
             if (nearestPointIndex == -1)
                 nearestPoint();
-            updateDestinationPosition();
+            updatePointPosition();
 			Movement();
             Defense();
             Attack(target);
@@ -58,25 +57,18 @@ public class Enemy : MonoBehaviour {
     protected void updatePoints()
     {
         Vector3 t = new Vector3(-1, 1, 0);
-        points[0] = target.transform.position + (Vector3)Vector2.one;
-        points[1] = target.transform.position + t;
-        points[2] = target.transform.position - (Vector3)Vector2.one;
-        points[3] = target.transform.position - t;
+        points[0] = target.transform.position + (Vector3)Vector2.one * pointDistance;
+        points[1] = target.transform.position + t * pointDistance;
+        points[2] = target.transform.position - (Vector3)Vector2.one * pointDistance;
+        points[3] = target.transform.position - t * pointDistance;
     }
 
-	protected void updateDestinationPosition()
+	protected void updatePointPosition()
 	{
         destinationHeading = points[nearestPointIndex] - transform.position;
-       // destinationDistance = destinationHeading.magnitude;
         destinationDirection = destinationHeading.normalized;
 	}
-
-	protected void updateFuturePosition()
-	{
-		futureHeading = (target.transform.position + (Vector3)target.rigidbody2D.velocity.normalized) - transform.position;
-		futureDirection = futureHeading.normalized;
-	}
-
+    
     protected void updatePosition()
     {
         heading = target.transform.position - transform.position;
@@ -86,7 +78,8 @@ public class Enemy : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		rigidbody2D.MoveRotation(Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
+        if (seek)
+		    rigidbody2D.MoveRotation(Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
 	}
 
 	void nearestPoint()
@@ -104,21 +97,26 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void Movement()
     {
-        //Debug.Log("V: " + rigidbody2D.velocity + " | Vm: " + (double)rigidbody2D.velocity.magnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm: " + (double)target.rigidbody2D.velocity.magnitude + " | TD: " + distance + " | Dest: " + destinationHeading + " | DestM: " + destinationHeading.magnitude);
+        //Debug.Log("V: " + rigidbody2D.velocity + " | Vm: " + (double)rigidbody2D.velocity.magnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm: " + (double)target.rigidbody2D.velocity.sqrMagnitude + " | TD: " + distance + " | Dest: " + destinationHeading + " | DestM: " + destinationHeading.sqrMagnitude);
         
-		if (pointSet) // se aproximar
+        if (distance > 5f)
+            rigidbody2D.velocity = Vector2.zero;
+        else if (pointSet) 
 		{
             if (destinationHeading.magnitude > 0.2f)
+//                                                                    Desacelera quanto mais perto do ponto se estiver
                 rigidbody2D.velocity = destinationDirection * speed * destinationHeading.magnitude / pointDistance;
-            else if (heading.magnitude > seekDistance)  // se parado
+            else if (heading.magnitude > seekDistance) // se aproximar
                 pointSet = false;
+            else // se parado
+                StartCoroutine(turnAttack(attackDelay));
         }
 		else // se afastar
         {
             updatePoints();
             nearestPointIndex = -1;
-            pointSet = true;			
-			// Delay para procurar o inimigo dnovo
+            pointSet = true;
+            destroy = false;
 		}
     }
 
@@ -129,7 +127,7 @@ public class Enemy : MonoBehaviour {
 		if (destroy)
 		{
             destroy = false;
-            StopAllCoroutines();
+            //StopAllCoroutines();
             obj.GetComponent<AnimationController>().Hit(this.damage, this.direction);
 
             if (Debug.isDebugBuild)
@@ -141,12 +139,14 @@ public class Enemy : MonoBehaviour {
     {
         yield return new WaitForSeconds(delay);
         destroy = true;
+        StopCoroutine("turnAttack");
     }
 
     protected IEnumerator turnAnimation(float delay)
     {
         yield return new WaitForSeconds(delay);
         GetComponent<Animator>().enabled = true;
+        StopCoroutine("turnAnimation");
     }
 
     void OnTriggerEnter2D(Collider2D trigger)
@@ -160,11 +160,11 @@ public class Enemy : MonoBehaviour {
         StopAllCoroutines(); 
         life -= damage;
         if (Debug.isDebugBuild)
-            Debug.Log("Enemy Life: " + life);
+            //Debug.Log("Enemy Life: " + life);
         rigidbody2D.AddForce(direction * -2f, ForceMode2D.Impulse);
         GetComponent<Animator>().enabled = false;
         destroy = false;
         StartCoroutine(turnAnimation(0.5f));
-        StartCoroutine(turnAttack(attackDelay));
+        //StartCoroutine(turnAttack(attackDelay));
     }
 }

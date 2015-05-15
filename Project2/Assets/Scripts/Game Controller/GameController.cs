@@ -3,6 +3,11 @@ using System.Collections;
 
 using MapResources;
 
+public static class Game {
+    public const float TIME = 0;
+    public const float TIME_BETA_DISAPPEAR = 0.3f;
+}
+
 public class GameController : MonoBehaviour {
 
     public static GameController self;

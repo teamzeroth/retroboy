@@ -8,8 +8,4 @@ public class SorthingParticleLayer : MonoBehaviour {
     public void Start() {
         particleSystem.renderer.sortingLayerName = sorthingLayer;
     }
-
-    void Update() {
-        //transform.localScale = transform.parent.localScale;
-    }
 }
