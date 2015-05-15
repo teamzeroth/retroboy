@@ -11,6 +11,7 @@ TextureImporter:
     21300012: coin-1_6
     21300014: coin-1_7
     21300016: coin-1_8
+    21300018: coin-1_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -59,8 +60,8 @@ TextureImporter:
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .469999999, y: .50999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: coin-1_1
       rect:
@@ -69,8 +70,8 @@ TextureImporter:
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .479999989, y: .50999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: coin-1_2
       rect:
@@ -79,8 +80,8 @@ TextureImporter:
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .49000001, y: .50999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: coin-1_3
       rect:
@@ -89,8 +90,8 @@ TextureImporter:
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .529999971, y: .50999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: coin-1_4
       rect:
@@ -99,8 +100,8 @@ TextureImporter:
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .540000021, y: .50999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: coin-1_5
       rect:
@@ -109,8 +110,8 @@ TextureImporter:
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .550000012, y: .50999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: coin-1_6
       rect:
@@ -119,8 +120,8 @@ TextureImporter:
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .529999971, y: .50999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: coin-1_7
       rect:
@@ -129,8 +130,8 @@ TextureImporter:
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .519999981, y: .50999999}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: coin-1_8
       rect:
@@ -139,8 +140,8 @@ TextureImporter:
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .529999971, y: .50999999}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

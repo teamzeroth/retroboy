@@ -31,7 +31,7 @@ TextureImporter:
   generateCubemap: 0
   seamlessCubemap: 0
   textureFormat: -3
-  maxTextureSize: 2048
+  maxTextureSize: 1024
   textureSettings:
     filterMode: 0
     aniso: 16
@@ -65,28 +65,28 @@ TextureImporter:
     - name: assets_cave_1
       rect:
         serializedVersion: 2
-        x: 40
-        y: 256
-        width: 21
-        height: 44
+        x: 54
+        y: 251
+        width: 24
+        height: 49
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: assets_cave_2
       rect:
         serializedVersion: 2
-        x: 61
-        y: 256
-        width: 21
-        height: 44
+        x: 92
+        y: 251
+        width: 36
+        height: 49
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: assets_cave_3
       rect:
         serializedVersion: 2
-        x: 82
-        y: 275
+        x: 20
+        y: 209
         width: 20
         height: 25
       alignment: 0
@@ -95,8 +95,8 @@ TextureImporter:
     - name: assets_cave_4
       rect:
         serializedVersion: 2
-        x: 82
-        y: 249
+        x: 0
+        y: 209
         width: 20
         height: 25
       alignment: 0
@@ -105,8 +105,8 @@ TextureImporter:
     - name: assets_cave_5
       rect:
         serializedVersion: 2
-        x: 102
-        y: 245
+        x: 41
+        y: 179
         width: 41
         height: 55
       alignment: 0
@@ -116,12 +116,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 143
-        y: 248
+        y: 249
         width: 28
-        height: 52
+        height: 51
       alignment: 0
       pivot: {x: .5, y: .5}
-      border: {x: 0, y: 1, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: assets_cave_7
       rect:
         serializedVersion: 2

@@ -282,7 +282,7 @@ public class AnimationController : MonoBehaviour {
         fireTime = REPEAT_FIRE_TIME;
         Vector2 dir = ForcingMove ? moveVec : deadMoveVec;
 
-        float timer = GetComponent<PlayerSFXController>().timer;
+        float timer = 0;//GetComponent<PlayerSFXController>().timer;
         int type = timer >= 1f ? timer >= 2f ? 3 : 2 : 1;
 
         GameObject shoot = Resources.Load<GameObject>("Shoots/Nim/shoot_" + type);

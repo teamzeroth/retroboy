@@ -106,10 +106,8 @@ public class ShootMove : MonoBehaviour {
 
         Vector2 v = direction.normalized * -speed * 0.5f;
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++)
             p[i].velocity = Quaternion.AngleAxis(Random.Range(-45, 45), Vector3.forward) * v;
-            //print(p[i].velocity);
-        }
 
         _collisionParticles.SetParticles(p, count);
         Destroy(_collisionParticles.gameObject, 0.5f);
