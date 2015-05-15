@@ -74,12 +74,14 @@ public class Enemy : MonoBehaviour {
         heading = target.transform.position - transform.position;
         distance = heading.magnitude;
         direction = heading.normalized;
+		GetComponent<Animator> ().SetFloat ("Vertical", direction.y);
+		GetComponent<Animator> ().SetFloat ("Horizontal", -direction.x);
     }
 
 	void FixedUpdate()
 	{
-        if (seek)
-		    rigidbody2D.MoveRotation(Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
+//        if (seek)
+		  //  rigidbody2D.MoveRotation(Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
 	}
 
 	void nearestPoint()

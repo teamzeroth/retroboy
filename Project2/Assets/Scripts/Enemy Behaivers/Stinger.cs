@@ -8,11 +8,13 @@ public class Stinger : Enemy
 
 	float z = 0f, walkTime = 0f;
     bool startedRotateAndShoot = false;
-    ShootMove bullet = null;
+	Vector3 _center = Vector3.zero;
+	ShootMove bullet = null;
 
     protected override void Movement()
     {
-        //Debug.Log("V: " + rigidbody2D.velocity + " | Vm(2): " + (double)rigidbody2D.velocity.sqrMagnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm(2): " + (double)target.rigidbody2D.velocity.sqrMagnitude + " | D: " + distance);
+		_center = GetComponentsInChildren<Transform>()[1].position;
+		//Debug.Log("V: " + rigidbody2D.velocity + " | Vm(2): " + (double)rigidbody2D.velocity.sqrMagnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm(2): " + (double)target.rigidbody2D.velocity.sqrMagnitude + " | D: " + distance);
         
         //if (target.rigidbody2D.velocity.sqrMagnitude < 3f && distance <= seekDistance)
         if (destinationHeading.sqrMagnitude <= 1f && distance <= seekDistance)
@@ -39,6 +41,8 @@ public class Stinger : Enemy
 
     protected IEnumerator rotateAndShoot(float delay)
     {
+		print("Tiro comum");
+
         for (int i = 0; i < numberofShoots; i++)
         {
             // Logica do Meio "de totoro", acho que não ficou muito legal...
@@ -57,10 +61,10 @@ public class Stinger : Enemy
             z = transform.rotation.eulerAngles.z + rotateStep * (i - numberofShoots / 2);
             //Debug.Log("Time" + i + ": " + (double)Time.time + " | t: " + (double)(i - numberofShoots / 2) + " | z: " + (double)z);
             bullet = prefab.Spawn();
-            Vector3 position = transform.position + Quaternion.Euler(0, 0, z) * Vector3.right / 3f;
-            bullet.transform.position = position;
-            bullet.direction = Quaternion.Euler(0, 0, z) * Vector2.right;
-            bullet.damage = damage;
+            //Vector3 position = transform.position + Quaternion.Euler(0, 0, z) * Vector3.right / 3f;
+			bullet.transform.position = transform.position + direction.normalized * 0.21f;
+            bullet.direction = direction;
+			bullet.damage = damage;
             bullet.speed = bulletSpeed;
         }
         
@@ -77,9 +81,11 @@ public class Stinger : Enemy
             destroy = false;
             //Debug.Log("MaxWalkingTime: " + (double)maxWalkTime + " | Walking Time: " + (double)walkTime + " | Time-walktime: " + (double)(Time.time - walkTime) + " | startrotate: " + startedRotateAndShoot + " | attacking: " + attacking);
 
+
             if (Time.time - walkTime > maxWalkTime && walkTime != 0 && !startedRotateAndShoot)
             {
                 //print("Tiro incomum");
+				GetComponent<Animator> ().SetBool("Shooting",true);
                 seek = false;
                 attacking = false;
                 startedRotateAndShoot = true;
@@ -89,13 +95,14 @@ public class Stinger : Enemy
             else if (!startedRotateAndShoot && attacking)
             {
                 //print("Tiro comum");
+				GetComponent<Animator> ().SetBool("Shooting",true);
                 seek = true;
                 attacking = false;
                 bullet = prefab.Spawn();
                 z = this.gameObject.transform.rotation.eulerAngles.z;
                 Vector3 position = transform.position + Quaternion.Euler(0, 0, z) * Vector3.right / 3f;
-                bullet.transform.position = position;
-                bullet.direction = Quaternion.Euler(0, 0, z) * Vector2.right;
+				bullet.transform.position = transform.position + direction.normalized * 0.21f;
+				bullet.direction = direction;
                 bullet.damage = damage;
                 bullet.speed = bulletSpeed;
             }

@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6158350}
   - 50: {fileID: 5058350}
   - 114: {fileID: 11458350}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bullet
   m_TagString: Shoot
   m_Icon: {fileID: 0}
@@ -73,6 +73,7 @@ MonoBehaviour:
   damage: 10
   isPlayerAlly: 0
   flipped: 0
+  destroied: 0
 --- !u!212 &21258350
 SpriteRenderer:
   m_ObjectHideFlags: 1
