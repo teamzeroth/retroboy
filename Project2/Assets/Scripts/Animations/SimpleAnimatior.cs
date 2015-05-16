@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(SpriteRenderer)]
+[RequireComponent (typeof (SpriteRenderer))]
 public class SimpleAnimatior : MonoBehaviour {
 
+    public bool playOnce = false;
     public float sample;
     public Sprite[] animation;
 
@@ -18,9 +19,16 @@ public class SimpleAnimatior : MonoBehaviour {
 
     void Update() {
         time += Time.deltaTime;
+        curr = Mathf.FloorToInt(sample * time);
 
-        curr = 0
+        if (curr >= animation.Length && playOnce) {
+            SendMessageUpwards("OnFinishAnimation", SendMessageOptions.DontRequireReceiver);
+            enabled = false;
+            return;
+        }
 
-        _renderer.sprite = animation[];
+        curr %= animation.Length;
+
+        _renderer.sprite = animation[curr];
     }
 }

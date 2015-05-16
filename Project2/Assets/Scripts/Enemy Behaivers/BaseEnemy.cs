@@ -33,14 +33,6 @@ public class BaseEnemy : MonoBehaviour {
         _renderer = transform.Find("renderer");
     }
 
-    public void Update() {
-        calcImpulseForce();
-    }
-
-    private void calcImpulseForce(){
-
-    }
-
     public virtual void FindPlayer(Transform player) { target = player; }
 
     public virtual void LostPlayer(Transform player) { target = null; }
@@ -59,9 +51,11 @@ public class BaseEnemy : MonoBehaviour {
         }
     }
 
-    public virtual void OnDestroyIt() {
-        int chance = Random.Range((int) Mathf.Max(coinsChange.x, 1), (int) coinsChange.y);
-        
+    public virtual void DropCoins() {
+        if (coinsChange.x == 0 && coinsChange.y == 0) return;
+
+        int chance = Random.Range((int)Mathf.Max(coinsChange.x, 1), (int)coinsChange.y);
+
         for (int i = 0; i < chance; i++) {
             Instantiate(
                 Resources.Load<GameObject>("Coins/Coin"),
@@ -69,7 +63,10 @@ public class BaseEnemy : MonoBehaviour {
                 Quaternion.identity
             );
         }
+    }
 
+    public virtual void OnDestroyIt() {
+        DropCoins();
         Destroy(gameObject);
     }
 
