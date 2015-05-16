@@ -44,8 +44,6 @@ public class ShootMove : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D trigger){
-        print("Collide with " + trigger.gameObject.name);
-
         if (trigger.tag == "Enemy" && isPlayerAlly) {
 
             if (trigger.GetComponent<Enemy>() != null) {
@@ -61,6 +59,7 @@ public class ShootMove : MonoBehaviour {
         }
 
         if (trigger.tag == "Player" && !isPlayerAlly) {
+			print("Collide with " + trigger.gameObject.name);
             trigger.GetComponent<PlayerMovementController>().OnGetHit();
             DestroyMove();
         }
@@ -98,10 +97,10 @@ public class ShootMove : MonoBehaviour {
     }
 
     public void DestroyMove() {
-        if (_anim != null)
-            _anim.SetTrigger("Collided");
-        else
-            OnFinishDestroyAnimation();
+		if (!isPlayerAlly || _anim == null)
+			OnFinishDestroyAnimation();
+		else
+			_anim.SetTrigger("Collided");
 
         if (_particles != null) {
             setCollisionPartiles();

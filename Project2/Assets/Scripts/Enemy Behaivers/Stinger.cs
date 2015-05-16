@@ -28,10 +28,11 @@ public class Stinger : Enemy
             if (seek)
             {
                 transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;
-                if (!attacking)
+				if (!attacking && !GetComponent<Animator> ().GetBool("Shooting"))
                 {
                     StartCoroutine(turnAttack(attackDelay));
                     attacking = true;
+					GetComponent<Animator> ().SetBool("Shooting",true);					
                 }
             }
 		}
@@ -62,7 +63,7 @@ public class Stinger : Enemy
             //Debug.Log("Time" + i + ": " + (double)Time.time + " | t: " + (double)(i - numberofShoots / 2) + " | z: " + (double)z);
             bullet = prefab.Spawn();
             //Vector3 position = transform.position + Quaternion.Euler(0, 0, z) * Vector3.right / 3f;
-			bullet.transform.position = transform.position + direction.normalized * 0.21f;
+			bullet.transform.position = transform.position + direction.normalized * 0.36f;
             bullet.direction = direction;
 			bullet.damage = damage;
             bullet.speed = bulletSpeed;
@@ -85,23 +86,22 @@ public class Stinger : Enemy
             if (Time.time - walkTime > maxWalkTime && walkTime != 0 && !startedRotateAndShoot)
             {
                 //print("Tiro incomum");
-				GetComponent<Animator> ().SetBool("Shooting",true);
                 seek = false;
                 attacking = false;
                 startedRotateAndShoot = true;
                 walkTime = 0f;
                 StartCoroutine(rotateAndShoot(attackDelay / speed));
             }
-            else if (!startedRotateAndShoot && attacking)
+			else if (!startedRotateAndShoot && attacking)
             {
                 //print("Tiro comum");
-				GetComponent<Animator> ().SetBool("Shooting",true);
+//				GetComponent<Animator> ().SetBool("Shooting",true);
                 seek = true;
                 attacking = false;
                 bullet = prefab.Spawn();
                 z = this.gameObject.transform.rotation.eulerAngles.z;
                 Vector3 position = transform.position + Quaternion.Euler(0, 0, z) * Vector3.right / 3f;
-				bullet.transform.position = transform.position + direction.normalized * 0.21f;
+				bullet.transform.position = transform.position + direction.normalized * 0.36f;
 				bullet.direction = direction;
                 bullet.damage = damage;
                 bullet.speed = bulletSpeed;
