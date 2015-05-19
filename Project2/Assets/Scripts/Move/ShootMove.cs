@@ -8,7 +8,7 @@ public class ShootMove : MonoBehaviour {
     public Vector2 direction;
 
     public float speed;
-    public float damage;
+    public int damage;
 
     public bool isPlayerAlly;
 
@@ -60,7 +60,7 @@ public class ShootMove : MonoBehaviour {
 
         if (trigger.tag == "Player" && !isPlayerAlly) {
 			print("Collide with " + trigger.gameObject.name);
-            trigger.GetComponent<PlayerMovementController>().OnGetHit();
+            //trigger.GetComponent<PlayerMovementController>().OnGetHit();
             DestroyMove();
         }
 

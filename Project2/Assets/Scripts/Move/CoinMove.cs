@@ -5,8 +5,12 @@ using DG.Tweening;
 
 public class CoinMove : MonoBehaviour {
 
+    static public float TOTAL_TIME_OF_LIVE = 10f; //+ 3 
+
+    public int quant = 10;
+
     [HideInInspector]
-    public float currentValue = 10f;
+    public float currentValue = 0f;
 
     Vector2 ground;
     Vector2 velocity;

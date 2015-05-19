@@ -5,6 +5,7 @@ TextureImporter:
     21300000: health-hud_0
     21300002: health-hud_1
     21300004: health-hud_2
+    21300006: health-hud_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -51,15 +52,15 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 18
-        width: 190
-        height: 110
+        width: 179
+        height: 111
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: health-hud_1
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
         width: 37
         height: 16
@@ -69,10 +70,20 @@ TextureImporter:
     - name: health-hud_2
       rect:
         serializedVersion: 2
-        x: 35
-        y: 16
+        x: 38
+        y: 13
+        width: 94
+        height: 3
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: health-hud_3
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 36
         width: 93
-        height: 2
+        height: 93
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

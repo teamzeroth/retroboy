@@ -3,6 +3,7 @@ using System.Collections;
 
 public class StingerExploder : BaseEnemy {
 
+    protected static float MIN_DISTANCE = 0.5f;
     protected Transform _explosion;
 
     private Vector3 initialPos;
@@ -35,7 +36,7 @@ public class StingerExploder : BaseEnemy {
 
         _renderer.localRotation = Quaternion.Inverse(transform.localRotation);
 
-        if (currDistance <= 0.1f) OnDestroyIt();
+        //if (currDistance <= 0.1f) OnDestroyIt();
     }
 
         void UpdateMove(){
@@ -64,18 +65,26 @@ public class StingerExploder : BaseEnemy {
     public override void LostPlayer(Transform player) { }
 
     public override void OnDestroyIt() {
-        destroied = true;
-
-        rigidbody2D.velocity = Vector2.zero;
-
-        _renderer.gameObject.SetActive(false);
-        _explosion.gameObject.SetActive(true);
+        DropCoins();
+        OnDestroyHumself();
     }
 
-    public void OnFinishAnimationExplosion() {OnDestroyIt();}
+        public void OnDestroyHumself() {
+            destroied = true;
 
-    public void OnFinishAnimation() {
+            rigidbody2D.velocity = Vector2.zero;
+
+            _renderer.gameObject.SetActive(false);
+            _explosion.gameObject.SetActive(true);
+        }
+
+    public void OnFinishSimpleAnimation() {
         Destroy(gameObject);
+    }
+
+    public override void OnFinishAnimationBehavior() {
+        if (Vector2.Distance(target.position, transform.position) <= MIN_DISTANCE)
+            OnDestroyHumself();
     }
     
     #endregion

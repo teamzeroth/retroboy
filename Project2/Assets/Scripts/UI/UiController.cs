@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
+using DG.Tweening;
+
 public class UiController : MonoBehaviour {
 
     private static float TOTAL_SIZE_CHARGE = 92.4f;
@@ -11,7 +13,7 @@ public class UiController : MonoBehaviour {
     private static GameObject LifePoint;
 
     private int _life;
-    public int life{
+    public int Life{
         get{
             return _life;
         }
@@ -22,7 +24,7 @@ public class UiController : MonoBehaviour {
     }
 
     private float _charge;
-    public float charge {
+    public float Charge {
         get {
             return _charge;
         }
@@ -32,9 +34,21 @@ public class UiController : MonoBehaviour {
         }
     }
 
+    private int _coins;
+    public int Coins {
+        get {
+            return _coins;
+        }
+        set {
+            changeCoins(_coins, value);
+            _coins = value;
+        }
+    }
+
     private Transform _ui;
     private Transform _lifeHud;
     private Transform _chargeHud;
+    private Transform _coinsHud;
 
     private Transform _pausePanel;
 
@@ -44,8 +58,8 @@ public class UiController : MonoBehaviour {
         loadPoolObject();
         loadprivateObject();
 
-        life = 4;
-        charge = 0;
+        Life = 4;
+        Charge = 0;
 
         self = this;       
     }
@@ -59,6 +73,7 @@ public class UiController : MonoBehaviour {
             _ui = GameObject.FindWithTag("UI").transform;
             _lifeHud = _ui.Find("Health Panel/life");
             _chargeHud = _ui.Find("Health Panel/charge-slider");
+            _coinsHud = _ui.Find("Coins Panel");
 
             _pausePanel = _ui.Find("Pause Panel");
         }
@@ -95,17 +110,34 @@ public class UiController : MonoBehaviour {
     private void changeLifeCounter(){
         var lifePoints = _lifeHud.childCount;
 
-        if (life > lifePoints)
+        if (Life > lifePoints)
             for (var i = 0; i < _life - lifePoints; i++) {
                 GameObject lp = LifePoint.Spawn(_lifeHud);
                 lp.transform.localScale = Vector3.one;
             }
         
-        else if (life < lifePoints)
+        else if (Life < lifePoints)
             for (var i = 1; i <= _lifeHud.childCount - _life; i++) {
                 _lifeHud.GetChild(_lifeHud.childCount - i).gameObject.Recycle();
             }
-    }   
+    }
 
+    Tween coinsToween;
+    private void changeCoins(int before, int current) {
+        if (coinsToween != null) {
+            coinsToween.Kill();
+        }
+        
+        int delta = before;
+        coinsToween = DOTween.To(() => delta, x => delta = x, current, 0.5f).OnUpdate(()=>{
+            
+            Transform countText = _coinsHud.Find("coins-count");
+                countText.GetComponent<Text>().text = delta.ToString();
+            countText = _coinsHud.Find("coins-count-shadow");
+                countText.GetComponent<Text>().text = delta.ToString();
+
+        });
+
+    }
 
 }

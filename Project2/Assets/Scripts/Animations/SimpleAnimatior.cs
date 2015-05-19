@@ -22,7 +22,7 @@ public class SimpleAnimatior : MonoBehaviour {
         curr = Mathf.FloorToInt(sample * time);
 
         if (curr >= animation.Length && playOnce) {
-            SendMessageUpwards("OnFinishAnimation", SendMessageOptions.DontRequireReceiver);
+            SendMessageUpwards("OnFinishSimpleAnimation", SendMessageOptions.DontRequireReceiver);
             enabled = false;
             return;
         }

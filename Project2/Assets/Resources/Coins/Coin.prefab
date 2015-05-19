@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11434892}
   m_Layer: 0
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.7110004, y: -8.31200027, z: 0}
+  m_LocalPosition: {x: -10.3579998, y: -8.17099953, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 434892}
@@ -68,7 +68,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 134890}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Radius: .0900000036
   m_Center: {x: 0, y: 0}
 --- !u!95 &9534892
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960365917b95dfb409f7e93a58cad0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quant: 10
   currentValue: 0
 --- !u!114 &11434892
 MonoBehaviour:
@@ -109,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8708499225a68e4ba15905782af2d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _positionPoint: {fileID: 0}
 --- !u!212 &21234890
 SpriteRenderer:
   m_ObjectHideFlags: 1

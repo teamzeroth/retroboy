@@ -7,9 +7,11 @@ public class BaseEnemy : MonoBehaviour {
 
     protected float TIME_IN_DAMAGE = 2;
 
-    public float life = 3f;
-    public float damage = 2f;
+    public int life = 3;
+    public int damage = 1;
     public float speed = 1f;
+
+    public bool isColliderDamage = false;
 
     public Vector2 coinsChange = new Vector2(1, 3);
 
@@ -64,6 +66,9 @@ public class BaseEnemy : MonoBehaviour {
             );
         }
     }
+
+    public void OnFinishAnimation() { OnFinishAnimationBehavior(); }
+    public virtual void OnFinishAnimationBehavior() { OnDestroyIt(); }
 
     public virtual void OnDestroyIt() {
         DropCoins();
