@@ -37,19 +37,27 @@ public class PlayerSFXController : MonoBehaviour {
         watchCharge = StartCoroutine(WaitPlayerConfirm());
     }
 
-        void playShoot() {
-            if (shootEmitter.HasStoped()) shootEmitter.Play();
-        }
+    public void UnCharge() {
+        if (!inCharge) return;
+
+        inCharge = false;
+
+        shootEmitter.SetParameter("Reset", 0f);
+    }
 
     public void Shoot(float forceTime) {
-        inCharge = false;
+        //inCharge = false;
         inShoot = true;
 
         shootEmitter.SetParameter("Shoot", forceTime >= 1.5f ? forceTime >= 3f ? 3 : 2 : 1);
-        shootEmitter.SetParameter("Reset", 0f);
+        //shootEmitter.SetParameter("Reset", 0f);
 
         playShoot();
     }
+
+        void playShoot() {
+            if (shootEmitter.HasStoped()) shootEmitter.Play();
+        }
 
     IEnumerator WaitPlayerConfirm() {
         yield return new WaitForSeconds(0.1f);
