@@ -8,6 +8,8 @@ public class PlayerMovementController : MonoBehaviour {
 
     private class ControllerStates{
 
+        public Transform player;
+
         public Vector2 deltaDirection;
         public Vector2 deadDirection = new Vector2(1, 0);
 
@@ -21,16 +23,26 @@ public class PlayerMovementController : MonoBehaviour {
         public float TimeLastShoot;
         public float LastTimeInCharge;
 
-
         public Vector3 Update() {
-            deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            if (!Input.GetKey(KeyCode.Mouse0)) {
+                deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-            if (deltaDirection.magnitude > 1)
+                if (deltaDirection.magnitude > 1)
+                    deltaDirection.Normalize();
+
+                if (deltaDirection.magnitude > 0.1f) {
+                    deadDirection = deltaDirection;
+                }
+            } else {
+                Camera camera = Camera.main;
+                Vector3 pos = camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));
+
+                deltaDirection = pos - player.transform.position;
                 deltaDirection.Normalize();
 
-            if (deltaDirection.magnitude > 0.1f){
                 deadDirection = deltaDirection;
             }
+            
 
             Direction = deadDirection;
 
@@ -105,10 +117,11 @@ public class PlayerMovementController : MonoBehaviour {
     #endregion
 
 
-
     #region MonoBehaviour
 
     public void Start() {
+        controller.player = transform;
+
         _anim = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _sfx = GetComponent<PlayerSFXController>();
@@ -243,7 +256,6 @@ public class PlayerMovementController : MonoBehaviour {
     #endregion
 
 
-
     #region Private Methods
 
     public void checkFlip() {
@@ -278,7 +290,6 @@ public class PlayerMovementController : MonoBehaviour {
     }
 
     #endregion
-
 
 
     #region CoRotinnes
