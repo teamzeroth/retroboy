@@ -1655,6 +1655,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shoot: {fileID: 11400000, guid: 1167ef6056d917e4a881357441696316, type: 2}
+  footstep: {fileID: 11400000, guid: a48ea9eec91471d41b1376340bfa3f07, type: 2}
+  hurt: {fileID: 11400000, guid: 912fcaa0e92cf8049adb6fa2fb97e2ab, type: 2}
 --- !u!114 &398462910
 MonoBehaviour:
   m_ObjectHideFlags: 0

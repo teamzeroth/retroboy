@@ -28,15 +28,16 @@ public class PlayerMovementController : MonoBehaviour {
             if (deltaDirection.magnitude > 1)
                 deltaDirection.Normalize();
 
-            Direction = deltaDirection;
-
             if (deltaDirection.magnitude > 0.1f){
                 deadDirection = deltaDirection;
-            } else {
-                Direction = deadDirection;
             }
 
+            Direction = deadDirection;
+
             InMoving = deltaDirection != Vector2.zero;
+
+            OnShooting = false;
+            OnCharging = false;
 
             if (OnCharging && !Input.GetButton("Fire1")) {
                 OnShooting = true;
@@ -72,6 +73,7 @@ public class PlayerMovementController : MonoBehaviour {
     private Tween lastFixedTween;
 
     private ControllerStates controller = new ControllerStates();
+
     private Coroutine watchShoot;
 
     private Animator _anim;
@@ -131,7 +133,7 @@ public class PlayerMovementController : MonoBehaviour {
             }
 
             //Checa o estado de carregar e atirar
-            if (controller.OnCharging && !waitShootFinish) {
+            if (controller.OnCharging && !waitShootFinish && !waitToNewShoot) {
                 _anim.SetTrigger("OnDraw");
 
                 if (watchShoot != null) StopCoroutine(watchShoot);
@@ -139,7 +141,6 @@ public class PlayerMovementController : MonoBehaviour {
             }
 
             if (controller.OnShooting && !waitToNewShoot) {
-                waitToNewShoot = true;
                 StartCoroutine(WaitShootAnimationStart());
 
                 _anim.SetTrigger("OnShoot");
@@ -148,7 +149,7 @@ public class PlayerMovementController : MonoBehaviour {
 
             //Checa o estado de se machucar
             if (OnHurt) {
-                waitToMove = false;
+                waitToMove = true;
 
                 _anim.SetBool("OnShoot", false);
                 _anim.SetBool("OnDraw", false);
@@ -161,10 +162,11 @@ public class PlayerMovementController : MonoBehaviour {
         }
 
         public void UpdateSound() {
-            if (controller.OnCharging && _anim.CurrentAnimState().StartsWith("Nim-draw")) 
+            if (controller.OnCharging && _anim.CurrentAnimState().StartsWith("Nim-draw"))
                 _sfx.Charge();
-            else if (_anim.CurrentAnimState().StartsWith("Nim-shoot")) //TODO: Controlar o tempo entre cada tiro
-                _sfx.Shoot(controller.LastTimeInCharge);
+            else
+                _sfx.UnCharge();
+                
         }
 
         public void UpdateMove() {
@@ -180,6 +182,7 @@ public class PlayerMovementController : MonoBehaviour {
             deltaMovement = fixedMove;
         }
 
+        _sfx.Footstep(deltaMovement != Vector2.zero);
         Move(deltaMovement);
     }
 
@@ -210,6 +213,8 @@ public class PlayerMovementController : MonoBehaviour {
         fixedMove = fixedMove + start;
 
         lastFixedTween = DOTween.To(() => fixedMove, x => fixedMove = x, to, time).SetEase(ease).OnComplete(() => {
+            print("END ANIMATION");
+
             OnHurt = false;
             collider2D.enabled = true;
             waitToMove = false;
@@ -262,6 +267,9 @@ public class PlayerMovementController : MonoBehaviour {
         ShootMove shoot = shootGO.GetComponent<ShootMove>();
         shoot.direction = v;
         shoot.damage = controller.LastTimeInCharge >= 1.5f ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
+
+        //SFX: Shoot
+        _sfx.Shoot(controller.LastTimeInCharge);
     }
 
     private void getCoin(CoinMove coin) {
@@ -279,23 +287,29 @@ public class PlayerMovementController : MonoBehaviour {
         waitShootFinish = true;
         waitToMove = true;
 
-        while (!_anim.CurrentAnimState().EndsWith("last") && waitShootFinish)
+        while (waitShootFinish)
             yield return null;
 
 
-        yield return new WaitForSeconds(0.35f);
+        /*yield return new WaitForSeconds(0.35f);
         waitShootFinish = false;
-        waitToNewShoot = false;
-        yield return new WaitForSeconds(0.2f);
+        waitToNewShoot = false;*/
+        yield return new WaitForSeconds(0.5f);
         waitToMove = false;
         watchShoot = null;
     }
 
     IEnumerator WaitShootAnimationStart() {
+        waitToNewShoot = true;
+
         while (!_anim.CurrentAnimState().StartsWith("Nim-shoot"))
             yield return null;
 
         instaceShoot(new Vector2(_anim.GetFloat("Horizontal"), _anim.GetFloat("Vertical")));
+        waitShootFinish = false;
+
+        yield return new WaitForSeconds(0.35f);
+        waitToNewShoot = false;
     }
 
     #endregion
