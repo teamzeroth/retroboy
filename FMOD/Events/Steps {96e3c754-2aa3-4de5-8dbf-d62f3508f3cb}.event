@@ -104,16 +104,16 @@
             <value>Normal</value>
         </property>
         <property name="minimumTimeBetweenSounds">
-            <value>280</value>
+            <value>400</value>
         </property>
         <property name="maximumTimeBetweenSounds">
-            <value>300</value>
+            <value>420</value>
         </property>
         <property name="minimumScatterDistance">
-            <value>1.60000002</value>
+            <value>0</value>
         </property>
         <property name="maximumScatterDistance">
-            <value>3.20000005</value>
+            <value>0.099999994</value>
         </property>
         <property name="runtimeVolumeModulatorID">
             <value>{10887374-0fdb-4bf0-a550-ffe809f613bf}</value>
@@ -176,9 +176,6 @@
         </relationship>
     </object>
     <object class="EventMixerGroup" id="{943357c2-e230-4353-aee5-2685418b50c6}">
-        <property name="volume">
-            <value>-4</value>
-        </property>
         <property name="name">
             <value>Steps</value>
         </property>
@@ -366,10 +363,10 @@
     <object class="MixerBusFader" id="{e5edebf5-1e91-4ec2-947b-acb3de3cd2fe}"/>
     <object class="SpatialiserEffect" id="{6931be4e-9bab-46b7-8166-1a040d42120f}">
         <property name="minimumDistance">
-            <value>0.599999964</value>
+            <value>0.5</value>
         </property>
         <property name="maximumDistance">
-            <value>0.99999994</value>
+            <value>0.899999976</value>
         </property>
     </object>
     <object class="MixerSend" id="{866c4c38-ce1d-4ef6-aead-81c6abfd0152}">
