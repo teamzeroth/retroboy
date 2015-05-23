@@ -101,7 +101,7 @@ public class Stinger : Enemy
                 bullet = prefab.Spawn();
                 z = this.gameObject.transform.rotation.eulerAngles.z;
                 Vector3 position = transform.position + Quaternion.Euler(0, 0, z) * Vector3.right / 3f;
-				bullet.transform.position = transform.position + direction.normalized * 0.36f;
+				bullet.transform.position = transform.position + direction * 0.36f;
 				bullet.direction = direction;
                 bullet.damage = (int) damage;
                 bullet.speed = bulletSpeed;

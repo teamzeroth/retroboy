@@ -164,9 +164,10 @@ public class Enemy : MonoBehaviour {
         if (Debug.isDebugBuild)
             //Debug.Log("Enemy Life: " + life);
         rigidbody2D.AddForce(direction * -2f, ForceMode2D.Impulse);
-        GetComponent<Animator>().enabled = false;
         destroy = false;
-        StartCoroutine(turnAnimation(0.5f));
-        //StartCoroutine(turnAttack(attackDelay));
+        StartCoroutine(turnAttack(attackDelay));
+        GetComponent<Animator>().SetBool("Shooting", false);
+        GetComponent<Animator>().enabled = false;
+        StartCoroutine(turnAnimation(attackDelay));
     }
 }
