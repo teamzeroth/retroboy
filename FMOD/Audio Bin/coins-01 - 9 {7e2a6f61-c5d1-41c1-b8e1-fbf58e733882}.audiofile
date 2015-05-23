@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.01.05.00">
-    <object class="AudioFile" id="{2d07b5d0-685c-42e9-8612-695a9d3191b7}">
+    <object class="AudioFile" id="{7e2a6f61-c5d1-41c1-b8e1-fbf58e733882}">
         <property name="frequencyInKHz">
             <value>44.0999985</value>
         </property>
@@ -8,16 +8,16 @@
             <value>2</value>
         </property>
         <property name="length">
-            <value>1.3741043083900226</value>
+            <value>0.6495238095238095</value>
         </property>
         <property name="lastModifiedDate">
             <value>0</value>
         </property>
         <property name="audioFilePath">
-            <value>$(AUDIO_BIN_DIR)/explosao-03 {843502b1-e0fb-47a2-8e0d-0c2a2275287b}.wav</value>
+            <value>$(AUDIO_BIN_DIR)/coins-01 - 9 {dc428159-aa01-425c-88fc-c1e34e3da809}.wav</value>
         </property>
         <relationship name="container">
-            <destination>{5bdaf706-a9dc-4a9e-bd06-d501d5eb06ac}</destination>
+            <destination>{a37a2fa9-25dd-475d-aef0-ec13b7c66f2d}</destination>
         </relationship>
     </object>
 </objects>

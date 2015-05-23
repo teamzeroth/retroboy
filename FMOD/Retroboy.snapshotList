@@ -4,8 +4,5 @@
         <relationship name="mixer">
             <destination>{00213e7a-df8b-42d4-a006-d296538856c3}</destination>
         </relationship>
-        <relationship name="items">
-            <destination>{ef7c1c6a-f3be-4194-b3b7-61069381e1af}</destination>
-        </relationship>
     </object>
 </objects>
