@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{7d0c610d-7875-4d7d-92ac-d79bd949a00b}">
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.10857142857142857</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/stinger E ataque-01 - 25 {6ff41446-554e-4def-9837-ca2bc56ba026}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{5bdaf706-a9dc-4a9e-bd06-d501d5eb06ac}</destination>
+        </relationship>
+    </object>
+</objects>

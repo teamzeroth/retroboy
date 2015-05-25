@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{bd7c9586-744b-4a21-877b-c6f475cf917f}">
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.40498866213151929</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/coins-01 - 13 {7d7444cc-d22e-4391-a11c-fcba7430d29e}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{a37a2fa9-25dd-475d-aef0-ec13b7c66f2d}</destination>
+        </relationship>
+    </object>
+</objects>
