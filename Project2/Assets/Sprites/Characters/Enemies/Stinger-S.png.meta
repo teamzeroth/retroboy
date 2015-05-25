@@ -83,7 +83,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_1
       rect:
@@ -93,7 +93,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_2
       rect:
@@ -103,7 +103,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_3
       rect:
@@ -113,7 +113,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_4
       rect:
@@ -123,7 +123,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_5
       rect:
@@ -133,7 +133,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_6
       rect:
@@ -143,7 +143,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_7
       rect:
@@ -153,7 +153,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_8
       rect:
@@ -163,7 +163,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_9
       rect:
@@ -173,7 +173,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_10
       rect:
@@ -183,7 +183,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_11
       rect:
@@ -193,7 +193,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_12
       rect:
@@ -203,7 +203,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_13
       rect:
@@ -213,7 +213,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_14
       rect:
@@ -223,7 +223,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_15
       rect:
@@ -233,7 +233,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_16
       rect:
@@ -243,7 +243,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_17
       rect:
@@ -253,7 +253,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_18
       rect:
@@ -263,7 +263,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_19
       rect:
@@ -273,7 +273,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_20
       rect:
@@ -283,7 +283,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_21
       rect:
@@ -293,7 +293,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_22
       rect:
@@ -303,7 +303,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_23
       rect:
@@ -313,7 +313,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_24
       rect:
@@ -322,8 +322,8 @@ TextureImporter:
         y: 55
         width: 55
         height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .560000002}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_25
       rect:
@@ -332,8 +332,8 @@ TextureImporter:
         y: 55
         width: 55
         height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .560000002}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_26
       rect:
@@ -342,8 +342,8 @@ TextureImporter:
         y: 55
         width: 55
         height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .560000002}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_27
       rect:
@@ -352,8 +352,8 @@ TextureImporter:
         y: 55
         width: 55
         height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: .5, y: .560000002}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_28
       rect:
@@ -363,7 +363,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_29
       rect:
@@ -373,7 +373,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_30
       rect:
@@ -383,7 +383,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Stinger-S_31
       rect:
@@ -393,7 +393,7 @@ TextureImporter:
         width: 55
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

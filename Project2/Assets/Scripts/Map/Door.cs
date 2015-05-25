@@ -43,7 +43,7 @@ namespace MapResources {
         public string goTo;
         public bool anotherMap = false;
 
-        private AnimationController _player = null;
+        private PlayerMovementController _player = null;
 
         void Awake(){
             if (!string.IsNullOrEmpty(id)) doors.Add(id, this);
@@ -77,7 +77,7 @@ namespace MapResources {
 
         public void OnTriggerEnter2D(Collider2D other) {
             if (other.tag == "Player" && _player == null && !string.IsNullOrEmpty(goTo)) {
-                GetIn(other.gameObject.GetComponent<AnimationController>());
+                GetIn(other.gameObject.GetComponent<PlayerMovementController>());
             }
         }
 
@@ -91,19 +91,23 @@ namespace MapResources {
         }
 
 
-        public void GetIn(AnimationController player) {
+        public void GetIn(PlayerMovementController player) {
             Camera.main.GetComponent<SmoothFollow>().target = transform;
-            
-            _player.MakeFixedMove(CalcInDirection(), 1, new Color(0, 0, 0, 0.3f));
+
+            var direction = CalcInDirection();
+            _player.StartFixedMove(direction, direction, 1, new Color(0, 0, 0, 0.3f));
+
             Invoke("AfterEnter", 1.1f);
         }
 
-        public void GetOut(AnimationController player) {
+        public void GetOut(PlayerMovementController player) {
             Camera.main.GetComponent<SmoothFollow>().target = player.transform;
 
             _player = player;
-            _player.MakeFixedMove(MapUtils.GetDirectionVector(Out), 1, new Color(1, 1, 1, 1));
-            _player.DeadVector = MapUtils.GetDirectionVector(Out);
+            var direction = MapUtils.GetDirectionVector(Out);
+
+            _player.StartFixedMove(direction, direction, 1, new Color(1, 1, 1, 1));
+            _player.DeadDirection = direction;
 
             Vector3 colliderCenter = (Vector3) (_player.collider2D as CircleCollider2D).center;
             _player.transform.position = GetComponent<Collider2D>().bounds.center - colliderCenter;

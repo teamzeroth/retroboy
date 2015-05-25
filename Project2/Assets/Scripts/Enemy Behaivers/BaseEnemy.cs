@@ -13,7 +13,7 @@ public class BaseEnemy : MonoBehaviour {
 
     public bool isColliderDamage = false;
 
-    public Vector2 coinsChange = new Vector2(1, 3);
+    public Vector2 coinsChance = new Vector2(1, 3);
 
     public float rangeAtack = 1f;
 
@@ -35,9 +35,14 @@ public class BaseEnemy : MonoBehaviour {
         _renderer = transform.Find("renderer");
     }
 
-    public virtual void FindPlayer(Transform player) { target = player; }
+    public void OnDrawGizmosSelected() {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, rangeAtack);
+    }
 
-    public virtual void LostPlayer(Transform player) { target = null; }
+    public virtual void FindPlayer(Transform player) { if (target != player) { target = player; } }
+
+    public virtual void LostPlayer(Transform player) { if (target == player) target = null; }
 
     public virtual void OnEnemyBehavior() { }
 
@@ -54,9 +59,9 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     public virtual void DropCoins() {
-        if (coinsChange.x == 0 && coinsChange.y == 0) return;
+        if (coinsChance.x == 0 && coinsChance.y == 0) return;
 
-        int chance = Random.Range((int)Mathf.Max(coinsChange.x, 1), (int)coinsChange.y);
+        int chance = Random.Range((int)Mathf.Max(coinsChance.x, 1), (int)coinsChance.y);
 
         for (int i = 0; i < chance; i++) {
             Instantiate(
@@ -76,7 +81,7 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     public virtual void OnDistanceWithPlayer(Transform player, float distance) {
-        if (distance <= rangeAtack) FindPlayer(player);
-        else LostPlayer(player);
+        if (distance <= rangeAtack) FindPlayer(player.parent);
+        else LostPlayer(player.parent);
     }
 }

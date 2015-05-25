@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.3579998, y: -8.17099953, z: 0}
+  m_LocalPosition: {x: -9.97999954, y: -7.78000021, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 434892}
@@ -69,7 +69,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Radius: .0900000036
+  m_Radius: .180000007
   m_Center: {x: 0, y: 0}
 --- !u!95 &9534892
 Animator:

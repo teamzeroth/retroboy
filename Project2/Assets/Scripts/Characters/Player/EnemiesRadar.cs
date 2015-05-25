@@ -4,7 +4,11 @@ using System.Collections;
 public class EnemiesRadar : MonoBehaviour {
     
     public void OnTriggerStay2D(Collider2D other) {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Enemies")) return;
+        if (
+            other.gameObject.layer != LayerMask.NameToLayer("Enemies") &&
+            other.gameObject.layer != LayerMask.NameToLayer("IgnoreEnemies")
+        ) return;
+
 		if (other.GetComponent<BaseEnemy>() == null) return;
 
         other.GetComponent<BaseEnemy>().OnDistanceWithPlayer(

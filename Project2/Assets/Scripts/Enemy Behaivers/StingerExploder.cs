@@ -26,10 +26,8 @@ public class StingerExploder : BaseEnemy {
         if (destroied) return;
 
         float currDistance = target != null ? Vector2.Distance(target.position, transform.position) : rangeAtack;
-        Vector3 senoid = initialPos + new Vector3(0, 0.2f, 0) * Mathf.Sin((randomTime + Time.time) * 2);
 
-        _renderer.localPosition = senoid;
-        _explosion.localPosition = senoid;
+        applySenoide();
 
         UpdateMove();
         UpdateAnimation(currDistance);
@@ -39,11 +37,20 @@ public class StingerExploder : BaseEnemy {
         //if (currDistance <= 0.1f) OnDestroyIt();
     }
 
+        void applySenoide() {
+            Vector3 senoid = initialPos + new Vector3(0, 0.2f, 0) * Mathf.Sin((randomTime + Time.time) * 2);
+
+            GetComponent<CircleCollider2D>().center = senoid;
+
+            _renderer.localPosition = senoid;
+            _explosion.localPosition = senoid;
+        }
+
         void UpdateMove(){
             Vector3 direction = Vector3.zero;
 
             if (target != null) direction = (target.position - transform.position).normalized * speed;
-            Vector3 currentDirection = (direction + impulseForce) / 2;
+            Vector3 currentDirection = impulseForce != Vector3.zero ? (direction + impulseForce) / 2 : direction;
 
             rigidbody2D.MovePosition(transform.position + currentDirection * Time.deltaTime);
         }
@@ -53,11 +60,6 @@ public class StingerExploder : BaseEnemy {
             _anim.SetFloat("Distance", currDistance / rangeAtack);
         }
 
-    public void OnDrawGizmosSelected() {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, rangeAtack);
-    }
-
     #endregion
 
     #region BaseEnemy
@@ -66,13 +68,13 @@ public class StingerExploder : BaseEnemy {
 
     public override void OnDestroyIt() {
         DropCoins();
-        OnDestroyHumself();
+        OnDestroyHimself();
     }
 
-        public void OnDestroyHumself() {
+        public void OnDestroyHimself() {
             destroied = true;
 
-            rigidbody2D.velocity = Vector2.zero;
+            //rigidbody2D.velocity = Vector2.zero;
 
             _renderer.gameObject.SetActive(false);
             _explosion.gameObject.SetActive(true);
@@ -84,7 +86,7 @@ public class StingerExploder : BaseEnemy {
 
     public override void OnFinishAnimationBehavior() {
         if (Vector2.Distance(target.position, transform.position) <= MIN_DISTANCE)
-            OnDestroyHumself();
+            OnDestroyHimself();
     }
     
     #endregion

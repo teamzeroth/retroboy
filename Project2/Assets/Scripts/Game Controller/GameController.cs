@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
 
     private SmoothFollow _camera;
     private UiController _ui;
-    private AnimationController _player;
+    private PlayerMovementController _player;
 
     void Awake() {
         self = this;
@@ -36,9 +36,9 @@ public class GameController : MonoBehaviour {
         return;
 
         if (GameObject.FindWithTag("Player"))
-            _player = GameObject.FindWithTag("Player").GetComponent<AnimationController>();
+            _player = GameObject.FindWithTag("Player").GetComponent<PlayerMovementController>();
         else
-            _player = ((GameObject)Instantiate(Resources.Load<GameObject>("Characters/Nim (Player)"))).GetComponent<AnimationController>();
+            _player = ((GameObject)Instantiate(Resources.Load<GameObject>("Characters/Nim (Player)"))).GetComponent<PlayerMovementController>();
 
         if (Door.doors.ContainsKey("MainDoor")) {
             _camera.target = Door.doors["MainDoor"].transform;

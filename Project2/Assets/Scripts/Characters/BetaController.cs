@@ -8,7 +8,7 @@ public class BetaController : MonoBehaviour {
     public Transform target;
 
     [HideInInspector] public bool flipped = false;
-    [HideInInspector] public bool visible = false;
+    [HideInInspector] public bool visible = true;
 
     [Range(1f, 10f)] public float smoothMove = 1f;
     [Range(1f, 10f)] public float smoothRotation = 1f;
@@ -42,6 +42,7 @@ public class BetaController : MonoBehaviour {
 
     void Start() {
         transform.position = target.position;
+        visible = !_player.BetaVisible;
     }
 
     void Update() {
@@ -107,7 +108,9 @@ public class BetaController : MonoBehaviour {
             visible = !visible;
 
             var time = 0f;
+
             var to = visible ? 1f : 0;
+            var totalTime = visible ? Game.TIME_BETA_DISAPPEAR : Game.TIME_BETA_DISAPPEAR / 2;
                 
             if(DoDisappear != null){
                 time = DoDisappear.fullPosition;
@@ -116,7 +119,7 @@ public class BetaController : MonoBehaviour {
 
             if (!visible) _lightParticle.particleSystem.maxParticles = 0;
 
-            DoDisappear = DOTween.To(() => visibleDelta, x => Disappear(x), to, Game.TIME_BETA_DISAPPEAR - time)
+            DoDisappear = DOTween.To(() => visibleDelta, x => Disappear(x), to, totalTime - time)
                 .SetEase(visible ? Ease.OutQuad : Ease.InQuad)
                 .OnComplete(() => {
                     if (visible) _lightParticle.particleSystem.maxParticles = 50;

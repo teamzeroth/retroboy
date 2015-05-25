@@ -18,6 +18,7 @@ public class PlayerMovementController : MonoBehaviour {
         public bool InMoving;
         public bool OnCharging;
         public bool OnShooting;
+        public bool OnSimulateMove;
 
         public float TimeInCharge;
         public float TimeLastShoot;
@@ -75,7 +76,6 @@ public class PlayerMovementController : MonoBehaviour {
     
     [HideInInspector] public bool flipped = false;
     [HideInInspector] public Vector2 fixedMove = Vector2.zero;
-
     [HideInInspector] public bool OnHurt = false;
 
     private bool waitToMove = false;
@@ -98,10 +98,18 @@ public class PlayerMovementController : MonoBehaviour {
     
     public Vector2 DeadDirection {
         get { return controller.deadDirection; }
+        set { controller.deadDirection = value; }
     }
 
     public bool BetaVisible {
-        get { return !OnHurt && (_anim.CurrentAnimState().StartsWith("Nim-idle") || _anim.CurrentAnimState().StartsWith("Nim-run")); }
+        get { 
+            bool colorTest = ((SpriteRenderer) renderer).color != Color.clear;
+            bool animationTest = _anim.CurrentAnimState().StartsWith("Nim-idle") || _anim.CurrentAnimState().StartsWith("Nim-run");
+
+            print(!OnHurt && !controller.OnSimulateMove && colorTest && animationTest);
+
+            return !OnHurt && !controller.OnSimulateMove && colorTest && animationTest; 
+        }
     }
 
     private int _life;
@@ -171,7 +179,7 @@ public class PlayerMovementController : MonoBehaviour {
             _anim.SetBool("OnHurt", OnHurt);
 
             //Checa se o jogador move
-            _anim.SetBool("InMoving", controller.InMoving && !waitToMove);
+            _anim.SetBool("InMoving", (controller.InMoving || controller.OnSimulateMove) && !waitToMove);
         }
 
         public void UpdateSound() {
@@ -218,19 +226,26 @@ public class PlayerMovementController : MonoBehaviour {
         collider2D.enabled = false;
     }
 
+    public void StartFixedMove(Vector2 start, Vector2 to, float time, Color color, Ease ease = Ease.Linear) {
+        StartFixedMove(start, to, time, ease);
+        waitToMove = false;
+
+        ((SpriteRenderer)renderer).DOColor(color, time);
+    }
+
     public void StartFixedMove(Vector2 start, Vector2 to, float time, Ease ease = Ease.OutCirc) {
         if (fixedMove != Vector2.zero)
             lastFixedTween.Kill();
 
         waitToMove = true;
         fixedMove = fixedMove + start;
+        controller.OnSimulateMove = true;
 
         lastFixedTween = DOTween.To(() => fixedMove, x => fixedMove = x, to, time).SetEase(ease).OnComplete(() => {
-            print("END ANIMATION");
-
             OnHurt = false;
             collider2D.enabled = true;
             waitToMove = false;
+            controller.OnSimulateMove = false;
             fixedMove = Vector2.zero;
         });
     }
@@ -242,7 +257,7 @@ public class PlayerMovementController : MonoBehaviour {
         OnHurt = true;
 
         Life -= damage;
-        StartFixedMove(v * damage, Vector2.zero, Game.TIME_PLAYER_DAMAGE);
+        StartFixedMove(v * damage * 2, Vector2.zero, Game.TIME_PLAYER_DAMAGE);
     }
 
         public void OnGetHit(BaseEnemy enemy, Collider2D other) {
