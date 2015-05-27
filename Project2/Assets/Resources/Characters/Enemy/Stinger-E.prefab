@@ -64,13 +64,14 @@ GameObject:
   - 58: {fileID: 5839852}
   - 114: {fileID: 11439860}
   - 114: {fileID: 11439858}
+  - 114: {fileID: 11467484}
   m_Layer: 9
   m_Name: Stinger-E
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &439852
 Transform:
   m_ObjectHideFlags: 1
@@ -78,7 +79,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139852}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.619000018, z: 0}
+  m_LocalPosition: {x: 0, y: -.600000024, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 439858}
@@ -156,7 +157,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 139856}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: 2.02317429, y: 1.07053959}
   m_Center: {x: -.0539488792, y: .017983932}
 --- !u!95 &9539852
@@ -255,6 +256,19 @@ MonoBehaviour:
   coinsChance: {x: 1, y: 3}
   rangeAtack: 2.5
   target: {fileID: 0}
+--- !u!114 &11467484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55570e5c611fc854fb5a5775c11bb64a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 11400000, guid: b9f31bf9e54fb554fa3e2b9f3efda775, type: 2}
+  hit: {fileID: 11400000, guid: af72331e967942b4c82e6b89febdb008, type: 2}
 --- !u!212 &21239852
 SpriteRenderer:
   m_ObjectHideFlags: 1

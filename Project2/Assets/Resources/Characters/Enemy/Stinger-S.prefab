@@ -27,11 +27,26 @@ GameObject:
   - 95: {fileID: 9521436}
   - 58: {fileID: 5821436}
   - 114: {fileID: 11421436}
-  - 58: {fileID: 5878002}
   - 114: {fileID: 11478000}
+  - 114: {fileID: 11444390}
   m_Layer: 9
   m_Name: Stinger-S
   m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &144390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 444390}
+  m_Layer: 9
+  m_Name: shootspawn
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,12 +90,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.98400021, y: -7.43599987, z: 0}
+  m_LocalPosition: {x: -10.7340002, y: -7.66099977, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 421438}
   - {fileID: 478002}
   - {fileID: 478000}
+  - {fileID: 444390}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &421438
@@ -95,6 +111,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 421436}
   m_RootOrder: 0
+--- !u!4 &444390
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -.216000006, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 421436}
+  m_RootOrder: 3
 --- !u!4 &478000
 Transform:
   m_ObjectHideFlags: 1
@@ -156,17 +184,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_Radius: .100000001
   m_Center: {x: 0, y: 0}
---- !u!58 &5878002
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121438}
-  m_Enabled: 0
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Radius: .100000001
-  m_Center: {x: 0, y: -.600000024}
 --- !u!95 &9521436
 Animator:
   serializedVersion: 3
@@ -194,6 +211,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
+--- !u!114 &11444390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be81b0afcd7162d4abdec136a1775b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laser: {fileID: 11400000, guid: c44ecb495e8c9614a9a7d16e03a63d96, type: 2}
+  voo: {fileID: 11400000, guid: 704885a76987d13418af4b2e35af3f58, type: 2}
 --- !u!114 &11478000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 3
   damage: 1
-  speed: .75
+  speed: 1
   isColliderDamage: 0
   coinsChance: {x: 1, y: 3}
   rangeAtack: 3
@@ -236,7 +266,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 112778315
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1f8e02997ed56484a9a97cc9ef250df1, type: 3}
+  m_Sprite: {fileID: 21300048, guid: 1f8e02997ed56484a9a97cc9ef250df1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
