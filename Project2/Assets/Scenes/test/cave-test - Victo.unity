@@ -73,7 +73,6 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
-    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &443903
 GameObject:
@@ -1949,6 +1948,7 @@ MonoBehaviour:
   life: 3
   damage: 2
   speed: 1
+  isColliderDamage: 0
   coinsChange: {x: 1, y: 3}
   rangeAtack: 1
   target: {fileID: 0}
@@ -2572,7 +2572,6 @@ GameObject:
   - 114: {fileID: 398462902}
   - 114: {fileID: 398462910}
   - 114: {fileID: 398462903}
-  - 114: {fileID: 398462909}
   m_Layer: 0
   m_Name: Nim (Player)
   m_TagString: Player
@@ -2607,6 +2606,7 @@ MonoBehaviour:
   speed: 3
   flipped: 0
   fixedMove: {x: 0, y: 0}
+  OnHurt: 0
 --- !u!95 &398462904
 Animator:
   serializedVersion: 3
@@ -2690,18 +2690,6 @@ Transform:
   - {fileID: 681948067}
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!114 &398462909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 398462901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c8a2d1663ab00c41b1960ce5c6d6212, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shoot: {fileID: 0}
 --- !u!114 &398462910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2709,7 +2697,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 398462901}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b53f9f56d3aa10428633e1b0a7ca552, type: 3}
   m_Name: 
@@ -3095,8 +3083,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  ignoreReversedGraphics: 1
+  blockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3543,6 +3531,7 @@ MonoBehaviour:
   life: 3
   damage: 2
   speed: 1
+  isColliderDamage: 0
   coinsChange: {x: 1, y: 3}
   rangeAtack: 1
   target: {fileID: 0}
@@ -4441,6 +4430,7 @@ MonoBehaviour:
   life: 3
   damage: 2
   speed: 1
+  isColliderDamage: 0
   coinsChange: {x: 1, y: 3}
   rangeAtack: 1
   target: {fileID: 0}
@@ -4868,6 +4858,7 @@ MonoBehaviour:
   life: 3
   damage: 2
   speed: 1
+  isColliderDamage: 0
   coinsChange: {x: 1, y: 3}
   rangeAtack: 1
   target: {fileID: 0}
@@ -5220,8 +5211,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  ignoreReversedGraphics: 1
+  blockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -5918,6 +5909,7 @@ MonoBehaviour:
   life: 3
   damage: 2
   speed: 1
+  isColliderDamage: 0
   coinsChange: {x: 1, y: 3}
   rangeAtack: 1
   target: {fileID: 0}
@@ -8227,6 +8219,7 @@ MonoBehaviour:
   life: 3
   damage: 2
   speed: 1
+  isColliderDamage: 0
   coinsChange: {x: 1, y: 3}
   rangeAtack: 1
   target: {fileID: 0}
@@ -8951,6 +8944,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 78
       objectReference: {fileID: 0}
+    - target: {fileID: 179034, guid: 8edd6212050dacb49b7403ad486f9053, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8edd6212050dacb49b7403ad486f9053, type: 2}
   m_RootGameObject: {fileID: 1749941618}
@@ -9112,6 +9109,7 @@ MonoBehaviour:
   life: 3
   damage: 2
   speed: 1
+  isColliderDamage: 0
   coinsChange: {x: 1, y: 3}
   rangeAtack: 1
   target: {fileID: 0}
@@ -10659,6 +10657,7 @@ MonoBehaviour:
   life: 3
   damage: 2
   speed: 1
+  isColliderDamage: 0
   coinsChange: {x: 1, y: 3}
   rangeAtack: 1
   target: {fileID: 0}
@@ -10808,7 +10807,7 @@ GameObject:
   - 114: {fileID: 1491796256}
   m_Layer: 0
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10822,7 +10821,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1491796252}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Radius: .0900000036
   m_Center: {x: 0, y: 0}
 --- !u!4 &1491796254
@@ -10850,6 +10849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960365917b95dfb409f7e93a58cad0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quant: 10
   currentValue: 0
 --- !u!114 &1491796256
 MonoBehaviour:
@@ -11717,6 +11717,7 @@ MonoBehaviour:
   life: 3
   damage: 2
   speed: 1
+  isColliderDamage: 0
   coinsChange: {x: 1, y: 3}
   rangeAtack: 1
   target: {fileID: 0}
@@ -12316,7 +12317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1749941619
 Transform:
   m_ObjectHideFlags: 0
@@ -13548,7 +13549,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1909196199}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a99e20262a0e68e4d9bb7f2aa543c5c4, type: 3}
   m_Name: 
@@ -14222,7 +14223,7 @@ ParticleSystemRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1470551667
+  m_SortingLayerID: 0
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MaxParticleSize: .5

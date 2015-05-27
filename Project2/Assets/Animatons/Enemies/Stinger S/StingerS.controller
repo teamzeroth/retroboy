@@ -59,7 +59,7 @@ BlendTree:
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400000, guid: c8946a651c7acb94ca938c32fd76ac5c, type: 2}
+  - m_Motion: {fileID: 7400000, guid: 5672d2d079c55ca4689ccfdf4ad56b01, type: 2}
     m_Threshold: .285714298
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
@@ -107,7 +107,7 @@ BlendTree:
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
   m_BlendType: 1
---- !u!206 &20615850
+--- !u!206 &20680854
 BlendTree:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
@@ -123,21 +123,21 @@ BlendTree:
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: 7209a76c17e39a74a9c9386223a0e34d, type: 2}
     m_Threshold: .142857149
-    m_Position: {x: -.5, y: .5}
+    m_Position: {x: .5, y: .5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: 7f230b2ea4b120b4d8fef08116a29b40, type: 2}
     m_Threshold: .285714298
-    m_Position: {x: -1, y: 0}
+    m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: 2040f79ab9ef195488ae428f9a17425b, type: 2}
     m_Threshold: .428571433
-    m_Position: {x: -.5, y: -.5}
+    m_Position: {x: .5, y: -.5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
@@ -151,21 +151,21 @@ BlendTree:
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: 7b471b78fe158af43b766c6448ab521b, type: 2}
     m_Threshold: .714285731
-    m_Position: {x: .5, y: -.5}
+    m_Position: {x: -.5, y: -.5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: c8946a651c7acb94ca938c32fd76ac5c, type: 2}
     m_Threshold: .857142866
-    m_Position: {x: 1, y: 0}
+    m_Position: {x: -1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: 677dd3ca2b74588489e0a7074e46e970, type: 2}
     m_Threshold: 1
-    m_Position: {x: .5, y: .5}
+    m_Position: {x: -.5, y: .5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
@@ -240,7 +240,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 20615850}
+  - {fileID: 20680854}
   m_ParentStateMachine: {fileID: 110788496}
   m_Position: {x: -96, y: 48, z: 0}
   m_IKOnFeet: 0
