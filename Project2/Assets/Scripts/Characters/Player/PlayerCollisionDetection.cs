@@ -11,17 +11,17 @@ public class PlayerCollisionDetection : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D other) {
-        if (!_player.OnHurt) {
+        if (other.tag == "Enemy"){
 
-            if (other.tag == "Enemy"){
+            var baseEnemy = other.GetComponent<BaseEnemy>();
 
-                if(other.GetComponent<BaseEnemy>() != null && other.GetComponent<BaseEnemy>().isColliderDamage) 
-                    _player.OnGetHit(other.GetComponent<BaseEnemy>(), other);
+            if(other.GetComponent<BaseEnemy>() != null && other.GetComponent<BaseEnemy>().isColliderDamage) 
+                _player.OnGetHit(other.GetComponent<BaseEnemy>(), other);
 
-                if(other.GetComponent<Enemy>())
-                    _player.OnGetHit(other.GetComponent<Enemy>(), other);
+            /*if(other.GetComponent<Enemy>())
+                *  _player.OnGetHit(other.GetComponent<Enemy>(), other);
+                */
 
-            }
         }
     }
 }

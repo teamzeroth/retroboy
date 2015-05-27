@@ -5,6 +5,7 @@ public class StingerExploder : BaseEnemy {
 
     protected static float MIN_DISTANCE = 0.5f;
     protected Transform _explosion;
+    protected StingerESFX _sfx;
 
     private Vector3 initialPos;
     private float randomTime;
@@ -17,6 +18,7 @@ public class StingerExploder : BaseEnemy {
         base.Start();
 
         _explosion = transform.Find("explosion");
+        _sfx = GetComponent<StingerESFX>();
 
         initialPos = _renderer.localPosition;
         randomTime = Random.value * 3;
@@ -49,21 +51,37 @@ public class StingerExploder : BaseEnemy {
         void UpdateMove(){
             Vector3 direction = Vector3.zero;
 
-            if (target != null) direction = (target.position - transform.position).normalized * speed;
-            Vector3 currentDirection = impulseForce != Vector3.zero ? (direction + impulseForce) / 2 : direction;
+            if (target != null)direction = (target.position - transform.position).normalized * speed;
+            Vector3 currentDirection = impulseForce != Vector3.zero ? (direction + impulseForce * 0.75f) / 2 : direction;
 
             rigidbody2D.MovePosition(transform.position + currentDirection * Time.deltaTime);
         }
 
         void UpdateAnimation(float currDistance) {
-            if(target != null) _anim.SetTrigger("Tracking");
-            _anim.SetFloat("Distance", currDistance / rangeAtack);
+            if (target != null) {
+                _anim.SetTrigger("Tracking");
+                _anim.SetFloat("Distance", currDistance / rangeAtack);
+
+                _sfx.Explosion(currDistance / rangeAtack);
+            }
         }
 
     #endregion
 
     #region BaseEnemy
 
+    public override void OnTakeDamage(ShootMove shoot, Collider2D coll){
+        base.OnTakeDamage(shoot, coll);
+        if(life > 0) _sfx.Hit();
+    }
+
+    public override void FindPlayer(Transform player) {
+        if (target != player) {
+            target = player;
+            _sfx.Explosion(1);
+        }     
+    }
+    
     public override void LostPlayer(Transform player) { }
 
     public override void OnDestroyIt() {
@@ -78,11 +96,19 @@ public class StingerExploder : BaseEnemy {
 
             _renderer.gameObject.SetActive(false);
             _explosion.gameObject.SetActive(true);
+
+            _sfx.Explosion(0.06f);
         }
 
     public void OnFinishSimpleAnimation() {
-        Destroy(gameObject);
+        StartCoroutine(WaitExplosionSound());
+        //Destroy(gameObject);
     }
+
+        IEnumerator WaitExplosionSound() {
+            yield return new WaitForSeconds(0.5f);
+            Destroy(gameObject);
+        }
 
     public override void OnFinishAnimationBehavior() {
         if (Vector2.Distance(target.position, transform.position) <= MIN_DISTANCE)

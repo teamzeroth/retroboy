@@ -76,7 +76,6 @@ public class PlayerMovementController : MonoBehaviour {
     
     [HideInInspector] public bool flipped = false;
     [HideInInspector] public Vector2 fixedMove = Vector2.zero;
-    [HideInInspector] public bool OnHurt = false;
 
     private bool waitToMove = false;
     private bool waitShootFinish = false;
@@ -95,7 +94,26 @@ public class PlayerMovementController : MonoBehaviour {
 
 
     #region Getters and Setters
-    
+
+    private bool _onHurt = false;
+    private bool afterOnHurt = false;
+    public bool OnHurt {
+        get { return _onHurt; }
+
+        set {
+            if (_onHurt && !value) {
+                Invoke("SetAfterOnHurt", 1f);
+                _onHurt = value;
+            } else {
+                _onHurt = afterOnHurt = value;
+            }
+        }
+    }
+
+    public void SetAfterOnHurt() {
+        afterOnHurt = _onHurt;
+    }
+
     public Vector2 DeadDirection {
         get { return controller.deadDirection; }
         set { controller.deadDirection = value; }
@@ -105,8 +123,6 @@ public class PlayerMovementController : MonoBehaviour {
         get { 
             bool colorTest = ((SpriteRenderer) renderer).color != Color.clear;
             bool animationTest = _anim.CurrentAnimState().StartsWith("Nim-idle") || _anim.CurrentAnimState().StartsWith("Nim-run");
-
-            print(!OnHurt && !controller.OnSimulateMove && colorTest && animationTest);
 
             return !OnHurt && !controller.OnSimulateMove && colorTest && animationTest; 
         }
@@ -134,7 +150,7 @@ public class PlayerMovementController : MonoBehaviour {
         _rigidbody = GetComponent<Rigidbody2D>();
         _sfx = GetComponent<PlayerSFXController>();
 
-        _life = UiController.self.Life;
+        _life = UiController.self.Life; /*To Do: Pog*/
     }
 
     public void Update() {
@@ -250,22 +266,34 @@ public class PlayerMovementController : MonoBehaviour {
         });
     }
 
-    public void OnGetHit(int damage, Collider2D other) {
-        Vector2 v = (collider2D.bounds.center - other.bounds.center).normalized;
-
-        DisableCollider();
+    public void OnGetHit(int damage, Vector2 direction, Collider2D other) {
+        //DisableCollider();
+        cancelShoot();
         OnHurt = true;
 
         Life -= damage;
-        StartFixedMove(v * damage * 2, Vector2.zero, Game.TIME_PLAYER_DAMAGE);
+        StartFixedMove(direction * damage * 4, Vector2.zero, Game.TIME_PLAYER_DAMAGE);
     }
 
         public void OnGetHit(BaseEnemy enemy, Collider2D other) {
-            OnGetHit(enemy.damage, other);
+            if (afterOnHurt) return;
+
+            Vector2 d = (collider2D.bounds.center - other.bounds.center).normalized;
+            OnGetHit((int) enemy.damage, d, other);
         }
 
         public void OnGetHit(Enemy enemy, Collider2D other) {
-            OnGetHit((int) enemy.damage, other);
+            if (afterOnHurt) return;
+
+            Vector2 d = (collider2D.bounds.center - other.bounds.center).normalized;
+            OnGetHit((int) enemy.damage, d, other);
+        }
+
+        public void OnGetHit(ShootMove shoot , Collider2D other) {
+            if (afterOnHurt) return;
+
+            Vector2 d = shoot.direction;
+            OnGetHit((int) shoot.damage, d, other);
         }
 
     #endregion
@@ -302,6 +330,17 @@ public class PlayerMovementController : MonoBehaviour {
     private void getCoin(CoinMove coin) {
         UiController.self.Coins += coin.quant;
         Destroy(coin.gameObject);
+    }
+
+    private void cancelShoot() {
+        if (watchShoot != null) {
+            StopCoroutine(watchShoot);
+
+            waitShootFinish = false;
+            waitToNewShoot = false;
+            waitToMove = false;
+            watchShoot = null;
+        }
     }
 
     #endregion

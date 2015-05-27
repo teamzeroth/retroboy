@@ -6,6 +6,8 @@ public class StingerShooter : BaseEnemy {
     protected float DISTANCE_TO_TARGET = 2f;
     protected float MAX_VELOCITY = 2f;
 
+    protected StingerSSFX _sfx;
+
     public Vector2 chanceToShoot;
     public int shootTimes = 3;
 
@@ -36,9 +38,13 @@ public class StingerShooter : BaseEnemy {
 
         initialPos = _renderer.localPosition;
         randomTime = Random.value * 3;
+
+        _sfx = GetComponent<StingerSSFX>();
     }
 
-    void Update() {
+    void LateUpdate() {
+        _sfx.Voo();
+
         if (!OnShooting) {
             currTime += Time.deltaTime;
             applySenoide();
@@ -48,10 +54,8 @@ public class StingerShooter : BaseEnemy {
     }
 
     void FixedUpdate() {
-        if (!OnShooting) 
-            UpdateMove();
-        else
-            UpdateMoveSleep();
+        if (!OnShooting) UpdateMove();
+        else UpdateMoveSleep();
     }   
 
         void applySenoide() {
@@ -63,12 +67,13 @@ public class StingerShooter : BaseEnemy {
         Vector2 toIntercept;
         void UpdateMove() {
             if (target == null || target.rigidbody2D == null) {
-                rigidbody2D.velocity = Vector2.zero;
+                rigidbody2D.velocity = (Vector2)impulseForce * 0.5f;
                 return;
             }
 
             /* Controlhe de angulo do Stinger Shooter */ {
-                toIntercept = target.GetComponent<PlayerMovementController>().DeadDirection.normalized;
+                if (target.rigidbody2D.velocity != Vector2.zero) 
+                    toIntercept = target.GetComponent<PlayerMovementController>().DeadDirection.normalized;
 
                 float currAngle = Mathf.LerpAngle(
                     (360 + Mathf.Atan2(intercept.y, intercept.x) * Mathf.Rad2Deg) % 360,
@@ -80,17 +85,18 @@ public class StingerShooter : BaseEnemy {
             }
 
             Vector2 direction = intercept * DISTANCE_TO_TARGET;
-            if (impulseForce != Vector3.zero) direction += (Vector2)impulseForce * 0.5f;
-
-            velocity = (direction - lastDirection);
-            velocity = velocity.magnitude > 0.01f ? velocity.normalized : Vector2.zero;
-            lastDirection = direction;
 
             // Limite de velocidade
             var magnitude = direction.magnitude;
             if (magnitude > MAX_VELOCITY) {
                 direction *= (MAX_VELOCITY / magnitude);
             }
+
+            if (impulseForce != Vector3.zero) direction += (Vector2)impulseForce * 0.5f;
+
+            velocity = (direction - lastDirection);
+            velocity = velocity.magnitude > 0.01f ? velocity.normalized : Vector2.zero;
+            lastDirection = direction;
 
             direction = Vector2.Lerp(transform.position, (Vector2)target.position + direction, Time.deltaTime * speed);
             
@@ -100,7 +106,7 @@ public class StingerShooter : BaseEnemy {
 
         void UpdateMoveSleep() {
             velocity = Vector2.Lerp(velocity, Vector2.zero, Time.deltaTime);
-            rigidbody2D.velocity = velocity;
+            rigidbody2D.velocity = velocity + (Vector2)impulseForce * 0.5f;
 
             //Vector2 direction = Vector2.Lerp(transform.position, (Vector2)target.position + velocity, Time.deltaTime * speed);            
         }
@@ -147,6 +153,8 @@ public class StingerShooter : BaseEnemy {
     }
 
     protected void shoot() {
+        _sfx.Laser();
+
         _anim.SetTrigger("Shoot");
 
         Vector3 direction = new Vector3(_anim.GetFloat("Horizontal"), _anim.GetFloat("Vertical"));

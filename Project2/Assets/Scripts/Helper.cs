@@ -86,5 +86,6 @@ public static class Helper {
         localScale.x *= -1;
         _transform.localScale = localScale;
     }
+
 }
 

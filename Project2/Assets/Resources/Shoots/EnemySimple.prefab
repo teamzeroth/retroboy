@@ -15,7 +15,7 @@ GameObject:
   - 58: {fileID: 5867786}
   m_Layer: 11
   m_Name: EnemySimple
-  m_TagString: Shoot
+  m_TagString: EnemyShoot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.3707371, y: -7.92875957, z: 0}
+  m_LocalPosition: {x: -10.5123711, y: -8.71146679, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,7 +55,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 105294}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Radius: .0806451589
   m_Center: {x: 0, y: 0}
 --- !u!95 &9505294
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 0}
-  speed: 4
+  speed: 5
   damage: 1
   isPlayerAlly: 0
   flipped: 0

@@ -59,8 +59,8 @@ public class ShootMove : MonoBehaviour {
         }
 
         if (trigger.tag == "Player" && !isPlayerAlly) {
-			print("Collide with " + trigger.gameObject.name);
-            //trigger.GetComponent<PlayerMovementController>().OnGetHit();
+            PlayerMovementController player = trigger.GetComponent<PlayerMovementController>();
+            player.OnGetHit(this, trigger);
             DestroyMove();
         }
 
