@@ -29,6 +29,7 @@ public class StingerShooter : BaseEnemy {
 
     [HideInInspector] public bool OnShooting = false;
     [HideInInspector] public bool OnLostPlayer = false;
+    [HideInInspector] public bool OnDie = false;
     [HideInInspector] private bool AfterShoot = false;
 
     private Coroutine watchTarget;
@@ -149,8 +150,8 @@ public class StingerShooter : BaseEnemy {
             if (life <= initLife * BROKEN) {
                 float time = _smoke.GetComponent<SimpleAnimatior>().NormalizeTime;
 
-                _smoke.localPosition = (Vector3) direction * -.2f + Vector3.up * 1 * time;
-                _smoke.GetComponent<SorthingMoveableLayer>().Position = transform.Find("feets").position.y + direction.y * -.2f;
+                _smoke.localPosition = (Vector3) direction * -.3f + Vector3.up * 1 * time;
+                _smoke.GetComponent<SorthingMoveableLayer>().Position = transform.Find("feets").position.y + direction.y * -.3f;
             }
 
             _anim.SetFloat("Horizontal", direction.x);
@@ -177,6 +178,7 @@ public class StingerShooter : BaseEnemy {
     }
 
     public override void OnFinishAnimationBehavior() {
+        if (OnDie) Destroy(gameObject);
         if (OnShooting) AfterShoot = true;
     }
 
@@ -186,6 +188,11 @@ public class StingerShooter : BaseEnemy {
         if (life <= initLife * BROKEN) {
             _smoke.gameObject.SetActive(true);
         }
+    }
+
+    public override void OnDestroyIt() {
+        OnDie = true;
+        _anim.SetTrigger("Die");
     }
 
     #endregion
