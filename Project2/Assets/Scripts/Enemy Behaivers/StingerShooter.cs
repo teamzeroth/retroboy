@@ -191,8 +191,11 @@ public class StingerShooter : BaseEnemy {
     }
 
     public override void OnDestroyIt() {
+        _smoke.gameObject.SetActive(false);
+
         OnDie = true;
         _anim.SetTrigger("Die");
+
     }
 
     #endregion
