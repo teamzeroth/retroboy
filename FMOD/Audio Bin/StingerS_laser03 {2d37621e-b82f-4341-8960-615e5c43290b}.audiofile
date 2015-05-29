@@ -11,7 +11,7 @@
             <value>0.13500000000000001</value>
         </property>
         <property name="lastModifiedDate">
-            <value>0</value>
+            <value>1429232264</value>
         </property>
         <property name="audioFilePath">
             <value>$(AUDIO_BIN_DIR)/StingerS_laser03 {ff093cd8-5164-4a9e-baac-479398089494}.wav</value>

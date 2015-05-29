@@ -268,6 +268,8 @@ public class PlayerMovementController : MonoBehaviour {
 
     public void OnGetHit(int damage, Vector2 direction, Collider2D other) {
         //DisableCollider();
+        _sfx.Hurt();
+
         cancelShoot();
         OnHurt = true;
 

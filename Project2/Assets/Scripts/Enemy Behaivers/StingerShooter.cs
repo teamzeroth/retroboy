@@ -5,13 +5,17 @@ public class StingerShooter : BaseEnemy {
 
     protected float DISTANCE_TO_TARGET = 2f;
     protected float MAX_VELOCITY = 2f;
+    protected float START_DISTANCE_OF_SHOOT = 0.29f;
+    protected float BROKEN = 0.4f; /*Relative damege to look broken */
 
     protected StingerSSFX _sfx;
+    protected Transform _shootspawn;
+    protected Transform _smoke;
 
     public Vector2 chanceToShoot;
     public int shootTimes = 3;
 
-    private Vector3 initialPos;
+    private Vector3 initPos;
     private Vector2 intercept;
 
     private Vector2 velocity;
@@ -20,6 +24,8 @@ public class StingerShooter : BaseEnemy {
     private float randomTime;
     private float timeToShoot;
     private float currTime;
+
+    private int initLife;
 
     [HideInInspector] public bool OnShooting = false;
     [HideInInspector] public bool OnLostPlayer = false;
@@ -36,10 +42,13 @@ public class StingerShooter : BaseEnemy {
         intercept = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         velocity = lastDirection = Vector2.zero;
 
-        initialPos = _renderer.localPosition;
+        initPos = _renderer.localPosition;
+        initLife = life;
         randomTime = Random.value * 3;
 
         _sfx = GetComponent<StingerSSFX>();
+        _shootspawn = transform.Find("shootspawn");
+        _smoke = transform.Find("smoke");
     }
 
     void LateUpdate() {
@@ -50,7 +59,28 @@ public class StingerShooter : BaseEnemy {
             applySenoide();
         }
 
+        FixedUpdate();
         UpdateAnimation();
+    }
+
+    public void OnDrawGizmosSelected() {
+#if UNITY_EDITOR
+        Gizmos.color = Color.red;
+        float[,] vectors = new float[8, 2] { {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1} };
+
+        for(int i = 0; i < 8; i++){
+            Vector3 a = new Vector3(vectors[i, 0], vectors[i, 1], 0);
+            Vector3 b = new Vector3(vectors[(i + 1) % 8, 0], vectors[(i + 1) % 8, 1], 0);
+
+            a.Normalize();
+            b.Normalize();
+
+            a = transform.Find("shootspawn").position + a * (0.29f * Mathf.Max(Mathf.Abs(a.x), Mathf.Abs(a.y)));
+            b = transform.Find("shootspawn").position + b * (0.29f * Mathf.Max(Mathf.Abs(b.x), Mathf.Abs(b.y)));
+
+            Gizmos.DrawLine(a, b);
+        }
+#endif
     }
 
     void FixedUpdate() {
@@ -59,7 +89,7 @@ public class StingerShooter : BaseEnemy {
     }   
 
         void applySenoide() {
-            Vector3 senoid = initialPos + new Vector3(0, 0.1f, 0) * Mathf.Sin((randomTime + currTime) * 4);
+            Vector3 senoid = initPos + new Vector3(0, 0.1f, 0) * Mathf.Sin((randomTime + currTime) * 4);
             GetComponent<CircleCollider2D>().center = senoid;
             _renderer.localPosition = senoid;
         }
@@ -116,6 +146,13 @@ public class StingerShooter : BaseEnemy {
                 (Vector2)(target.position - transform.position).normalized :
                 intercept * -1;
 
+            if (life <= initLife * BROKEN) {
+                float time = _smoke.GetComponent<SimpleAnimatior>().NormalizeTime;
+
+                _smoke.localPosition = (Vector3) direction * -.2f + Vector3.up * 1 * time;
+                _smoke.GetComponent<SorthingMoveableLayer>().Position = transform.Find("feets").position.y + direction.y * -.2f;
+            }
+
             _anim.SetFloat("Horizontal", direction.x);
             _anim.SetFloat("Vertical", direction.y);
         }
@@ -143,6 +180,14 @@ public class StingerShooter : BaseEnemy {
         if (OnShooting) AfterShoot = true;
     }
 
+    public override void OnTakeDamage(ShootMove shoot, Collider2D coll) {
+        base.OnTakeDamage(shoot, coll);
+
+        if (life <= initLife * BROKEN) {
+            _smoke.gameObject.SetActive(true);
+        }
+    }
+
     #endregion
 
 
@@ -157,17 +202,17 @@ public class StingerShooter : BaseEnemy {
 
         _anim.SetTrigger("Shoot");
 
-        Vector3 direction = new Vector3(_anim.GetFloat("Horizontal"), _anim.GetFloat("Vertical"));
+        Vector3 d = new Vector3(_anim.GetFloat("Horizontal"), _anim.GetFloat("Vertical"));
+        Vector3 spawn = _shootspawn.position + d * (START_DISTANCE_OF_SHOOT * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
 
         /*Spawn a shoot */{
             GameObject shootGO = (GameObject)Instantiate(
                 Resources.Load<GameObject>("Shoots/EnemySimple"),
-                transform.Find("shootspawn").position + direction.normalized * 0.25f,
-                Quaternion.identity
+                spawn, Quaternion.identity
             );
 
             ShootMove shoot = shootGO.GetComponent<ShootMove>();
-            shoot.direction = direction;
+            shoot.Direction = d;
         }
     }
 

@@ -29,6 +29,11 @@ public class FMOD_CustonEmitter : FMOD_StudioEventEmitter {
         return getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPED || getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPING;
     }
 
+    public void Play(float stopAfter) {
+        Play();
+        Invoke("Stop", stopAfter);
+    }
+
     public void Release() {
         if (evt != null) {
             ERRCHECK(evt.release());

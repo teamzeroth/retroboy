@@ -13,12 +13,13 @@ public class PlayerSFXController : MonoBehaviour {
     private bool inCharge = false;
     private bool inShoot = false;
     private bool inWalking = false;
+    private bool haveHurt = false;
 
     private FMOD_CustonEmitter shootEmitter;
     private FMOD_CustonEmitter footstepEmitter;
     private FMOD_CustonEmitter hurtEmitter;
 
-    private AnimationController _animControl;
+    private PlayerMovementController _player;
     
     void Awake() {
         GameObject gameObject = (GameObject) Instantiate(new GameObject("SFX"), Vector3.zero, Quaternion.identity);
@@ -33,7 +34,7 @@ public class PlayerSFXController : MonoBehaviour {
         hurtEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
         hurtEmitter.Init(hurt);
 
-        _animControl = GetComponent<AnimationController>();
+        _player = GetComponent<PlayerMovementController>();
     }
 
     public void Charge() {
@@ -64,6 +65,8 @@ public class PlayerSFXController : MonoBehaviour {
     }
     
     public void Footstep(bool walking, int surface = 1) {
+        if (_player.OnHurt) return;
+
         if (walking && inWalking != walking) {
             inWalking = true;
 
@@ -80,8 +83,17 @@ public class PlayerSFXController : MonoBehaviour {
     }
 
 
-    void playShoot() { if (shootEmitter.HasStoped()) shootEmitter.Play(); }
+    public void Hurt() {
+        if (!haveHurt) {
+            haveHurt = true;
+            hurtEmitter.SetParameter("hurt", 1f);
+        }
 
+        //hurtEmitter.Release();
+        hurtEmitter.Play(0.5f);
+    }
+    
+    void playShoot() { if (shootEmitter.HasStoped()) shootEmitter.Play(); }
 
     IEnumerator WaitPlayerConfirm() {
         yield return new WaitForSeconds(0.1f);

@@ -80,6 +80,9 @@
         </relationship>
     </object>
     <object class="EventMixerMaster" id="{501eb1f5-90ea-4a6b-a814-3ce7039b3a81}">
+        <property name="volume">
+            <value>-5</value>
+        </property>
         <property name="name">
             <value>Master</value>
         </property>
@@ -524,6 +527,9 @@
     <object class="MixerBusPanner" id="{7057b1d1-e03a-4fb7-b34c-9728acc6725d}"/>
     <object class="MixerBusFader" id="{2a8c406a-52ff-48d8-a2b2-c38886ec04bf}"/>
     <object class="SpatialiserEffect" id="{101930e7-6ba4-4f93-8ca0-94faa81f233f}">
+        <property name="maximumDistance">
+            <value>5</value>
+        </property>
         <property name="extentMode">
             <value>1</value>
         </property>

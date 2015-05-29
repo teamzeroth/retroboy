@@ -22,7 +22,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 		public string name;
 		public float value;
 	}
-	
+
 	public void Play()
 	{
 		if (evt != null)

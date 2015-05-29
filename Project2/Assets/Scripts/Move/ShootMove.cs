@@ -21,6 +21,13 @@ public class ShootMove : MonoBehaviour {
     private ParticleSystem _collisionParticles;
     private Animator _anim;
 
+    public Vector2 Direction {
+        set {
+            direction = value;
+            transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+        }
+    }
+
     #region MonoBehaviour
 
     void Start() {

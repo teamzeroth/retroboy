@@ -4,10 +4,19 @@ using System.Collections;
 public class SorthingMoveableLayer : MonoBehaviour {
 
     public Transform _positionPoint;
+    public bool forcePosition = false;
+
+    private float position;
 
     Renderer _renderer = null;
-    
     int _initialOrder;
+
+    public float Position {
+        set{
+            forcePosition = true;
+            position = value;
+        }
+    }
 
     void Awake() {
         Transform t;
@@ -39,10 +48,14 @@ public class SorthingMoveableLayer : MonoBehaviour {
     }
 
     void Update() {
-        _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(_positionPoint.position.y * -10);
+        if (!forcePosition)
+            _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(_positionPoint.position.y * -10);
+        else
+            _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(position * -10);
     }
 
     void OnDrawGizmosSelected() {
+#if UNITY_EDITOR
         Transform positionPoint = _positionPoint;
 
         if (positionPoint == null) positionPoint = transform.Find("Feets");
@@ -51,7 +64,11 @@ public class SorthingMoveableLayer : MonoBehaviour {
 
         if (positionPoint != null) {
             Gizmos.color = Color.magenta;
-            Gizmos.DrawWireSphere(positionPoint.position, 0.1f);
+            if (!forcePosition)
+                Gizmos.DrawWireSphere(positionPoint.position, 0.1f);
+            else
+                Gizmos.DrawWireSphere(new Vector3(positionPoint.position.x, position), 0.1f);
         }
+#endif
     }
 }
