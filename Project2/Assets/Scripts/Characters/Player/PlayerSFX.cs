@@ -3,7 +3,7 @@ using System.Collections;
 
 using FMOD.Studio;
 
-public class PlayerSFXController : MonoBehaviour {
+public class PlayerSFX : MonoBehaviour {
 
     public FMODAsset shoot;
     public FMODAsset footstep;
@@ -19,7 +19,7 @@ public class PlayerSFXController : MonoBehaviour {
     private FMOD_CustonEmitter footstepEmitter;
     private FMOD_CustonEmitter hurtEmitter;
 
-    private PlayerMovementController _player;
+    private Player _player;
     
     void Awake() {
         GameObject gameObject = (GameObject) Instantiate(new GameObject("SFX"), Vector3.zero, Quaternion.identity);
@@ -34,7 +34,7 @@ public class PlayerSFXController : MonoBehaviour {
         hurtEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
         hurtEmitter.Init(hurt);
 
-        _player = GetComponent<PlayerMovementController>();
+        _player = GetComponent<Player>();
     }
 
     public void Charge() {

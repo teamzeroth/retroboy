@@ -4,7 +4,7 @@ using System;
 
 using DG.Tweening;
 
-public class PlayerMovementController : MonoBehaviour {
+public class Player : MonoBehaviour {
 
     private class ControllerStates{
 
@@ -89,11 +89,12 @@ public class PlayerMovementController : MonoBehaviour {
 
     private Animator _anim;
     private Rigidbody2D _rigidbody;
-    private PlayerSFXController _sfx;
-
-
+    private PlayerSFX _sfx;
 
     #region Getters and Setters
+
+    [HideInInspector]
+    public bool OnDie;
 
     private bool _onHurt = false;
     private bool afterOnHurt = false;
@@ -110,9 +111,9 @@ public class PlayerMovementController : MonoBehaviour {
         }
     }
 
-    public void SetAfterOnHurt() {
-        afterOnHurt = _onHurt;
-    }
+        public void SetAfterOnHurt() {
+            afterOnHurt = _onHurt;
+        }
 
     public Vector2 DeadDirection {
         get { return controller.deadDirection; }
@@ -148,7 +149,7 @@ public class PlayerMovementController : MonoBehaviour {
 
         _anim = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
-        _sfx = GetComponent<PlayerSFXController>();
+        _sfx = GetComponent<PlayerSFX>();
 
         _life = UiController.self.Life; /*To Do: Pog*/
     }
@@ -259,22 +260,36 @@ public class PlayerMovementController : MonoBehaviour {
 
         lastFixedTween = DOTween.To(() => fixedMove, x => fixedMove = x, to, time).SetEase(ease).OnComplete(() => {
             OnHurt = false;
-            collider2D.enabled = true;
-            waitToMove = false;
-            controller.OnSimulateMove = false;
             fixedMove = Vector2.zero;
+
+            collider2D.enabled = true;
+            controller.OnSimulateMove = false;
+            
+            waitShootFinish = false;
+            waitToNewShoot = false;
+            waitToMove = false;
         });
     }
 
     public void OnGetHit(int damage, Vector2 direction, Collider2D other) {
-        //DisableCollider();
         _sfx.Hurt();
 
-        cancelShoot();
-        OnHurt = true;
+        StopAllCoroutines();
 
         Life -= damage;
-        StartFixedMove(direction * damage * 4, Vector2.zero, Game.TIME_PLAYER_DAMAGE);
+
+        if (Life > 0) {
+            OnHurt = true;
+            StartFixedMove(direction.normalized * damage * 4, Vector2.zero, Game.TIME_PLAYER_DAMAGE);
+        } else {
+            DisableCollider();
+
+            OnDie = true;
+            waitToMove = true;
+
+            _anim.SetBool("OnHurt", false);
+            _anim.SetTrigger("OnDie");
+        }
     }
 
         public void OnGetHit(BaseEnemy enemy, Collider2D other) {
@@ -284,12 +299,12 @@ public class PlayerMovementController : MonoBehaviour {
             OnGetHit((int) enemy.damage, d, other);
         }
 
-        public void OnGetHit(Enemy enemy, Collider2D other) {
+        /*public void OnGetHit(Enemy enemy, Collider2D other) {
             if (afterOnHurt) return;
 
             Vector2 d = (collider2D.bounds.center - other.bounds.center).normalized;
             OnGetHit((int) enemy.damage, d, other);
-        }
+        }*/
 
         public void OnGetHit(ShootMove shoot , Collider2D other) {
             if (afterOnHurt) return;
@@ -297,6 +312,10 @@ public class PlayerMovementController : MonoBehaviour {
             Vector2 d = shoot.direction;
             OnGetHit((int) shoot.damage, d, other);
         }
+
+    public void OnAnimationFinish(){
+        if(OnDie) GameController.self.CanRestartTheGame = true;
+    }
 
     #endregion
 
@@ -322,7 +341,7 @@ public class PlayerMovementController : MonoBehaviour {
         );
 
         ShootMove shoot = shootGO.GetComponent<ShootMove>();
-        shoot.direction = v;
+        shoot.Direction = v;
         shoot.damage = controller.LastTimeInCharge >= 1.5f ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
 
         //SFX: Shoot
@@ -332,17 +351,6 @@ public class PlayerMovementController : MonoBehaviour {
     private void getCoin(CoinMove coin) {
         UiController.self.Coins += coin.quant;
         Destroy(coin.gameObject);
-    }
-
-    private void cancelShoot() {
-        if (watchShoot != null) {
-            StopCoroutine(watchShoot);
-
-            waitShootFinish = false;
-            waitToNewShoot = false;
-            waitToMove = false;
-            watchShoot = null;
-        }
     }
 
     #endregion
@@ -357,10 +365,6 @@ public class PlayerMovementController : MonoBehaviour {
         while (waitShootFinish)
             yield return null;
 
-
-        /*yield return new WaitForSeconds(0.35f);
-        waitShootFinish = false;
-        waitToNewShoot = false;*/
         yield return new WaitForSeconds(0.5f);
         waitToMove = false;
         watchShoot = null;
@@ -379,7 +383,15 @@ public class PlayerMovementController : MonoBehaviour {
         waitToNewShoot = false;
     }
 
-    #endregion
+    /*IEnumerator CancelShoot() {
+        yield return new WaitForSeconds(0.1f);    
 
+        waitShootFinish = false;
+        waitToNewShoot = false;
+        waitToMove = false;
+        watchShoot = null;
+    }*/
+
+    #endregion
 
 }

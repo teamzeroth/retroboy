@@ -24,7 +24,7 @@ public class BetaController : MonoBehaviour {
     private Transform _lightSprite;
     private Transform _lightParticle;
     private Transform _renderer;
-    private PlayerMovementController _player;
+    private Player _player;
 
     Tween DoDisappear;
 
@@ -35,7 +35,7 @@ public class BetaController : MonoBehaviour {
         _lightParticle = transform.FindChild("particles");
         _renderer = transform.FindChild("renderer");
 
-        _player = GameObject.FindWithTag("Player").GetComponent<PlayerMovementController>();
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
         if (target == null) target = _player.transform;
     }

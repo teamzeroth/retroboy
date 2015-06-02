@@ -43,7 +43,7 @@ namespace MapResources {
         public string goTo;
         public bool anotherMap = false;
 
-        private PlayerMovementController _player = null;
+        private Player _player = null;
 
         void Awake(){
             if (!string.IsNullOrEmpty(id)) doors.Add(id, this);
@@ -77,7 +77,7 @@ namespace MapResources {
 
         public void OnTriggerEnter2D(Collider2D other) {
             if (other.tag == "Player" && _player == null && !string.IsNullOrEmpty(goTo)) {
-                GetIn(other.gameObject.GetComponent<PlayerMovementController>());
+                GetIn(other.gameObject.GetComponent<Player>());
             }
         }
 
@@ -91,7 +91,7 @@ namespace MapResources {
         }
 
 
-        public void GetIn(PlayerMovementController player) {
+        public void GetIn(Player player) {
             Camera.main.GetComponent<SmoothFollow>().target = transform;
 
             var direction = CalcInDirection();
@@ -100,7 +100,7 @@ namespace MapResources {
             Invoke("AfterEnter", 1.1f);
         }
 
-        public void GetOut(PlayerMovementController player) {
+        public void GetOut(Player player) {
             Camera.main.GetComponent<SmoothFollow>().target = player.transform;
 
             _player = player;

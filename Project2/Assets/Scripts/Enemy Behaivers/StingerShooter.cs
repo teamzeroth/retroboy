@@ -34,7 +34,6 @@ public class StingerShooter : BaseEnemy {
 
     private Coroutine watchTarget;
 
-
     #region MonoBehaiver
 
     public void Start() {
@@ -60,7 +59,7 @@ public class StingerShooter : BaseEnemy {
             applySenoide();
         }
 
-        FixedUpdate();
+        //_FixedUpdate();
         UpdateAnimation();
     }
 
@@ -85,6 +84,8 @@ public class StingerShooter : BaseEnemy {
     }
 
     void FixedUpdate() {
+        if (OnDie) return;
+
         if (!OnShooting) UpdateMove();
         else UpdateMoveSleep();
     }   
@@ -98,13 +99,13 @@ public class StingerShooter : BaseEnemy {
         Vector2 toIntercept;
         void UpdateMove() {
             if (target == null || target.rigidbody2D == null) {
-                rigidbody2D.velocity = (Vector2)impulseForce * 0.5f;
+                rigidbody2D.velocity = (Vector2)impulseForce * 0.3f;
                 return;
             }
 
             /* Controlhe de angulo do Stinger Shooter */ {
                 if (target.rigidbody2D.velocity != Vector2.zero) 
-                    toIntercept = target.GetComponent<PlayerMovementController>().DeadDirection.normalized;
+                    toIntercept = target.GetComponent<Player>().DeadDirection.normalized;
 
                 float currAngle = Mathf.LerpAngle(
                     (360 + Mathf.Atan2(intercept.y, intercept.x) * Mathf.Rad2Deg) % 360,
@@ -118,12 +119,9 @@ public class StingerShooter : BaseEnemy {
             Vector2 direction = intercept * DISTANCE_TO_TARGET;
 
             // Limite de velocidade
-            var magnitude = direction.magnitude;
-            if (magnitude > MAX_VELOCITY) {
-                direction *= (MAX_VELOCITY / magnitude);
-            }
+            direction = Vector2.ClampMagnitude(direction, MAX_VELOCITY);
 
-            if (impulseForce != Vector3.zero) direction += (Vector2)impulseForce * 0.5f;
+            if (impulseForce != Vector3.zero) direction += (Vector2)impulseForce * 0.3f;
 
             velocity = (direction - lastDirection);
             velocity = velocity.magnitude > 0.01f ? velocity.normalized : Vector2.zero;
@@ -136,6 +134,8 @@ public class StingerShooter : BaseEnemy {
         }
 
         void UpdateMoveSleep() {
+            velocity = Vector2.ClampMagnitude(velocity, MAX_VELOCITY);
+
             velocity = Vector2.Lerp(velocity, Vector2.zero, Time.deltaTime);
             rigidbody2D.velocity = velocity + (Vector2)impulseForce * 0.5f;
 
@@ -185,17 +185,21 @@ public class StingerShooter : BaseEnemy {
     public override void OnTakeDamage(ShootMove shoot, Collider2D coll) {
         base.OnTakeDamage(shoot, coll);
 
-        if (life <= initLife * BROKEN) {
+        if (life > 0 && life <= initLife * BROKEN) {
             _smoke.gameObject.SetActive(true);
         }
     }
 
     public override void OnDestroyIt() {
+        OnDie = true;
+
+        rigidbody2D.velocity = -Vector2.up / 4;
+        //collider.enabled = false;
+
+        _anim.SetTrigger("Die");
         _smoke.gameObject.SetActive(false);
 
-        OnDie = true;
-        _anim.SetTrigger("Die");
-
+        _sfx.Explosion();
     }
 
     #endregion

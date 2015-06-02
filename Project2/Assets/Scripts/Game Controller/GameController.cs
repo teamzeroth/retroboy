@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
 
     private SmoothFollow _camera;
     private UiController _ui;
-    private PlayerMovementController _player;
+    private Player _player;
 
     void Awake() {
         self = this;
@@ -36,9 +36,9 @@ public class GameController : MonoBehaviour {
         return;
 
         if (GameObject.FindWithTag("Player"))
-            _player = GameObject.FindWithTag("Player").GetComponent<PlayerMovementController>();
+            _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         else
-            _player = ((GameObject)Instantiate(Resources.Load<GameObject>("Characters/Nim (Player)"))).GetComponent<PlayerMovementController>();
+            _player = ((GameObject)Instantiate(Resources.Load<GameObject>("Characters/Nim (Player)"))).GetComponent<Player>();
 
         if (Door.doors.ContainsKey("MainDoor")) {
             _camera.target = Door.doors["MainDoor"].transform;
@@ -48,9 +48,15 @@ public class GameController : MonoBehaviour {
     }
 
     public void Update() {
+        if (CanRestartTheGame && Input.anyKeyDown) {
+            Application.LoadLevel(Application.loadedLevel);
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Return)) {
             Pause = !Pause;
         }
+
     }
 
     public void StartStage() {
@@ -99,6 +105,8 @@ public class GameController : MonoBehaviour {
             }
         }
     }
+
+    public bool CanRestartTheGame = false;
 
     #endregion
 }

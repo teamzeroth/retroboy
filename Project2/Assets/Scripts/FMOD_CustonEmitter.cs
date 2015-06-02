@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class FMOD_CustonEmitter : FMOD_StudioEventEmitter {
+    
+    public delegate void Action();
 
     public void Init(FMODAsset asset)  {
         this.asset = asset;

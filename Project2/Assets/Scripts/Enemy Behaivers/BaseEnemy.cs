@@ -6,6 +6,7 @@ using DG.Tweening;
 public class BaseEnemy : MonoBehaviour {
 
     protected float TIME_IN_DAMAGE = 2;
+    protected float DAMAGE_INFLUENCE = 1;
 
     public int life = 3;
     public int damage = 1;
@@ -49,7 +50,7 @@ public class BaseEnemy : MonoBehaviour {
     public virtual void OnTakeDamage(ShootMove shoot, Collider2D coll) {
         if (impulseTween != null) impulseTween.Kill();
 
-        impulseForce = ((Vector3)shoot.direction * shoot.damage * 8) + impulseForce;
+        impulseForce = ((Vector3)shoot.direction * shoot.damage * 8) + impulseForce * DAMAGE_INFLUENCE;
         impulseTween = DOTween.To(() => impulseForce, x => impulseForce = x, Vector3.zero, TIME_IN_DAMAGE).SetEase(Ease.OutCirc).OnComplete(() => impulseTween = null);
     
         life -= shoot.damage;
