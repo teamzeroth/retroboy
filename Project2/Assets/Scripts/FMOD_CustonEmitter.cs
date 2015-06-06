@@ -27,6 +27,15 @@ public class FMOD_CustonEmitter : FMOD_StudioEventEmitter {
         parameter.setValue(value);
     }
 
+    public float GetParameter(string name) {
+        float value;
+
+        FMOD.Studio.ParameterInstance parameter = getParameter(name);
+        parameter.getValue(out value);
+
+        return value;
+    }
+
     public bool HasStoped() {
         return getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPED || getPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPING;
     }

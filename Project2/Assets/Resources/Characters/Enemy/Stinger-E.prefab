@@ -71,7 +71,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &439852
 Transform:
   m_ObjectHideFlags: 1
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f3f1c82c5764b43ae9b55b763d9df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: 
   playOnce: 1
   sample: 16
   animation:
@@ -226,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 439852}
+  forcePosition: 0
 --- !u!114 &11439858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
+  forcePosition: 0
 --- !u!114 &11439860
 MonoBehaviour:
   m_ObjectHideFlags: 1

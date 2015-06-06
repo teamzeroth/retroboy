@@ -3,7 +3,7 @@ using System.Collections;
 
 using DG.Tweening;
 
-public class BetaController : MonoBehaviour {
+public class Beta : MonoBehaviour {
     
     public Transform target;
 
@@ -41,8 +41,11 @@ public class BetaController : MonoBehaviour {
     }
 
     void Start() {
+        Disappear(0);
+
+        visible = false;
         transform.position = target.position;
-        visible = !_player.BetaVisible;
+        _lightParticle.particleSystem.maxParticles = 0;
     }
 
     void Update() {

@@ -334,17 +334,20 @@ public class Player : MonoBehaviour {
     }
 
     private void instaceShoot(Vector3 v){
+        Vector3 d = v.normalized;
+        Vector3 spawn = transform.position + d * (0.35f * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
+
         GameObject shootGO = (GameObject) Instantiate(
             Resources.Load<GameObject>("Shoots/Nim/shoot_1"),
-            transform.position + v.normalized * 0.3f,
-            Quaternion.identity
+            spawn, Quaternion.identity
         );
 
         ShootMove shoot = shootGO.GetComponent<ShootMove>();
-        shoot.Direction = v;
         shoot.damage = controller.LastTimeInCharge >= 1.5f ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
 
-        //SFX: Shoot
+        shoot.Direction = v;
+        shoot.Distance = 0.5f * Mathf.Pow(shoot.damage, 2);
+
         _sfx.Shoot(controller.LastTimeInCharge);
     }
 

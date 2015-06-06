@@ -65,6 +65,8 @@ public class StingerShooter : BaseEnemy {
 
     public void OnDrawGizmosSelected() {
 #if UNITY_EDITOR
+        base.OnDrawGizmosSelected();
+
         Gizmos.color = Color.red;
         float[,] vectors = new float[8, 2] { {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1} };
 

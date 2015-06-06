@@ -3,9 +3,21 @@ using System.Collections;
 
 public class SorthingParticleLayer : MonoBehaviour {
 
-    public string sorthingLayer;
+    public string sortingLayer;
 
     public void Start() {
-        particleSystem.renderer.sortingLayerName = sorthingLayer;
+        if (particleSystem != null)
+            particleSystem.renderer.sortingLayerName = sortingLayer;
+        
+        if (renderer != null)
+            renderer.sortingLayerName = sortingLayer;
+    }
+
+    public void OnDrawGizmosSelected() {
+        if (particleSystem != null)
+            particleSystem.renderer.sortingLayerName = sortingLayer;
+
+        if (renderer != null)
+            renderer.sortingLayerName = sortingLayer;
     }
 }

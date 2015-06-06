@@ -37,8 +37,10 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     public void OnDrawGizmosSelected() {
+#if UNITY_EDITOR
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, rangeAtack);
+#endif
     }
 
     public virtual void FindPlayer(Transform player) { if (target != player) { target = player; } }

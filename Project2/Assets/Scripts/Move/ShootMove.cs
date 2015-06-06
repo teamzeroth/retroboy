@@ -7,15 +7,18 @@ public class ShootMove : MonoBehaviour {
 
     public Vector2 direction;
 
+    public float distance = 0;
     public float speed;
     public int damage;
 
     public bool isPlayerAlly;
+    public bool hasCollider = false;
+    public bool hasLostForce = false;
 
-    [HideInInspector]
-    public bool flipped;
-    [HideInInspector]
-    public bool destroied;
+    [HideInInspector] public bool flipped;
+    [HideInInspector] public bool destroied;
+
+    private Vector2 startPosition;
 
     private ParticleSystem _particles;
     private ParticleSystem _collisionParticles;
@@ -23,8 +26,15 @@ public class ShootMove : MonoBehaviour {
 
     public Vector2 Direction {
         set {
-            direction = value;
+            direction = value.normalized;
             transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+        }
+    }
+
+    public float Distance {
+        set {
+            distance = value;
+            startPosition = transform.position;
         }
     }
 
@@ -32,6 +42,8 @@ public class ShootMove : MonoBehaviour {
 
     void Start() {
         destroied = false;
+        direction = direction.normalized;
+
         transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
 
         if(transform.Find("Particles")) _particles = transform.Find("Particles").particleSystem;
@@ -42,7 +54,12 @@ public class ShootMove : MonoBehaviour {
 
     void Update() {
         if (!destroied)
-            rigidbody2D.velocity = direction.normalized * speed;
+            rigidbody2D.velocity = direction * speed;
+
+        if (distance != 0 && Vector2.Distance(startPosition, transform.position) >= distance) {
+            DestroyMove(false);
+        }
+           
     }
 
     void LateUpdate() {
@@ -92,6 +109,7 @@ public class ShootMove : MonoBehaviour {
     #region Messages
 
     public void OnFinishDestroyAnimation() {
+        destroied = true;
         Destroy(gameObject);
     }
 
@@ -103,19 +121,35 @@ public class ShootMove : MonoBehaviour {
         transform.localScale = localScale;
     }
 
-    public void DestroyMove() {
-		if (!isPlayerAlly || _anim == null)
-			OnFinishDestroyAnimation();
-		else
-			_anim.SetTrigger("Collided");
+    public void DestroyMove(bool collided = true) {
+        if (collided) {
 
-        if (_particles != null) {
-            setCollisionPartiles();
-            _particles.gameObject.SetActive(false);
+            if (_particles != null)  _particles.gameObject.SetActive(false);
+            if (_collisionParticles != null) setCollisionPartiles();
+
+            if (_anim != null && hasCollider) {
+                _anim.SetTrigger("Collided");
+            } else {
+                OnFinishDestroyAnimation();
+            }
+
+            rigidbody2D.velocity = Vector3.zero;
+            destroied = true;
+
+        } else {
+            
+            if (_anim != null && hasLostForce) {
+                _anim.SetTrigger("LostForce");
+            } else {
+                OnFinishDestroyAnimation();
+            }
+
+            DOTween.To(() => direction, x => direction = x, Vector2.zero, .5f);
+
+            //rigidbody2D.velocity = direction.normalized * (speed / 2);
         }
 
-        destroied = true;
-        rigidbody2D.velocity = Vector3.zero;
+        
     }
 
     #endregion
