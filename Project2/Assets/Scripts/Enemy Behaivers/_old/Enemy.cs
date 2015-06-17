@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour {
 		if (life <= 0)
         {
             GameObject.Destroy(this.gameObject);
-            Camera.main.GetComponent<Director>().increaseScore();
+//            Camera.main.GetComponent<Director>().increaseScore();
             StopAllCoroutines();
         }
         else

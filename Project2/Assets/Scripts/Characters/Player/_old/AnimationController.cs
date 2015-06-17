@@ -259,7 +259,7 @@ public class AnimationController : MonoBehaviour {
         }else
             rigidbody2D.AddForce(direction * 2f, ForceMode2D.Impulse);
         
-        Camera.main.GetComponent<Director>().updateLife(life);
+//        Camera.main.GetComponent<Director>().updateLife(life);
     }
 
     #endregion

@@ -2,6 +2,11 @@
 <map version="1.0" orientation="isometric" renderorder="right-down" width="30" height="43" tilewidth="256" tileheight="160" nextobjectid="172">
  <tileset firstgid="1" name="tiledmap (1)" tilewidth="256" tileheight="160">
   <image source="tiledmap.png" width="768" height="640"/>
+  <tile id="3">
+   <properties>
+    <property name="0-prefab" value="Stinger"/>
+   </properties>
+  </tile>
   <tile id="4">
    <objectgroup draworder="index"/>
   </tile>
@@ -16,6 +21,11 @@
   </tile>
   <tile id="8">
    <objectgroup draworder="index"/>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="0-prefab" value="Stinger"/>
+   </properties>
   </tile>
   <tile id="10">
    <objectgroup draworder="index"/>
@@ -1399,7 +1409,12 @@
   <object id="168" x="3932.79" y="853.943"/>
   <object id="169" x="3951.42" y="866.559"/>
   <object id="170" x="3918.07" y="830.214"/>
-  <object id="171" name="Left" x="3878.67" y="809.373" width="142.841" height="35.4738" rotation="-291.368"/>
+  <object id="171" name="Left" x="3878.67" y="809.373" width="142.841" height="35.4738" rotation="-291.368">
+   <properties>
+    <property name="0-prefab" value="Stinger-S"/>
+    <property name="0-prefab path" value="Characters/Enemy/"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Layer 1" width="30" height="43">
   <data>
