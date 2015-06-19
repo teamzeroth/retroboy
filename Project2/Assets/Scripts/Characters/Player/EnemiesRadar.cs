@@ -18,7 +18,7 @@ public class EnemiesRadar : MonoBehaviour {
 
     public void Update() {
         if (findedEnemys.Count == 0) {
-            SoundTrackController.self.SetBackgroundSound(3);
+            //SoundTrackController.self.SetBackgroundSound(3);
             return;
         }
 
