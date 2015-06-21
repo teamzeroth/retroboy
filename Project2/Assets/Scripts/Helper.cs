@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
+enum Direction { E = 0, NE = 1, N = 2, NW = 3, W = 4, SW = 5, S = 6, SE = 7 };
 
 public static class Helper {
 
@@ -68,7 +70,7 @@ public static class Helper {
         int l = _particles.GetParticles(p);
 
         for (int i = 0; i < l; i++)
-            p[i].velocity = velocity * (1 + 0.3f * Random.value);
+            p[i].velocity = velocity * (1 + 0.3f * UnityEngine.Random.value);
 
         _particles.SetParticles(p, l);
     }
@@ -85,6 +87,31 @@ public static class Helper {
         Vector3 localScale = _transform.localScale;
         localScale.x *= -1;
         _transform.localScale = localScale;
+    }
+
+    
+    /// <sumary>
+    /// Return the current Direction of a vector in geographic directions
+    /// </sumary>
+    /// <param name="vector">The given vector</param>
+    /// <param name="fliped">If the directions will be return fliped</param>
+
+    public static int getGeoDirection(Vector2 vector, bool fliped = true) {
+        Vector2 normal = vector.normalized;
+
+        float radAngle = Mathf.Atan2(vector.y, vector.x);
+        float angle = Mathf.Rad2Deg * radAngle;
+
+        int index = Mathf.FloorToInt(((angle + 360 + 22.5f) % 360) / 45);
+        Direction dir = (Direction) index;
+
+        if (fliped) {
+            if (dir == Direction.NW) dir = Direction.NE;
+            else if (dir == Direction.SW) dir = Direction.SE;
+            else if (dir == Direction.W) dir = Direction.E;
+        }
+
+        return (int) dir;
     }
 
 }

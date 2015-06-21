@@ -215,10 +215,10 @@ MonoBehaviour:
   target: {fileID: 0}
   flipped: 0
   visible: 1
-  smoothMove: 1
-  smoothRotation: 1
-  totalDistance: 1
-  anglesPerSeconds: 180
+  smoothMove: 3
+  smoothRotation: 2
+  totalDistance: .800000012
+  anglesPerSeconds: 90
 --- !u!198 &19846820
 ParticleSystem:
   m_ObjectHideFlags: 1

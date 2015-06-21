@@ -4,22 +4,29 @@ using System.Collections;
 using DG.Tweening;
 
 public class Beta : MonoBehaviour {
-    
+
     public Transform target;
 
-    [HideInInspector] public bool flipped = false;
-    [HideInInspector] public bool visible = true;
+    [HideInInspector]
+    public bool flipped = false;
+    [HideInInspector]
+    public bool visible = true;
 
-    [Range(1f, 10f)] public float smoothMove = 1f;
-    [Range(1f, 10f)] public float smoothRotation = 1f;
-    [Range(0, 1f)] public float totalDistance = 1f;
+    [Range(1f, 10f)]
+    public float smoothMove = 1f;
+    [Range(1f, 10f)]
+    public float smoothRotation = 1f;
+    [Range(0, 1f)]
+    public float totalDistance = 1f;
 
     public float anglesPerSeconds = 180;
 
-    private float angle = 0;
+    //private float angle = 0;
     private float lightAngle = 0;
     private float distance = 0;
     private float visibleDelta = 0;
+
+    private bool canAppear;
 
     private Transform _lightSprite;
     private Transform _lightParticle;
@@ -30,6 +37,7 @@ public class Beta : MonoBehaviour {
 
     void Awake() {
         distance = totalDistance;
+        canAppear = true;
 
         _lightSprite = transform.FindChild("light");
         _lightParticle = transform.FindChild("particles");
@@ -65,6 +73,7 @@ public class Beta : MonoBehaviour {
 
     Vector2 currVecAngle = Vector2.zero;
 
+
     void CalcRotation() {
         lightAngle += anglesPerSeconds * Time.deltaTime;
         lightAngle = lightAngle % 360;
@@ -75,7 +84,7 @@ public class Beta : MonoBehaviour {
         _lightSprite.transform.localEulerAngles = curAngle;
         _lightParticle.particleSystem.startRotation = lightAngle * Mathf.Deg2Rad;
         _lightParticle.particleSystem.startLifetime = 1;
-   
+
     }
 
     void CalcPosition() {
@@ -92,35 +101,38 @@ public class Beta : MonoBehaviour {
             );
 
             currVecAngle.Set(Mathf.Cos(currAngle * Mathf.Deg2Rad), Mathf.Sin(currAngle * Mathf.Deg2Rad));
-            toPos += (Vector3) currVecAngle * distance;
+            toPos += (Vector3)currVecAngle * distance;
         }
 
         transform.position = Vector3.Lerp(curPos, toPos, Time.deltaTime * smoothMove);
     }
 
     void checkFlip() {
-        if (!_player.flipped) {  
+        if (!_player.flipped) {
             if (flipped) _renderer.Flip(ref flipped);
-        } else{
+        } else {
             if (!flipped) _renderer.Flip(ref flipped);
         }
     }
 
     void checkVisibility() {
-        if ((_player.BetaVisible && !visible) || (!_player.BetaVisible && visible)) {
+        if ((_player.BetaVisible && !visible && canAppear) || (!_player.BetaVisible && visible)) {
             visible = !visible;
 
             var time = 0f;
 
             var to = visible ? 1f : 0;
             var totalTime = visible ? Game.TIME_BETA_DISAPPEAR : Game.TIME_BETA_DISAPPEAR / 2;
-                
-            if(DoDisappear != null){
+
+            if (DoDisappear != null) {
                 time = DoDisappear.fullPosition;
                 DoDisappear.Kill();
             }
 
-            if (!visible) _lightParticle.particleSystem.maxParticles = 0;
+            if (!visible) {
+                _lightParticle.particleSystem.maxParticles = 0;
+                StartCoroutine(WaitToAppear());
+            }
 
             DoDisappear = DOTween.To(() => visibleDelta, x => Disappear(x), to, totalTime - time)
                 .SetEase(visible ? Ease.OutQuad : Ease.InQuad)
@@ -131,7 +143,7 @@ public class Beta : MonoBehaviour {
         }
     }
 
-    public void Disappear(float delta) {
+    void Disappear(float delta) {
         visibleDelta = delta;
 
         Color c;
@@ -151,5 +163,11 @@ public class Beta : MonoBehaviour {
         _lightSprite.localScale = t;
 
         distance = totalDistance * delta;
+    }
+
+    IEnumerator WaitToAppear() {
+        canAppear = false;
+        yield return new WaitForSeconds(Game.BETA_WAIT_APPEAR);
+        canAppear = true;
     }
 }

@@ -8,11 +8,19 @@ public static class Game {
     public const float TIME_BETA_DISAPPEAR = 0.3f;
     public const float TIME_PLAYER_SHOOTING = 0.5f;
     public const float TIME_PLAYER_DAMAGE = 0.6f;
+    public const float FRAMETIME_PLAYER_DASH = 0.018f;
+    public const float TOTAL_TIME_DASH = 0.1f;
+    public const float EXTRA_DASH_TIME = 0.06f;
+    public const float DASH_SHADOW_TIME = 0.5f;
+
+    public const float BETA_WAIT_APPEAR = 0.5f;
 
     public const int LEVEL_LAYER = 8;
     public const int ENEMY_LAYER = 9;
     public const int ALLY_SHOOT_LAYER = 10;
     public const int ENEMY_SHOOT_LAYER = 11;
+
+
 }
 
 public class GameController : MonoBehaviour {

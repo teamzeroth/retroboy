@@ -37,7 +37,6 @@ public class SoundTrackController : MonoBehaviour {
 
     public void SetBackgroundSound(float soundTrack) {
         if (!init) {
-            print("INIT");
             soundTrackEmitter.Play();
             init = true;
         }

@@ -226,6 +226,36 @@ TextureImporter:
     21300442: walk_NE_5
     21300444: walk_NE_6
     21300446: walk_NE_7
+    21300448: ss_E_0
+    21300450: ss_S_0
+    21300452: ss_N_0
+    21300454: ss_NE_0
+    21300456: ss_SE_0
+    21300458: ss_E_1
+    21300460: ss_E_2
+    21300462: ss_E_3
+    21300464: ss_E_4
+    21300466: ss_E_5
+    21300468: ss_S_01
+    21300470: ss_S_02
+    21300472: ss_S_03
+    21300474: ss_S_04
+    21300476: ss_S_05
+    21300478: ss_N_1
+    21300480: ss_N_2
+    21300482: ss_N_3
+    21300484: ss_N_4
+    21300486: ss_N_5
+    21300488: ss_NE_1
+    21300490: ss_SE_1
+    21300492: ss_NE_2
+    21300494: ss_SE_2
+    21300496: ss_NE_3
+    21300498: ss_SE_3
+    21300500: ss_NE_4
+    21300502: ss_NE_5
+    21300504: ss_SE_4
+    21300506: ss_SE_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -2312,6 +2342,306 @@ TextureImporter:
         serializedVersion: 2
         x: 960
         y: 1440
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_E_0
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1380
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_S_0
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1320
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_N_0
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1260
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_NE_0
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1200
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_SE_0
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 1140
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_E_1
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1380
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_E_2
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 1380
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_E_3
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 1380
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_E_4
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 1380
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_E_5
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 1380
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_S_01
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1320
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_S_02
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 1320
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_S_03
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 1320
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_S_04
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 1320
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_S_05
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 1320
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_N_1
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1260
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_N_2
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 1260
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_N_3
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 1260
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_N_4
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 1260
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_N_5
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 1260
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_NE_1
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1200
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_SE_1
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1140
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_NE_2
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 1200
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_SE_2
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 1140
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_NE_3
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 1200
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_SE_3
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 1140
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_NE_4
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 1200
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_NE_5
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 1200
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_SE_4
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 1140
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ss_SE_5
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 1140
         width: 60
         height: 60
       alignment: 0

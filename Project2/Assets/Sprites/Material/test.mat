@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: DefaultSpriteDiffuseMaterial
-  m_Shader: {fileID: 10800, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: test
+  m_Shader: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -23,8 +23,28 @@ Material:
     m_Floats:
       data:
         first:
-          name: PixelSnap
+          name: _Stencil
         second: 0
+      data:
+        first:
+          name: _StencilReadMask
+        second: 0
+      data:
+        first:
+          name: _StencilWriteMask
+        second: 0
+      data:
+        first:
+          name: _StencilComp
+        second: 0
+      data:
+        first:
+          name: _StencilOp
+        second: 0
+      data:
+        first:
+          name: _ColorMask
+        second: -53.4000015
     m_Colors:
       data:
         first:
