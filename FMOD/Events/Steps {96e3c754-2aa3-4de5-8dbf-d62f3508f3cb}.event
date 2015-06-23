@@ -145,16 +145,16 @@
             <value>Wood</value>
         </property>
         <property name="minimumTimeBetweenSounds">
-            <value>280</value>
+            <value>400</value>
         </property>
         <property name="maximumTimeBetweenSounds">
-            <value>300</value>
+            <value>420</value>
         </property>
         <property name="minimumScatterDistance">
-            <value>1.60000002</value>
+            <value>0</value>
         </property>
         <property name="maximumScatterDistance">
-            <value>3.20000005</value>
+            <value>0.100000001</value>
         </property>
         <property name="runtimeVolumeModulatorID">
             <value>{bb1a0392-5de6-471a-ab6c-f44b6de96a08}</value>
@@ -527,13 +527,13 @@
     <object class="MixerBusFader" id="{a538b9b0-2ea8-4a60-8292-cb618588ac48}"/>
     <object class="ThreeEQEffect" id="{4eb192cd-7d41-47e9-91c7-c0130dbdcb97}">
         <property name="lowGain">
-            <value>-12</value>
+            <value>-7</value>
         </property>
         <property name="midGain">
-            <value>-5</value>
+            <value>-32</value>
         </property>
         <property name="highGain">
-            <value>-14</value>
+            <value>-40</value>
         </property>
     </object>
     <object class="SingleSound" id="{677cf369-2278-43e8-a624-bc0e559d97d3}">

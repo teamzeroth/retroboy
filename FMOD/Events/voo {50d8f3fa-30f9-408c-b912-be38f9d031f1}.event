@@ -168,7 +168,7 @@
             <value>0.22406639004149376</value>
         </property>
         <property name="value">
-            <value>0.391303539</value>
+            <value>-9</value>
         </property>
     </object>
     <object class="AutomationPoint" id="{477c9d76-f91f-4a92-b52e-46fb3e842a9e}">
@@ -176,7 +176,7 @@
             <value>0</value>
         </property>
         <property name="value">
-            <value>-49.4565201</value>
+            <value>-9</value>
         </property>
     </object>
     <object class="MixerBusFader" id="{04093a32-dcff-4daa-8bb4-52c4af3cadbf}"/>
