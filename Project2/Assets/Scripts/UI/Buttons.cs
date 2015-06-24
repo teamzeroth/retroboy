@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Buttons : MonoBehaviour {
 
+    public GameObject ui;
+
 	public void quit()
     {
         Application.Quit();
@@ -42,5 +44,11 @@ public class Buttons : MonoBehaviour {
     {
         if (Debug.isDebugBuild)
             Debug.Log(this.name + " clicked");
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            ui.SetActive(!ui.activeSelf);
     }
 }
