@@ -149,11 +149,11 @@ public class Beta : MonoBehaviour {
         Color c;
 
         c = _lightSprite.GetComponent<SpriteRenderer>().color;
-        c.a = delta;
+        c.a = delta * delta;
         _lightSprite.GetComponent<SpriteRenderer>().color = c;
 
         c = _renderer.GetComponent<SpriteRenderer>().color;
-        c.a = delta;
+        c.a = delta * delta;
         _renderer.GetComponent<SpriteRenderer>().color = c;
 
         Vector3 t;
@@ -168,6 +168,7 @@ public class Beta : MonoBehaviour {
     IEnumerator WaitToAppear() {
         canAppear = false;
         yield return new WaitForSeconds(Game.BETA_WAIT_APPEAR);
+        Disappear(0);
         canAppear = true;
     }
 }
