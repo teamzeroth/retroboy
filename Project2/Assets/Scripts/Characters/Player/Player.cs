@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
 
     private class ControllerStates{
 
-        public Transform player;
+        public Transform _player;
 
         public Vector2 deltaDirection;
         public Vector2 deadDirection = new Vector2(1, 0);
@@ -27,14 +27,14 @@ public class Player : MonoBehaviour {
         //public float TimeLastShoot;
         public float LastTimeInCharge;
 
-        public Vector3 Update() {
-            setupDirection();
-            setupShoot();            
+        public Vector3 Update(Player player) {
+            setupDirection(player);
+            setupShoot(player);            
 
             return deltaDirection;
         }
 
-            public void setupDirection() {
+            public void setupDirection(Player player) {
                 if (!Input.GetKey(KeyCode.Mouse0)) {
                     deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour {
                     Camera camera = Camera.main;
                     Vector3 pos = camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));
 
-                    deltaDirection = pos - player.transform.position;
+                    deltaDirection = pos - _player.transform.position;
                     deltaDirection.Normalize();
 
                     deadDirection = deltaDirection;
@@ -57,10 +57,12 @@ public class Player : MonoBehaviour {
                 Direction = deadDirection;
 
                 InMoving = deltaDirection != Vector2.zero;
-                InDash = InDash || Input.GetKeyDown(KeyCode.Mouse1);
+
+                if (player.watchDash == null)
+                    InDash = InDash || Input.GetKeyDown(KeyCode.Mouse1);
             }
 
-            public void setupShoot() {
+            public void setupShoot(Player player) {
                 OnShooting = false;
                 OnCharging = false;
 
@@ -103,7 +105,8 @@ public class Player : MonoBehaviour {
 
     private ControllerStates controller = new ControllerStates();
 
-    private Coroutine watchShoot;
+    private Coroutine watchShoot = null;
+    private Coroutine watchDash = null;
 
     private Animator _anim;
     private SpriteRenderer _sprite;
@@ -164,7 +167,7 @@ public class Player : MonoBehaviour {
     #region MonoBehaviour
 
     public void Start() {
-        controller.player = transform;
+        controller._player = transform;
 
         _anim = GetComponent<Animator>();
         _sprite = (SpriteRenderer) renderer;
@@ -180,6 +183,7 @@ public class Player : MonoBehaviour {
         UpdateMove();
         UpdateAnimation();
         UpdateSound();
+
     }
     
         public void UpdateAnimation() {
@@ -229,13 +233,18 @@ public class Player : MonoBehaviour {
         }
 
         public void UpdateMove() {
-        Vector2 deltaMovement = controller.Update();
+        Vector2 deltaMovement = controller.Update(this);
 
-        if (controller.InDash && !waitToMove){
-            Vector2 normal = controller.Direction.normalized * dashSpeed;
+        if (watchDash == null && controller.InDash && !waitToMove) {
+            Vector2 normal = controller.Direction.normalized;
+            float time = getDashTime(normal, dashSpeed, Game.TOTAL_TIME_DASH);
 
-            StartFixedMove(normal, normal / 2,  Game.TOTAL_TIME_DASH, Ease.InExpo);
-            StartCoroutine(Clone());   
+            if (time > 0.011f) {
+                StartFixedMove((normal * dashSpeed), (normal * dashSpeed) / 2, time, Ease.InExpo);
+                watchDash = StartCoroutine(Clone());
+            } else {
+                controller.InDash = false;
+            }
         }
 
         if (fixedMove == Vector2.zero){
@@ -252,10 +261,17 @@ public class Player : MonoBehaviour {
         Move(deltaMovement);
     }
 
-
     public void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag == "Coin")
             getCoin(coll.gameObject.GetComponent<CoinMove>());
+
+        /*if (coll.gameObject.layer == LayerMask.NameToLayer("Level") && controller.InDash) {
+            print("OK GO");
+
+            //StopCoroutine(watchDash);
+            CancelFixedMove();
+        }*/
+            
     }
 
     #endregion
@@ -265,6 +281,11 @@ public class Player : MonoBehaviour {
 
     public void Move(Vector3 deltaMovement){
         rigidbody2D.velocity = deltaMovement;
+    }
+
+    public void Move2(Vector3 deltaMovement) {
+        Vector3 move = transform.position + deltaMovement * Time.deltaTime;
+        rigidbody2D.MovePosition(move);
     }
 
     public void DisableCollider() {
@@ -299,6 +320,11 @@ public class Player : MonoBehaviour {
             waitToNewShoot = false;
             waitToMove = false;
         });
+    }
+
+    public void CancelFixedMove() {
+        if (lastFixedTween == null) return;
+        lastFixedTween.Kill(true);
     }
 
     public void OnGetHit(int damage, Vector2 direction, Collider2D other) {
@@ -386,8 +412,36 @@ public class Player : MonoBehaviour {
         Destroy(coin.gameObject);
     }
 
-    #endregion
+    private float getDashTime(Vector2 vector, float velocity, float time) {
+        Vector2 sPoint = (Vector2) transform.collider2D.bounds.center;// + vector * (transform.collider2D as CircleCollider2D).radius;
+        float radius = (transform.collider2D as CircleCollider2D).radius * 2.5f;
 
+        RaycastHit2D hit = Physics2D.Raycast(sPoint, vector, time * velocity, 1 << LayerMask.NameToLayer("Level"));
+
+        float r = hit.distance != 0 ? (hit.distance - radius) / velocity : time;
+        //print(r);
+        return r;//time * (hit.distance / time * velocity);
+    }
+
+    /*public void OnDrawGizmos() {
+        Vector2 vector = controller.Direction.normalized;
+        float time = Game.TOTAL_TIME_DASH;
+        float velocity = dashSpeed;
+
+        Vector2 sPoint = (Vector2) transform.collider2D.bounds.center;
+        float radius = (transform.collider2D as CircleCollider2D).radius * 2.5f;
+
+        RaycastHit2D hit = Physics2D.Raycast(sPoint, vector, time * velocity, 1 << LayerMask.NameToLayer("Level"));
+
+        float r = hit.distance != 0 ? (hit.distance - radius) : time * velocity;
+
+        print(r);
+
+        Gizmos.DrawLine(sPoint, sPoint + vector * time * velocity);
+        Gizmos.DrawWireSphere(sPoint + vector * r, 0.1f);
+    }*/
+
+    #endregion
 
     #region CoRotinnes
 
@@ -419,9 +473,8 @@ public class Player : MonoBehaviour {
     IEnumerator Clone() {
         Sprite[] array = null;
 
-        bool first = true;
         float time = Time.time;
-        float duration = Game.TOTAL_TIME_DASH + Game.EXTRA_DASH_TIME;
+        float length = 4;
 
         switch (Helper.getGeoDirection(controller.Direction)) {
             case (int) Direction.E: array = ss_E; break;
@@ -431,32 +484,43 @@ public class Player : MonoBehaviour {
             case (int) Direction.S: array = ss_S; break;
         }
 
-        while (time + duration > Time.time){
-            if (!first) {
-                GameObject clone = new GameObject("Clone", typeof(SpriteRenderer));
-                SpriteRenderer cloneSprite = (clone.renderer as SpriteRenderer);
+        length = array.Length - 1;
 
-                int i = Mathf.FloorToInt((Time.time - time) / duration * 4);
+        while (/* time + Game.TOTAL_TIME_DASH > Time.time && */ controller.InDash) {
+            float i = (Time.time - time) / Game.TOTAL_TIME_DASH;
+            i = -i * (i - 2);
 
-                print(i);
-
-                clone.transform.position = transform.position;
-                clone.transform.localScale = transform.localScale;
-
-                cloneSprite.sprite = array[UnityEngine.Random.Range(i, 4)];
-                cloneSprite.sortingLayerID = _sprite.sortingLayerID;
-                cloneSprite.sortingOrder = _sprite.sortingOrder - 4;
-
-                cloneSprite.DOColor(new Color(1, 1, 1, 0), Game.DASH_SHADOW_TIME).SetEase(Ease.InExpo).OnComplete(() => {
-                    Destroy(clone);
-                });
-            }
-
-            first = false;
+            cloneMethod(array[(int)UnityEngine.Random.Range(i * length, length)]);
             yield return new WaitForSeconds(Game.FRAMETIME_PLAYER_DASH);
-
         }
+
+        while (time + Game.TOTAL_TIME_DASH + Game.EXTRA_DASH_TIME > Time.time) {
+            cloneMethod(_sprite.sprite, 0.5f);
+            yield return new WaitForSeconds(Game.FRAMETIME_PLAYER_DASH * 2.5f);
+        }
+
+        yield return new WaitForSeconds(Game.TIME_TO_NEW_DASH);
+        
+        watchDash = null;
     }
+
+        void cloneMethod(Sprite sprite, float alpha = 1) {
+            GameObject clone = new GameObject("Clone", typeof(SpriteRenderer));
+            SpriteRenderer cloneSprite = (clone.renderer as SpriteRenderer);
+
+            clone.transform.position = transform.position;
+            clone.transform.localScale = transform.localScale;
+
+            cloneSprite.sprite = sprite;
+            cloneSprite.sortingLayerID = _sprite.sortingLayerID;
+            cloneSprite.sortingOrder = _sprite.sortingOrder - 4;
+            cloneSprite.color = new Color(1, 1, 1, alpha);
+
+            cloneSprite.DOColor(new Color(1, 1, 1, 0), Game.DASH_SHADOW_TIME).SetEase(Ease.InQuint).OnComplete(() => {
+                Destroy(clone);
+            });
+        }
+
     #endregion
 
 }

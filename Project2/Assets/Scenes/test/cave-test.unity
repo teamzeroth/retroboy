@@ -174,6 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &10602210
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -290,6 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!114 &15348394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!61 &71494250
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -503,6 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &88780309
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1352,6 +1356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!1 &226335490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,6 +1978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &379504473
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2166,6 +2172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 21300000, guid: 0804a056c7adf8440a18bfc95b8b0250, type: 3}
 --- !u!114 &398462903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2473,7 +2480,7 @@ Transform:
   m_PrefabInternal: {fileID: 819052789}
   m_GameObject: {fileID: 457097709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.432000011, z: 0}
+  m_LocalPosition: {x: -.0320000015, y: -.412, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 398462908}
@@ -2566,6 +2573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &488019838
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2696,6 +2704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!212 &496262081
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3119,6 +3128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!61 &607130718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3211,6 +3221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &617984861
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3483,6 +3494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &638855396
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3569,6 +3581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!61 &646531247
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3811,6 +3824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &762045593
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4243,6 +4257,27 @@ Prefab:
       propertyPath: dashSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 437666, guid: ec144d69a7f55b344b6427a678f7e7e8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.412
+      objectReference: {fileID: 0}
+    - target: {fileID: 437666, guid: ec144d69a7f55b344b6427a678f7e7e8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.0320000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 437664, guid: ec144d69a7f55b344b6427a678f7e7e8, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 437664, guid: ec144d69a7f55b344b6427a678f7e7e8, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11437664, guid: ec144d69a7f55b344b6427a678f7e7e8, type: 2}
+      propertyPath: shadow
+      value: 
+      objectReference: {fileID: 21300000, guid: 0804a056c7adf8440a18bfc95b8b0250,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec144d69a7f55b344b6427a678f7e7e8, type: 2}
   m_RootGameObject: {fileID: 398462901}
@@ -4806,6 +4841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &977210235
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -6298,6 +6334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!114 &1029919611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6518,6 +6555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!61 &1042755564
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6709,6 +6747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!1 &1156132322
 GameObject:
   m_ObjectHideFlags: 0
@@ -7276,6 +7315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &1212726104
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -7732,6 +7772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 1844136249}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!1001 &1326874089
 Prefab:
   m_ObjectHideFlags: 0
@@ -8061,6 +8102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &1382889844
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -8146,6 +8188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &1383302591
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -8231,6 +8274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!61 &1386557800
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8970,6 +9014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 432409181}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!1 &1528611035
 GameObject:
   m_ObjectHideFlags: 0
@@ -9395,6 +9440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!4 &1657934560
 Transform:
   m_ObjectHideFlags: 0
@@ -10809,6 +10855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!212 &1905843664
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12710,6 +12757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!212 &2081023019
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12843,6 +12891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!60 &2145410157
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -12998,6 +13047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!58 &2146492392
 CircleCollider2D:
   m_ObjectHideFlags: 0
