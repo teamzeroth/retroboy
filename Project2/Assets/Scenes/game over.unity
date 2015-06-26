@@ -402,7 +402,6 @@ GameObject:
   - 223: {fileID: 821951699}
   - 114: {fileID: 821951698}
   - 114: {fileID: 821951697}
-  - 114: {fileID: 821951701}
   - 114: {fileID: 821951700}
   m_Layer: 5
   m_Name: EndScreen
@@ -493,26 +492,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 821951695}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce88890f46054a4a86988b24c0feaeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &821951701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 821951695}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a99e20262a0e68e4d9bb7f2aa543c5c4, type: 3}
+  m_Script: {fileID: 11500000, guid: fd69d2f14fe29e34ca881a9810620847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: 11400000, guid: 8f6718ded3be37b489d01b59667dd929, type: 2}
-  path: 
-  startEventOnAwake: 0
-  hasStarted: 0
+  ui: {fileID: 0}
 --- !u!1 &1085043480
 GameObject:
   m_ObjectHideFlags: 0
