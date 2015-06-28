@@ -413,7 +413,7 @@ public class Player : MonoBehaviour {
         var x = Mathf.Clamp(controller.LastTimeInCharge, 1, 3);
 
         shoot.Direction = v;
-        shoot.Distance = 12 * (x / 3);
+        shoot.Distance = 8 * (x / 3);
 
         _sfx.Shoot(controller.LastTimeInCharge);
     }
