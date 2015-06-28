@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
         }
 
             public void setupDirection(Player player) {
-                if (!Input.GetKeyDown(KeyCode.Mouse0)) {
+                if (!Input.GetKey(KeyCode.Mouse0)) {
                     deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
                     if (deltaDirection.magnitude > 1)

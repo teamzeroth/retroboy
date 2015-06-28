@@ -39,7 +39,9 @@ public class SimpleAnimatior : MonoBehaviour {
         curr = Mathf.FloorToInt(sample * timer);
 
         if (curr >= animation.Length && playOnce && Application.isPlaying) {
+            _renderer.sprite = null;
             SendMessageUpwards("OnFinishSimpleAnimation", SendMessageOptions.DontRequireReceiver);
+            
             enabled = false;
             return;
         }
