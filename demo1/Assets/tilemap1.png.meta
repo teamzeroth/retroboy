@@ -1,0 +1,3114 @@
+fileFormatVersion: 2
+guid: 692fcf41fc51a5a4d91d697e1aa8aae2
+timeCreated: 1429196774
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: grass1
+    21300002: grass2
+    21300004: grass3
+    21300006: grass4
+    21300008: grass5
+    21300010: grass6
+    21300012: grass25
+    21300014: grass26
+    21300016: dirt1
+    21300018: dirt1
+    21300020: dirt3
+    21300022: dirt4
+    21300024: dirt5
+    21300026: dirt6
+    21300028: dirt7
+    21300030: dirt8
+    21300032: pipe1
+    21300034: bigtree1
+    21300036: bigtree2
+    21300038: bigtree3
+    21300040: bigtree4
+    21300042: grass7
+    21300044: grass8
+    21300046: grass20
+    21300048: grass21
+    21300050: grass22
+    21300052: grass23
+    21300054: dirt-tiles-alpha-padded_27
+    21300056: dirt9
+    21300058: dirt10
+    21300060: dirt11
+    21300062: dirt12
+    21300064: dirt13
+    21300066: dirt14
+    21300068: dirt15
+    21300070: dirt16
+    21300072: pipe2
+    21300074: pipe3
+    21300076: dirt-tiles-alpha-padded_38
+    21300078: dirt-tiles-alpha-padded_39
+    21300080: bigtree5
+    21300082: bigtree6
+    21300084: bigtree7
+    21300086: bigtree8
+    21300088: grass9
+    21300090: grass10
+    21300092: grass11
+    21300094: grass12
+    21300096: grass13
+    21300098: grass14
+    21300100: dirt-tiles-alpha-padded_50
+    21300102: dirt17
+    21300104: dirt18
+    21300106: dirt19
+    21300108: dirt20
+    21300110: dirt21
+    21300112: dirt22
+    21300114: dirt23
+    21300116: dirt24
+    21300118: pipe4
+    21300120: pipe5
+    21300122: pipe6
+    21300124: dirt-tiles-alpha-padded_62
+    21300126: bigtree9
+    21300128: bigtree10
+    21300130: bigtree11
+    21300132: bigtree12
+    21300134: dirt-tiles-alpha-padded_67
+    21300136: dirt-tiles-alpha-padded_68
+    21300138: grass15
+    21300140: grass16
+    21300142: grass24
+    21300144: grass17
+    21300146: grass18
+    21300148: grass19
+    21300150: dirt25
+    21300152: dirt26
+    21300154: dirt27
+    21300156: dirt28
+    21300158: dirt29
+    21300160: dirt30
+    21300162: dirt31
+    21300164: pipe7
+    21300166: pipe8
+    21300168: dirt-tiles-alpha-padded_84
+    21300170: dirt-tiles-alpha-padded_85
+    21300172: bigtree13
+    21300174: bigtree14
+    21300176: bigtree15
+    21300178: bigtree16
+    21300180: dirt-tiles-alpha-padded_90
+    21300182: dirt-tiles-alpha-padded_91
+    21300184: dirt-tiles-alpha-padded_92
+    21300186: dirt-tiles-alpha-padded_93
+    21300188: dirt-tiles-alpha-padded_94
+    21300190: dirt-tiles-alpha-padded_95
+    21300192: dirt-tiles-alpha-padded_96
+    21300194: dirt-tiles-alpha-padded_97
+    21300196: darkdirt1
+    21300198: darkdirt2
+    21300200: darkdirt3
+    21300202: darkdirt4
+    21300204: darkdirt5
+    21300206: darkdirt6
+    21300208: darkdirt7
+    21300210: darkdirt8
+    21300212: dirt-tiles-alpha-padded_106
+    21300214: dirt-tiles-alpha-padded_107
+    21300216: dirt-tiles-alpha-padded_108
+    21300218: dirt-tiles-alpha-padded_109
+    21300220: bigtree17
+    21300222: bigtree18
+    21300224: dirt-tiles-alpha-padded_112
+    21300226: dirt-tiles-alpha-padded_113
+    21300228: dirt-tiles-alpha-padded_114
+    21300230: dirt-tiles-alpha-padded_115
+    21300232: dirt-tiles-alpha-padded_116
+    21300234: dirt-tiles-alpha-padded_117
+    21300236: dirt-tiles-alpha-padded_118
+    21300238: dirt-tiles-alpha-padded_119
+    21300240: darkdirt9
+    21300242: darkdirt10
+    21300244: darkdirt11
+    21300246: darkdirt12
+    21300248: darkdirt13
+    21300250: darkdirt14
+    21300252: darkdirt15
+    21300254: darkdirt16
+    21300256: dirt-tiles-alpha-padded_128
+    21300258: dirt-tiles-alpha-padded_129
+    21300260: dirt-tiles-alpha-padded_130
+    21300262: bigtree19
+    21300264: bigtree20
+    21300266: dirt-tiles-alpha-padded_133
+    21300268: dirt-tiles-alpha-padded_134
+    21300270: dirt-tiles-alpha-padded_135
+    21300272: dirt-tiles-alpha-padded_136
+    21300274: dirt-tiles-alpha-padded_137
+    21300276: dirt-tiles-alpha-padded_138
+    21300278: dirt-tiles-alpha-padded_139
+    21300280: dirt-tiles-alpha-padded_140
+    21300282: darkdirt17
+    21300284: darkdirt18
+    21300286: darkdirt19
+    21300288: darkdirt20
+    21300290: darkdirt21
+    21300292: darkdirt22
+    21300294: darkdirt23
+    21300296: darkdirt24
+    21300298: dirt-tiles-alpha-padded_149
+    21300300: dirt-tiles-alpha-padded_150
+    21300302: dirt-tiles-alpha-padded_151
+    21300304: bigtree21
+    21300306: bigtree22
+    21300308: dirt-tiles-alpha-padded_154
+    21300310: dirt-tiles-alpha-padded_155
+    21300312: dirt-tiles-alpha-padded_156
+    21300314: dirt-tiles-alpha-padded_157
+    21300316: dirt-tiles-alpha-padded_158
+    21300318: dirt-tiles-alpha-padded_159
+    21300320: dirt-tiles-alpha-padded_160
+    21300322: darkdirt25
+    21300324: darkdirt26
+    21300326: darkdirt27
+    21300328: darkdirt28
+    21300330: darkdirt29
+    21300332: darkdirt30
+    21300334: darkdirt31
+    21300336: dirt-tiles-alpha-padded_168
+    21300338: dirt-tiles-alpha-padded_169
+    21300340: dirt-tiles-alpha-padded_170
+    21300342: dirt-tiles-alpha-padded_171
+    21300344: dirt-tiles-alpha-padded_172
+    21300346: dirt-tiles-alpha-padded_173
+    21300348: dirt-tiles-alpha-padded_174
+    21300350: dirt-tiles-alpha-padded_175
+    21300352: dirt-tiles-alpha-padded_176
+    21300354: dirt-tiles-alpha-padded_177
+    21300356: dirt-tiles-alpha-padded_178
+    21300358: dirt-tiles-alpha-padded_179
+    21300360: dirt-tiles-alpha-padded_180
+    21300362: dirt-tiles-alpha-padded_181
+    21300364: dirt-tiles-alpha-padded_182
+    21300366: dirt-tiles-alpha-padded_183
+    21300368: dirt-tiles-alpha-padded_184
+    21300370: dirt-tiles-alpha-padded_185
+    21300372: dirt-tiles-alpha-padded_186
+    21300374: dirt-tiles-alpha-padded_187
+    21300376: dirt-tiles-alpha-padded_188
+    21300378: dirt-tiles-alpha-padded_189
+    21300380: dirt-tiles-alpha-padded_190
+    21300382: dirt-tiles-alpha-padded_191
+    21300384: dirt-tiles-alpha-padded_192
+    21300386: dirt-tiles-alpha-padded_193
+    21300388: dirt-tiles-alpha-padded_194
+    21300390: dirt-tiles-alpha-padded_195
+    21300392: dirt-tiles-alpha-padded_196
+    21300394: dirt-tiles-alpha-padded_197
+    21300396: dirt-tiles-alpha-padded_198
+    21300398: dirt-tiles-alpha-padded_199
+    21300400: dirt-tiles-alpha-padded_200
+    21300402: dirt-tiles-alpha-padded_201
+    21300404: dirt-tiles-alpha-padded_202
+    21300406: dirt-tiles-alpha-padded_203
+    21300408: dirt-tiles-alpha-padded_204
+    21300410: dirt-tiles-alpha-padded_205
+    21300412: dirt-tiles-alpha-padded_206
+    21300414: dirt-tiles-alpha-padded_207
+    21300416: dirt-tiles-alpha-padded_208
+    21300418: dirt-tiles-alpha-padded_209
+    21300420: dirt-tiles-alpha-padded_210
+    21300422: dirt-tiles-alpha-padded_211
+    21300424: dirt-tiles-alpha-padded_212
+    21300426: dirt-tiles-alpha-padded_213
+    21300428: dirt-tiles-alpha-padded_214
+    21300430: dirt-tiles-alpha-padded_215
+    21300432: dirt-tiles-alpha-padded_216
+    21300434: dirt-tiles-alpha-padded_217
+    21300436: darkcyan2
+    21300438: darkcyan3
+    21300440: darkcyan4
+    21300442: darkcyan5
+    21300444: darkcyan6
+    21300446: darkcyan7
+    21300448: darkcyan8
+    21300450: cyan1
+    21300452: cyan2
+    21300454: cyan3
+    21300456: cyan4
+    21300458: cyan5
+    21300460: cyan6
+    21300462: cyan7
+    21300464: cyan8
+    21300466: darkcyan10
+    21300468: darkcyan11
+    21300470: darkcyan12
+    21300472: darkcyan13
+    21300474: darkcyan14
+    21300476: darkcyan15
+    21300478: darkcyan16
+    21300480: cyan9
+    21300482: cyan10
+    21300484: cyan11
+    21300486: cyan12
+    21300488: cyan13
+    21300490: cyan14
+    21300492: cyan15
+    21300494: cyan16
+    21300496: darkcyan17
+    21300498: darkcyan18
+    21300500: darkcyan19
+    21300502: darkcyan20
+    21300504: darkcyan21
+    21300506: darkcyan22
+    21300508: darkcyan23
+    21300510: darkcyan24
+    21300512: cyan17
+    21300514: cyan18
+    21300516: cyan19
+    21300518: cyan20
+    21300520: cyan21
+    21300522: cyan22
+    21300524: cyan23
+    21300526: cyan24
+    21300528: darkcyan25
+    21300530: darkcyan26
+    21300532: darkcyan27
+    21300534: darkcyan28
+    21300536: darkcyan29
+    21300538: darkcyan30
+    21300540: darkcyan31
+    21300542: cyan25
+    21300544: cyan26
+    21300546: cyan27
+    21300548: cyan28
+    21300550: cyan29
+    21300552: cyan30
+    21300554: cyan31
+    21300556: dirt2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 16
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: grass1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass2
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass3
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass4
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass5
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass6
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass25
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass26
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt1
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt2
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt3
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt4
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt5
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt6
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt7
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt8
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pipe1
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree1
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree2
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree3
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree4
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass8
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass20
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass21
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass22
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass23
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_27
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt9
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt10
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt11
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt12
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt13
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt14
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt15
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt16
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pipe2
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pipe3
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_38
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_39
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree5
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree6
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree7
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree8
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 479
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass10
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass11
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass12
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass13
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass14
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_50
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt17
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt18
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt19
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt20
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt21
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt22
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt23
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt24
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pipe4
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pipe5
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pipe6
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_62
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree9
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree10
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree11
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree12
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 462
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_67
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_68
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass15
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass16
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass24
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass17
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass18
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: grass19
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt25
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt26
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt27
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt28
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt29
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt30
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt31
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pipe7
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pipe8
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_84
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_85
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree13
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree14
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree15
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree16
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 445
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_91
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_92
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_93
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_94
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_95
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_96
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_97
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt1
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt2
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt3
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt4
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt5
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt6
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt7
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt8
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_106
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_107
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_108
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_109
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree17
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree18
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 428
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_112
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_113
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_114
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_115
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_116
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_117
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_118
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_119
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt9
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt10
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt11
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt12
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt13
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt14
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt15
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt16
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_128
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_129
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_130
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree19
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree20
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 411
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_133
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_134
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_135
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_136
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_137
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_138
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_139
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_140
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt17
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt18
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt19
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt20
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt21
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt22
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt23
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt24
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_149
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_150
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_151
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree21
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bigtree22
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 394
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_154
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_155
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_156
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_157
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_158
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_159
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_160
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt25
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt26
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt27
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt28
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt29
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt30
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkdirt31
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_168
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_169
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_170
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_171
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_172
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_173
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_174
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_175
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 377
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_176
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_177
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_178
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_179
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_180
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_181
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_182
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_183
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_184
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_185
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_186
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_187
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_188
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_189
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 360
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_190
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_191
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_192
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_193
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_194
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_195
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_196
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_197
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_198
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_199
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_200
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_201
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_202
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 343
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_203
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 326
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_204
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 326
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_205
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 326
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_206
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 326
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_207
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 326
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_208
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 326
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_209
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 326
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_210
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 326
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_211
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 309
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_212
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 309
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_213
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 309
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_214
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 309
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_215
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 309
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_216
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 309
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dirt-tiles-alpha-padded_217
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 309
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan2
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan3
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan4
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan5
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan6
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan7
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan8
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan1
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan2
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan3
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan4
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan5
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan6
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan7
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan8
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 292
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan10
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan11
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan12
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan13
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan14
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan15
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan16
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan9
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan10
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan11
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan12
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan13
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan14
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan15
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan16
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 275
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan18
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan19
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan20
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan21
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan22
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan23
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan24
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan17
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan18
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan19
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan20
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan21
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan22
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan23
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan24
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 258
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan26
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan27
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan28
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan29
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan30
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: darkcyan31
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan25
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan26
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan27
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan28
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan29
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan30
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyan31
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 241
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: asfd
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
