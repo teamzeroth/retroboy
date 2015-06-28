@@ -174,10 +174,10 @@ namespace X_UniTMX
 		/// </summary>
 		/// <param name="property">Name of the property inside Tiled</param>
 		/// <returns>The value of the property, String.Empty if property not found</returns>
-		public string GetPropertyAsString(string property)
+        public string GetPropertyAsString(string property, string standard = "")
 		{
 			if (Properties == null)
-				return string.Empty;
+                return standard;
 			return Properties.GetPropertyAsString(property);
 		}
 		/// <summary>
@@ -185,10 +185,10 @@ namespace X_UniTMX
 		/// </summary>
 		/// <param name="property">Name of the property inside Tiled</param>
 		/// <returns>The value of the property</returns>
-		public bool GetPropertyAsBoolean(string property)
+        public bool GetPropertyAsBoolean(string property, bool standard = false)
 		{
 			if (Properties == null)
-				return false;
+                return standard;
 			return Properties.GetPropertyAsBoolean(property);
 		}
 		/// <summary>
@@ -196,10 +196,10 @@ namespace X_UniTMX
 		/// </summary>
 		/// <param name="property">Name of the property inside Tiled</param>
 		/// <returns>The value of the property</returns>
-		public int GetPropertyAsInt(string property)
+        public int GetPropertyAsInt(string property, int standard = 0)
 		{
 			if (Properties == null)
-				return 0;
+                return standard;
 			return Properties.GetPropertyAsInt(property);
 		}
 		/// <summary>
@@ -207,10 +207,10 @@ namespace X_UniTMX
 		/// </summary>
 		/// <param name="property">Name of the property inside Tiled</param>
 		/// <returns>The value of the property</returns>
-		public float GetPropertyAsFloat(string property)
+        public float GetPropertyAsFloat(string property, float standard = 0)
 		{
 			if (Properties == null)
-				return 0;
+                return standard;
 			return Properties.GetPropertyAsFloat(property);
 		}
 

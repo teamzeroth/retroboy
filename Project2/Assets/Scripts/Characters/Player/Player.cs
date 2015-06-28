@@ -7,6 +7,8 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
+    public static Vector2 PLAYER_SHOOT_DIFERENCE = new Vector2(0, 0.03f);
+
     private class ControllerStates{
 
         public Transform _player;
@@ -157,7 +159,7 @@ public class Player : MonoBehaviour {
 
         set {
             _life = value;
-            UiController.self.Life = value; 
+            //UiController.self.Life = value; 
         }
     }
 
@@ -187,9 +189,13 @@ public class Player : MonoBehaviour {
     }
     
         public void UpdateAnimation() {
-            if(!(waitShootFinish && !waitToMove)){
-                _anim.SetFloat("Horizontal", controller.Direction.x);
-                _anim.SetFloat("Vertical", controller.Direction.y);
+
+            if (!(waitShootFinish && !waitToMove)) {
+                    
+                Vector2 targetVector = fixedMove != Vector2.zero ? fixedMove : controller.Direction;
+                    
+                _anim.SetFloat("Horizontal", targetVector.x);
+                _anim.SetFloat("Vertical", targetVector.y);
 
                 checkFlip();
             }
@@ -288,15 +294,16 @@ public class Player : MonoBehaviour {
         rigidbody2D.MovePosition(move);
     }
 
-    public void DisableCollider() {
-        collider2D.enabled = false;
+    public void DisableCollider(bool disable = false) {
+        collider2D.enabled = disable;
     }
 
     public void StartFixedMove(Vector2 start, Vector2 to, float time, Color color, Ease ease = Ease.Linear) {
         StartFixedMove(start, to, time, ease);
-        //waitToMove = false;
+        waitToMove = false;
 
         ((SpriteRenderer)renderer).DOColor(color, time);
+        ((SpriteRenderer)transform.Find("Shadow").renderer).DOColor(color, time);
     }
 
     public void StartFixedMove(Vector2 start, Vector2 to, float time, Ease ease = Ease.OutCirc) {
@@ -379,7 +386,9 @@ public class Player : MonoBehaviour {
     #region Private Methods
 
     public void checkFlip() {
-        if (controller.Direction.x < 0 && Mathf.Abs(controller.Direction.x) >= Mathf.Abs(controller.Direction.y * 0.4f)) {
+        Vector2 targetVector = fixedMove != Vector2.zero ? fixedMove : controller.Direction;
+
+        if (targetVector.x < 0 && Mathf.Abs(targetVector.x) >= Mathf.Abs(targetVector.y * 0.4f)) {
             if (!flipped)
                 transform.Flip(ref flipped);
 
@@ -391,7 +400,8 @@ public class Player : MonoBehaviour {
 
     private void instaceShoot(Vector3 v){
         Vector3 d = v.normalized;
-        Vector3 spawn = transform.position + d * (0.35f * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
+        Vector3 spawn = transform.position + d * (Game.PLAYER_DIST_SHOOT * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
+        spawn += (Vector3) PLAYER_SHOOT_DIFERENCE;
 
         GameObject shootGO = (GameObject) Instantiate(
             Resources.Load<GameObject>("Shoots/Nim/shoot_1"),
@@ -401,14 +411,20 @@ public class Player : MonoBehaviour {
         ShootMove shoot = shootGO.GetComponent<ShootMove>();
         shoot.damage = controller.LastTimeInCharge >= 1.5f ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
 
+        var x = Mathf.Clamp(controller.LastTimeInCharge, 1, 3);
+            x = 3 * x / 3;
+
         shoot.Direction = v;
-        shoot.Distance = 0.5f * Mathf.Pow(shoot.damage, 2);
+        var y = 2 * Mathf.Pow(x, 2);
+        shoot.Distance = y;
+
+        print(y);
 
         _sfx.Shoot(controller.LastTimeInCharge);
     }
 
     private void getCoin(CoinMove coin) {
-        UiController.self.Coins += coin.quant;
+        //UiController.self.Coins += coin.quant;
         Destroy(coin.gameObject);
     }
 
@@ -442,6 +458,7 @@ public class Player : MonoBehaviour {
     }*/
 
     #endregion
+
 
     #region CoRotinnes
 

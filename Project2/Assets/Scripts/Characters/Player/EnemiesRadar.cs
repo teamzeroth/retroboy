@@ -26,17 +26,17 @@ public class EnemiesRadar : MonoBehaviour {
 
         if (findedPlayer && !findPlayer) {
             findPlayer = findedPlayer;
-            SoundTrackController.self.SetBackgroundSound(2);
+            //SoundTrackController.self.SetBackgroundSound(2);
             return;
         }
 
         if (!findedPlayer && findPlayer) {
             findPlayer = findedPlayer;
-            SoundTrackController.self.SetBackgroundSound(3);
+            //SoundTrackController.self.SetBackgroundSound(3);
             return;
         }
 
-        SoundTrackController.self.SetBackgroundSound(1);
+        //SoundTrackController.self.SetBackgroundSound(1);
     }
 
     public void OnTriggerStay2D(Collider2D other) {

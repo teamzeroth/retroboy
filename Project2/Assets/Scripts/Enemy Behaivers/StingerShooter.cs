@@ -3,9 +3,9 @@ using System.Collections;
 
 public class StingerShooter : BaseEnemy {
 
-    protected float DISTANCE_TO_TARGET = 2f;
+    protected float DISTANCE_TO_TARGET = 4f;
     protected float MAX_VELOCITY = 2f;
-    protected float START_DISTANCE_OF_SHOOT = 0.29f;
+    protected float START_DISTANCE_OF_SHOOT = 0.6f;
     protected float BROKEN = 0.4f; /*Relative damege to look broken */
 
     protected StingerSSFX _sfx;
@@ -77,8 +77,8 @@ public class StingerShooter : BaseEnemy {
             a.Normalize();
             b.Normalize();
 
-            a = transform.Find("shootspawn").position + a * (0.29f * Mathf.Max(Mathf.Abs(a.x), Mathf.Abs(a.y)));
-            b = transform.Find("shootspawn").position + b * (0.29f * Mathf.Max(Mathf.Abs(b.x), Mathf.Abs(b.y)));
+            a = transform.Find("shootspawn").position + a * (0.6f * Mathf.Max(Mathf.Abs(a.x), Mathf.Abs(a.y)));
+            b = transform.Find("shootspawn").position + b * (0.6f * Mathf.Max(Mathf.Abs(b.x), Mathf.Abs(b.y)));
 
             Gizmos.DrawLine(a, b);
         }
@@ -124,7 +124,7 @@ public class StingerShooter : BaseEnemy {
             Vector2 direction = intercept * DISTANCE_TO_TARGET;
 
             // Limite de velocidade
-            direction = Vector2.ClampMagnitude(direction, MAX_VELOCITY);
+            //direction = Vector2.ClampMagnitude(direction, MAX_VELOCITY);
 
             if (impulseForce != Vector3.zero) direction += (Vector2)impulseForce * 0.3f;
 
@@ -134,8 +134,9 @@ public class StingerShooter : BaseEnemy {
             lastDirection = direction;
 
             // ----Porque usar o target.position + direction? O target.positio nao seria suficiente?----
-            direction = Vector2.Lerp(transform.position, (Vector2)target.position + direction, Time.deltaTime * speed);
+            direction = Vector2.Lerp(transform.position, (Vector2)target.position + direction, Time.deltaTime / 2);
             
+
             rigidbody2D.MovePosition(direction);
             //rigidbody2D.velocity = (((Vector2)target.position + direction) - (Vector2) transform.position).normalized * speed;
         }
@@ -159,8 +160,8 @@ public class StingerShooter : BaseEnemy {
                 // ----Porque ficar atualizando a posição (no plano e no frame) da fumaça se ela ainda não vai ser usada?----
                 float time = _smoke.GetComponent<SimpleAnimatior>().NormalizeTime;
 
-                _smoke.localPosition = (Vector3) direction * -.3f + Vector3.up * 1 * time;
-                _smoke.GetComponent<SorthingMoveableLayer>().Position = transform.Find("feets").position.y + direction.y * -.3f;
+                _smoke.localPosition = (Vector3) direction * -.6f + Vector3.up * 1 * time;
+                _smoke.GetComponent<SorthingMoveableLayer>().Position = transform.Find("feets").position.y + direction.y * -.6f;
             }
 
             _anim.SetFloat("Horizontal", direction.x);
@@ -203,13 +204,15 @@ public class StingerShooter : BaseEnemy {
         OnDie = true;
 
         // ----Porque dividir o vetor.up por 4?----
-        rigidbody2D.velocity = -Vector2.up / 4;
+        rigidbody2D.velocity = -Vector2.up / 2;
         //collider.enabled = false;
 
         _anim.SetTrigger("Die");
         _smoke.gameObject.SetActive(false);
 
         _sfx.Explosion();
+
+        DropCoins();
     }
 
     #endregion

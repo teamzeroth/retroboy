@@ -5,7 +5,9 @@ using System.Collections;
 [ExecuteInEditMode]
 public class SimpleAnimatior : MonoBehaviour {
 
+#if UNITY_EDITOR
     public string test;
+#endif
 
     public bool playOnce = false;
     public float sample;
@@ -14,7 +16,9 @@ public class SimpleAnimatior : MonoBehaviour {
     private float timer;
     private int curr = -1;
 
+
     private SpriteRenderer _renderer;
+
 
     public int Frame {
         get { return curr; }
@@ -34,7 +38,7 @@ public class SimpleAnimatior : MonoBehaviour {
         timer += Time.deltaTime;
         curr = Mathf.FloorToInt(sample * timer);
 
-        if (curr >= animation.Length && playOnce) {
+        if (curr >= animation.Length && playOnce && Application.isPlaying) {
             SendMessageUpwards("OnFinishSimpleAnimation", SendMessageOptions.DontRequireReceiver);
             enabled = false;
             return;
@@ -45,6 +49,7 @@ public class SimpleAnimatior : MonoBehaviour {
         _renderer.sprite = animation[curr];
     }
 
+#if UNITY_EDITOR
     void OnRenderObject() {
         if (Application.isEditor && !Application.isPlaying) {
             timer += Time.fixedDeltaTime;
@@ -53,6 +58,5 @@ public class SimpleAnimatior : MonoBehaviour {
             _renderer.sprite = animation[curr];
         }
     }
-
-
+#endif
 }

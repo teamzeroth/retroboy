@@ -21,6 +21,10 @@ public static class Game {
     public const int ENEMY_LAYER = 9;
     public const int ALLY_SHOOT_LAYER = 10;
     public const int ENEMY_SHOOT_LAYER = 11;
+
+    public const float DOOR_ANIMATION_TIME = 1.3f;
+
+    public const float PLAYER_DIST_SHOOT = 0.8f;
 }
 
 public class GameController : MonoBehaviour {

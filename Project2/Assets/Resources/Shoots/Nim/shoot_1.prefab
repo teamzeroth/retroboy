@@ -75,7 +75,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.2444115, y: -7.84968901, z: 0}
+  m_LocalPosition: {x: 6.04400015, y: -12.4639997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 416698}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da07fed9bc80ea44d9083998cb81e117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sortingLayer: 
+  sortingLayer: Game
 --- !u!114 &11440326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ee4943fb71f3642a67df9b2fba3392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 0}
+  direction: {x: -1, y: -1}
   distance: 0
   speed: 7
   damage: 10
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da07fed9bc80ea44d9083998cb81e117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sortingLayer: 
+  sortingLayer: Game
 --- !u!198 &19816698
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -346,7 +346,7 @@ ParticleSystem:
         rgba: 4294704324
       minMaxState: 2
     startSize:
-      scalar: .0399999991
+      scalar: .0500000007
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -361,7 +361,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .625
+          value: .799999952
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -403,7 +403,7 @@ ParticleSystem:
       minMaxState: 0
     gravityModifier: 0
     inheritVelocity: 0
-    maxNumParticles: 10
+    maxNumParticles: 20
   ShapeModule:
     serializedVersion: 2
     enabled: 1
@@ -421,7 +421,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 1
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1378,7 +1378,7 @@ ParticleSystem:
         rgba: 4294704324
       minMaxState: 2
     startSize:
-      scalar: .0399999991
+      scalar: .0500000007
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1393,7 +1393,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .625
+          value: .799999952
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -2261,7 +2261,7 @@ ParticleSystemRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1470551667
+  m_SortingLayerID: 112778315
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MaxParticleSize: .5
@@ -2293,7 +2293,7 @@ ParticleSystemRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1470551667
+  m_SortingLayerID: 112778315
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MaxParticleSize: .5

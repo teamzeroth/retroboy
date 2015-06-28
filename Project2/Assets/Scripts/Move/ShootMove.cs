@@ -140,13 +140,14 @@ public class ShootMove : MonoBehaviour {
             
             if (_anim != null && hasLostForce) {
                 _anim.SetTrigger("LostForce");
+
+                DOTween.To(() => direction, x => direction = x, Vector2.zero, .5f);
             } else {
-                OnFinishDestroyAnimation();
+
+                DOTween.To(() => direction, x => direction = x, Vector2.zero, .5f).OnComplete(() => {
+                    OnFinishDestroyAnimation();
+                });                
             }
-
-            DOTween.To(() => direction, x => direction = x, Vector2.zero, .5f);
-
-            //rigidbody2D.velocity = direction.normalized * (speed / 2);
         }
 
         

@@ -7,17 +7,12 @@ public class Beta : MonoBehaviour {
 
     public Transform target;
 
-    [HideInInspector]
-    public bool flipped = false;
-    [HideInInspector]
-    public bool visible = true;
+    [HideInInspector] public bool flipped = false;
+    [HideInInspector] public bool visible = true;
 
-    [Range(1f, 10f)]
-    public float smoothMove = 1f;
-    [Range(1f, 10f)]
-    public float smoothRotation = 1f;
-    [Range(0, 1f)]
-    public float totalDistance = 1f;
+    [Range(1f, 10f)] public float smoothMove = 1f;
+    [Range(1f, 10f)] public float smoothRotation = 1f;
+    [Range(0, 1.5f)] public float totalDistance = 1f;
 
     public float anglesPerSeconds = 180;
 
@@ -159,7 +154,7 @@ public class Beta : MonoBehaviour {
         Vector3 t;
 
         t = _lightSprite.localScale;
-        t.y = delta * 0.5f;
+        //t.y = delta * 0.5f;
         _lightSprite.localScale = t;
 
         distance = totalDistance * delta;

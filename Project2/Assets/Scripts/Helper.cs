@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-enum Direction { E = 0, NE = 1, N = 2, NW = 3, W = 4, SW = 5, S = 6, SE = 7 };
+public enum Direction { E = 0, NE = 1, N = 2, NW = 3, W = 4, SW = 5, S = 6, SE = 7, CC = 8 };
 
 public static class Helper {
 
@@ -114,5 +114,23 @@ public static class Helper {
         return (int) dir;
     }
 
+    public static Direction TranslateDirection(string value) {
+        return (Direction) Enum.Parse(typeof(Direction), value, true);
+    }
+
+    static public Vector2 GetDirectionVector(Direction d) {
+        switch (d) {
+            case Direction.E: return new Vector2(1, 0).normalized;
+            case Direction.NE: return new Vector2(1, 1).normalized;
+            case Direction.N: return new Vector2(0, 1).normalized;
+            case Direction.NW: return new Vector2(-1, 1).normalized;
+            case Direction.W: return new Vector2(-1, 0).normalized;
+            case Direction.SW: return new Vector2(-1, -1).normalized;
+            case Direction.S: return new Vector2(0, -1).normalized;
+            case Direction.SE: return new Vector2(1, -1).normalized;
+        }
+
+        return Vector2.zero;
+    }
 }
 

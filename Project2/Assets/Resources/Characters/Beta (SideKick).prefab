@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!114 &11466204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionPoint: {fileID: 475870}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!114 &11475872
 MonoBehaviour:
   m_ObjectHideFlags: 1
