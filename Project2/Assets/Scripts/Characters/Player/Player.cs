@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
         }
 
             public void setupDirection(Player player) {
-                if (!Input.GetKey(KeyCode.Mouse0)) {
+                if (!Input.GetKeyDown(KeyCode.Mouse0)) {
                     deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
                     if (deltaDirection.magnitude > 1)
@@ -60,20 +60,19 @@ public class Player : MonoBehaviour {
 
                 InMoving = deltaDirection != Vector2.zero;
 
-                if (player.watchDash == null)
-                    InDash = InDash || Input.GetKeyDown(KeyCode.Mouse1);
+                if (player.watchDash == null) InDash = InDash || Input.GetButtonDown("Dash");
             }
 
             public void setupShoot(Player player) {
                 OnShooting = false;
                 OnCharging = false;
 
-                if (OnCharging && !Input.GetButton("Fire1")) {
+                if (OnCharging && !Input.GetButton("Action")) {
                     OnShooting = true;
                     OnCharging = false;
                 } else {
-                    OnCharging = Input.GetButton("Fire1");
-                    OnShooting = Input.GetButtonUp("Fire1");
+                    OnCharging = Input.GetButton("Action");
+                    OnShooting = Input.GetButtonUp("Action");
                 }
 
                 TimeInCharge = OnCharging ? TimeInCharge + Time.deltaTime : 0;
@@ -412,13 +411,9 @@ public class Player : MonoBehaviour {
         shoot.damage = controller.LastTimeInCharge >= 1.5f ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
 
         var x = Mathf.Clamp(controller.LastTimeInCharge, 1, 3);
-            x = 3 * x / 3;
 
         shoot.Direction = v;
-        var y = 2 * Mathf.Pow(x, 2);
-        shoot.Distance = y;
-
-        print(y);
+        shoot.Distance = 12 * (x / 3);
 
         _sfx.Shoot(controller.LastTimeInCharge);
     }
