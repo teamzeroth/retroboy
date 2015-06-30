@@ -20,14 +20,20 @@ public class ShootMove : MonoBehaviour {
 
     private Vector2 startPosition;
 
+    private Transform _feet;
     private ParticleSystem _particles;
     private ParticleSystem _collisionParticles;
     private Animator _anim;
 
     public Vector2 Direction {
         set {
-            direction = value.normalized;
+            if (_feet == null) _feet = transform.GetComponent<SorthingMoveableLayer>().positionPoint;
+            Vector3 local = _feet.position;
+
+            direction = value.normalized;                        
             transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+
+            _feet.position = local;
         }
     }
 
@@ -41,16 +47,34 @@ public class ShootMove : MonoBehaviour {
     #region MonoBehaviour
 
     void Start() {
-        destroied = false;
-        direction = direction.normalized;
+        createFeetCollider();
 
-        transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+        destroied = false;
+        Direction = direction;
+
+        //transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+        //_feet.RotateAround(transform.position, Vector3.forward, Mathf.Atan2(direction.y, direction.x) * -Mathf.Rad2Deg);
 
         if(transform.Find("Particles")) _particles = transform.Find("Particles").particleSystem;
         if(transform.Find("Collision Particles")) _collisionParticles = transform.Find("Collision Particles").particleSystem;
 
         _anim = GetComponent<Animator>();
     }
+
+        void createFeetCollider() {
+            if (transform.GetComponent<SorthingMoveableLayer>() == null) return;
+
+            _feet = transform.GetComponent<SorthingMoveableLayer>().positionPoint;
+
+            CircleCollider2D feetCollider = _feet.gameObject.AddComponent<CircleCollider2D>();
+            CollisionListener listener = _feet.gameObject.AddComponent<CollisionListener>();
+
+            feetCollider.radius = Mathf.Min(collider2D.bounds.extents.x, collider2D.bounds.extents.y);
+            feetCollider.isTrigger = collider2D.isTrigger;
+
+            listener.Layer = LayerMask.NameToLayer("Level");
+            listener.Father = gameObject;
+        }
 
     void Update() {
         if (!destroied)
@@ -88,9 +112,9 @@ public class ShootMove : MonoBehaviour {
             DestroyMove();
         }
 
-        if (trigger.gameObject.layer == LayerMask.NameToLayer("Level")) {
+        /*if (trigger.gameObject.layer == LayerMask.NameToLayer("Level")) {
             DestroyMove();
-        }
+        }*/
     }   
 
     /*public void OnCollisionEnter2D(Collision2D coll) {
@@ -107,6 +131,12 @@ public class ShootMove : MonoBehaviour {
     #endregion
 
     #region Messages
+
+    public void OnCollisionListener(Collider2D trigger) {
+        if (trigger.gameObject.layer == LayerMask.NameToLayer("Level")) {
+            DestroyMove();
+        }
+    }
 
     public void OnFinishDestroyAnimation() {
         destroied = true;
@@ -149,8 +179,6 @@ public class ShootMove : MonoBehaviour {
                 });                
             }
         }
-
-        
     }
 
     #endregion

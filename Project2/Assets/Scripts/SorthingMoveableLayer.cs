@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SorthingMoveableLayer : MonoBehaviour {
 
-    public Transform _positionPoint;
+    public Transform positionPoint;
     public bool forcePosition = false;
     public Sprite shadow;
     
@@ -37,11 +37,11 @@ public class SorthingMoveableLayer : MonoBehaviour {
 
         _initialOrder = _renderer.sortingOrder;
 
-        if (_positionPoint == null) _positionPoint = transform.Find("Feets");
-        if (_positionPoint == null) _positionPoint = transform.Find("feets");
-        if (_positionPoint == null) _positionPoint = transform;
+        if (positionPoint == null) positionPoint = transform.Find("Feets");
+        if (positionPoint == null) positionPoint = transform.Find("feets");
+        if (positionPoint == null) positionPoint = transform;
 
-        if (_positionPoint == null) {
+        if (positionPoint == null) {
             Debug.LogError("No Transform Coponente found to " + name);
             this.enabled = false;
             return;
@@ -51,7 +51,7 @@ public class SorthingMoveableLayer : MonoBehaviour {
     }
 
     void Update() {
-        if (!forcePosition) _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(_positionPoint.position.y * -10);
+        if (!forcePosition) _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(positionPoint.position.y * -10);
         else _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(position * -10);
 
         if (_shadow != null) _shadow.sortingOrder = _renderer.sortingOrder - 4;
@@ -59,29 +59,29 @@ public class SorthingMoveableLayer : MonoBehaviour {
 
     void OnDrawGizmosSelected() {
 #if UNITY_EDITOR
-        Transform positionPoint = _positionPoint;
+        Transform testPositionPoint = positionPoint;
 
-        if (positionPoint == null) positionPoint = transform.Find("Feets");
-        if (positionPoint == null) positionPoint = transform.Find("feets");
-        if (positionPoint == null) positionPoint = GetComponent<Transform>();
+        if (testPositionPoint == null) testPositionPoint = transform.Find("Feets");
+        if (testPositionPoint == null) testPositionPoint = transform.Find("feets");
+        if (testPositionPoint == null) testPositionPoint = GetComponent<Transform>();
 
-        if (positionPoint != null) {
+        if (testPositionPoint != null) {
             Gizmos.color = Color.magenta;
             if (!forcePosition)
-                Gizmos.DrawWireSphere(positionPoint.position, 0.1f);
+                Gizmos.DrawWireSphere(testPositionPoint.position, 0.1f);
             else
-                Gizmos.DrawWireSphere(new Vector3(positionPoint.position.x, position), 0.1f);
+                Gizmos.DrawWireSphere(new Vector3(testPositionPoint.position.x, position), 0.1f);
         }
 #endif
     }
 
     public void CastShadow(){
-        float dist = Vector2.Distance(transform.position, _positionPoint.position);
+        float dist = Vector2.Distance(transform.position, positionPoint.position);
 
         GameObject shadowGO = new GameObject("Shadow", typeof(SpriteRenderer));
         _shadow = shadowGO.renderer as SpriteRenderer;
 
-        shadowGO.transform.position = _positionPoint.position;
+        shadowGO.transform.position = positionPoint.position;
         shadowGO.transform.parent = transform;
 
         if (collider2D != null) shadowGO.transform.localScale = Vector3.back + (Vector3) collider2D.bounds.size * 4;
