@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 439852}
+  - 58: {fileID: 5825334}
   m_Layer: 9
   m_Name: feets
   m_TagString: Untagged
@@ -79,7 +80,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139852}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.600000024, z: 0}
+  m_LocalPosition: {x: 0, y: -.954999983, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 439858}
@@ -115,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.05999994, y: -8.07999992, z: 0}
+  m_LocalPosition: {x: 24.2099991, y: -13.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 439856}
@@ -138,6 +139,17 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+--- !u!58 &5825334
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139852}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Radius: .100000001
+  m_Center: {x: 0, y: 0}
 --- !u!58 &5839852
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -147,8 +159,8 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Radius: .200000003
-  m_Center: {x: 0, y: 0}
+  m_Radius: .424294472
+  m_Center: {x: -.00999999978, y: 0}
 --- !u!61 &6139852
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -158,8 +170,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 2.02317429, y: 1.07053959}
-  m_Center: {x: -.0539488792, y: .017983932}
+  m_Size: {x: 4.22271013, y: 2.22095585}
+  m_Center: {x: -.104596138, y: -.000102996826}
 --- !u!95 &9539852
 Animator:
   serializedVersion: 3
@@ -226,8 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8708499225a68e4ba15905782af2d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionPoint: {fileID: 439852}
+  positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!114 &11439858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,8 +252,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8708499225a68e4ba15905782af2d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionPoint: {fileID: 0}
+  positionPoint: {fileID: 0}
   forcePosition: 0
+  shadow: {fileID: 0}
 --- !u!114 &11439860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,11 +267,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 3
-  damage: 1
-  speed: .5
+  damage: 2
+  speed: .400000006
   isColliderDamage: 0
   coinsChance: {x: 1, y: 3}
-  rangeAtack: 2.5
+  rangeAtack: 3
   target: {fileID: 0}
 --- !u!114 &11467484
 MonoBehaviour:
@@ -314,7 +328,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 112778315
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300006, guid: 86f024b0acecd1242bb7aba503219c29, type: 3}
+  m_Sprite: {fileID: 21300010, guid: 86f024b0acecd1242bb7aba503219c29, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

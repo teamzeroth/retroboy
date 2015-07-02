@@ -100065,7 +100065,7 @@
  </objectgroup>
  <objectgroup name="Enemies" visible="0"/>
  <objectgroup name="Trigger">
-  <object id="17" name="Stair1F" type="Trigger" x="771" y="226">
+  <object id="17" name="4Floor" type="Trigger" x="771" y="226">
    <properties>
     <property name="add component1" value="Door"/>
     <property name="go to" value="Stair2F"/>
@@ -100075,10 +100075,10 @@
    </properties>
    <polygon points="0,0 16.6667,-6.33333 67,18 51.6667,26"/>
   </object>
-  <object id="25" name="Stair2F" type="Trigger" x="532" y="316.667">
+  <object id="25" name="3Floor" type="Trigger" x="532" y="316.667">
    <properties>
     <property name="add component1" value="Door"/>
-    <property name="go to" value="Stair1F"/>
+    <property name="go to" value="&quot;3Floor&quot;"/>
     <property name="in" value="NE"/>
     <property name="out" value="O"/>
     <property name="send message1" value="Init|self"/>
