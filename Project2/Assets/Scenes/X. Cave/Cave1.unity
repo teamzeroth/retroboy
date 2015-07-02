@@ -4602,7 +4602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &626305780
 Transform:
   m_ObjectHideFlags: 0
@@ -4610,7 +4610,7 @@ Transform:
   m_PrefabInternal: {fileID: 1243290586}
   m_GameObject: {fileID: 626305779}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.0100002, y: -15.3599997, z: 0}
+  m_LocalPosition: {x: 31.4099998, y: -10.4300003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 1347937888}
@@ -4675,7 +4675,7 @@ MonoBehaviour:
   speed: 2
   isColliderDamage: 0
   coinsChance: {x: 2, y: 3}
-  rangeAtack: 4
+  rangeAtack: 3
   target: {fileID: 0}
   chanceToShoot: {x: 4, y: 8}
   shootTimes: 3
@@ -5698,7 +5698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &781830937
 Transform:
   m_ObjectHideFlags: 0
@@ -5706,7 +5706,7 @@ Transform:
   m_PrefabInternal: {fileID: 1129226584}
   m_GameObject: {fileID: 781830936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.96999979, y: -18.1000004, z: 0}
+  m_LocalPosition: {x: 24.2099991, y: -13.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1809496686}
@@ -7218,11 +7218,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 439858, guid: b92516d94e0836a4386c63115dfb38fc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.96999979
+      value: 24.2099991
       objectReference: {fileID: 0}
     - target: {fileID: 439858, guid: b92516d94e0836a4386c63115dfb38fc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -18.1000004
+      value: -13.79
       objectReference: {fileID: 0}
     - target: {fileID: 439858, guid: b92516d94e0836a4386c63115dfb38fc, type: 2}
       propertyPath: m_LocalPosition.z
@@ -7246,7 +7246,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 439858, guid: b92516d94e0836a4386c63115dfb38fc, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 439852, guid: b92516d94e0836a4386c63115dfb38fc, type: 2}
       propertyPath: m_LocalPosition.y
@@ -7303,7 +7303,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 139858, guid: b92516d94e0836a4386c63115dfb38fc, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b92516d94e0836a4386c63115dfb38fc, type: 2}
@@ -8065,11 +8065,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 421436, guid: ebb9366ae3dcb314c8e419e4296248e2, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 14.0100002
+      value: 31.4099998
       objectReference: {fileID: 0}
     - target: {fileID: 421436, guid: ebb9366ae3dcb314c8e419e4296248e2, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -15.3599997
+      value: -10.4300003
       objectReference: {fileID: 0}
     - target: {fileID: 421436, guid: ebb9366ae3dcb314c8e419e4296248e2, type: 2}
       propertyPath: m_LocalPosition.z
@@ -8093,7 +8093,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 421436, guid: ebb9366ae3dcb314c8e419e4296248e2, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 478000, guid: ebb9366ae3dcb314c8e419e4296248e2, type: 2}
       propertyPath: m_LocalPosition.y
@@ -8121,7 +8121,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11478000, guid: ebb9366ae3dcb314c8e419e4296248e2, type: 2}
       propertyPath: rangeAtack
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11478000, guid: ebb9366ae3dcb314c8e419e4296248e2, type: 2}
       propertyPath: coinsChance.x
@@ -8129,7 +8129,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 121438, guid: ebb9366ae3dcb314c8e419e4296248e2, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ebb9366ae3dcb314c8e419e4296248e2, type: 2}
@@ -10682,6 +10682,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1571329250}
+  - 58: {fileID: 1571329251}
   m_Layer: 9
   m_Name: feets
   m_TagString: Untagged
@@ -10701,6 +10702,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 781830937}
   m_RootOrder: 2
+--- !u!58 &1571329251
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1571329249}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Radius: .100000001
+  m_Center: {x: 0, y: 0}
 --- !u!1 &1578998253
 GameObject:
   m_ObjectHideFlags: 0
