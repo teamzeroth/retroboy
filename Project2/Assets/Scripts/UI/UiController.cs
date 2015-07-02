@@ -75,7 +75,7 @@ public class UiController : MonoBehaviour {
             _chargeHud = _ui.Find("Health Panel/charge-slider");
             _coinsHud = _ui.Find("Coins Panel");
 
-            _pausePanel = _ui.Find("Pause Panel");
+            _pausePanel = _ui.parent.Find("Pause Menu");
         }
 
     #region UI Buttons messegens

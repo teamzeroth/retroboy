@@ -34,6 +34,6 @@ public class VideoIntro : MonoBehaviour {
     }
 
     public void OnFinishIntro() {
-        Application.LoadLevel("cave-test");
+        Application.LoadLevel("Cave1");
     }
 }
