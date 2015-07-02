@@ -24,9 +24,7 @@ public class SoundTrackController : MonoBehaviour {
 
         soundTrackEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
         soundTrackEmitter.Init(soundTrack);
-    }
-
-   
+    }   
 
     public void Update() {
         if (lastChange + 2 < Time.time && latParameter != 0) {

@@ -27,7 +27,7 @@ public class ShootMove : MonoBehaviour {
 
     public Vector2 Direction {
         set {
-            if (_feet == null) _feet = transform.GetComponent<SorthingMoveableLayer>().positionPoint;
+            if (_feet == null) _feet = transform.GetComponent<SortingMoveableLayer>().positionPoint;
             Vector3 local = _feet.position;
 
             direction = value.normalized;                        
@@ -62,9 +62,9 @@ public class ShootMove : MonoBehaviour {
     }
 
         void createFeetCollider() {
-            if (transform.GetComponent<SorthingMoveableLayer>() == null) return;
+            if (transform.GetComponent<SortingMoveableLayer>() == null) return;
 
-            _feet = transform.GetComponent<SorthingMoveableLayer>().positionPoint;
+            _feet = transform.GetComponent<SortingMoveableLayer>().positionPoint;
 
             CircleCollider2D feetCollider = _feet.gameObject.AddComponent<CircleCollider2D>();
             CollisionListener listener = _feet.gameObject.AddComponent<CollisionListener>();

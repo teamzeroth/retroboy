@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SorthingMoveableLayer : MonoBehaviour {
+public class SortingMoveableLayer : MonoBehaviour {
 
     public Transform positionPoint;
     public bool forcePosition = false;
@@ -17,6 +17,12 @@ public class SorthingMoveableLayer : MonoBehaviour {
         set{
             forcePosition = true;
             position = value;
+        }
+    }
+
+    public int InitialOrder {
+        set {
+            _initialOrder = value;
         }
     }
 

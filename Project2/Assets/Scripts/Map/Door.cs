@@ -33,6 +33,7 @@ namespace MapResources {
             ForceOut = door.GetPropertyAsFloat("force out", 1);
             ForceIn = door.GetPropertyAsFloat("force in", 1);
 
+            print(door.GetPropertyAsString("go to"));
             GoTo = door.GetPropertyAsString("go to");
             Scene = door.GetPropertyAsString("scene");
         }

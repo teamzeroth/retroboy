@@ -161,7 +161,7 @@ public class StingerShooter : BaseEnemy {
                 float time = _smoke.GetComponent<SimpleAnimatior>().NormalizeTime;
 
                 _smoke.localPosition = (Vector3) direction * -.6f + Vector3.up * 1 * time;
-                _smoke.GetComponent<SorthingMoveableLayer>().Position = transform.Find("feets").position.y + direction.y * -.6f;
+                _smoke.GetComponent<SortingMoveableLayer>().Position = transform.Find("feets").position.y + direction.y * -.6f;
             }
 
             _anim.SetFloat("Horizontal", direction.x);

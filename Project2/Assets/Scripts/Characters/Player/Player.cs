@@ -158,7 +158,7 @@ public class Player : MonoBehaviour {
 
         set {
             _life = value;
-            //UiController.self.Life = value; 
+            UiController.self.Life = value; 
         }
     }
 
@@ -262,7 +262,7 @@ public class Player : MonoBehaviour {
             deltaMovement = fixedMove;
         }
 
-        _sfx.Footstep(deltaMovement != Vector2.zero);
+        //_sfx.Footstep(deltaMovement != Vector2.zero);
         Move(deltaMovement);
     }
 
@@ -419,7 +419,7 @@ public class Player : MonoBehaviour {
     }
 
     private void getCoin(CoinMove coin) {
-        //UiController.self.Coins += coin.quant;
+        UiController.self.Coins += coin.quant;
         Destroy(coin.gameObject);
     }
 

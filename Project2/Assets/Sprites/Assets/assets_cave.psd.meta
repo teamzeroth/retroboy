@@ -11,6 +11,8 @@ TextureImporter:
     21300012: assets_cave_6
     21300014: assets_cave_7
     21300016: assets_cave_8
+    21300018: assets_cave_9
+    21300020: assets_cave_10
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -46,7 +48,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 62
+  spritePixelsToUnits: 31.5
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -139,6 +141,26 @@ TextureImporter:
         y: 234
         width: 24
         height: 22
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: assets_cave_9
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 133
+        width: 59
+        height: 45
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: assets_cave_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 133
+        width: 56
+        height: 45
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
