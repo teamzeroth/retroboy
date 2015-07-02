@@ -37,6 +37,8 @@ public class GameController : MonoBehaviour {
     private UiController _ui;
     private Player _player;
 
+    public bool stopPlayer = false; // POG
+
     void Awake() {
         self = this;
     }
@@ -44,6 +46,10 @@ public class GameController : MonoBehaviour {
     void Start() {
         _camera = Camera.main.GetComponent<SmoothFollow>();
         _ui = GetComponent<UiController>();
+
+        // FORA DE CONTEXTO
+            stopPlayer = true;
+        //
 
         return;
 
@@ -72,12 +78,13 @@ public class GameController : MonoBehaviour {
     }
 
     public void StartStage() {
-        _player.gameObject.SetActive(true);
+        //_player.gameObject.SetActive(true);
+        stopPlayer = false;
 
-        if (Door.doors.ContainsKey("MainDoor")) {
+        /*if (Door.doors.ContainsKey("MainDoor")) {
             (_player.renderer as SpriteRenderer).color = new Color(0, 0, 0, 0.3f);
             Door.doors["MainDoor"].GetOut(_player);
-        }
+        }*/
     } 
 
     public void PauseGame(bool pause) {

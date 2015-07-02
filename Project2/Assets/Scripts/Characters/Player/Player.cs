@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
 
         public Transform _player;
 
-        public Vector2 deltaDirection;
+        public Vector2 deltaDirection = new Vector2(1, 0);
         public Vector2 deadDirection = new Vector2(1, 0);
 
         public Vector2 Direction;
@@ -178,8 +178,8 @@ public class Player : MonoBehaviour {
         _life = UiController.self.Life; /*To Do: Pog*/
     }
 
-    public void Update() {  
-        if (GameController.self.Pause) return;
+    public void Update() {
+        if (GameController.self.Pause || GameController.self.stopPlayer) return;
 
         UpdateMove();
         UpdateAnimation();
