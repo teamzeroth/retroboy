@@ -48,7 +48,7 @@ public class Buttons : MonoBehaviour {
 
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && ui == null)
             Application.LoadLevel("title-screen");
         if (Input.GetKeyDown(KeyCode.Escape) && ui != null)
             ui.SetActive(!ui.activeSelf);
