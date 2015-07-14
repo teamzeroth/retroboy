@@ -18,7 +18,7 @@ public class VideoIntro : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetButtonDown("Submit") && _anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= TIME_TO_PRESS_START) {
+        if ((Input.GetButtonDown("Menu") || Input.GetButtonDown("Action")) && _anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= TIME_TO_PRESS_START) {
             _fmod.SetParameter("startGame", 1.0f);
             _anim.SetInteger("Video", 1);
         }

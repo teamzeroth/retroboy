@@ -181,6 +181,7 @@ public class Player : MonoBehaviour {
     public void Update() {
         if (GameController.self.Pause || GameController.self.stopPlayer) return;
 
+
         UpdateMove();
         UpdateAnimation();
         UpdateSound();

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SortingTiledLayer : MonoBehaviour {
 
+    public int Level;
+
     void Start() {
         float minY = float.PositiveInfinity, minX = float.PositiveInfinity, maxX = float.NegativeInfinity;
 
@@ -27,6 +29,7 @@ public class SortingTiledLayer : MonoBehaviour {
         sML.positionPoint = feets;
         sML.InitialOrder = 0;
         tileRenderer.sortingLayerName = "Game";
+        tileRenderer.sortingOrder = Level;
         
     }
 

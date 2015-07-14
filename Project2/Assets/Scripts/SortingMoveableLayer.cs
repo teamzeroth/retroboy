@@ -8,10 +8,10 @@ public class SortingMoveableLayer : MonoBehaviour {
     public Sprite shadow;
     
     private float position;
-    private SpriteRenderer _shadow;
+    private Transform _shadow;
 
-    Renderer _renderer = null;
-    int _initialOrder;
+    Transform _renderer;
+    float _initialOrder;
 
     public float Position {
         set{
@@ -20,28 +20,26 @@ public class SortingMoveableLayer : MonoBehaviour {
         }
     }
 
-    public int InitialOrder {
+    public float InitialOrder {
         set {
             _initialOrder = value;
         }
     }
 
     void Awake() {
-        Transform t;
+        _renderer = transform.Find("Renderer");
+        if (_renderer == null) _renderer = transform.Find("renderer");
+        if (_renderer == null) _renderer = transform;
 
-        t = transform.Find("Renderer");
-        if (t == null) t = transform.Find("renderer");
-        if (t == null) t = transform;
-
-        _renderer = t.GetComponent<SpriteRenderer>();
+        /*_renderer = t.GetComponent<SpriteRenderer>();
 
         if (_renderer == null) {
             Debug.LogError("No SpriteRenderer Coponente in Renderer GameObject " + t.name);
             this.enabled = false;
             return;
-        }
+        }*/
 
-        _initialOrder = _renderer.sortingOrder;
+        _initialOrder = _renderer.position.z;
 
         if (positionPoint == null) positionPoint = transform.Find("Feets");
         if (positionPoint == null) positionPoint = transform.Find("feets");
@@ -57,10 +55,19 @@ public class SortingMoveableLayer : MonoBehaviour {
     }
 
     void Update() {
-        if (!forcePosition) _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(positionPoint.position.y * -10);
-        else _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(position * -10);
+        _renderer.position = new Vector3(
+        //_renderer.position.Set(
+            _renderer.position.x, _renderer.position.y, 
+            _initialOrder + positionPoint.position.y // * -10
+        );
 
-        if (_shadow != null) _shadow.sortingOrder = _renderer.sortingOrder - 4;
+        //else _renderer.sortingOrder = _initialOrder + Mathf.RoundToInt(position * -10);
+
+        if (_shadow != null) _shadow.position.Set(
+            _shadow.position.x, _shadow.position.y, 
+            _renderer.position.z - 4
+        );
+
     }
 
     void OnDrawGizmosSelected() {
@@ -85,15 +92,17 @@ public class SortingMoveableLayer : MonoBehaviour {
         float dist = Vector2.Distance(transform.position, positionPoint.position);
 
         GameObject shadowGO = new GameObject("Shadow", typeof(SpriteRenderer));
-        _shadow = shadowGO.renderer as SpriteRenderer;
+        SpriteRenderer shadowRenderer = shadowGO.renderer as SpriteRenderer;
+
+        _shadow = shadowGO.transform;        
 
         shadowGO.transform.position = positionPoint.position;
         shadowGO.transform.parent = transform;
 
         if (collider2D != null) shadowGO.transform.localScale = Vector3.back + (Vector3) collider2D.bounds.size * 4;
 
-        _shadow.sprite = shadow;
-        _shadow.sortingLayerID = _renderer.sortingLayerID;
-        _shadow.color = new Color(1, 1, 1, 1 - (dist / 2));
+        shadowRenderer.sprite = shadow;
+        shadowRenderer.sortingLayerID = _renderer.GetComponent<SpriteRenderer>().sortingLayerID;
+        shadowRenderer.color = new Color(1, 1, 1, 1 - (dist / 2));
     }
 }

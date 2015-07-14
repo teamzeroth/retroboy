@@ -71,7 +71,7 @@ public class GameController : MonoBehaviour {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return)) {
+        if (Input.GetButtonDown("Menu")) {
             Pause = !Pause;
         }
 

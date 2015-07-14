@@ -17,6 +17,7 @@ namespace MapResources {
         public float ForceIn;
         public string GoTo;
         public string Scene;
+        public int Level;
 
         private Player _player = null;
 
@@ -33,9 +34,9 @@ namespace MapResources {
             ForceOut = door.GetPropertyAsFloat("force out", 1);
             ForceIn = door.GetPropertyAsFloat("force in", 1);
 
-            print(door.GetPropertyAsString("go to"));
             GoTo = door.GetPropertyAsString("go to");
             Scene = door.GetPropertyAsString("scene");
+            Level = door.GetPropertyAsInt("level", 0);
         }
 
         public void OnDrawGizmos() {
@@ -58,6 +59,7 @@ namespace MapResources {
 
         public void AfterOut() {
             //if (string.IsNullOrEmpty(goTo)) collider2D.isTrigger = false;
+            _player.GetComponent<SpriteRenderer>().sortingOrder = Level;
             _player = null;
         }
 

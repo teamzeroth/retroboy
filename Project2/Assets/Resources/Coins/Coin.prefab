@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11434890}
   - 95: {fileID: 9534892}
   - 114: {fileID: 11434892}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Coin
   m_TagString: Coin
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 434892}
   - 212: {fileID: 21234890}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8708499225a68e4ba15905782af2d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionPoint: {fileID: 0}
+  positionPoint: {fileID: 0}
   forcePosition: 0
   shadow: {fileID: 0}
 --- !u!212 &21234890

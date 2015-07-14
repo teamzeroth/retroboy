@@ -35,6 +35,11 @@ public class CoinMove : MonoBehaviour {
 
     void Update() {
         if (!disableMove) Move();
+        
+        /*
+        int layer = 1 << LayerMask.NameToLayer("Default");
+        Collider2D coll = Physics2D.OverlapCircle(collider.bounds.center, 0.5, layer);
+        */
     }
 
     private void Move() {

@@ -46,6 +46,9 @@ public class SmoothFollow : MonoBehaviour {
 
     void updateCameraPosition() {
         Vector3 targetPos = getTargetPosition();
-        transform.position = Vector3.SmoothDamp(transform.position, targetPos - cameraOffset, ref _smoothDampVelocity, onQuake == 0 ? smoothDampTime : -1);
+        Vector3 targetCameraPos = targetPos - cameraOffset;
+            targetCameraPos.z = -cameraOffset.z;
+
+        transform.position = Vector3.SmoothDamp(transform.position, targetCameraPos, ref _smoothDampVelocity, onQuake == 0 ? smoothDampTime : -1);
     }
 }
