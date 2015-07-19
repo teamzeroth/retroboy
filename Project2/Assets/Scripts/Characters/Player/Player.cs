@@ -36,32 +36,39 @@ public class Player : MonoBehaviour {
             return deltaDirection;
         }
 
-            public void setupDirection(Player player) {
-                if (!Input.GetKey(KeyCode.Mouse0)) {
-                    deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        public void setupDirection(Player player)
+        {
+            if (!Input.GetKey(KeyCode.Mouse0))
+            {
+                deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-                    if (deltaDirection.magnitude > 1)
-                        deltaDirection.Normalize();
-
-                    if (deltaDirection.magnitude > 0.1f) {
-                        deadDirection = deltaDirection;
-                    }
-                } else {
-                    Camera camera = Camera.main;
-                    Vector3 pos = camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));
-
-                    deltaDirection = pos - _player.transform.position;
+                if (deltaDirection.magnitude > 1)
                     deltaDirection.Normalize();
 
+                if (deltaDirection.magnitude > 0.1f)
+                {
                     deadDirection = deltaDirection;
                 }
+            }
+            else
+            {
+                Camera camera = Camera.main;
+                Vector3 pos = camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));
 
-                Direction = deadDirection;
+                deltaDirection = pos - _player.transform.position;
+                deltaDirection.Normalize();
 
-                InMoving = deltaDirection != Vector2.zero;
+                deadDirection = deltaDirection;
+            }
 
+            Direction = deadDirection;
+
+            InMoving = deltaDirection != Vector2.zero;
+            if (!OnCharging)
+            {
                 if (player.watchDash == null) InDash = InDash || Input.GetButtonDown("Dash");
             }
+        }
 
             public void setupShoot(Player player) {
                 OnShooting = false;
@@ -94,10 +101,10 @@ public class Player : MonoBehaviour {
     public Sprite[] ss_N;
     public Sprite[] ss_NE;
     public Sprite[] ss_SE;
-
+    public GameObject shootPrefab;
     [HideInInspector] public bool flipped = false;
     [HideInInspector] public Vector2 fixedMove = Vector2.zero;
-
+    [HideInInspector] public CollisionLevel collisionLevel;
     private bool waitToMove = false;
     private bool waitShootFinish = false;
     private bool waitToNewShoot = false;
@@ -163,18 +170,15 @@ public class Player : MonoBehaviour {
     }
 
     #endregion
-
-
     #region MonoBehaviour
-
     public void Start() {
         controller._player = transform;
-
         _anim = GetComponent<Animator>();
         _sprite = (SpriteRenderer) renderer;
         _rigidbody = GetComponent<Rigidbody2D>();
         _sfx = GetComponent<PlayerSFX>();
 
+        collisionLevel = GetComponent<CollisionLevel>();
         _life = UiController.self.Life; /*To Do: Pog*/
     }
 
@@ -193,10 +197,8 @@ public class Player : MonoBehaviour {
             if (!(waitShootFinish && !waitToMove)) {
                     
                 Vector2 targetVector = fixedMove != Vector2.zero ? fixedMove : controller.Direction;
-                    
                 _anim.SetFloat("Horizontal", targetVector.x);
                 _anim.SetFloat("Vertical", targetVector.y);
-
                 checkFlip();
             }
 
@@ -207,14 +209,12 @@ public class Player : MonoBehaviour {
                 if (watchShoot != null) StopCoroutine(watchShoot);
                 watchShoot = StartCoroutine(WaitShootAnimationFinish());
             }
-
             if (controller.OnShooting && !waitToNewShoot) {
                 StartCoroutine(WaitShootAnimationStart());
 
                 _anim.SetTrigger("OnShoot");
                 _anim.SetBool("OnDraw", false);
             }
-
             //Checa o estado de se machucar
             if (OnHurt) {
                 waitToMove = true;
@@ -402,20 +402,21 @@ public class Player : MonoBehaviour {
         Vector3 d = v.normalized;
         Vector3 spawn = transform.position + d * (Game.PLAYER_DIST_SHOOT * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
         spawn += (Vector3) PLAYER_SHOOT_DIFERENCE;
-
-        GameObject shootGO = (GameObject) Instantiate(
+        /*
+        GameObject shootGO = (GameObject)Instantiate(
             Resources.Load<GameObject>("Shoots/Nim/shoot_1"),
             spawn, Quaternion.identity
+        );*/
+        GameObject shootGO = (GameObject) Instantiate(
+            shootPrefab,
+            spawn, Quaternion.identity
         );
-
         ShootMove shoot = shootGO.GetComponent<ShootMove>();
+        shoot.collisionLevel.Level = collisionLevel.Level;
         shoot.damage = controller.LastTimeInCharge >= 1.5f ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
-
         var x = Mathf.Clamp(controller.LastTimeInCharge, 1, 3);
-
         shoot.Direction = v;
         shoot.Distance = 8 * (x / 3);
-
         _sfx.Shoot(controller.LastTimeInCharge);
     }
 

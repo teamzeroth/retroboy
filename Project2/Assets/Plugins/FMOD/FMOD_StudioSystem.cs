@@ -363,7 +363,6 @@ public class FMOD_StudioSystem : MonoBehaviour
 		{
 			FMOD.Studio.UnityUtil.Log("__ SHUT DOWN FMOD SYSTEM __");
 			ERRCHECK(system.release());
-
             if (this == sInstance)
             {
                 sInstance = null;
