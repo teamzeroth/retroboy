@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class ShootMove : MonoBehaviour {
 
-    public Vector2 direction;
 
     public float distance = 0;
     public float speed;
@@ -15,11 +14,12 @@ public class ShootMove : MonoBehaviour {
     public bool hasCollider = false;
     public bool hasLostForce = false;
 
+    [HideInInspector] public Vector2 direction;
+    public CollisionLevel collisionLevel;
     [HideInInspector] public bool flipped;
     [HideInInspector] public bool destroied;
 
     private Vector2 startPosition;
-
     private Transform _feet;
     private ParticleSystem _particles;
     private ParticleSystem _collisionParticles;
@@ -32,11 +32,9 @@ public class ShootMove : MonoBehaviour {
 
             direction = value.normalized;                        
             transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-
             _feet.position = local;
         }
     }
-
     public float Distance {
         set {
             distance = value;
@@ -46,18 +44,16 @@ public class ShootMove : MonoBehaviour {
 
     #region MonoBehaviour
 
-    void Start() {
+    void Awake() {
         createFeetCollider();
 
         destroied = false;
         Direction = direction;
-
         //transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
         //_feet.RotateAround(transform.position, Vector3.forward, Mathf.Atan2(direction.y, direction.x) * -Mathf.Rad2Deg);
 
         if(transform.Find("Particles")) _particles = transform.Find("Particles").particleSystem;
         if(transform.Find("Collision Particles")) _collisionParticles = transform.Find("Collision Particles").particleSystem;
-
         _anim = GetComponent<Animator>();
     }
 
@@ -91,31 +87,44 @@ public class ShootMove : MonoBehaviour {
             _particles.SetParticlesVelocity(direction.normalized * speed * 0.5f);
     }
 
-    public void OnTriggerEnter2D(Collider2D trigger){
-        if (trigger.tag == "Enemy" && isPlayerAlly) {
+    public void OnTriggerEnter2D(Collider2D trigger)
+    {
 
-            if (trigger.GetComponent<Enemy>() != null) {
-                trigger.GetComponent<Enemy>().Hit(damage, direction);
-                DestroyMove();
+        CollisionLevel Collision = trigger.GetComponent<CollisionLevel>();
+        if (Collision.Level == collisionLevel.Level)
+        {
+            if (trigger.tag == "Enemy" && isPlayerAlly)
+            {
+                if (trigger.GetComponent<Enemy>() != null)
+                {
+                    trigger.GetComponent<Enemy>().Hit(damage, direction);
+                    DestroyMove();
+                }
             }
-
-            if (trigger.GetComponent<BaseEnemy>() != null) {
+            if (trigger.GetComponent<BaseEnemy>() != null)
+            {
                 trigger.GetComponent<BaseEnemy>().OnTakeDamage(this, trigger);
                 DestroyMove();
             }
-
+            // if the shoot collides with the wall ,it's destroyed.
+            if (trigger.gameObject.tag == "Wall")
+            {
+                DestroyMove();
+            }
+            if (trigger.tag == "Player" && !isPlayerAlly)
+            {
+                Player player = trigger.GetComponent<Player>();
+                if (collisionLevel.Level == player.collisionLevel.Level)
+                {
+                    player.OnGetHit(this, trigger);
+                    DestroyMove();
+                }
+            }
         }
-
-        if (trigger.tag == "Player" && !isPlayerAlly) {
-            Player player = trigger.GetComponent<Player>();
-            player.OnGetHit(this, trigger);
-            DestroyMove();
-        }
-
+    }
         /*if (trigger.gameObject.layer == LayerMask.NameToLayer("Level")) {
             DestroyMove();
-        }*/
-    }   
+        }*/   
 
     /*public void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag == "Player" && !isPlayerAlly) {
@@ -131,12 +140,12 @@ public class ShootMove : MonoBehaviour {
     #endregion
 
     #region Messages
-
+    /*
     public void OnCollisionListener(Collider2D trigger) {
         if (trigger.gameObject.layer == LayerMask.NameToLayer("Level")) {
             DestroyMove();
         }
-    }
+    }*/
 
     public void OnFinishDestroyAnimation() {
         destroied = true;
@@ -195,7 +204,6 @@ public class ShootMove : MonoBehaviour {
         _collisionParticles.Emit(count);
         ParticleSystem.Particle[] p = new ParticleSystem.Particle[count];
         _collisionParticles.GetParticles(p);
-
         Vector2 v = direction.normalized * -speed * 0.5f;
 
         for (int i = 0; i < count; i++)

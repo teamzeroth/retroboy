@@ -9,22 +9,24 @@ namespace MapResources {
     public class Door : MonoBehaviour {
 
         public static Dictionary<string, Door> doors = new Dictionary<string, Door>();
-
         public Direction Out;
         public Direction In;
-
         public float ForceOut;
         public float ForceIn;
         public string GoTo;
         public string Scene;
         public int Level;
-
+       [HideInInspector]CollisionLevel collisionLevel;
         private Player _player = null;
 
         void Awake() {
             if (!string.IsNullOrEmpty(name)) doors.Add(name, this);
-        }
 
+        }
+        void Start()
+        {
+            collisionLevel = GetComponent<CollisionLevel>();
+        }
         public void Init(MapObject door) {
             if (door.HasProperty("name")) name = door.GetPropertyAsString("name");
 
@@ -77,6 +79,7 @@ namespace MapResources {
         }
 
         public void GetOut(Player player) {
+            player.collisionLevel.Level = collisionLevel.Level;
             Camera.main.GetComponent<SmoothFollow>().target = player.transform;
 
             _player = player;
