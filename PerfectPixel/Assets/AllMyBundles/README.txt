@@ -1,1 +1,0 @@
-This is where the asset bundles will be located after being built.
