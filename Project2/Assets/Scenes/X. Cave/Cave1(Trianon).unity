@@ -1806,8 +1806,8 @@ Transform:
   m_LocalPosition: {x: 16.6041565, y: -9.88540649, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1052416976}
-  m_RootOrder: 0
+  m_Father: {fileID: 1683470858}
+  m_RootOrder: 1
 --- !u!68 &153122130
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -9121,8 +9121,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 153122129}
+  m_Children: []
   m_Father: {fileID: 746313543}
   m_RootOrder: 12
 --- !u!43 &1058548387
@@ -12740,9 +12739,9 @@ PolygonCollider2D:
       - {x: 6.76357269, y: 4.41313314}
       - {x: 4.51273346, y: 3.26441288}
       - {x: 6.71410751, y: 4.3055501}
-      - {x: 6.72739029, y: 2.21799946}
-      - {x: -.0171146393, y: -.964962959}
-      - {x: -6.45536423, y: 2.23825741}
+      - {x: 6.77790642, y: 3.3798914}
+      - {x: .0334033966, y: .398997307}
+      - {x: -6.50588036, y: 3.40014935}
       - {x: -6.51711845, y: 4.32902765}
       - {x: .090171814, y: 1.46171284}
 --- !u!1 &1567023071
@@ -13241,6 +13240,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 324484069}
+  - {fileID: 153122129}
   m_Father: {fileID: 746313543}
   m_RootOrder: 11
 --- !u!43 &1689251838
