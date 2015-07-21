@@ -14,10 +14,13 @@ public class ShootMove : MonoBehaviour {
     public bool hasCollider = false;
     public bool hasLostForce = false;
 
-    [HideInInspector] public Vector2 direction;
+    [HideInInspector]
+    public Vector2 direction;
     public CollisionLevel collisionLevel;
-    [HideInInspector] public bool flipped;
-    [HideInInspector] public bool destroied;
+    [HideInInspector]
+    public bool flipped;
+    [HideInInspector]
+    public bool destroied;
 
     private Vector2 startPosition;
     private Transform _feet;
@@ -30,7 +33,7 @@ public class ShootMove : MonoBehaviour {
             if (_feet == null) _feet = transform.GetComponent<SortingMoveableLayer>().positionPoint;
             Vector3 local = _feet.position;
 
-            direction = value.normalized;                        
+            direction = value.normalized;
             transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
             _feet.position = local;
         }
@@ -44,7 +47,7 @@ public class ShootMove : MonoBehaviour {
 
     #region MonoBehaviour
 
-    void Awake() {
+    void Start() {
         createFeetCollider();
 
         destroied = false;
@@ -52,25 +55,26 @@ public class ShootMove : MonoBehaviour {
         //transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
         //_feet.RotateAround(transform.position, Vector3.forward, Mathf.Atan2(direction.y, direction.x) * -Mathf.Rad2Deg);
 
-        if(transform.Find("Particles")) _particles = transform.Find("Particles").particleSystem;
-        if(transform.Find("Collision Particles")) _collisionParticles = transform.Find("Collision Particles").particleSystem;
+        if (collisionLevel == null) collisionLevel = GetComponent<CollisionLevel>();
+        if (transform.Find("Particles")) _particles = transform.Find("Particles").particleSystem;
+        if (transform.Find("Collision Particles")) _collisionParticles = transform.Find("Collision Particles").particleSystem;
         _anim = GetComponent<Animator>();
     }
 
-        void createFeetCollider() {
-            if (transform.GetComponent<SortingMoveableLayer>() == null) return;
+    void createFeetCollider() {
+        if (transform.GetComponent<SortingMoveableLayer>() == null) return;
 
-            _feet = transform.GetComponent<SortingMoveableLayer>().positionPoint;
+        _feet = transform.GetComponent<SortingMoveableLayer>().positionPoint;
 
-            CircleCollider2D feetCollider = _feet.gameObject.AddComponent<CircleCollider2D>();
-            CollisionListener listener = _feet.gameObject.AddComponent<CollisionListener>();
+        CircleCollider2D feetCollider = _feet.gameObject.AddComponent<CircleCollider2D>();
+        CollisionListener listener = _feet.gameObject.AddComponent<CollisionListener>();
 
-            feetCollider.radius = Mathf.Min(collider2D.bounds.extents.x, collider2D.bounds.extents.y);
-            feetCollider.isTrigger = collider2D.isTrigger;
+        feetCollider.radius = Mathf.Min(collider2D.bounds.extents.x, collider2D.bounds.extents.y);
+        feetCollider.isTrigger = collider2D.isTrigger;
 
-            listener.Layer = LayerMask.NameToLayer("Level");
-            listener.Father = gameObject;
-        }
+        listener.Layer = LayerMask.NameToLayer("Level");
+        listener.Father = gameObject;
+    }
 
     void Update() {
         if (!destroied)
@@ -79,52 +83,45 @@ public class ShootMove : MonoBehaviour {
         if (distance != 0 && Vector2.Distance(startPosition, transform.position) >= distance) {
             DestroyMove(false);
         }
-           
+
     }
 
     void LateUpdate() {
         if (_particles == null) return;
-            _particles.SetParticlesVelocity(direction.normalized * speed * 0.5f);
+        _particles.SetParticlesVelocity(direction.normalized * speed * 0.5f);
     }
 
-    public void OnTriggerEnter2D(Collider2D trigger)
-    {
+    public void OnTriggerEnter2D(Collider2D trigger) {
 
-        CollisionLevel Collision = trigger.GetComponent<CollisionLevel>();
-        if (Collision.Level == collisionLevel.Level)
-        {
-            if (trigger.tag == "Enemy" && isPlayerAlly)
-            {
-                if (trigger.GetComponent<Enemy>() != null)
-                {
+        CollisionLevel collision = trigger.GetComponent<CollisionLevel>();
+
+        if (collisionLevel == null || collision.Level == collisionLevel.Level) {
+            if (trigger.tag == "Enemy" && isPlayerAlly) {
+                if (trigger.GetComponent<Enemy>() != null) {
                     trigger.GetComponent<Enemy>().Hit(damage, direction);
                     DestroyMove();
                 }
             }
-            if (trigger.GetComponent<BaseEnemy>() != null)
-            {
+            if (trigger.GetComponent<BaseEnemy>() != null) {
                 trigger.GetComponent<BaseEnemy>().OnTakeDamage(this, trigger);
                 DestroyMove();
             }
             // if the shoot collides with the wall ,it's destroyed.
-            if (trigger.gameObject.tag == "Wall")
-            {
+            if (trigger.gameObject.tag == "Wall") {
                 DestroyMove();
             }
-            if (trigger.tag == "Player" && !isPlayerAlly)
-            {
+            if (trigger.tag == "Player" && !isPlayerAlly) {
                 Player player = trigger.GetComponent<Player>();
-                if (collisionLevel.Level == player.collisionLevel.Level)
-                {
-                    player.OnGetHit(this, trigger);
-                    DestroyMove();
-                }
+                //if (collisionLevel.Level == player.collisionLevel.Level) {
+                player.OnGetHit(this, trigger);
+                DestroyMove();
+                //}
             }
         }
     }
-        /*if (trigger.gameObject.layer == LayerMask.NameToLayer("Level")) {
-            DestroyMove();
-        }*/   
+    /*if (trigger.gameObject.layer == LayerMask.NameToLayer("Level")) {
+        DestroyMove();
+    }*/
 
     /*public void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag == "Player" && !isPlayerAlly) {
@@ -163,7 +160,7 @@ public class ShootMove : MonoBehaviour {
     public void DestroyMove(bool collided = true) {
         if (collided) {
 
-            if (_particles != null)  _particles.gameObject.SetActive(false);
+            if (_particles != null) _particles.gameObject.SetActive(false);
             if (_collisionParticles != null) setCollisionPartiles();
 
             if (_anim != null && hasCollider) {
@@ -176,7 +173,7 @@ public class ShootMove : MonoBehaviour {
             destroied = true;
 
         } else {
-            
+
             if (_anim != null && hasLostForce) {
                 _anim.SetTrigger("LostForce");
 
@@ -185,7 +182,7 @@ public class ShootMove : MonoBehaviour {
 
                 DOTween.To(() => direction, x => direction = x, Vector2.zero, .5f).OnComplete(() => {
                     OnFinishDestroyAnimation();
-                });                
+                });
             }
         }
     }

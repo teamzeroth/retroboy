@@ -58,7 +58,7 @@ public class EnemiesRadar : MonoBehaviour {
         if (!_player.OnDie) {
             enemy.OnDistanceWithPlayer(
                 transform,
-                Vector3.Distance(transform.parent.position, other.transform.position)
+                Vector2.Distance(transform.parent.position, other.transform.position)
             );
         } else {
             enemy.LostPlayer(_player.transform);
@@ -67,7 +67,7 @@ public class EnemiesRadar : MonoBehaviour {
 
     public void OnTriggerExit2D(Collider2D other) {
         BaseEnemy enemy = other.GetComponent<BaseEnemy>();
-        if (enemy != null)  findedEnemys.Remove(enemy);      
+        if (enemy != null) findedEnemys.Remove(enemy);
     }
 
     public void OnDestroyEnemy(BaseEnemy enemy) {

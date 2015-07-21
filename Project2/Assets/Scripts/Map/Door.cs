@@ -9,24 +9,27 @@ namespace MapResources {
     public class Door : MonoBehaviour {
 
         public static Dictionary<string, Door> doors = new Dictionary<string, Door>();
+
         public Direction Out;
         public Direction In;
         public float ForceOut;
         public float ForceIn;
         public string GoTo;
         public string Scene;
-        public int Level;
-       [HideInInspector]CollisionLevel collisionLevel;
+
+
+        CollisionLevel collisionLevel;
+
         private Player _player = null;
 
         void Awake() {
             if (!string.IsNullOrEmpty(name)) doors.Add(name, this);
-
         }
-        void Start()
-        {
+
+        void Start() {
             collisionLevel = GetComponent<CollisionLevel>();
         }
+
         public void Init(MapObject door) {
             if (door.HasProperty("name")) name = door.GetPropertyAsString("name");
 
@@ -38,7 +41,6 @@ namespace MapResources {
 
             GoTo = door.GetPropertyAsString("go to");
             Scene = door.GetPropertyAsString("scene");
-            Level = door.GetPropertyAsInt("level", 0);
         }
 
         public void OnDrawGizmos() {
@@ -61,7 +63,7 @@ namespace MapResources {
 
         public void AfterOut() {
             //if (string.IsNullOrEmpty(goTo)) collider2D.isTrigger = false;
-            _player.GetComponent<SpriteRenderer>().sortingOrder = Level;
+            _player.GetComponent<SpriteRenderer>().sortingOrder = collisionLevel.Level;
             _player = null;
         }
 
@@ -95,13 +97,13 @@ namespace MapResources {
         }
 
         public Vector2 CalcInDirection(string state) {
-            Direction /*direction*/ d = Direction.CC; 
+            Direction /*direction*/ d = Direction.CC;
             float /*force*/ f = 1;
 
             if (state.CompareTo("in") == 0) {
                 d = In;
                 f = ForceIn;
-            }else if(state.CompareTo("out") == 0){
+            } else if (state.CompareTo("out") == 0) {
                 d = Out;
                 f = ForceOut;
             }

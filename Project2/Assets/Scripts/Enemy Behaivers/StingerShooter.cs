@@ -27,10 +27,14 @@ public class StingerShooter : BaseEnemy {
 
     private int initLife;
 
-    [HideInInspector] public bool OnShooting = false;
-    [HideInInspector] public bool OnLostPlayer = false;
-    [HideInInspector] public bool OnDie = false;
-    [HideInInspector] private bool AfterShoot = false;
+    [HideInInspector]
+    public bool OnShooting = false;
+    [HideInInspector]
+    public bool OnLostPlayer = false;
+    [HideInInspector]
+    public bool OnDie = false;
+    [HideInInspector]
+    private bool AfterShoot = false;
 
     private Coroutine watchTarget;
 
@@ -52,7 +56,7 @@ public class StingerShooter : BaseEnemy {
     }
 
     void LateUpdate() {
-        _sfx.Voo();
+        //_sfx.Voo();
 
         if (!OnShooting) {
             currTime += Time.deltaTime;
@@ -68,9 +72,9 @@ public class StingerShooter : BaseEnemy {
         base.OnDrawGizmosSelected();
 
         Gizmos.color = Color.red;
-        float[,] vectors = new float[8, 2] { {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}, {-1, 0}, {-1, 1} };
+        float[,] vectors = new float[8, 2] { { 0, 1 }, { 1, 1 }, { 1, 0 }, { 1, -1 }, { 0, -1 }, { -1, -1 }, { -1, 0 }, { -1, 1 } };
 
-        for(int i = 0; i < 8; i++){
+        for (int i = 0; i < 8; i++) {
             Vector3 a = new Vector3(vectors[i, 0], vectors[i, 1], 0);
             Vector3 b = new Vector3(vectors[(i + 1) % 8, 0], vectors[(i + 1) % 8, 1], 0);
 
@@ -90,83 +94,85 @@ public class StingerShooter : BaseEnemy {
 
         if (!OnShooting) UpdateMove();
         else UpdateMoveSleep();
-    }   
+    }
 
-        void applySenoide() {
-            Vector3 senoid = initPos + new Vector3(0, 0.1f, 0) * Mathf.Sin((randomTime + currTime) * 4);
-            GetComponent<CircleCollider2D>().center = senoid;
-            _renderer.localPosition = senoid;
+    void applySenoide() {
+        Vector3 senoid = initPos + new Vector3(0, 0.1f, 0) * Mathf.Sin((randomTime + currTime) * 4);
+        GetComponent<CircleCollider2D>().center = senoid;
+        _renderer.localPosition = senoid;
+
+    }
+
+    Vector2 toIntercept;
+    void UpdateMove() {
+        if (target == null || target.rigidbody2D == null) {
+            rigidbody2D.velocity = (Vector2)impulseForce * 0.3f;
+            return;
         }
 
-        Vector2 toIntercept;
-        void UpdateMove() {
-            if (target == null || target.rigidbody2D == null) {
-                rigidbody2D.velocity = (Vector2)impulseForce * 0.3f;
-                return;
-            }
+        /* Controlhe de angulo do Stinger Shooter */
+        {
+            if (target.rigidbody2D.velocity != Vector2.zero)
+                // ----O que seria o DeadDirection?----
+                toIntercept = target.GetComponent<Player>().DeadDirection.normalized;
 
-            /* Controlhe de angulo do Stinger Shooter */ {
-                if (target.rigidbody2D.velocity != Vector2.zero)
-                    // ----O que seria o DeadDirection?----
-                    toIntercept = target.GetComponent<Player>().DeadDirection.normalized;
+            // ----toIntercept é o qua falta para chegar em Intercept, e Intercept seria o que?----
+            float currAngle = Mathf.LerpAngle(
+                (360 + Mathf.Atan2(intercept.y, intercept.x) * Mathf.Rad2Deg) % 360,
+                (360 + Mathf.Atan2(toIntercept.y, toIntercept.x) * Mathf.Rad2Deg) % 360,
+                Time.deltaTime
+            );
 
-                // ----toIntercept é o qua falta para chegar em Intercept, e Intercept seria o que?----
-                float currAngle = Mathf.LerpAngle(
-                    (360 + Mathf.Atan2(intercept.y, intercept.x) * Mathf.Rad2Deg) % 360,
-                    (360 + Mathf.Atan2(toIntercept.y, toIntercept.x) * Mathf.Rad2Deg) % 360,
-                    Time.deltaTime 
-                );
-
-                // ----Set é muito melhor que o "= new Vector2" ?----
-                intercept.Set(Mathf.Cos(currAngle * Mathf.Deg2Rad), Mathf.Sin(currAngle * Mathf.Deg2Rad));
-            }
-
-            Vector2 direction = intercept * DISTANCE_TO_TARGET;
-
-            // Limite de velocidade
-            //direction = Vector2.ClampMagnitude(direction, MAX_VELOCITY);
-
-            if (impulseForce != Vector3.zero) direction += (Vector2)impulseForce * 0.3f;
-
-            velocity = (direction - lastDirection);
-            // ----Porque zerar a velocidade se a magnitude dela ja é pequena d+?----
-            velocity = velocity.magnitude > 0.01f ? velocity.normalized : Vector2.zero;
-            lastDirection = direction;
-
-            // ----Porque usar o target.position + direction? O target.positio nao seria suficiente?----
-            direction = Vector2.Lerp(transform.position, (Vector2)target.position + direction, Time.deltaTime / 2);
-            
-
-            rigidbody2D.MovePosition(direction);
-            //rigidbody2D.velocity = (((Vector2)target.position + direction) - (Vector2) transform.position).normalized * speed;
+            // ----Set é muito melhor que o "= new Vector2" ?----
+            intercept.Set(Mathf.Cos(currAngle * Mathf.Deg2Rad), Mathf.Sin(currAngle * Mathf.Deg2Rad));
         }
 
-        void UpdateMoveSleep() {
-            velocity = Vector2.ClampMagnitude(velocity, MAX_VELOCITY);
+        Vector2 direction = intercept * DISTANCE_TO_TARGET;
 
-            velocity = Vector2.Lerp(velocity, Vector2.zero, Time.deltaTime);
-            // ----Apesar de diminuir a velocidade linearmente, voce ainda mantem a força aplicada, né isso?----
-            rigidbody2D.velocity = velocity + (Vector2)impulseForce * 0.5f;
+        // Limite de velocidade
+        //direction = Vector2.ClampMagnitude(direction, MAX_VELOCITY);
 
-            //Vector2 direction = Vector2.Lerp(transform.position, (Vector2)target.position + velocity, Time.deltaTime * speed);            
+        if (impulseForce != Vector3.zero) direction += (Vector2)impulseForce * 0.3f;
+
+        velocity = (direction - lastDirection);
+        // ----Porque zerar a velocidade se a magnitude dela ja é pequena d+?----
+        velocity = velocity.magnitude > 0.01f ? velocity.normalized : Vector2.zero;
+        lastDirection = direction;
+
+        // ----Porque usar o target.position + direction? O target.positio nao seria suficiente?----
+        direction = Vector2.Lerp(transform.position, (Vector2)target.position + direction, Time.deltaTime / 2);
+
+
+        rigidbody2D.MovePosition(direction);
+        //rigidbody2D.velocity = (((Vector2)target.position + direction) - (Vector2) transform.position).normalized * speed;
+    }
+
+    void UpdateMoveSleep() {
+        velocity = Vector2.ClampMagnitude(velocity, MAX_VELOCITY);
+
+        velocity = Vector2.Lerp(velocity, Vector2.zero, Time.deltaTime);
+        // ----Apesar de diminuir a velocidade linearmente, voce ainda mantem a força aplicada, né isso?----
+        rigidbody2D.velocity = velocity + (Vector2)impulseForce * 0.5f;
+
+        //Vector2 direction = Vector2.Lerp(transform.position, (Vector2)target.position + velocity, Time.deltaTime * speed);            
+    }
+
+    void UpdateAnimation() {
+        Vector2 direction = target != null ?
+            (Vector2)(target.position - transform.position).normalized :
+            intercept * -1;
+
+        if (life <= initLife * BROKEN) {
+            // ----Porque ficar atualizando a posição (no plano e no frame) da fumaça se ela ainda não vai ser usada?----
+            float time = _smoke.GetComponent<SimpleAnimatior>().NormalizeTime;
+
+            _smoke.localPosition = (Vector3)direction * -.6f + Vector3.up * 1 * time;
+            _smoke.GetComponent<SortingMoveableLayer>().Position = transform.Find("feets").position.y + direction.y * -.6f;
         }
 
-        void UpdateAnimation() {
-            Vector2 direction = target != null ?
-                (Vector2)(target.position - transform.position).normalized :
-                intercept * -1;
-
-            if (life <= initLife * BROKEN) {
-                // ----Porque ficar atualizando a posição (no plano e no frame) da fumaça se ela ainda não vai ser usada?----
-                float time = _smoke.GetComponent<SimpleAnimatior>().NormalizeTime;
-
-                _smoke.localPosition = (Vector3) direction * -.6f + Vector3.up * 1 * time;
-                _smoke.GetComponent<SortingMoveableLayer>().Position = transform.Find("feets").position.y + direction.y * -.6f;
-            }
-
-            _anim.SetFloat("Horizontal", direction.x);
-            _anim.SetFloat("Vertical", direction.y);
-        }
+        _anim.SetFloat("Horizontal", direction.x);
+        _anim.SetFloat("Vertical", direction.y);
+    }
 
     #endregion
 
@@ -233,7 +239,8 @@ public class StingerShooter : BaseEnemy {
         //----Porque usar o Max entre o x e y de d? Nao seria melhor usar o _shootspawn direto como o lugar que o tiro deveria aparecer?
         Vector3 spawn = _shootspawn.position + d * (START_DISTANCE_OF_SHOOT * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
 
-        /*Spawn a shoot */{
+        /*Spawn a shoot */
+        {
             GameObject shootGO = (GameObject)Instantiate(
                 Resources.Load<GameObject>("Shoots/EnemySimple"),
                 spawn, Quaternion.identity
@@ -256,12 +263,12 @@ public class StingerShooter : BaseEnemy {
 
         while ((fistTime || self == watchTarget) && !OnLostPlayer) {
             yield return new WaitForSeconds(timeToShoot);
-            
+
             OnShooting = true;
             AfterShoot = true;
 
             var i = 0;
-           
+
             yield return new WaitForSeconds(0.5f);
 
             while (i < shootTimes) {
