@@ -2599,6 +2599,7 @@ namespace X_UniTMX
 					float zDepth = obj.GetPropertyAsFloat(indexPrefab + Property_PrefabZDepth);
 					GameObject newPrefab = UnityEngine.Object.Instantiate(resourceObject) as GameObject;
 
+                    print(obj.ge)
 					newPrefab.transform.parent = obj.ParentObjectLayer != null ? obj.ParentObjectLayer.LayerGameObject.transform : MapObject.transform;
 					newPrefab.transform.localPosition = TiledPositionToWorldPoint(new Vector3(obj.Bounds.center.x, obj.Bounds.center.y, zDepth));
 
