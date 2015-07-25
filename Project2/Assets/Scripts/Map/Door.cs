@@ -90,7 +90,7 @@ namespace MapResources {
             _player.StartFixedMove(direction, direction, Game.DOOR_ANIMATION_TIME, new Color(1, 1, 1, 1));
             _player.DeadDirection = direction;
 
-            Vector3 colliderCenter = (Vector3)(_player.collider2D as CircleCollider2D).center;
+            Vector3 colliderCenter = (Vector3)(_player.GetComponent<Collider2D>() as CircleCollider2D).offset;
             _player.transform.position = GetComponent<Collider2D>().bounds.center - colliderCenter;
 
             Invoke("AfterOut", Game.DOOR_ANIMATION_TIME + 0.1f);
@@ -110,7 +110,7 @@ namespace MapResources {
 
             if (d == Direction.CC) {
                 Vector2 boundCenter = (Vector2)GetComponent<Collider2D>().bounds.center;
-                Vector2 playerPosition = (Vector2)_player.collider2D.bounds.center;
+                Vector2 playerPosition = (Vector2)_player.GetComponent<Collider2D>().bounds.center;
 
                 return (boundCenter - playerPosition).normalized / 2;
             } else {

@@ -12,7 +12,7 @@ public class GrowAndFade : MonoBehaviour {
     private Tweener currentColor;
 
     public void OnEnable() {
-        SpriteRenderer r = (SpriteRenderer) renderer;
+        SpriteRenderer r = (SpriteRenderer) GetComponent<Renderer>();
 
         Color c = r.color;
         r.color = new Color(c.r, c.g, c.b, 1);

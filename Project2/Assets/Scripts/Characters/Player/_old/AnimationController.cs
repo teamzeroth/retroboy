@@ -124,7 +124,7 @@ public class AnimationController : MonoBehaviour {
         _anim.SetFloat("Horizontal", fixedMoveVec.x);
         _anim.SetFloat("Vertical", fixedMoveVec.y);
 
-        rigidbody2D.velocity = (Vector3)fixedMoveVec;
+        GetComponent<Rigidbody2D>().velocity = (Vector3)fixedMoveVec;
         CheckFlip(fixedMoveVec);
     }
 
@@ -138,7 +138,7 @@ public class AnimationController : MonoBehaviour {
         }
 
         Vector2 dir = (NormalState ? moveVec : Vector2.zero) * speed;
-        Vector2 curDir = rigidbody2D.velocity;
+        Vector2 curDir = GetComponent<Rigidbody2D>().velocity;
 
         float value = Mathf.Abs(Mathf.DeltaAngle(
             Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg,
@@ -148,18 +148,18 @@ public class AnimationController : MonoBehaviour {
         frictionValue = moveVec == Vector2.zero || curDir == Vector2.zero ? 0 : value / 180;
 
         if (!Input.GetButton("Horizontal") && !Input.GetButton("Vertical")) {
-            rigidbody2D.velocity = Vector2.Lerp(curDir, dir, 20 * Time.deltaTime);
+            GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(curDir, dir, 20 * Time.deltaTime);
             return;
         }
 
         if (moveVec != curDir)
-            rigidbody2D.velocity = Vector2.Lerp(curDir, dir, Mathf.Max(0.3f, 1 - frictionValue) * 20 * Time.deltaTime);
+            GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(curDir, dir, Mathf.Max(0.3f, 1 - frictionValue) * 20 * Time.deltaTime);
     }
 
     public void MakeFixedMove(Vector2 position, float duration, Color color) {
         MakeFixedMove(position, duration);
 
-        SpriteRenderer spriteRenderer = (SpriteRenderer)renderer;
+        SpriteRenderer spriteRenderer = (SpriteRenderer)GetComponent<Renderer>();
         spriteRenderer.DOColor(color, duration).SetEase(Ease.OutCubic);
     }
 
@@ -180,7 +180,7 @@ public class AnimationController : MonoBehaviour {
         yield return new WaitForSeconds(waitTime);
 
         fixedMoveVec = Vector2.zero;
-        rigidbody2D.velocity = Vector2.zero;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         _anim.speed = 1;
         OnHurt = false;
 
@@ -189,11 +189,11 @@ public class AnimationController : MonoBehaviour {
 
     private bool waitDraw = false;
     public void Animation(Vector2 moveVec) {
-        _anim.SetBool("OnMoving", OnMoving && (rigidbody2D.velocity != Vector2.zero || DrawState));
+        _anim.SetBool("OnMoving", OnMoving && (GetComponent<Rigidbody2D>().velocity != Vector2.zero || DrawState));
         _anim.SetBool("OnHurt", OnHurt);
 
         if (fixedMoveVec == Vector2.zero) {
-            if(waitDraw == true && rigidbody2D.velocity == Vector2.zero){
+            if(waitDraw == true && GetComponent<Rigidbody2D>().velocity == Vector2.zero){
                 _anim.SetBool("OnDraw", true);
                 waitDraw = false;
             } else {
@@ -210,10 +210,10 @@ public class AnimationController : MonoBehaviour {
         //Vector2 pv = rigidbody2D.GetPointVelocity((Vector2) collider2D.bounds.center);
 
         if (NormalState && ForcingMove) {
-            _anim.speed = 0.3f + Mathf.Clamp01(rigidbody2D.velocity.magnitude) * 0.7f;
+            _anim.speed = 0.3f + Mathf.Clamp01(GetComponent<Rigidbody2D>().velocity.magnitude) * 0.7f;
 
-            _anim.SetFloat("Horizontal", rigidbody2D.velocity.normalized.x);
-            _anim.SetFloat("Vertical", rigidbody2D.velocity.normalized.y);
+            _anim.SetFloat("Horizontal", GetComponent<Rigidbody2D>().velocity.normalized.x);
+            _anim.SetFloat("Vertical", GetComponent<Rigidbody2D>().velocity.normalized.y);
         }else if(ForcingMove){
             _anim.speed = 1;
 
@@ -257,7 +257,7 @@ public class AnimationController : MonoBehaviour {
             Time.timeScale = 0f;
             if(ui != null) ui.SetActive(true);
         }else
-            rigidbody2D.AddForce(direction * 2f, ForceMode2D.Impulse);
+            GetComponent<Rigidbody2D>().AddForce(direction * 2f, ForceMode2D.Impulse);
         
 //        Camera.main.GetComponent<Director>().updateLife(life);
     }

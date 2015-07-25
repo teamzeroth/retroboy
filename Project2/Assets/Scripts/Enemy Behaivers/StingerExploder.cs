@@ -42,7 +42,7 @@ public class StingerExploder : BaseEnemy {
         void applySenoide() {
             Vector3 senoid = initialPos + new Vector3(0, 0.2f, 0) * Mathf.Sin((randomTime + Time.time) * 2);
 
-            GetComponent<CircleCollider2D>().center = senoid;
+            GetComponent<CircleCollider2D>().offset = senoid;
 
             _renderer.localPosition = senoid;
             _explosion.localPosition = senoid;
@@ -54,7 +54,7 @@ public class StingerExploder : BaseEnemy {
             if (target != null)direction = (target.position - transform.position).normalized * speed;
             Vector3 currentDirection = impulseForce != Vector3.zero ? (direction + impulseForce * 0.75f) / 2 : direction;
 
-            rigidbody2D.MovePosition(transform.position + currentDirection * Time.deltaTime);
+            GetComponent<Rigidbody2D>().MovePosition(transform.position + currentDirection * Time.deltaTime);
         }
 
         void UpdateAnimation(float currDistance) {

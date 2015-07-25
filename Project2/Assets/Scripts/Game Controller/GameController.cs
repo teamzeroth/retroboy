@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour {
         if (Door.doors.ContainsKey("MainDoor")) {
             _camera.target = Door.doors["MainDoor"].transform;
             _player.transform.position = Door.doors["MainDoor"].transform.position;
-            (_player.renderer as SpriteRenderer).color = Color.clear;
+            (_player.GetComponent<Renderer>() as SpriteRenderer).color = Color.clear;
         }
     }
 

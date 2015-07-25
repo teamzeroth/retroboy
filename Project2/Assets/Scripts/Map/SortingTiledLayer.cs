@@ -11,9 +11,9 @@ public class SortingTiledLayer : MonoBehaviour {
         GameObject feets = new GameObject("Feets");
 
         foreach (Transform tile in transform) {
-            if (tile.renderer.bounds.min.y < minY) minY = tile.renderer.bounds.min.y;
-            if (tile.renderer.bounds.min.x < minX) minX = tile.renderer.bounds.min.x;
-            if (tile.renderer.bounds.max.x > maxX) maxX = tile.renderer.bounds.max.x;
+            if (tile.GetComponent<Renderer>().bounds.min.y < minY) minY = tile.GetComponent<Renderer>().bounds.min.y;
+            if (tile.GetComponent<Renderer>().bounds.min.x < minX) minX = tile.GetComponent<Renderer>().bounds.min.x;
+            if (tile.GetComponent<Renderer>().bounds.max.x > maxX) maxX = tile.GetComponent<Renderer>().bounds.max.x;
 
             addSortingMoveableLayer(tile.gameObject, feets.transform);
         }
@@ -24,7 +24,7 @@ public class SortingTiledLayer : MonoBehaviour {
 
     void addSortingMoveableLayer(GameObject tile, Transform feets){
         SortingMoveableLayer sML = tile.AddComponent<SortingMoveableLayer>();
-        SpriteRenderer tileRenderer = (SpriteRenderer)tile.renderer;
+        SpriteRenderer tileRenderer = (SpriteRenderer)tile.GetComponent<Renderer>();
 
         sML.positionPoint = feets;
         sML.InitialOrder = 0;

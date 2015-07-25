@@ -35,7 +35,7 @@ public class MachineDog : Enemy {
     {
         if (seek)
         {
-            rigidbody2D.velocity = Vector2.right * movementDirection;
+            GetComponent<Rigidbody2D>().velocity = Vector2.right * movementDirection;
             seek = false;
             movementDirection *= -1f;
             transform.localScale = localScale;

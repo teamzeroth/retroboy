@@ -56,8 +56,8 @@ public class ShootMove : MonoBehaviour {
         //_feet.RotateAround(transform.position, Vector3.forward, Mathf.Atan2(direction.y, direction.x) * -Mathf.Rad2Deg);
 
         if (collisionLevel == null) collisionLevel = GetComponent<CollisionLevel>();
-        if (transform.Find("Particles")) _particles = transform.Find("Particles").particleSystem;
-        if (transform.Find("Collision Particles")) _collisionParticles = transform.Find("Collision Particles").particleSystem;
+        if (transform.Find("Particles")) _particles = transform.Find("Particles").GetComponent<ParticleSystem>();
+        if (transform.Find("Collision Particles")) _collisionParticles = transform.Find("Collision Particles").GetComponent<ParticleSystem>();
         _anim = GetComponent<Animator>();
     }
 
@@ -69,8 +69,8 @@ public class ShootMove : MonoBehaviour {
         CircleCollider2D feetCollider = _feet.gameObject.AddComponent<CircleCollider2D>();
         CollisionListener listener = _feet.gameObject.AddComponent<CollisionListener>();
 
-        feetCollider.radius = Mathf.Min(collider2D.bounds.extents.x, collider2D.bounds.extents.y);
-        feetCollider.isTrigger = collider2D.isTrigger;
+        feetCollider.radius = Mathf.Min(GetComponent<Collider2D>().bounds.extents.x, GetComponent<Collider2D>().bounds.extents.y);
+        feetCollider.isTrigger = GetComponent<Collider2D>().isTrigger;
 
         listener.Layer = LayerMask.NameToLayer("Level");
         listener.Father = gameObject;
@@ -78,7 +78,7 @@ public class ShootMove : MonoBehaviour {
 
     void Update() {
         if (!destroied)
-            rigidbody2D.velocity = direction * speed;
+            GetComponent<Rigidbody2D>().velocity = direction * speed;
 
         if (distance != 0 && Vector2.Distance(startPosition, transform.position) >= distance) {
             DestroyMove(false);
@@ -169,7 +169,7 @@ public class ShootMove : MonoBehaviour {
                 OnFinishDestroyAnimation();
             }
 
-            rigidbody2D.velocity = Vector3.zero;
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             destroied = true;
 
         } else {

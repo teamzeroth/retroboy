@@ -86,14 +86,14 @@ public class SortingMoveableLayer : MonoBehaviour {
         float dist = Vector2.Distance(transform.position, positionPoint.position);
 
         GameObject shadowGO = new GameObject("Shadow", typeof(SpriteRenderer));
-        SpriteRenderer shadowRenderer = shadowGO.renderer as SpriteRenderer;
+        SpriteRenderer shadowRenderer = shadowGO.GetComponent<Renderer>() as SpriteRenderer;
 
         _shadow = shadowGO.transform;
 
         shadowGO.transform.position = positionPoint.position;
         shadowGO.transform.parent = transform;
 
-        if (collider2D != null) shadowGO.transform.localScale = Vector3.back + (Vector3)collider2D.bounds.size * 4;
+        if (GetComponent<Collider2D>() != null) shadowGO.transform.localScale = Vector3.back + (Vector3)GetComponent<Collider2D>().bounds.size * 4;
 
         shadowRenderer.sprite = shadow;
         shadowRenderer.sortingLayerID = _renderer.GetComponent<SpriteRenderer>().sortingLayerID;

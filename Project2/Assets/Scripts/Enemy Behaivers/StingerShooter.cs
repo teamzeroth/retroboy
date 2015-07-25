@@ -98,21 +98,21 @@ public class StingerShooter : BaseEnemy {
 
     void applySenoide() {
         Vector3 senoid = initPos + new Vector3(0, 0.1f, 0) * Mathf.Sin((randomTime + currTime) * 4);
-        GetComponent<CircleCollider2D>().center = senoid;
+        GetComponent<CircleCollider2D>().offset = senoid;
         _renderer.localPosition = senoid;
 
     }
 
     Vector2 toIntercept;
     void UpdateMove() {
-        if (target == null || target.rigidbody2D == null) {
-            rigidbody2D.velocity = (Vector2)impulseForce * 0.3f;
+        if (target == null || target.GetComponent<Rigidbody2D>() == null) {
+            GetComponent<Rigidbody2D>().velocity = (Vector2)impulseForce * 0.3f;
             return;
         }
 
         /* Controlhe de angulo do Stinger Shooter */
         {
-            if (target.rigidbody2D.velocity != Vector2.zero)
+            if (target.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
                 // ----O que seria o DeadDirection?----
                 toIntercept = target.GetComponent<Player>().DeadDirection.normalized;
 
@@ -143,7 +143,7 @@ public class StingerShooter : BaseEnemy {
         direction = Vector2.Lerp(transform.position, (Vector2)target.position + direction, Time.deltaTime / 2);
 
 
-        rigidbody2D.MovePosition(direction);
+        GetComponent<Rigidbody2D>().MovePosition(direction);
         //rigidbody2D.velocity = (((Vector2)target.position + direction) - (Vector2) transform.position).normalized * speed;
     }
 
@@ -152,7 +152,7 @@ public class StingerShooter : BaseEnemy {
 
         velocity = Vector2.Lerp(velocity, Vector2.zero, Time.deltaTime);
         // ----Apesar de diminuir a velocidade linearmente, voce ainda mantem a força aplicada, né isso?----
-        rigidbody2D.velocity = velocity + (Vector2)impulseForce * 0.5f;
+        GetComponent<Rigidbody2D>().velocity = velocity + (Vector2)impulseForce * 0.5f;
 
         //Vector2 direction = Vector2.Lerp(transform.position, (Vector2)target.position + velocity, Time.deltaTime * speed);            
     }
@@ -210,7 +210,7 @@ public class StingerShooter : BaseEnemy {
         OnDie = true;
 
         // ----Porque dividir o vetor.up por 4?----
-        rigidbody2D.velocity = -Vector2.up / 2;
+        GetComponent<Rigidbody2D>().velocity = -Vector2.up / 2;
         //collider.enabled = false;
 
         _anim.SetTrigger("Die");

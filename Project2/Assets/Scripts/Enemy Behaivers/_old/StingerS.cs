@@ -86,7 +86,7 @@ public class StingerS : BaseEnemy
         print(pointDirection + " " + impulseForce);
         Vector3 currentDirection = (pointDirection + impulseForce) / 2;
 
-        rigidbody2D.MovePosition(transform.position + currentDirection * Time.deltaTime);
+        GetComponent<Rigidbody2D>().MovePosition(transform.position + currentDirection * Time.deltaTime);
     }
 
     void UpdateAnimation()

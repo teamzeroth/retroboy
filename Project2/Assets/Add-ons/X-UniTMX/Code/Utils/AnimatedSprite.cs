@@ -200,7 +200,7 @@ namespace X_UniTMX.Utils
 		// Use this for initialization
 		void OnEnable()
 		{
-			_thisRenderer = renderer as SpriteRenderer;
+			_thisRenderer = GetComponent<Renderer>() as SpriteRenderer;
 			_canAnimate = false;
 
 			if (AnimationMode == SpriteAnimationMode.BACKWARD || AnimationMode == SpriteAnimationMode.REVERSE_LOOP)

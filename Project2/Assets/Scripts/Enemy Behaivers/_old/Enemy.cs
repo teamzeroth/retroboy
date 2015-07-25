@@ -102,12 +102,12 @@ public class Enemy : MonoBehaviour {
         //Debug.Log("V: " + rigidbody2D.velocity + " | Vm: " + (double)rigidbody2D.velocity.magnitude + " | TV: " + target.rigidbody2D.velocity + " | TVm: " + (double)target.rigidbody2D.velocity.sqrMagnitude + " | TD: " + distance + " | Dest: " + destinationHeading + " | DestM: " + destinationHeading.sqrMagnitude);
         
         if (distance > 5f)
-            rigidbody2D.velocity = Vector2.zero;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         else if (pointSet) 
 		{
             if (destinationHeading.magnitude > 0.2f)
 //                                                                    Desacelera quanto mais perto do ponto se estiver
-                rigidbody2D.velocity = destinationDirection * speed * destinationHeading.magnitude / pointDistance;
+                GetComponent<Rigidbody2D>().velocity = destinationDirection * speed * destinationHeading.magnitude / pointDistance;
             else if (heading.magnitude > seekDistance) // se aproximar
                 pointSet = false;
             else // se parado
@@ -163,7 +163,7 @@ public class Enemy : MonoBehaviour {
         life -= damage;
         if (Debug.isDebugBuild)
             //Debug.Log("Enemy Life: " + life);
-        rigidbody2D.AddForce(direction * -2f, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(direction * -2f, ForceMode2D.Impulse);
         destroy = false;
         StartCoroutine(turnAttack(attackDelay));
         GetComponent<Animator>().SetBool("Shooting", false);

@@ -53,7 +53,7 @@ public static class Helper {
 
     public static string CurrentAnimState(this Animator _anim){
         try {
-            return _anim.GetCurrentAnimationClipState(0)[0].clip.name;
+            return _anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         } catch (System.Exception) {
             return "";
         }

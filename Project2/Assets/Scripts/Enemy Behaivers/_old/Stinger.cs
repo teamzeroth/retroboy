@@ -19,12 +19,12 @@ public class Stinger : Enemy
         //if (target.rigidbody2D.velocity.sqrMagnitude < 3f && distance <= seekDistance)
         if (destinationHeading.sqrMagnitude <= 1f && distance <= seekDistance)
 		{
-            if (target.rigidbody2D.velocity.sqrMagnitude < 1f)
+            if (target.GetComponent<Rigidbody2D>().velocity.sqrMagnitude < 1f)
                 walkTime = 0f;
             else if (walkTime == 0f)
                 walkTime = Time.time;
 
-			rigidbody2D.velocity = Vector2.zero; // Tem que ser zero pra o efeito ficar certo, mas causa problemas ao aplicar uma força (i.e. quando o inimigo toma um tiro)
+			GetComponent<Rigidbody2D>().velocity = Vector2.zero; // Tem que ser zero pra o efeito ficar certo, mas causa problemas ao aplicar uma força (i.e. quando o inimigo toma um tiro)
             if (seek)
             {
                 transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;

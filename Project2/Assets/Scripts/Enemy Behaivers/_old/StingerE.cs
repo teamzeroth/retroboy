@@ -11,7 +11,7 @@ public class StingerE : Enemy
 
         if (distance <= 1f)
         {
-            rigidbody2D.velocity = Vector2.zero;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;
             if (!attacking)
             {

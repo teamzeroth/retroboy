@@ -152,7 +152,7 @@ public class Player : MonoBehaviour {
 
     public bool BetaVisible {
         get { 
-            bool colorTest = ((SpriteRenderer) renderer).color != Color.clear;
+            bool colorTest = ((SpriteRenderer) GetComponent<Renderer>()).color != Color.clear;
             bool animationTest = _anim.CurrentAnimState().StartsWith("Nim-idle") || _anim.CurrentAnimState().StartsWith("Nim-run");
 
             return !OnHurt && !controller.OnSimulateMove && colorTest && animationTest; 
@@ -174,7 +174,7 @@ public class Player : MonoBehaviour {
     public void Start() {
         controller._player = transform;
         _anim = GetComponent<Animator>();
-        _sprite = (SpriteRenderer) renderer;
+        _sprite = (SpriteRenderer) GetComponent<Renderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _sfx = GetComponent<PlayerSFX>();
 
@@ -286,24 +286,24 @@ public class Player : MonoBehaviour {
     #region Messages
 
     public void Move(Vector3 deltaMovement){
-        rigidbody2D.velocity = deltaMovement;
+        GetComponent<Rigidbody2D>().velocity = deltaMovement;
     }
 
     public void Move2(Vector3 deltaMovement) {
         Vector3 move = transform.position + deltaMovement * Time.deltaTime;
-        rigidbody2D.MovePosition(move);
+        GetComponent<Rigidbody2D>().MovePosition(move);
     }
 
     public void DisableCollider(bool disable = false) {
-        collider2D.enabled = disable;
+        GetComponent<Collider2D>().enabled = disable;
     }
 
     public void StartFixedMove(Vector2 start, Vector2 to, float time, Color color, Ease ease = Ease.Linear) {
         StartFixedMove(start, to, time, ease);
         waitToMove = false;
 
-        ((SpriteRenderer)renderer).DOColor(color, time);
-        ((SpriteRenderer)transform.Find("Shadow").renderer).DOColor(color, time);
+        ((SpriteRenderer)GetComponent<Renderer>()).DOColor(color, time);
+        ((SpriteRenderer)transform.Find("Shadow").GetComponent<Renderer>()).DOColor(color, time);
     }
 
     public void StartFixedMove(Vector2 start, Vector2 to, float time, Ease ease = Ease.OutCirc) {
@@ -318,7 +318,7 @@ public class Player : MonoBehaviour {
             OnHurt = false;
             fixedMove = Vector2.zero;
             
-            collider2D.enabled = true;
+            GetComponent<Collider2D>().enabled = true;
 
             controller.InDash = false;
             controller.OnSimulateMove = false;
@@ -358,7 +358,7 @@ public class Player : MonoBehaviour {
         public void OnGetHit(BaseEnemy enemy, Collider2D other) {
             if (afterOnHurt) return;
 
-            Vector2 d = (collider2D.bounds.center - other.bounds.center).normalized;
+            Vector2 d = (GetComponent<Collider2D>().bounds.center - other.bounds.center).normalized;
             OnGetHit((int) enemy.damage, d, other);
         }
 
@@ -426,8 +426,8 @@ public class Player : MonoBehaviour {
     }
 
     private float getDashTime(Vector2 vector, float velocity, float time) {
-        Vector2 sPoint = (Vector2) transform.collider2D.bounds.center;// + vector * (transform.collider2D as CircleCollider2D).radius;
-        float radius = (transform.collider2D as CircleCollider2D).radius * 2.5f;
+        Vector2 sPoint = (Vector2) transform.GetComponent<Collider2D>().bounds.center;// + vector * (transform.collider2D as CircleCollider2D).radius;
+        float radius = (transform.GetComponent<Collider2D>() as CircleCollider2D).radius * 2.5f;
 
         RaycastHit2D hit = Physics2D.Raycast(sPoint, vector, time * velocity, 1 << LayerMask.NameToLayer("Level"));
 
@@ -520,7 +520,7 @@ public class Player : MonoBehaviour {
 
         void cloneMethod(Sprite sprite, float alpha = 1) {
             GameObject clone = new GameObject("Clone", typeof(SpriteRenderer));
-            SpriteRenderer cloneSprite = (clone.renderer as SpriteRenderer);
+            SpriteRenderer cloneSprite = (clone.GetComponent<Renderer>() as SpriteRenderer);
 
             clone.transform.position = transform.position;
             clone.transform.localScale = transform.localScale;

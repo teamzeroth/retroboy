@@ -63,8 +63,8 @@ public class OldBetaMovimetation : MonoBehaviour {
 
         _lightSprite.transform.localEulerAngles = curAngle;
 
-        _lightParticle.particleSystem.startRotation = lightAngle * Mathf.Deg2Rad;
-        _lightParticle.particleSystem.startLifetime = 1;
+        _lightParticle.GetComponent<ParticleSystem>().startRotation = lightAngle * Mathf.Deg2Rad;
+        _lightParticle.GetComponent<ParticleSystem>().startLifetime = 1;
     }
 
     void CalcPosition() {
@@ -114,7 +114,7 @@ public class OldBetaMovimetation : MonoBehaviour {
 
         checkFlip();
 
-        _lightParticle.particleSystem.maxParticles = 0;
+        _lightParticle.GetComponent<ParticleSystem>().maxParticles = 0;
         disappearTime = disappearTime + Time.deltaTime;
 
         animSetScale(disappearTime);
@@ -125,7 +125,7 @@ public class OldBetaMovimetation : MonoBehaviour {
             disappeared = false;
         }
 
-        if (disappearTime <= 0f) _lightParticle.particleSystem.maxParticles = 10;
+        if (disappearTime <= 0f) _lightParticle.GetComponent<ParticleSystem>().maxParticles = 10;
 
         if (disappearTime < 0f) { 
             disappearTime = 0f;  
@@ -148,7 +148,7 @@ public class OldBetaMovimetation : MonoBehaviour {
         _lightSprite.transform.localScale = new Vector3(sign * 0.5f, delta * 0.5f, 1);
         transform.localScale = new Vector3(sign + (1 - delta), delta, 1);
 
-        (renderer as SpriteRenderer).color = new Color(1, 1, 1, delta * delta);
-        (_lightSprite.renderer as SpriteRenderer).color = Color.Lerp(Color.white, pink, delta * delta);
+        (GetComponent<Renderer>() as SpriteRenderer).color = new Color(1, 1, 1, delta * delta);
+        (_lightSprite.GetComponent<Renderer>() as SpriteRenderer).color = Color.Lerp(Color.white, pink, delta * delta);
     }
 }

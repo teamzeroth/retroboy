@@ -48,7 +48,7 @@ public class Beta : MonoBehaviour {
 
         visible = false;
         transform.position = target.position;
-        _lightParticle.particleSystem.maxParticles = 0;
+        _lightParticle.GetComponent<ParticleSystem>().maxParticles = 0;
     }
 
     void Update() {
@@ -77,8 +77,8 @@ public class Beta : MonoBehaviour {
         curAngle.z = -lightAngle;
 
         _lightSprite.transform.localEulerAngles = curAngle;
-        _lightParticle.particleSystem.startRotation = lightAngle * Mathf.Deg2Rad;
-        _lightParticle.particleSystem.startLifetime = 1;
+        _lightParticle.GetComponent<ParticleSystem>().startRotation = lightAngle * Mathf.Deg2Rad;
+        _lightParticle.GetComponent<ParticleSystem>().startLifetime = 1;
 
     }
 
@@ -125,14 +125,14 @@ public class Beta : MonoBehaviour {
             }
 
             if (!visible) {
-                _lightParticle.particleSystem.maxParticles = 0;
+                _lightParticle.GetComponent<ParticleSystem>().maxParticles = 0;
                 StartCoroutine(WaitToAppear());
             }
 
             DoDisappear = DOTween.To(() => visibleDelta, x => Disappear(x), to, totalTime - time)
                 .SetEase(visible ? Ease.OutQuad : Ease.InQuad)
                 .OnComplete(() => {
-                    if (visible) _lightParticle.particleSystem.maxParticles = 50;
+                    if (visible) _lightParticle.GetComponent<ParticleSystem>().maxParticles = 50;
                     DoDisappear = null;
                 });
         }

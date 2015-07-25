@@ -6,18 +6,18 @@ public class SorthingParticleLayer : MonoBehaviour {
     public string sortingLayer;
 
     public void Start() {
-        if (particleSystem != null)
-            particleSystem.renderer.sortingLayerName = sortingLayer;
+        if (GetComponent<ParticleSystem>() != null)
+            GetComponent<ParticleSystem>().GetComponent<Renderer>().sortingLayerName = sortingLayer;
         
-        if (renderer != null)
-            renderer.sortingLayerName = sortingLayer;
+        if (GetComponent<Renderer>() != null)
+            GetComponent<Renderer>().sortingLayerName = sortingLayer;
     }
 
     public void OnDrawGizmosSelected() {
-        if (particleSystem != null)
-            particleSystem.renderer.sortingLayerName = sortingLayer;
+        if (GetComponent<ParticleSystem>() != null)
+            GetComponent<ParticleSystem>().GetComponent<Renderer>().sortingLayerName = sortingLayer;
 
-        if (renderer != null)
-            renderer.sortingLayerName = sortingLayer;
+        if (GetComponent<Renderer>() != null)
+            GetComponent<Renderer>().sortingLayerName = sortingLayer;
     }
 }

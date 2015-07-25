@@ -27,7 +27,7 @@ namespace Fungus
 			string prefabName = Path.GetFileNameWithoutExtension(prefabFile);
 
 			// This will only succeed if Fungus is located in the root folder of the project
-			GameObject prefab = Resources.LoadAssetAtPath(prefabFile, typeof(GameObject)) as GameObject;
+			GameObject prefab = AssetDatabase.LoadAssetAtPath(prefabFile, typeof(GameObject)) as GameObject;
 			if (prefab == null)
 			{
 				return null;

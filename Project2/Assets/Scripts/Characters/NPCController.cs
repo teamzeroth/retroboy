@@ -44,7 +44,7 @@ public class NPCController : MonoBehaviour {
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(
-            transform.position + (Vector3) coll.center,
+            transform.position + (Vector3) coll.offset,
             coll.radius
         );
     }
