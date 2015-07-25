@@ -20,7 +20,7 @@ public class NPCController : MonoBehaviour {
     #region MonoBehavior
 
     void Awake() {
-        defaltDirection = (Vector2) (transform.Find("Look").position - transform.Find("Feets").position);
+        defaltDirection = (Vector2)(transform.Find("Look").position - transform.Find("Feets").position);
         print(defaltDirection);
 
         _interactionArea = Array.Find<Collider2D>(GetComponents<Collider2D>(), x => x.isTrigger);
@@ -38,13 +38,13 @@ public class NPCController : MonoBehaviour {
     }
 
 
-    public void OnDrawGizmos() {        
+    public void OnDrawGizmos() {
         if (_interactionArea == null) _interactionArea = Array.Find<Collider2D>(GetComponents<Collider2D>(), x => x.isTrigger);
         CircleCollider2D coll = _interactionArea as CircleCollider2D;
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(
-            transform.position + (Vector3) coll.offset,
+            transform.position + (Vector3)coll.offset,
             coll.radius
         );
     }
@@ -54,12 +54,12 @@ public class NPCController : MonoBehaviour {
     #region Messages
 
     public void Interact(Vector2 playerPos) {
-        Vector2 direction = playerPos - (Vector2) transform.position;
-        Fungus.FungusScript fungus = GameObject.FindWithTag("Fungus").GetComponent<Fungus.FungusScript>();
+        Vector2 direction = playerPos - (Vector2)transform.position;
+        //Fungus.FungusScript fungus = GameObject.FindWithTag("Fungus").GetComponent<Fungus.FungusScript>();
 
         print(name + "Say");
 
-        fungus.SendFungusMessage(name + "Say");
+        //fungus.SendFungusMessage(name + "Say");
         changeAnimation(direction);
     }
 
@@ -82,12 +82,12 @@ public class NPCController : MonoBehaviour {
         if (flipAnimation) {
 
             if (Mathf.Abs(direction.x) >= Mathf.Abs(direction.y) * 0.42f) {
-                
+
                 if (!flipped && direction.x < 0) Flip();
                 if (flipped && direction.x > 0) Flip();
-            
+
             } else {
-                
+
                 if (flipped) Flip();
             }
         }
