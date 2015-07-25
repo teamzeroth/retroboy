@@ -11,7 +11,7 @@ GameObject:
   - 198: {fileID: 19803502}
   - 199: {fileID: 19959662}
   - 114: {fileID: 11445286}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Collision Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 198: {fileID: 19857398}
   - 199: {fileID: 19947670}
   - 114: {fileID: 11478612}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - 4: {fileID: 447070}
   - 58: {fileID: 5875888}
   - 114: {fileID: 11443934}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Feets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,9 +68,9 @@ GameObject:
   - 114: {fileID: 11435752}
   - 114: {fileID: 11477700}
   - 114: {fileID: 11446688}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Shoot
-  m_TagString: EnemyShoot
+  m_TagString: Shoot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2444,11 +2444,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: EnemyShoot
+      value: Shoot
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID

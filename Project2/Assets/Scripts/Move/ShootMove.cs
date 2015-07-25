@@ -100,7 +100,7 @@ public class ShootMove : MonoBehaviour {
 
         CollisionLevel collision = trigger.GetComponent<CollisionLevel>();
 
-        print(trigger.name + " " + collision);
+        if (isPlayerAlly) print(trigger.name + " " + trigger.tag + " " + isPlayerAlly);
 
         if (collision != null && (collisionLevel == null || collision.Level == collisionLevel.Level)) {
             if (trigger.tag == "Enemy" && isPlayerAlly) {
