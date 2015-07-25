@@ -242,12 +242,14 @@ public class StingerShooter : BaseEnemy {
         /*Spawn a shoot */
         {
             GameObject shootGO = (GameObject)Instantiate(
-                Resources.Load<GameObject>("Shoots/EnemySimple"),
+                Resources.Load<GameObject>("Shoots/Enemies/Simple"),
                 spawn, Quaternion.identity
             );
 
             ShootMove shoot = shootGO.GetComponent<ShootMove>();
             shoot.Direction = d;
+            print(shoot.collisionLevel);
+            shoot.collisionLevel.Level = _collisionLevel.Level;
         }
     }
 

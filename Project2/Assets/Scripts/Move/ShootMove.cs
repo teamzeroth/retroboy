@@ -16,6 +16,7 @@ public class ShootMove : MonoBehaviour {
 
     [HideInInspector]
     public Vector2 direction;
+    [HideInInspector]
     public CollisionLevel collisionLevel;
     [HideInInspector]
     public bool flipped;
@@ -47,18 +48,22 @@ public class ShootMove : MonoBehaviour {
 
     #region MonoBehaviour
 
+    void Awake() {
+        collisionLevel = GetComponent<CollisionLevel>();
+
+        _anim = GetComponent<Animator>();
+
+        if (transform.Find("Particles"))
+            _particles = transform.Find("Particles").GetComponent<ParticleSystem>();
+        if (transform.Find("Collision Particles"))
+            _collisionParticles = transform.Find("Collision Particles").GetComponent<ParticleSystem>();
+    }
+
     void Start() {
-        createFeetCollider();
+        //createFeetCollider();
 
         destroied = false;
         Direction = direction;
-        //transform.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
-        //_feet.RotateAround(transform.position, Vector3.forward, Mathf.Atan2(direction.y, direction.x) * -Mathf.Rad2Deg);
-
-        if (collisionLevel == null) collisionLevel = GetComponent<CollisionLevel>();
-        if (transform.Find("Particles")) _particles = transform.Find("Particles").GetComponent<ParticleSystem>();
-        if (transform.Find("Collision Particles")) _collisionParticles = transform.Find("Collision Particles").GetComponent<ParticleSystem>();
-        _anim = GetComponent<Animator>();
     }
 
     void createFeetCollider() {
@@ -95,7 +100,9 @@ public class ShootMove : MonoBehaviour {
 
         CollisionLevel collision = trigger.GetComponent<CollisionLevel>();
 
-        if (collisionLevel == null || collision.Level == collisionLevel.Level) {
+        print(trigger.name + " " + collision);
+
+        if (collision != null && (collisionLevel == null || collision.Level == collisionLevel.Level)) {
             if (trigger.tag == "Enemy" && isPlayerAlly) {
                 if (trigger.GetComponent<Enemy>() != null) {
                     trigger.GetComponent<Enemy>().Hit(damage, direction);

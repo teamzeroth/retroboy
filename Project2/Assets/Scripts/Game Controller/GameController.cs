@@ -47,9 +47,7 @@ public class GameController : MonoBehaviour {
         _camera = Camera.main.GetComponent<SmoothFollow>();
         _ui = GetComponent<UiController>();
 
-        // FORA DE CONTEXTO
-            stopPlayer = true;
-        //
+        StartStage();
 
         return;
 
@@ -85,7 +83,7 @@ public class GameController : MonoBehaviour {
             (_player.renderer as SpriteRenderer).color = new Color(0, 0, 0, 0.3f);
             Door.doors["MainDoor"].GetOut(_player);
         }*/
-    } 
+    }
 
     public void PauseGame(bool pause) {
         if (pause) {
@@ -111,7 +109,7 @@ public class GameController : MonoBehaviour {
     }
 
     #region getters and setters
-    
+
     private bool _pause;
     public bool Pause {
         get {

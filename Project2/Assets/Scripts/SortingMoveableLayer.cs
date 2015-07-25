@@ -50,7 +50,7 @@ public class SortingMoveableLayer : MonoBehaviour {
     }
 
     void Update() {
-        if (name == "Shoot(Clone)") print(initialOrder);
+        //if (name == "Shoot(Clone)") print(initialOrder);
 
         _renderer.position = new Vector3(
             _renderer.position.x, _renderer.position.y,

@@ -26,14 +26,19 @@ public class BaseEnemy : MonoBehaviour {
 
     protected Animator _anim;
     protected Transform _renderer;
+    protected CollisionLevel _collisionLevel;
+
+
+    public void Awake() {
+        _anim = GetComponent<Animator>();
+        _renderer = transform.Find("renderer");
+        _collisionLevel = GetComponent<CollisionLevel>();
+    }
 
     public void Start() {
         impulseForce = Vector3.zero;
         impulseTween = null;
         target = null;
-
-        _anim = GetComponent<Animator>();
-        _renderer = transform.Find("renderer");
     }
 
     public void OnDrawGizmosSelected() {
@@ -54,7 +59,7 @@ public class BaseEnemy : MonoBehaviour {
 
         impulseForce = ((Vector3)shoot.direction * shoot.damage * 8) + impulseForce * DAMAGE_INFLUENCE;
         impulseTween = DOTween.To(() => impulseForce, x => impulseForce = x, Vector3.zero, TIME_IN_DAMAGE).SetEase(Ease.OutCirc).OnComplete(() => impulseTween = null);
-    
+
         life -= shoot.damage;
         if (life <= 0) {
             OnDestroyIt();

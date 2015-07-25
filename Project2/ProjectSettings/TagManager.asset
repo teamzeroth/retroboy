@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
+  serializedVersion: 2
   tags:
   - Fungus
   - Enemy
@@ -10,85 +11,52 @@ TagManager:
   - Coin
   - EnemyShoot
   - Wall
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
   - 
-  Builtin Layer 0: Default
-  Builtin Layer 1: TransparentFX
-  Builtin Layer 2: Ignore Raycast
-  Builtin Layer 3: 
-  Builtin Layer 4: Water
-  Builtin Layer 5: UI
-  Builtin Layer 6: 
-  Builtin Layer 7: 
-  User Layer 8: Level
-  User Layer 9: Enemies
-  User Layer 10: AllyShoots
-  User Layer 11: EnemiesShoots
-  User Layer 12: Itens
-  User Layer 13: IgnoreEnemies
-  User Layer 14: PlayerTarget
-  User Layer 15: 
-  User Layer 16: 
-  User Layer 17: 
-  User Layer 18: 
-  User Layer 19: 
-  User Layer 20: 
-  User Layer 21: 
-  User Layer 22: 
-  User Layer 23: 
-  User Layer 24: 
-  User Layer 25: 
-  User Layer 26: 
-  User Layer 27: 
-  User Layer 28: 
-  User Layer 29: 
-  User Layer 30: 
-  User Layer 31: 
+  - Water
+  - UI
+  - 
+  - 
+  - Level
+  - Enemies
+  - AllyShoots
+  - EnemiesShoots
+  - Itens
+  - IgnoreEnemies
+  - PlayerTarget
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
-    userID: 0
     uniqueID: 0
     locked: 0
   - name: Background
-    userID: 3
     uniqueID: 2983528921
     locked: 0
-  - name: BackgroundDetail
-    userID: 2
-    uniqueID: 2968402737
-    locked: 0
-  - name: Foreground
-    userID: 4
-    uniqueID: 3278916925
-    locked: 0
-  - name: ForegroundDetail
-    userID: 5
-    uniqueID: 4068179441
-    locked: 0
-  - name: Tales
-    userID: 7
-    uniqueID: 3529121795
-    locked: 0
-  - name: assets especiais
-    userID: 11
-    uniqueID: 1316588281
-    locked: 0
-  - name: Assets
-    userID: 6
-    uniqueID: 2666144631
-    locked: 0
-  - name: cc
-    userID: 10
-    uniqueID: 1976078283
-    locked: 0
   - name: Game
-    userID: 1
     uniqueID: 112778315
     locked: 0
-  - name: ForeParticles
-    userID: 9
-    uniqueID: 1470551667
+  - name: Foreground
+    uniqueID: 3278916925
     locked: 0
   - name: UI
-    userID: 8
     uniqueID: 83145165
     locked: 0
