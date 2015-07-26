@@ -1,3 +1,10 @@
+#Others .git repositories
+
+X-UniTMX/.git*
+X-UniTMX/.gitignore
+
+#################
+
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
