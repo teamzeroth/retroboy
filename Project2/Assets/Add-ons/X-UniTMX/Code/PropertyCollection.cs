@@ -96,8 +96,8 @@ namespace X_UniTMX {
         /// </summary>
         /// <param name="property">Name of the property inside Tiled</param>
         /// <returns>The value of the property</returns>
-        public float GetPropertyAsFloat(string property, float standard = 0) {
-            float b = standard;
+        public float GetPropertyAsFloat(string property) {
+            float b = 0;
             string str = string.Empty;
             Property p = null;
             if (TryGetValue(property.ToLowerInvariant(), out p))

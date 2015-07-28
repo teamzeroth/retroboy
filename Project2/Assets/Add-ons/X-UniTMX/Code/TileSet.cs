@@ -303,7 +303,7 @@ namespace X_UniTMX
 
 					// calculate the source rectangle
 					int rx = Margin + x * (TileWidth + Spacing);
-					int ry = Texture.height + Margin - (Margin + (y + 1) * (TileHeight + Spacing));
+					int ry = Texture.height + Spacing - (Margin + (y + 1) * (TileHeight + Spacing));
 					Rect Source = new Rect(rx, ry, TileWidth, TileHeight);
 					//Debug.Log(Source);
 					// get any properties from the tile set

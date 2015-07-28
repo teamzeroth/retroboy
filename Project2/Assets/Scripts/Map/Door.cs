@@ -17,7 +17,6 @@ namespace MapResources {
         public string GoTo;
         public string Scene;
 
-
         CollisionLevel collisionLevel;
 
         private Player _player = null;
@@ -36,8 +35,8 @@ namespace MapResources {
             Out = Helper.TranslateDirection(door.GetPropertyAsString("out"));
             In = Helper.TranslateDirection(door.GetPropertyAsString("in"));
 
-            ForceOut = door.GetPropertyAsFloat("force out", 1);
-            ForceIn = door.GetPropertyAsFloat("force in", 1);
+            ForceOut = door.HasProperty("force out") ? door.GetPropertyAsFloat("force out") : 1;
+            ForceIn = door.HasProperty("force in") ? door.GetPropertyAsFloat("force in") : 1;
 
             GoTo = door.GetPropertyAsString("go to");
             Scene = door.GetPropertyAsString("scene");

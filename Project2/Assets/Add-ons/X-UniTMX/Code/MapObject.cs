@@ -161,9 +161,9 @@ namespace X_UniTMX {
         /// </summary>
         /// <param name="property">Name of the property inside Tiled</param>
         /// <returns>The value of the property, String.Empty if property not found</returns>
-        public string GetPropertyAsString(string property, string standard = "") {
+        public string GetPropertyAsString(string property) {
             if (Properties == null)
-                return standard;
+                return string.Empty;
             return Properties.GetPropertyAsString(property);
         }
         /// <summary>
@@ -171,9 +171,9 @@ namespace X_UniTMX {
         /// </summary>
         /// <param name="property">Name of the property inside Tiled</param>
         /// <returns>The value of the property</returns>
-        public bool GetPropertyAsBoolean(string property, bool standard = false) {
+        public bool GetPropertyAsBoolean(string property) {
             if (Properties == null)
-                return standard;
+                return false;
             return Properties.GetPropertyAsBoolean(property);
         }
         /// <summary>
@@ -181,9 +181,9 @@ namespace X_UniTMX {
         /// </summary>
         /// <param name="property">Name of the property inside Tiled</param>
         /// <returns>The value of the property</returns>
-        public int GetPropertyAsInt(string property, int standard = 0) {
+        public int GetPropertyAsInt(string property) {
             if (Properties == null)
-                return standard;
+                return 0;
             return Properties.GetPropertyAsInt(property);
         }
         /// <summary>
@@ -191,10 +191,10 @@ namespace X_UniTMX {
         /// </summary>
         /// <param name="property">Name of the property inside Tiled</param>
         /// <returns>The value of the property</returns>
-        public float GetPropertyAsFloat(string property, float standard = 0) {
+        public float GetPropertyAsFloat(string property) {
             if (Properties == null)
-                return standard;
-            return Properties.GetPropertyAsFloat(property, standard);
+                return 0;
+            return Properties.GetPropertyAsFloat(property);
         }
 
         /// <summary>
