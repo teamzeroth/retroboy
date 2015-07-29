@@ -69,7 +69,7 @@ public class GameController : MonoBehaviour {
             return;
         }
 
-        if (Input.GetButtonDown("Menu")) {
+        if (Input.GetButtonDown("Menu") || Input.GetKeyDown(KeyCode.Escape)) {
             Pause = !Pause;
         }
 
