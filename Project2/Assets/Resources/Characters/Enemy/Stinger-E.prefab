@@ -47,7 +47,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 421748}
   - 58: {fileID: 5879244}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: feets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.5299988, y: -14.3500004, z: 0}
+  m_LocalPosition: {x: 24.3899994, y: -23.1000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 421748}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer: {fileID: 21261002}
-  level: 4
+  level: 3
 --- !u!114 &11450006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   test: 
   playOnce: 1
-  sample: 16
+  sample: 30
   animation:
   - {fileID: 21300000, guid: 86f024b0acecd1242bb7aba503219c29, type: 3}
   - {fileID: 21300002, guid: 86f024b0acecd1242bb7aba503219c29, type: 3}
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 3
   damage: 2
-  speed: 5
+  speed: 20
   isColliderDamage: 0
   coinsChance: {x: 1, y: 3}
   rangeAtack: 3
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 3
-  damage: 1
+  damage: 2
   speed: 0
   isColliderDamage: 1
   coinsChance: {x: 1, y: 3}

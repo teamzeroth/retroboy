@@ -50,6 +50,7 @@ namespace MapResources {
         public void OnTriggerEnter2D(Collider2D other) {
 			if (other.tag == "NimFeet" && _player == null && !string.IsNullOrEmpty(GoTo)) {
 				GetIn();
+				Debug.Log("Entered");
             }
         }
 
@@ -89,7 +90,7 @@ namespace MapResources {
             _player.StartFixedMove(direction, direction, Game.DOOR_ANIMATION_TIME, new Color(1, 1, 1, 1));
             _player.DeadDirection = direction;
 
-            Vector3 colliderCenter = (Vector3)(_player.GetComponent<Collider2D>() as CircleCollider2D).offset;
+            Vector3 colliderCenter = (Vector3)(_player.FeetCollider as CircleCollider2D).offset;
             _player.transform.position = GetComponent<Collider2D>().bounds.center - colliderCenter;
 
             Invoke("AfterOut", Game.DOOR_ANIMATION_TIME + 0.1f);

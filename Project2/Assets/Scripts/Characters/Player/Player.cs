@@ -28,7 +28,6 @@ public class Player : MonoBehaviour {
         public float TimeInCharge;
         //public float TimeLastShoot;
         public float LastTimeInCharge;
-
         public Vector3 Update(Player player) {
             setupDirection(player);
             setupShoot(player);            
@@ -95,7 +94,9 @@ public class Player : MonoBehaviour {
     public float speed = 3;
     public float dashSpeed = 50;
     //public Dictionary<string, Sprite[]> alocAnimations = new Dictionary<string, Sprite[]>();
-
+	
+	public Collider2D FeetCollider;
+	public Collider2D BodyCollider;
     public Sprite[] ss_E;
     public Sprite[] ss_S;
     public Sprite[] ss_N;
@@ -294,16 +295,16 @@ public class Player : MonoBehaviour {
         GetComponent<Rigidbody2D>().MovePosition(move);
     }
 
-    public void DisableCollider(bool disable = false) {
-        GetComponent<Collider2D>().enabled = disable;
+    public void DisableColliders(bool disable = false) {
+		FeetCollider.enabled = disable;
+		BodyCollider.enabled = disable;
     }
 
     public void StartFixedMove(Vector2 start, Vector2 to, float time, Color color, Ease ease = Ease.Linear) {
         StartFixedMove(start, to, time, ease);
         waitToMove = false;
-
         ((SpriteRenderer)GetComponent<Renderer>()).DOColor(color, time);
-        ((SpriteRenderer)transform.Find("Shadow").GetComponent<Renderer>()).DOColor(color, time);
+        //((SpriteRenderer)transform.Find("Shadow").GetComponent<Renderer>()).DOColor(color, time);
     }
 
     public void StartFixedMove(Vector2 start, Vector2 to, float time, Ease ease = Ease.OutCirc) {
@@ -318,8 +319,7 @@ public class Player : MonoBehaviour {
             OnHurt = false;
             fixedMove = Vector2.zero;
             
-            GetComponent<Collider2D>().enabled = true;
-
+			DisableColliders(true);
             controller.InDash = false;
             controller.OnSimulateMove = false;
             
@@ -345,7 +345,7 @@ public class Player : MonoBehaviour {
             OnHurt = true;
             StartFixedMove(direction.normalized * damage * 4, Vector2.zero, Game.TIME_PLAYER_DAMAGE);
         } else {
-            DisableCollider();
+            DisableColliders();
 
             OnDie = true;
             waitToMove = true;
@@ -358,7 +358,7 @@ public class Player : MonoBehaviour {
         public void OnGetHit(BaseEnemy enemy, Collider2D other) {
             if (afterOnHurt) return;
 
-            Vector2 d = (GetComponent<Collider2D>().bounds.center - other.bounds.center).normalized;
+            Vector2 d = (FeetCollider.bounds.center - other.bounds.center).normalized;
             OnGetHit((int) enemy.damage, d, other);
         }
 
@@ -426,8 +426,8 @@ public class Player : MonoBehaviour {
     }
 
     private float getDashTime(Vector2 vector, float velocity, float time) {
-        Vector2 sPoint = (Vector2) transform.GetComponent<Collider2D>().bounds.center;// + vector * (transform.collider2D as CircleCollider2D).radius;
-        float radius = (transform.GetComponent<Collider2D>() as CircleCollider2D).radius * 2.5f;
+        Vector2 sPoint = (Vector2) FeetCollider.bounds.center;// + vector * (transform.collider2D as CircleCollider2D).radius;
+        float radius = (FeetCollider as CircleCollider2D).radius * 2.5f;
 
         RaycastHit2D hit = Physics2D.Raycast(sPoint, vector, time * velocity, 1 << LayerMask.NameToLayer("Level"));
 
