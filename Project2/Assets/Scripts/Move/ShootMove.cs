@@ -118,9 +118,9 @@ public class ShootMove : MonoBehaviour {
                 DestroyMove();
             }
             if (trigger.tag == "Player" && !isPlayerAlly) {
-                Player player = trigger.GetComponent<Player>();
+                //Player player = trigger.GetComponent<Player>();
                 //if (collisionLevel.Level == player.collisionLevel.Level) {
-                player.OnGetHit(this, trigger);
+				GameController.self.player.OnGetHit(this, trigger);
                 DestroyMove();
                 //}
             }

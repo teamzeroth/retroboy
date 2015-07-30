@@ -26,8 +26,9 @@ public class BaseEnemy : MonoBehaviour {
 
     protected Animator _anim;
     protected Transform _renderer;
-    protected CollisionLevel _collisionLevel;
 
+    protected CollisionLevel _collisionLevel;
+	protected CollisionLevel player;
 
     public void Awake() {
         _anim = GetComponent<Animator>();
@@ -89,7 +90,11 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     public virtual void OnDistanceWithPlayer(Transform player, float distance) {
-        if (distance <= rangeAtack) FindPlayer(player.parent);
-        else LostPlayer(player.parent);
-    }
+		if (_renderer != null) {
+			if (GameController.self.player.collisionLevel.Level == _collisionLevel.Level && (distance <= rangeAtack)) {
+				FindPlayer (player.parent);
+			} else
+				LostPlayer (player.parent);
+		}
+	}
 }

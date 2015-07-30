@@ -35,12 +35,23 @@ public class GameController : MonoBehaviour {
 
     private SmoothFollow _camera;
     private UiController _ui;
-    private Player _player;
+
+	private Player _player;
+	
+	public Player player {
+		get {
+			return _player;
+		}
+	}
 
     public bool stopPlayer = false; // POG
 
     void Awake() {
         self = this;
+
+		_player = GameObject.FindWithTag("Player") ?
+			GameObject.FindWithTag("Player").GetComponent<Player>() : 
+			((GameObject)Instantiate(Resources.Load<GameObject>("Characters/Nim (Player)"))).GetComponent<Player>();
     }
 
     void Start() {
@@ -51,11 +62,7 @@ public class GameController : MonoBehaviour {
 
         return;
 
-        if (GameObject.FindWithTag("Player"))
-            _player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        else
-            _player = ((GameObject)Instantiate(Resources.Load<GameObject>("Characters/Nim (Player)"))).GetComponent<Player>();
-
+        
         if (Door.doors.ContainsKey("MainDoor")) {
             _camera.target = Door.doors["MainDoor"].transform;
             _player.transform.position = Door.doors["MainDoor"].transform.position;

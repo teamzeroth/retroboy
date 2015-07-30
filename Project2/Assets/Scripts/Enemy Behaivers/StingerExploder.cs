@@ -54,8 +54,9 @@ public class StingerExploder : BaseEnemy {
             if (target != null)direction = (target.position - transform.position).normalized * speed;
             Vector3 currentDirection = impulseForce != Vector3.zero ? (direction + impulseForce * 0.75f) / 2 : direction;
 
-            GetComponent<Rigidbody2D>().MovePosition(transform.position + currentDirection * Time.deltaTime);
-        }
+            //GetComponent<Rigidbody2D>().MovePosition(transform.position + currentDirection * Time.deltaTime);
+			GetComponent<Rigidbody2D>().AddForce(direction);
+		}
 
         void UpdateAnimation(float currDistance) {
             if (target != null) {
