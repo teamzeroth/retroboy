@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 484444}
   - 58: {fileID: 5898040}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: feets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.6599998, y: -13.4399996, z: 0}
+  m_LocalPosition: {x: 13.6199999, y: 5.1500001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 423272}
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer: {fileID: 0}
-  level: 4
+  level: 2
 --- !u!114 &11419962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -285,7 +285,7 @@ MonoBehaviour:
   speed: 2
   isColliderDamage: 0
   coinsChance: {x: 2, y: 3}
-  rangeAtack: 4
+  rangeAtack: 4.5
   target: {fileID: 0}
   chanceToShoot: {x: 1, y: 3}
   shootTimes: 3
