@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
 
     public static Vector2 PLAYER_SHOOT_DIFERENCE = new Vector2(0, 0.03f);
 
-    private class ControllerStates{
+    private class ControllerStates {
 
         public Transform _player;
 
@@ -30,27 +30,22 @@ public class Player : MonoBehaviour {
         public float LastTimeInCharge;
         public Vector3 Update(Player player) {
             setupDirection(player);
-            setupShoot(player);            
+            setupShoot(player);
 
             return deltaDirection;
         }
 
-        public void setupDirection(Player player)
-        {
-            if (!Input.GetKey(KeyCode.Mouse0))
-            {
+        public void setupDirection(Player player) {
+            if (!Input.GetKey(KeyCode.Mouse0)) {
                 deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
                 if (deltaDirection.magnitude > 1)
                     deltaDirection.Normalize();
 
-                if (deltaDirection.magnitude > 0.1f)
-                {
+                if (deltaDirection.magnitude > 0.1f) {
                     deadDirection = deltaDirection;
                 }
-            }
-            else
-            {
+            } else {
                 Camera camera = Camera.main;
                 Vector3 pos = camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));
 
@@ -63,27 +58,26 @@ public class Player : MonoBehaviour {
             Direction = deadDirection;
 
             InMoving = deltaDirection != Vector2.zero;
-            if (!OnCharging)
-            {
+            if (!OnCharging) {
                 if (player.watchDash == null) InDash = InDash || Input.GetButtonDown("Dash");
             }
         }
 
-            public void setupShoot(Player player) {
-                OnShooting = false;
+        public void setupShoot(Player player) {
+            OnShooting = false;
+            OnCharging = false;
+
+            if (OnCharging && !Input.GetButton("Action")) {
+                OnShooting = true;
                 OnCharging = false;
-
-                if (OnCharging && !Input.GetButton("Action")) {
-                    OnShooting = true;
-                    OnCharging = false;
-                } else {
-                    OnCharging = Input.GetButton("Action");
-                    OnShooting = Input.GetButtonUp("Action");
-                }
-
-                TimeInCharge = OnCharging ? TimeInCharge + Time.deltaTime : 0;
-                if (OnCharging) LastTimeInCharge = TimeInCharge;
+            } else {
+                OnCharging = Input.GetButton("Action");
+                OnShooting = Input.GetButtonUp("Action");
             }
+
+            TimeInCharge = OnCharging ? TimeInCharge + Time.deltaTime : 0;
+            if (OnCharging) LastTimeInCharge = TimeInCharge;
+        }
 
         public void registreTime() {
             LastTimeInCharge = 0;
@@ -93,19 +87,22 @@ public class Player : MonoBehaviour {
 
     public float speed = 3;
     public float dashSpeed = 50;
-    //public Dictionary<string, Sprite[]> alocAnimations = new Dictionary<string, Sprite[]>();
-	
-	public Collider2D FeetCollider;
-	public Collider2D BodyCollider;
+
+    public Collider2D FeetCollider;
+    public Collider2D BodyCollider;
     public Sprite[] ss_E;
     public Sprite[] ss_S;
     public Sprite[] ss_N;
     public Sprite[] ss_NE;
     public Sprite[] ss_SE;
     public GameObject shootPrefab;
-    [HideInInspector] public bool flipped = false;
-    [HideInInspector] public Vector2 fixedMove = Vector2.zero;
-    [HideInInspector] public CollisionLevel collisionLevel;
+    [HideInInspector]
+    public bool flipped = false;
+    [HideInInspector]
+    public Vector2 fixedMove = Vector2.zero;
+    [HideInInspector]
+    public CollisionLevel collisionLevel;
+
     private bool waitToMove = false;
     private bool waitShootFinish = false;
     private bool waitToNewShoot = false;
@@ -142,9 +139,9 @@ public class Player : MonoBehaviour {
         }
     }
 
-        public void SetAfterOnHurt() {
-            afterOnHurt = _onHurt;
-        }
+    public void SetAfterOnHurt() {
+        afterOnHurt = _onHurt;
+    }
 
     public Vector2 DeadDirection {
         get { return controller.deadDirection; }
@@ -152,30 +149,31 @@ public class Player : MonoBehaviour {
     }
 
     public bool BetaVisible {
-        get { 
-            bool colorTest = ((SpriteRenderer) GetComponent<Renderer>()).color != Color.clear;
+        get {
+            bool colorTest = ((SpriteRenderer)GetComponent<Renderer>()).color != Color.clear;
             bool animationTest = _anim.CurrentAnimState().StartsWith("Nim-idle") || _anim.CurrentAnimState().StartsWith("Nim-run");
 
-            return !OnHurt && !controller.OnSimulateMove && colorTest && animationTest; 
+            return !OnHurt && !controller.OnSimulateMove && colorTest && animationTest;
         }
     }
 
     private int _life;
     public int Life {
-        get {return _life; }
+        get { return _life; }
 
         set {
             _life = value;
-            UiController.self.Life = value; 
+            UiController.self.Life = value;
         }
     }
 
     #endregion
+
     #region MonoBehaviour
     public void Start() {
         controller._player = transform;
         _anim = GetComponent<Animator>();
-        _sprite = (SpriteRenderer) GetComponent<Renderer>();
+        _sprite = (SpriteRenderer)GetComponent<Renderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _sfx = GetComponent<PlayerSFX>();
 
@@ -192,54 +190,54 @@ public class Player : MonoBehaviour {
         UpdateSound();
 
     }
-    
-        public void UpdateAnimation() {
 
-            if (!(waitShootFinish && !waitToMove)) {
-                    
-                Vector2 targetVector = fixedMove != Vector2.zero ? fixedMove : controller.Direction;
-                _anim.SetFloat("Horizontal", targetVector.x);
-                _anim.SetFloat("Vertical", targetVector.y);
-                checkFlip();
-            }
+    public void UpdateAnimation() {
 
-            //Checa o estado de carregar e atirar
-            if (controller.OnCharging && !waitShootFinish && !waitToNewShoot) {
-                _anim.SetTrigger("OnDraw");
+        if (!(waitShootFinish && !waitToMove)) {
 
-                if (watchShoot != null) StopCoroutine(watchShoot);
-                watchShoot = StartCoroutine(WaitShootAnimationFinish());
-            }
-            if (controller.OnShooting && !waitToNewShoot) {
-                StartCoroutine(WaitShootAnimationStart());
-
-                _anim.SetTrigger("OnShoot");
-                _anim.SetBool("OnDraw", false);
-            }
-            //Checa o estado de se machucar
-            if (OnHurt) {
-                waitToMove = true;
-
-                _anim.SetBool("OnShoot", false);
-                _anim.SetBool("OnDraw", false);
-            }
-
-            _anim.SetBool("OnHurt", OnHurt);
-            _anim.SetBool("OnDash", controller.InDash);
-
-            //Checa se o jogador move
-            _anim.SetBool("InMoving", (controller.InMoving || controller.OnSimulateMove) && !waitToMove);
+            Vector2 targetVector = fixedMove != Vector2.zero ? fixedMove : controller.Direction;
+            _anim.SetFloat("Horizontal", targetVector.x);
+            _anim.SetFloat("Vertical", targetVector.y);
+            checkFlip();
         }
 
-        public void UpdateSound() {
-            if (controller.OnCharging && _anim.CurrentAnimState().StartsWith("Nim-draw"))
-                _sfx.Charge();
-            else
-                _sfx.UnCharge();
-                
+        //Checa o estado de carregar e atirar
+        if (controller.OnCharging && !waitShootFinish && !waitToNewShoot) {
+            _anim.SetTrigger("OnDraw");
+
+            if (watchShoot != null) StopCoroutine(watchShoot);
+            watchShoot = StartCoroutine(WaitShootAnimationFinish());
+        }
+        if (controller.OnShooting && !waitToNewShoot) {
+            StartCoroutine(WaitShootAnimationStart());
+
+            _anim.SetTrigger("OnShoot");
+            _anim.SetBool("OnDraw", false);
+        }
+        //Checa o estado de se machucar
+        if (OnHurt) {
+            waitToMove = true;
+
+            _anim.SetBool("OnShoot", false);
+            _anim.SetBool("OnDraw", false);
         }
 
-        public void UpdateMove() {
+        _anim.SetBool("OnHurt", OnHurt);
+        _anim.SetBool("OnDash", controller.InDash);
+
+        //Checa se o jogador move
+        _anim.SetBool("InMoving", (controller.InMoving || controller.OnSimulateMove) && !waitToMove);
+    }
+
+    public void UpdateSound() {
+        if (controller.OnCharging && _anim.CurrentAnimState().StartsWith("Nim-draw"))
+            _sfx.Charge();
+        else
+            _sfx.UnCharge();
+
+    }
+
+    public void UpdateMove() {
         Vector2 deltaMovement = controller.Update(this);
 
         if (watchDash == null && controller.InDash && !waitToMove) {
@@ -254,13 +252,13 @@ public class Player : MonoBehaviour {
             }
         }
 
-        if (fixedMove == Vector2.zero){
+        if (fixedMove == Vector2.zero) {
             if (controller.OnCharging || controller.OnShooting || waitToMove)
                 deltaMovement = Vector2.zero;
             else {
                 deltaMovement *= speed;
             }
-        }else{
+        } else {
             deltaMovement = fixedMove;
         }
 
@@ -278,7 +276,7 @@ public class Player : MonoBehaviour {
             //StopCoroutine(watchDash);
             CancelFixedMove();
         }*/
-            
+
     }
 
     #endregion
@@ -286,7 +284,7 @@ public class Player : MonoBehaviour {
 
     #region Messages
 
-    public void Move(Vector3 deltaMovement){
+    public void Move(Vector3 deltaMovement) {
         GetComponent<Rigidbody2D>().velocity = deltaMovement;
     }
 
@@ -296,8 +294,8 @@ public class Player : MonoBehaviour {
     }
 
     public void DisableColliders(bool disable = false) {
-		FeetCollider.enabled = disable;
-		BodyCollider.enabled = disable;
+        FeetCollider.enabled = disable;
+        BodyCollider.enabled = disable;
     }
 
     public void StartFixedMove(Vector2 start, Vector2 to, float time, Color color, Ease ease = Ease.Linear) {
@@ -318,11 +316,11 @@ public class Player : MonoBehaviour {
         lastFixedTween = DOTween.To(() => fixedMove, x => fixedMove = x, to, time).SetEase(ease).OnComplete(() => {
             OnHurt = false;
             fixedMove = Vector2.zero;
-            
-			DisableColliders(true);
+
+            DisableColliders(true);
             controller.InDash = false;
             controller.OnSimulateMove = false;
-            
+
             waitShootFinish = false;
             waitToNewShoot = false;
             waitToMove = false;
@@ -355,29 +353,29 @@ public class Player : MonoBehaviour {
         }
     }
 
-        public void OnGetHit(BaseEnemy enemy, Collider2D other) {
-            if (afterOnHurt) return;
+    public void OnGetHit(BaseEnemy enemy, Collider2D other) {
+        if (afterOnHurt) return;
 
-            Vector2 d = (FeetCollider.bounds.center - other.bounds.center).normalized;
-            OnGetHit((int) enemy.damage, d, other);
-        }
+        Vector2 d = (FeetCollider.bounds.center - other.bounds.center).normalized;
+        OnGetHit((int)enemy.damage, d, other);
+    }
 
-        /*public void OnGetHit(Enemy enemy, Collider2D other) {
-            if (afterOnHurt) return;
+    /*public void OnGetHit(Enemy enemy, Collider2D other) {
+        if (afterOnHurt) return;
 
-            Vector2 d = (collider2D.bounds.center - other.bounds.center).normalized;
-            OnGetHit((int) enemy.damage, d, other);
-        }*/
+        Vector2 d = (collider2D.bounds.center - other.bounds.center).normalized;
+        OnGetHit((int) enemy.damage, d, other);
+    }*/
 
-        public void OnGetHit(ShootMove shoot , Collider2D other) {
-            if (afterOnHurt) return;
+    public void OnGetHit(ShootMove shoot, Collider2D other) {
+        if (afterOnHurt) return;
 
-            Vector2 d = shoot.direction;
-            OnGetHit((int) shoot.damage, d, other);
-        }
+        Vector2 d = shoot.direction;
+        OnGetHit((int)shoot.damage, d, other);
+    }
 
-    public void OnAnimationFinish(){
-        if(OnDie) GameController.self.CanRestartTheGame = true;
+    public void OnAnimationFinish() {
+        if (OnDie) GameController.self.CanRestartTheGame = true;
     }
 
     #endregion
@@ -398,16 +396,16 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void instaceShoot(Vector3 v){
+    private void instaceShoot(Vector3 v) {
         Vector3 d = v.normalized;
         Vector3 spawn = transform.position + d * (Game.PLAYER_DIST_SHOOT * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
-        spawn += (Vector3) PLAYER_SHOOT_DIFERENCE;
+        spawn += (Vector3)PLAYER_SHOOT_DIFERENCE;
         /*
         GameObject shootGO = (GameObject)Instantiate(
             Resources.Load<GameObject>("Shoots/Nim/shoot_1"),
             spawn, Quaternion.identity
         );*/
-        GameObject shootGO = (GameObject) Instantiate(
+        GameObject shootGO = (GameObject)Instantiate(
             shootPrefab,
             spawn, Quaternion.identity
         );
@@ -426,7 +424,7 @@ public class Player : MonoBehaviour {
     }
 
     private float getDashTime(Vector2 vector, float velocity, float time) {
-        Vector2 sPoint = (Vector2) FeetCollider.bounds.center;// + vector * (transform.collider2D as CircleCollider2D).radius;
+        Vector2 sPoint = (Vector2)FeetCollider.bounds.center;// + vector * (transform.collider2D as CircleCollider2D).radius;
         float radius = (FeetCollider as CircleCollider2D).radius * 2.5f;
 
         RaycastHit2D hit = Physics2D.Raycast(sPoint, vector, time * velocity, 1 << LayerMask.NameToLayer("Level"));
@@ -491,11 +489,11 @@ public class Player : MonoBehaviour {
         float length = 4;
 
         switch (Helper.getGeoDirection(controller.Direction)) {
-            case (int) Direction.E: array = ss_E; break;
-            case (int) Direction.NE: array = ss_NE; break;
-            case (int) Direction.N: array = ss_N; break;
-            case (int) Direction.SE: array = ss_SE; break;
-            case (int) Direction.S: array = ss_S; break;
+            case (int)Direction.E: array = ss_E; break;
+            case (int)Direction.NE: array = ss_NE; break;
+            case (int)Direction.N: array = ss_N; break;
+            case (int)Direction.SE: array = ss_SE; break;
+            case (int)Direction.S: array = ss_S; break;
         }
 
         length = array.Length - 1;
@@ -514,26 +512,26 @@ public class Player : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(Game.TIME_TO_NEW_DASH);
-        
+
         watchDash = null;
     }
 
-        void cloneMethod(Sprite sprite, float alpha = 1) {
-            GameObject clone = new GameObject("Clone", typeof(SpriteRenderer));
-            SpriteRenderer cloneSprite = (clone.GetComponent<Renderer>() as SpriteRenderer);
+    void cloneMethod(Sprite sprite, float alpha = 1) {
+        GameObject clone = new GameObject("Clone", typeof(SpriteRenderer));
+        SpriteRenderer cloneSprite = (clone.GetComponent<Renderer>() as SpriteRenderer);
 
-            clone.transform.position = transform.position;
-            clone.transform.localScale = transform.localScale;
+        clone.transform.position = transform.position;
+        clone.transform.localScale = transform.localScale;
 
-            cloneSprite.sprite = sprite;
-            cloneSprite.sortingLayerID = _sprite.sortingLayerID;
-            cloneSprite.sortingOrder = _sprite.sortingOrder - 4;
-            cloneSprite.color = new Color(1, 1, 1, alpha);
+        cloneSprite.sprite = sprite;
+        cloneSprite.sortingLayerID = _sprite.sortingLayerID;
+        cloneSprite.sortingOrder = _sprite.sortingOrder - 4;
+        cloneSprite.color = new Color(1, 1, 1, alpha);
 
-            cloneSprite.DOColor(new Color(1, 1, 1, 0), Game.DASH_SHADOW_TIME).SetEase(Ease.InQuint).OnComplete(() => {
-                Destroy(clone);
-            });
-        }
+        cloneSprite.DOColor(new Color(1, 1, 1, 0), Game.DASH_SHADOW_TIME).SetEase(Ease.InQuint).OnComplete(() => {
+            Destroy(clone);
+        });
+    }
 
     #endregion
 

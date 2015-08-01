@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class ShootMove : MonoBehaviour {
 
-
     public float distance = 0;
     public float speed;
     public int damage;
@@ -29,9 +28,11 @@ public class ShootMove : MonoBehaviour {
     private ParticleSystem _collisionParticles;
     private Animator _anim;
 
+    #region Getters And Setters
+
     public Vector2 Direction {
         set {
-            if (_feet == null) _feet = transform.GetComponent<SortingMoveableLayer>().positionPoint;
+            if (_feet == null) _feet = transform.GetComponent<SortingOrder>().positionPoint;
             Vector3 local = _feet.position;
 
             direction = value.normalized;
@@ -39,6 +40,7 @@ public class ShootMove : MonoBehaviour {
             _feet.position = local;
         }
     }
+
     public float Distance {
         set {
             distance = value;
@@ -46,7 +48,9 @@ public class ShootMove : MonoBehaviour {
         }
     }
 
-    #region MonoBehaviour
+    #endregion
+
+    #region Core
 
     void Awake() {
         collisionLevel = GetComponent<CollisionLevel>();
@@ -55,30 +59,14 @@ public class ShootMove : MonoBehaviour {
 
         if (transform.Find("Particles"))
             _particles = transform.Find("Particles").GetComponent<ParticleSystem>();
+
         if (transform.Find("Collision Particles"))
             _collisionParticles = transform.Find("Collision Particles").GetComponent<ParticleSystem>();
     }
 
     void Start() {
-        //createFeetCollider();
-
         destroied = false;
         Direction = direction;
-    }
-
-    void createFeetCollider() {
-        if (transform.GetComponent<SortingMoveableLayer>() == null) return;
-
-        _feet = transform.GetComponent<SortingMoveableLayer>().positionPoint;
-
-        CircleCollider2D feetCollider = _feet.gameObject.AddComponent<CircleCollider2D>();
-        CollisionListener listener = _feet.gameObject.AddComponent<CollisionListener>();
-
-        feetCollider.radius = Mathf.Min(GetComponent<Collider2D>().bounds.extents.x, GetComponent<Collider2D>().bounds.extents.y);
-        feetCollider.isTrigger = GetComponent<Collider2D>().isTrigger;
-
-        listener.Layer = LayerMask.NameToLayer("Level");
-        listener.Father = gameObject;
     }
 
     void Update() {
@@ -88,7 +76,6 @@ public class ShootMove : MonoBehaviour {
         if (distance != 0 && Vector2.Distance(startPosition, transform.position) >= distance) {
             DestroyMove(false);
         }
-
     }
 
     void LateUpdate() {
@@ -97,59 +84,34 @@ public class ShootMove : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D trigger) {
+        if (trigger.tag == "Enemy" && isPlayerAlly) {
+            CollisionLevel collision = trigger.GetComponent<CollisionLevel>();
 
-        CollisionLevel collision = trigger.GetComponent<CollisionLevel>();
+            if (collision == null) return;
+            if (collision.Level != collisionLevel.Level) return;
 
-        if (isPlayerAlly) print(trigger.name + " " + trigger.tag + " " + isPlayerAlly);
+            trigger.GetComponent<BaseEnemy>().OnTakeDamage(this, trigger);
+            DestroyMove();
 
-        if (collision != null && (collisionLevel == null || collision.Level == collisionLevel.Level)) {
-            if (trigger.tag == "Enemy" && isPlayerAlly) {
-                if (trigger.GetComponent<Enemy>() != null) {
-                    trigger.GetComponent<Enemy>().Hit(damage, direction);
-                    DestroyMove();
-                }
-            }
-            if (trigger.GetComponent<BaseEnemy>() != null) {
-                trigger.GetComponent<BaseEnemy>().OnTakeDamage(this, trigger);
-                DestroyMove();
-            }
-            // if the shoot collides with the wall ,it's destroyed.
-            if (trigger.gameObject.tag == "Wall") {
-                DestroyMove();
-            }
-            if (trigger.tag == "Player" && !isPlayerAlly) {
-                //Player player = trigger.GetComponent<Player>();
-                //if (collisionLevel.Level == player.collisionLevel.Level) {
-				GameController.self.player.OnGetHit(this, trigger);
-                DestroyMove();
-                //}
-            }
+        } else if (trigger.tag == "PlayerCollider" && !isPlayerAlly) {
+            Player player = GameController.self.player;
+
+            if (player.collisionLevel.Level != collisionLevel.Level) return;
+
+            player.OnGetHit(this, trigger);
+            DestroyMove();
         }
     }
-    /*if (trigger.gameObject.layer == LayerMask.NameToLayer("Level")) {
-        DestroyMove();
-    }*/
 
-    /*public void OnCollisionEnter2D(Collision2D coll) {
-        if (coll.gameObject.tag == "Player" && !isPlayerAlly) {
-            coll.gameObject.GetComponent<AnimationController>().Hit(damage, direction);
+    public void OnTriggerListener(Collider2D trigger) {
+        if (trigger.gameObject.tag == "Wall") {
             DestroyMove();
         }
-
-        if (coll.gameObject.layer == LayerMask.NameToLayer("Level")) {
-            DestroyMove();
-        }   
-    }*/
+    }
 
     #endregion
 
     #region Messages
-    /*
-    public void OnCollisionListener(Collider2D trigger) {
-        if (trigger.gameObject.layer == LayerMask.NameToLayer("Level")) {
-            DestroyMove();
-        }
-    }*/
 
     public void OnFinishDestroyAnimation() {
         destroied = true;

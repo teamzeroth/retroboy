@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SortingMoveableLayer : MonoBehaviour {
+public class SortingOrder : MonoBehaviour {
 
     public Transform positionPoint;
     public bool forcePosition = false;
@@ -49,9 +49,10 @@ public class SortingMoveableLayer : MonoBehaviour {
         if (shadow != null) CastShadow();
     }
 
-    void Update() {
-        //if (name == "Shoot(Clone)") print(initialOrder);
+    float timer;
 
+    void Update() {
+        //if (name == "Stinger-S") print(initialOrder);
         _renderer.position = new Vector3(
             _renderer.position.x, _renderer.position.y,
             initialOrder + positionPoint.position.y
@@ -61,7 +62,6 @@ public class SortingMoveableLayer : MonoBehaviour {
             _shadow.position.x, _shadow.position.y,
             _renderer.position.z - 4
         );
-
     }
 
     void OnDrawGizmosSelected() {

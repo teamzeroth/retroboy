@@ -23,7 +23,7 @@ public class SortingTiledLayer : MonoBehaviour {
     }
 
     void addSortingMoveableLayer(GameObject tile, Transform feets){
-        SortingMoveableLayer sML = tile.AddComponent<SortingMoveableLayer>();
+        SortingOrder sML = tile.AddComponent<SortingOrder>();
         SpriteRenderer tileRenderer = (SpriteRenderer)tile.GetComponent<Renderer>();
 
         sML.positionPoint = feets;

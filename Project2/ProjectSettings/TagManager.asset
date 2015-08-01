@@ -11,7 +11,7 @@ TagManager:
   - Coin
   - EnemyShoot
   - Wall
-  - NimFeet
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX

@@ -20,20 +20,24 @@ public class BaseEnemy : MonoBehaviour {
 
     [HideInInspector]
     public Transform target;
+    [HideInInspector]
+    public bool dead = false;
 
     protected Vector3 impulseForce;
     protected Tween impulseTween;
 
     protected Animator _anim;
     protected Transform _renderer;
+    protected Rigidbody2D _rigidbody;
 
     protected CollisionLevel _collisionLevel;
-	protected CollisionLevel player;
+    protected CollisionLevel player;
 
     public void Awake() {
         _anim = GetComponent<Animator>();
         _renderer = transform.Find("renderer");
         _collisionLevel = GetComponent<CollisionLevel>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     public void Start() {
@@ -44,7 +48,7 @@ public class BaseEnemy : MonoBehaviour {
 
     public void OnDrawGizmosSelected() {
 #if UNITY_EDITOR
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, rangeAtack);
 #endif
     }
@@ -90,11 +94,11 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     public virtual void OnDistanceWithPlayer(Transform player, float distance) {
-		if (_renderer != null) {
-			if (GameController.self.player.collisionLevel.Level == _collisionLevel.Level && (distance <= rangeAtack)) {
-				FindPlayer (player.parent);
-			} else
-				LostPlayer (player.parent);
-		}
-	}
+        if (_renderer != null) {
+            if (GameController.self.player.collisionLevel.Level == _collisionLevel.Level && (distance <= rangeAtack)) {
+                FindPlayer(player.parent);
+            } else
+                LostPlayer(player.parent);
+        }
+    }
 }

@@ -65,8 +65,8 @@ GameObject:
   - 212: {fileID: 21240838}
   - 114: {fileID: 11494636}
   - 114: {fileID: 11450724}
-  - 61: {fileID: 6122354}
   - 114: {fileID: 11419920}
+  - 60: {fileID: 6039780}
   m_Layer: 9
   m_Name: explosion
   m_TagString: Enemy
@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.71000004, y: -4.51000023, z: 0}
+  m_LocalPosition: {x: 6.73999977, y: 1.97000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 421748}
@@ -167,19 +167,30 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .100000001
---- !u!61 &6122354
-BoxCollider2D:
+--- !u!60 &6039780
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171856}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.104596138, y: -.000102996826}
-  serializedVersion: 2
-  m_Size: {x: 4.22271013, y: 2.22095585}
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -.733520508, y: 1.05873609}
+      - {x: -1.50443649, y: .791135073}
+      - {x: -2.05000305, y: .385413408}
+      - {x: -2.11948776, y: -.141129255}
+      - {x: -1.64823151, y: -.744343519}
+      - {x: -.703893661, y: -1.10748363}
+      - {x: .641941071, y: -1.08449244}
+      - {x: 1.59765625, y: -.689556837}
+      - {x: 1.95142555, y: .0772984028}
+      - {x: 1.61476517, y: .589829683}
+      - {x: .626056671, y: .975243807}
 --- !u!95 &9533848
 Animator:
   serializedVersion: 3
@@ -255,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   test: 
   playOnce: 1
-  sample: 30
+  sample: 16
   animation:
   - {fileID: 21300000, guid: 86f024b0acecd1242bb7aba503219c29, type: 3}
   - {fileID: 21300002, guid: 86f024b0acecd1242bb7aba503219c29, type: 3}
@@ -291,10 +302,12 @@ MonoBehaviour:
   life: 3
   damage: 2
   speed: 20
-  isColliderDamage: 1
+  isColliderDamage: 0
   coinsChance: {x: 1, y: 3}
   rangeAtack: 3.5
   target: {fileID: 0}
+  dead: 0
+  distanceExplosion: 1.20000005
 --- !u!114 &11494636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,9 +323,10 @@ MonoBehaviour:
   damage: 2
   speed: 0
   isColliderDamage: 1
-  coinsChance: {x: 1, y: 3}
-  rangeAtack: 1
+  coinsChance: {x: 0, y: 0}
+  rangeAtack: 0
   target: {fileID: 0}
+  dead: 0
 --- !u!212 &21240838
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -337,7 +351,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 112778315
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300010, guid: 86f024b0acecd1242bb7aba503219c29, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 86f024b0acecd1242bb7aba503219c29, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21261002
 SpriteRenderer:

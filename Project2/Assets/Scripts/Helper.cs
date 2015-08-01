@@ -29,16 +29,16 @@ public static class Helper {
     /// <param name="totalTime">Duration</param>
 
     public static float EaseOutBounce(float currentTime, float startValue, float changeInValue, float totalTime) {
-        float magic1 = 7.5625f, magic2 = 2.75f,  magic3 = 1.5f, magic4 = 2.25f, 
+        float magic1 = 7.5625f, magic2 = 2.75f, magic3 = 1.5f, magic4 = 2.25f,
             magic5 = 2.625f, magic6 = 0.75f, magic7 = 0.9375f, magic8 = 0.984375f;
 
-        if ((currentTime /= totalTime) < (1 / magic2)){ //0.36
+        if ((currentTime /= totalTime) < (1 / magic2)) { //0.36
             return changeInValue * (magic1 * currentTime * currentTime) + startValue;
 
-        } else if (currentTime < (2 / magic2)){ //0.72
+        } else if (currentTime < (2 / magic2)) { //0.72
             return changeInValue * (magic1 * (currentTime -= (magic3 / magic2)) * currentTime + magic6) + startValue;
 
-        } else if (currentTime < (2.5 / magic2)){ //0.91
+        } else if (currentTime < (2.5 / magic2)) { //0.91
             return changeInValue * (magic1 * (currentTime -= (magic4 / magic2)) * currentTime + magic7) + startValue;
 
         } else {
@@ -51,7 +51,7 @@ public static class Helper {
     /// </summary>
     /// <param name="anim">this paramether of the Animation</param>
 
-    public static string CurrentAnimState(this Animator _anim){
+    public static string CurrentAnimState(this Animator _anim) {
         try {
             return _anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         } catch (System.Exception) {
@@ -89,7 +89,28 @@ public static class Helper {
         _transform.localScale = localScale;
     }
 
-    
+    /// <sumary>
+    /// Return a component of object, if this component don't exist so, create it
+    /// </sumary>
+
+    public static T TryAddComponent<T>(this GameObject _object) where T : Component {
+        T component = _object.GetComponent<T>();
+
+        if (component == null)
+            return _object.AddComponent<T>();
+        return component;
+    }
+
+    /// <sumary>
+    /// Overwrite a vector3 with a Vecto2, ignoring the Z cood
+    /// </sumary>
+    /// <param name="cur">The current value</param>
+    /// <param name="over">The overwrite value</param>
+
+    public static Vector3 IgnoreZ(Vector3 cur, Vector2 over) {
+        return new Vector3(over.x, over.y, cur.z);
+    }
+
     /// <sumary>
     /// Return the current Direction of a vector in geographic directions
     /// </sumary>
@@ -103,7 +124,7 @@ public static class Helper {
         float angle = Mathf.Rad2Deg * radAngle;
 
         int index = Mathf.FloorToInt(((angle + 360 + 22.5f) % 360) / 45);
-        Direction dir = (Direction) index;
+        Direction dir = (Direction)index;
 
         if (fliped) {
             if (dir == Direction.NW) dir = Direction.NE;
@@ -111,11 +132,11 @@ public static class Helper {
             else if (dir == Direction.W) dir = Direction.E;
         }
 
-        return (int) dir;
+        return (int)dir;
     }
 
     public static Direction TranslateDirection(string value) {
-        return (Direction) Enum.Parse(typeof(Direction), value, true);
+        return (Direction)Enum.Parse(typeof(Direction), value, true);
     }
 
     static public Vector2 GetDirectionVector(Direction d) {

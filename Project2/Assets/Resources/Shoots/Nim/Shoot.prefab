@@ -52,7 +52,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &171846
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.9899998, y: -11.7200003, z: 0}
+  m_LocalPosition: {x: 25.35812, y: -18.3725624, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447070}
@@ -212,7 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e05bd67939a8904abc30f0d7c3905df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Layer: 8
+  father: {fileID: 171846}
+  layer: Wall
 --- !u!114 &11445286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 0
   speed: 7
-  damage: 3
+  damage: 1
   isPlayerAlly: 1
   hasCollider: 1
   hasLostForce: 1

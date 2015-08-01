@@ -48,9 +48,10 @@ namespace MapResources {
         }
 
         public void OnTriggerEnter2D(Collider2D other) {
-			if (other.tag == "NimFeet" && _player == null && !string.IsNullOrEmpty(GoTo)) {
-				GetIn();
-				Debug.Log("Entered");
+            if (other.transform.parent.tag == "Player" &&
+                _player == null && !string.IsNullOrEmpty(GoTo)) {
+
+                GetIn();
             }
         }
 
@@ -67,16 +68,15 @@ namespace MapResources {
             _player = null;
         }
 
-		public void GetIn() {
+        public void GetIn() {
             Camera.main.GetComponent<SmoothFollow>().target = transform;
 
-			_player = GameController.self.player;
-			//_player.DisableColliders();
+            _player = GameController.self.player;
+            //_player.DisableColliders();
 
             var direction = CalcInDirection("in");
 
             _player.StartFixedMove(direction, direction, Game.DOOR_ANIMATION_TIME, new Color(0, 0, 0, 0.0f));
-
             Invoke("AfterEnter", Game.DOOR_ANIMATION_TIME + 0.1f);
         }
 
@@ -84,13 +84,13 @@ namespace MapResources {
             player.collisionLevel.Level = collisionLevel.Level;
             Camera.main.GetComponent<SmoothFollow>().target = player.transform;
 
-			_player = GameController.self.player;
+            _player = player;
             var direction = CalcInDirection("out");
 
             _player.StartFixedMove(direction, direction, Game.DOOR_ANIMATION_TIME, new Color(1, 1, 1, 1));
             _player.DeadDirection = direction;
 
-            Vector3 colliderCenter = (Vector3)(_player.FeetCollider as CircleCollider2D).offset;
+            Vector3 colliderCenter = _player.FeetCollider.transform.localPosition;
             _player.transform.position = GetComponent<Collider2D>().bounds.center - colliderCenter;
 
             Invoke("AfterOut", Game.DOOR_ANIMATION_TIME + 0.1f);

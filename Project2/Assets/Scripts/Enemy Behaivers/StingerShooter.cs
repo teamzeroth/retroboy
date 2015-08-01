@@ -98,9 +98,10 @@ public class StingerShooter : BaseEnemy {
 
     void applySenoide() {
         Vector3 senoid = initPos + new Vector3(0, 0.1f, 0) * Mathf.Sin((randomTime + currTime) * 4);
-        GetComponent<CircleCollider2D>().offset = senoid;
-        _renderer.localPosition = senoid;
 
+        GetComponent<CircleCollider2D>().offset = senoid;
+
+        _renderer.localPosition = Helper.IgnoreZ(_renderer.localPosition, senoid);
     }
 
     Vector2 toIntercept;
@@ -167,7 +168,7 @@ public class StingerShooter : BaseEnemy {
             float time = _smoke.GetComponent<SimpleAnimatior>().NormalizeTime;
 
             _smoke.localPosition = (Vector3)direction * -.6f + Vector3.up * 1 * time;
-            _smoke.GetComponent<SortingMoveableLayer>().Position = transform.Find("feets").position.y + direction.y * -.6f;
+            _smoke.GetComponent<SortingOrder>().Position = transform.Find("feets").position.y + direction.y * -.6f;
         }
 
         _anim.SetFloat("Horizontal", direction.x);
@@ -248,7 +249,6 @@ public class StingerShooter : BaseEnemy {
 
             ShootMove shoot = shootGO.GetComponent<ShootMove>();
             shoot.Direction = d;
-            print(shoot.collisionLevel);
             shoot.collisionLevel.Level = _collisionLevel.Level;
         }
     }

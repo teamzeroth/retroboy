@@ -76,10 +76,10 @@ GameObject:
   - 95: {fileID: 9556138}
   - 58: {fileID: 5848306}
   - 50: {fileID: 5067590}
-  - 114: {fileID: 11466866}
-  - 114: {fileID: 11419962}
   - 114: {fileID: 11460692}
   - 114: {fileID: 11402488}
+  - 114: {fileID: 11427838}
+  - 114: {fileID: 11459356}
   m_Layer: 9
   m_Name: Stinger-S
   m_TagString: Enemy
@@ -118,7 +118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.6199999, y: 5.1500001, z: 0}
+  m_LocalPosition: {x: 32.1325989, y: -20.1952763, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 423272}
@@ -221,9 +221,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b39a1f1c363bca4790b03b9204f8328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderer: {fileID: 0}
+  renderer: {fileID: 21202108}
   level: 2
---- !u!114 &11419962
+--- !u!114 &11427838
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionPoint: {fileID: 0}
   forcePosition: 0
-  ignoreRenderer: 0
+  ignoreRenderer: 1
   shadow: {fileID: 0}
   initialOrder: 0
 --- !u!114 &11450326
@@ -255,6 +255,30 @@ MonoBehaviour:
   ignoreRenderer: 0
   shadow: {fileID: 0}
   initialOrder: 0
+--- !u!114 &11459356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd63eae0eea4cd47bb307079462dec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 3
+  damage: 1
+  speed: 5
+  isColliderDamage: 0
+  coinsChance: {x: 1, y: 3}
+  rangeAtack: 4
+  target: {fileID: 0}
+  dead: 0
+  chanceToShoot: {x: 2, y: 4}
+  shootTimes: 3
+  OnShooting: 0
+  OnLostPlayer: 0
+  OnDie: 0
 --- !u!114 &11460692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,29 +293,6 @@ MonoBehaviour:
   laser: {fileID: 11400000, guid: c44ecb495e8c9614a9a7d16e03a63d96, type: 2}
   voo: {fileID: 11400000, guid: 704885a76987d13418af4b2e35af3f58, type: 2}
   explosion: {fileID: 11400000, guid: b9f31bf9e54fb554fa3e2b9f3efda775, type: 2}
---- !u!114 &11466866
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd63eae0eea4cd47bb307079462dec1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 5
-  damage: 1
-  speed: 2
-  isColliderDamage: 0
-  coinsChance: {x: 2, y: 3}
-  rangeAtack: 4.5
-  target: {fileID: 0}
-  chanceToShoot: {x: 1, y: 3}
-  shootTimes: 3
-  OnShooting: 0
-  OnLostPlayer: 0
-  OnDie: 0
 --- !u!114 &11498796
 MonoBehaviour:
   m_ObjectHideFlags: 1
