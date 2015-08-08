@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="Bank" id="{366d4c14-91a4-4bb0-a2a1-744340c3ab50}">
+        <property name="name">
+            <value>NIM</value>
+        </property>
+        <relationship name="buildSettings">
+            <destination>{0a7c4633-487c-4bd3-b381-327bdcb83895}</destination>
+        </relationship>
+        <relationship name="folder">
+            <destination>{e9893328-4bf2-4fb5-88d2-6574190bd5db}</destination>
+        </relationship>
+    </object>
+    <object class="DesktopBuildSetting" id="{0a7c4633-487c-4bd3-b381-327bdcb83895}">
+        <relationship name="compressionSettings">
+            <destination>{ebd4f756-41bd-4dfe-8dfd-eda3546cbe1c}</destination>
+            <destination>{74af5a5e-ebf3-488e-baad-62c1576f535d}</destination>
+            <destination>{cf7dbdf5-ae96-46a0-aad5-86a4b8327558}</destination>
+        </relationship>
+        <relationship name="activeCompressionSetting">
+            <destination>{74af5a5e-ebf3-488e-baad-62c1576f535d}</destination>
+        </relationship>
+    </object>
+    <object class="LossyCompressionSetting" id="{ebd4f756-41bd-4dfe-8dfd-eda3546cbe1c}">
+        <property name="type">
+            <value>Vorbis</value>
+        </property>
+        <property name="quality">
+            <value>100</value>
+        </property>
+    </object>
+    <object class="PCMCompressionSetting" id="{74af5a5e-ebf3-488e-baad-62c1576f535d}">
+        <property name="type">
+            <value>ADPCM</value>
+        </property>
+    </object>
+    <object class="PCMCompressionSetting" id="{cf7dbdf5-ae96-46a0-aad5-86a4b8327558}">
+        <property name="type">
+            <value>PCM</value>
+        </property>
+    </object>
+</objects>
