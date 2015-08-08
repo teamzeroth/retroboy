@@ -37,8 +37,16 @@ public class FMOD_Listener : MonoBehaviour
 		FMOD.RESULT result = FMOD_StudioSystem.instance.System.loadBankFile(bankPath, LOAD_BANK_FLAGS.NORMAL, out bank);
 		if (result == FMOD.RESULT.ERR_VERSION)
 		{
-			FMOD.Studio.UnityUtil.LogError("These banks were built with an incompatible version of FMOD Studio.");
+            FMOD.Studio.UnityUtil.LogError(String.Format("Bank {0} built with an incompatible version of FMOD Studio.", fileName));
 		}
+        else if (result == FMOD.RESULT.ERR_EVENT_ALREADY_LOADED)
+        {
+            // ignore
+        }
+        else if (result != FMOD.RESULT.OK)
+        {
+            FMOD.Studio.UnityUtil.LogError(String.Format("Bank {0} encountered a loading error {1}", fileName, result.ToString()));
+        }		
 		
 		FMOD.Studio.UnityUtil.Log("bank load: " + (bank != null ? "suceeded" : "failed!!"));
 	}
@@ -46,65 +54,33 @@ public class FMOD_Listener : MonoBehaviour
 	string getStreamingAsset(string fileName)
 	{
 		string bankPath = "";
-		if (Application.platform == RuntimePlatform.WindowsEditor || 
-			Application.platform == RuntimePlatform.OSXEditor ||
-		    Application.platform == RuntimePlatform.WindowsPlayer ||
-		    Application.platform == RuntimePlatform.LinuxPlayer
-#if UNITY_PS4
-		    || Application.platform == RuntimePlatform.PS4
-#endif
-#if UNITY_XBOXONE
-			|| Application.platform == RuntimePlatform.XboxOne
-#endif
-#if UNITY_WIIU
-            || Application.platform == RuntimePlatform.WiiU
-#endif
-#if UNITY_PSP2
-            || Application.platform == RuntimePlatform.PSP2
-#endif
-)
-		{
-			bankPath = Application.dataPath + "/StreamingAssets";
-		}
-		else if (Application.platform == RuntimePlatform.OSXPlayer ||
-			Application.platform == RuntimePlatform.OSXDashboardPlayer)
-		{
-			bankPath = Application.dataPath + "/Data/StreamingAssets";
-		}
-		else if (Application.platform == RuntimePlatform.IPhonePlayer)
-		{
-			bankPath = Application.dataPath + "/Raw";
-		}
-		else if (Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android)
 		{
 			bankPath = "jar:file://" + Application.dataPath + "!/assets";
 		}
-#if (UNITY_4_0 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_5 || UNITY_4_6)
+        #if (UNITY_4_0 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_5 || UNITY_4_6)
         else if (Application.platform == RuntimePlatform.MetroPlayerARM || 
                  Application.platform == RuntimePlatform.MetroPlayerX86 || 
                  Application.platform == RuntimePlatform.MetroPlayerX64
             )
-        {
-            bankPath = "ms-appx:///Data/StreamingAssets";
-        }
-#else // UNITY 5 enum
+        #else // UNITY 5 enum
         else if (Application.platform == RuntimePlatform.WSAPlayerARM || 
 		         Application.platform == RuntimePlatform.WSAPlayerX86 || 
 		         Application.platform == RuntimePlatform.WSAPlayerX64
             )
+        #endif
         {
+            // TODO: not sure but I don't think Application.streamingAssetsPath has ms-appx:// format
             bankPath = "ms-appx:///Data/StreamingAssets";
         }
-#endif
         else
-		{		
-			FMOD.Studio.UnityUtil.LogError("Unknown platform!");
-			return "";
+        {
+            bankPath = Application.streamingAssetsPath;
 		}
 		
 		string assetPath = bankPath + "/" + fileName;
 		
-#if UNITY_ANDROID && !UNITY_EDITOR
+        #if UNITY_ANDROID && !UNITY_EDITOR
 		// Unpack the compressed JAR file
 		string unpackedJarPath = Application.persistentDataPath + "/" + fileName;
 		
@@ -139,7 +115,7 @@ public class FMOD_Listener : MonoBehaviour
 		//FMOD.Studio.UnityUtil.Log("Unpacked bank size = " + fi.Length);
 		
 		assetPath = unpackedJarPath;
-#endif
+        #endif
 
 		return assetPath;
 	}
@@ -208,8 +184,8 @@ public class FMOD_Listener : MonoBehaviour
 		
 		if (sys != null && sys.isValid())
 		{
-			var attributes = UnityUtil.to3DAttributes(gameObject, cachedRigidBody);		
-			ERRCHECK(sys.setListenerAttributes(attributes));
+			var attributes = FMOD.Studio.UnityUtil.to3DAttributes(gameObject, cachedRigidBody);		
+			ERRCHECK(sys.setListenerAttributes(0, attributes));
 		}
 	}
 	

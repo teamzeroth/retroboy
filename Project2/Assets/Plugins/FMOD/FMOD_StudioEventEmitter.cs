@@ -10,11 +10,10 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 	public string path = "";
 	public bool startEventOnAwake = true;
 
-    protected FMOD.Studio.EventInstance evt;
-    [HideInInspector]
-    public bool hasStarted = false;
-
-    protected Rigidbody cachedRigidBody;
+	protected FMOD.Studio.EventInstance evt;
+	protected bool hasStarted = false;
+	
+	Rigidbody cachedRigidBody;
 
 	[System.Serializable]
 	public class Parameter
@@ -22,7 +21,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 		public string name;
 		public float value;
 	}
-
+	
 	public void Play()
 	{
 		if (evt != null)
@@ -65,9 +64,8 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 		return FMOD.Studio.PLAYBACK_STATE.STOPPED;
 	}
 
-	public void Start() 
+	protected void Start() 
 	{
-
 		if (evt == null || !evt.isValid())
 		{
 			CacheEventInstance();
@@ -79,11 +77,11 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 			StartEvent();
 	}
 	
-	void CacheEventInstance()
+	protected void CacheEventInstance()
 	{
 		if (asset != null)
 		{
-			evt = FMOD_StudioSystem.instance.GetEvent(asset.id);
+			evt = FMOD_StudioSystem.instance.GetEvent(asset.id);				
 		}
 		else if (!String.IsNullOrEmpty(path))
 		{
@@ -102,7 +100,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 		isShuttingDown = true;
 	}
 
-	void OnDestroy() 
+	protected void OnDestroy() 
 	{
 		if (isShuttingDown)
 			return;
@@ -172,7 +170,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 	{
 		if (evt != null && evt.isValid ()) 
 		{
-			var attributes = UnityUtil.to3DAttributes(gameObject, cachedRigidBody);			
+			var attributes = FMOD.Studio.UnityUtil.to3DAttributes(gameObject, cachedRigidBody);			
 			ERRCHECK(evt.set3DAttributes(attributes));
 		}
 	}    
@@ -199,7 +197,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 	}
     #endif
 	
-	public FMOD.RESULT ERRCHECK(FMOD.RESULT result)
+	protected FMOD.RESULT ERRCHECK(FMOD.RESULT result)
 	{
 		FMOD.Studio.UnityUtil.ERRCHECK(result);
 		return result;
