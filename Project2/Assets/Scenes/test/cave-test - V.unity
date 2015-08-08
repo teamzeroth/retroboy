@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33bf71f8293cb6f41a45c63cc0545cf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Out: 1
+  Out: 0
   In: 0
   ForceOut: 0
   ForceIn: 0
@@ -3071,11 +3071,7 @@ GameObject:
   - 4: {fileID: 1171320439}
   - 114: {fileID: 1171320441}
   - 114: {fileID: 1171320440}
-  - 114: {fileID: 1171320448}
-  - 114: {fileID: 1171320447}
   - 114: {fileID: 1171320446}
-  - 114: {fileID: 1171320445}
-  - 114: {fileID: 1171320444}
   m_Layer: 0
   m_Name: FungusScript
   m_TagString: Fungus
@@ -3108,17 +3104,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 345
-    y: 30
-    width: 155
-    height: 40
+    x: 0
+    y: 0
+    width: 120
+    height: 30
   itemId: 0
-  blockName: GiovanniSay
+  blockName: New Block
   description: 
-  eventHandler: {fileID: 1171320448}
-  commandList:
-  - {fileID: 1171320447}
-  - {fileID: 1171320445}
+  eventHandler: {fileID: 0}
+  commandList: []
 --- !u!114 &1171320441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3134,13 +3128,13 @@ MonoBehaviour:
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
-  zoom: .692500114
+  zoom: 1
   scrollViewRect:
     serializedVersion: 2
-    x: -400
-    y: -400
-    width: 1474
-    height: 992
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   selectedBlock: {fileID: 0}
   selectedCommands: []
   variables: []
@@ -3150,49 +3144,6 @@ MonoBehaviour:
   hideComponents: 1
   saveSelection: 1
   localizationId: 
---- !u!114 &1171320444
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1171320438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 5
-  errorMessage: 
-  indentLevel: 0
-  storyText: A monstros mecanicos nessa caverna, devemos fugir!
-  description: 
-  character: {fileID: 0}
-  portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
-  showAlways: 1
-  showCount: 1
-  extendPrevious: 0
-  fadeIn: 0
-  fadeOut: 0
-  waitForClick: 1
-  setSayDialog: {fileID: 0}
---- !u!114 &1171320445
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1171320438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 050fb9e6e72f442b3b883da8a965bdeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 4
-  errorMessage: 
-  indentLevel: 0
-  targetFlowchart: {fileID: 0}
-  targetBlock: {fileID: 1171320446}
-  callMode: 0
 --- !u!114 &1171320446
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -3206,55 +3157,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 330
-    y: 109
-    width: 133
-    height: 40
+    x: 0
+    y: 0
+    width: 120
+    height: 30
   itemId: 1
-  blockName: GiovanneSay2
+  blockName: New Block
   description: 
   eventHandler: {fileID: 0}
-  commandList:
-  - {fileID: 1171320444}
---- !u!114 &1171320447
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1171320438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 3
-  errorMessage: 
-  indentLevel: 0
-  storyText: "Nim, o que voc\xEA esta fazendo aqui!"
-  description: 
-  character: {fileID: 0}
-  portrait: {fileID: 0}
-  voiceOverClip: {fileID: 8300000, guid: b3bcd48a9e6a9994586617d2b35b8f75, type: 3}
-  showAlways: 1
-  showCount: 1
-  extendPrevious: 0
-  fadeIn: 0
-  fadeOut: 0
-  waitForClick: 1
-  setSayDialog: {fileID: 0}
---- !u!114 &1171320448
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1171320438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 1171320440}
-  message: GiovanniSay
+  commandList: []
 --- !u!1 &1174922889
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,9 +3518,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38be50e60827b454fa3ada30ad16a60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialDefaultFile: {fileID: 2100000, guid: 22ee199904f64ea4786aee7fa87b2b4d, type: 2}
-  MapTMX: {fileID: 4900000, guid: cc96602a2664bea499e78e97a69a350b, type: 3}
-  MapTMXPath: Maps/Cave/
+  materialDefaultFile: {fileID: 0}
+  MapTMX: {fileID: 0}
+  MapTMXPath: GameMaps/
   DefaultSortingOrder: 0
   tileObjectElipsePrecision: 16
   simpleTileObjectCalculation: 1
@@ -3625,43 +3536,25 @@ MonoBehaviour:
   TileCollisionsIsInner: 0
   TileCollisionsIsTrigger: 0
   TileCollisionsIs2D: 1
-  generateCollider: 01000001
-  collidersZDepth:
-  - 0
-  - 0
-  - 0
-  - 0
-  collidersWidth:
-  - 1
-  - 1
-  - 1
-  - 1
-  objectLayers:
-  - Door Action
-  - Quest
-  - Enemies
-  - Colliders
-  collidersIsInner: 00000000
-  collidersIsTrigger: 00000000
-  collidersIs2D: 01010101
+  generateCollider: 
+  collidersZDepth: []
+  collidersWidth: []
+  objectLayers: []
+  collidersIsInner: 
+  collidersIsTrigger: 
+  collidersIs2D: 
   isToLoadOnStart: 0
   addTileNameToColliderName: 1
   imageLayers: []
-  tileLayers:
-  - Background
-  - BackgroundDetail
-  - Foreground
-  - ForegroundDetail
-  - Assets
-  - Tales
+  tileLayers: []
   foldoutObjectsInLayer: 0
   foldoutImageLayers: 0
-  foldoutObjectLayers: 1
-  foldoutLayers: 1
+  foldoutObjectLayers: 0
+  foldoutLayers: 0
   foldoutMapProperties: 0
-  MakeUniqueTiles: 000000000000
-  tileLayersFoldoutProperties: 000000000000
-  objectLayersFoldoutProperties: 00000000
+  MakeUniqueTiles: 
+  tileLayersFoldoutProperties: 
+  objectLayersFoldoutProperties: 
   imageLayersFoldoutProperties: 
 --- !u!4 &1317779197
 Transform:
@@ -4295,13 +4188,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   writingSpeed: 60
-  writingSound: {fileID: 8300000, guid: 5a3c8e205638142dcb8227abe5f14f1f, type: 3}
+  writingSound: {fileID: 0}
   writingVolume: 1
   loopWritingSound: 1
   beepPerCharacter: 0
   slowBeepsAt: 10
   fastBeepsAt: 30
-  punctuationPause: .400000006
+  punctuationPause: .25
   alwaysFadeDialog: 0
   fadeDuration: 1
   fadeEaseType: 0
@@ -4310,12 +4203,12 @@ MonoBehaviour:
   moveSpeed: 1000
   moveEaseType: 0
   clickAnywhere: 1
-  dialogCanvas: {fileID: 427724062}
-  nameText: {fileID: 967550839}
-  storyText: {fileID: 1033756884}
-  characterImage: {fileID: 2005051651}
+  dialogCanvas: {fileID: 0}
+  nameText: {fileID: 0}
+  storyText: {fileID: 0}
+  characterImage: {fileID: 0}
   characterTypingSound: {fileID: 0}
-  continueImage: {fileID: 1526976430}
+  continueImage: {fileID: 0}
   continueSound: {fileID: 0}
 --- !u!4 &1466097098
 Transform:
@@ -4632,7 +4525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da07fed9bc80ea44d9083998cb81e117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sortingLayer: ForeParticles
+  sortingLayer: 
 --- !u!23 &1617546739
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5530,7 +5423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99e20262a0e68e4d9bb7f2aa543c5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: 11400000, guid: 217c058e1a6f59640af2cf4048732adc, type: 2}
+  asset: {fileID: 0}
   path: 
   startEventOnAwake: 1
   hasStarted: 0
@@ -5617,7 +5510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1141a2c8b5154b8498008f8016554203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundTrack: {fileID: 11400000, guid: 217c058e1a6f59640af2cf4048732adc, type: 2}
+  soundTrack: {fileID: 0}
 --- !u!114 &1909196207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5629,7 +5522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd69d2f14fe29e34ca881a9810620847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 2084107231}
+  ui: {fileID: 0}
 --- !u!1 &1963871675
 GameObject:
   m_ObjectHideFlags: 0
@@ -6076,10 +5969,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 460118, guid: 3991a04c8a850014e89ce9c31b6e9291, type: 2}
   m_PrefabInternal: {fileID: 1434962009}
---- !u!1 &2084107231 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 183356, guid: e79cea5e6fab81a4e983f7191d9aa183, type: 2}
-  m_PrefabInternal: {fileID: 673263065}
 --- !u!224 &2084107232 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22483356, guid: e79cea5e6fab81a4e983f7191d9aa183,
