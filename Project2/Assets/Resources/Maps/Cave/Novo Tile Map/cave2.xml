@@ -70272,7 +70272,7 @@
    </properties>
    <polygon points="12.6667,9.33334 29.3333,-1.33333 58.3334,11 40,21.6667"/>
   </object>
-  <object id="84" name="PlatformSecto3F" type="Trigger" x="1226.5" y="264">
+  <object id="84" name="PlatformSecto3F" type="Trigger" x="1216.17" y="276.667">
    <properties>
     <property name="add component1" value="Door"/>
     <property name="add component2" value="CollisionLevel"/>
@@ -70285,7 +70285,7 @@
    </properties>
    <polygon points="12.6667,9.33334 29.3333,-1.33333 54.3334,13.25 37.75,22.6667"/>
   </object>
-  <object id="110" name="PlatformSecto0F" type="Trigger" x="1671.67" y="260.333">
+  <object id="110" name="PlatformSecto0F" type="Trigger" x="1751" y="267">
    <properties>
     <property name="add component1" value="Door"/>
     <property name="add component2" value="CollisionLevel"/>
