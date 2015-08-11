@@ -12,6 +12,7 @@ public class StingerESFX : MonoBehaviour {
     private StingerExploder _enemy;
 
     void Awake() {
+		return;
         GameObject gameObject = (GameObject)Instantiate(new GameObject("SFX"), transform.TransformPoint(Vector3.zero), Quaternion.identity);
         gameObject.transform.parent = transform;
 
@@ -25,11 +26,13 @@ public class StingerESFX : MonoBehaviour {
     }
 
     public void Hit() {
+		return;
         hitEmitter.Play();
     }
 
     bool inAtraction = false;
     public void Explosion(float distance) {
+		return;
         explosionEmitter.SetParameter("Attack", 1 - Mathf.Clamp(distance, -0.16f, 1) + 0.16f);
 
         if (!inAtraction) {

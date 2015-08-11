@@ -22,6 +22,7 @@ public class PlayerSFX : MonoBehaviour {
     private Player _player;
     
     void Awake() {
+		return;
         GameObject gameObject = (GameObject) Instantiate(new GameObject("SFX"), Vector3.zero, Quaternion.identity);
         gameObject.transform.parent = transform;
 
@@ -38,6 +39,7 @@ public class PlayerSFX : MonoBehaviour {
     }
 
     public void Charge() {
+		return;
         if (inCharge) return;
 
         inCharge = true;
@@ -50,6 +52,7 @@ public class PlayerSFX : MonoBehaviour {
     }
 
     public void UnCharge() {
+		return;
         if (!inCharge) return;
 
         inCharge = false;
@@ -58,6 +61,7 @@ public class PlayerSFX : MonoBehaviour {
     }
 
     public void Shoot(float forceTime) {
+		return;
         inShoot = true;
         shootEmitter.SetParameter("Shoot", forceTime >= 1.5f ? forceTime >= 3f ? 3 : 2 : 1);
 
@@ -65,6 +69,7 @@ public class PlayerSFX : MonoBehaviour {
     }
     
     public void Footstep(bool walking, int surface = 1) {
+		return;
         if (_player.OnHurt) return;
 
         if (walking && inWalking != walking) {
@@ -84,6 +89,7 @@ public class PlayerSFX : MonoBehaviour {
 
 
     public void Hurt() {
+		return;
         if (!haveHurt) {
             haveHurt = true;
             hurtEmitter.SetParameter("hurt", 1f);

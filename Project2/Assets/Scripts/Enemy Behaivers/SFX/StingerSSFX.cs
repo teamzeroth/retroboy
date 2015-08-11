@@ -14,6 +14,7 @@ public class StingerSSFX : MonoBehaviour {
     private StingerShooter _enemy;
 
     void Awake() {
+		return;
         GameObject gameObject = (GameObject)Instantiate(new GameObject("SFX"), transform.TransformPoint(Vector3.zero), Quaternion.identity);
         gameObject.transform.parent = transform;
 
@@ -30,6 +31,7 @@ public class StingerSSFX : MonoBehaviour {
     }
 
     public void Laser() {
+		return;
         laserEmitter.SetParameter("laser", 1f);
 
         laserEmitter.Play();
@@ -37,6 +39,7 @@ public class StingerSSFX : MonoBehaviour {
 
     bool inFleing = false;
     public void Voo() {
+		return;
         vooEmitter.SetParameter("voo", 1f);
 
         if (!inFleing) {
@@ -46,6 +49,7 @@ public class StingerSSFX : MonoBehaviour {
     }
 
     public void Explosion() {
+		return;
         vooEmitter.Stop();
         explosionEmitter.SetParameter("Attack", 1f);
         explosionEmitter.Play();
