@@ -8,26 +8,51 @@ public class CameraController : MonoBehaviour {
     public float smoothDampTime = 0.2f;
     public bool useFixedUpdate = false;
 
+    private Camera cam;
+
     private Vector3 _smoothDampVelocity;
     private float timer;
     private float onQuake;
 
+    #region MonoBehaviour
+    public void Awake() {
+        cam = GetComponent<Camera>();
+    }
+
     public void Start() {
         if (target == null) target = GameObject.FindWithTag("Player").transform;
+
     }
 
     void LateUpdate() {
-        if (!useFixedUpdate) updateCameraPosition();
+        if (!useFixedUpdate) OnUpdate();
     }
 
     void FixedUpdate() {
-        if (useFixedUpdate) updateCameraPosition();
+        if (useFixedUpdate) OnUpdate();
     }
 
-    public void Quake(float level) {
-        onQuake = level;
-        timer = 0;
+    void OnUpdate() {
+        updatePixelPerfect();
+        updateCameraPosition();
     }
+
+    #endregion
+
+    #region Private Methods
+
+    void updatePixelPerfect() {
+
+    }
+
+    void updateCameraPosition() {
+        Vector3 targetPos = getTargetPosition();
+        Vector3 targetCameraPos = targetPos - cameraOffset;
+        targetCameraPos.z = -cameraOffset.z;
+
+        transform.position = Vector3.SmoothDamp(transform.position, targetCameraPos, ref _smoothDampVelocity, onQuake == 0 ? smoothDampTime : -1);
+    }
+
 
     Vector3 getTargetPosition() {
         if (onQuake == 0) return target.position;
@@ -46,11 +71,14 @@ public class CameraController : MonoBehaviour {
         );
     }
 
-    void updateCameraPosition() {
-        Vector3 targetPos = getTargetPosition();
-        Vector3 targetCameraPos = targetPos - cameraOffset;
-        targetCameraPos.z = -cameraOffset.z;
+    #endregion
 
-        transform.position = Vector3.SmoothDamp(transform.position, targetCameraPos, ref _smoothDampVelocity, onQuake == 0 ? smoothDampTime : -1);
+    #region Messages
+
+    public void Quake(float level) {
+        onQuake = level;
+        timer = 0;
     }
+
+    #endregion
 }

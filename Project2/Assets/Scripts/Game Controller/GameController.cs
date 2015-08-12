@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour {
 
     private Coroutine pauseRoutine;
 
-    private SmoothFollow _camera;
+    private CameraController _camera;
     private UiController _ui;
 
     private Player _player;
