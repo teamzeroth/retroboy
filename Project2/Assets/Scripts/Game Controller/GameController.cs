@@ -25,6 +25,7 @@ public static class Game {
     public const float DOOR_ANIMATION_TIME = 1.3f;
 
     public const float PLAYER_DIST_SHOOT = 0.8f;
+    public const int SPRITE_PPU = 32;
 }
 
 public class GameController : MonoBehaviour {
@@ -55,7 +56,7 @@ public class GameController : MonoBehaviour {
     }
 
     void Start() {
-        _camera = Camera.main.GetComponent<SmoothFollow>();
+        _camera = Camera.main.GetComponent<GameController>();
         _ui = GetComponent<UiController>();
 
         StartStage();

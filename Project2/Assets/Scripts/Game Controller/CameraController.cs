@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour {
 
     public void Start() {
         if (target == null) target = GameObject.FindWithTag("Player").transform;
-
+        updatePixelPerfect();
     }
 
     void LateUpdate() {
@@ -33,7 +33,6 @@ public class CameraController : MonoBehaviour {
     }
 
     void OnUpdate() {
-        updatePixelPerfect();
         updateCameraPosition();
     }
 
@@ -42,7 +41,7 @@ public class CameraController : MonoBehaviour {
     #region Private Methods
 
     void updatePixelPerfect() {
-
+        cam.orthographicSize = cam.pixelHeight / (Game.SPRITE_PPU * 2);
     }
 
     void updateCameraPosition() {
