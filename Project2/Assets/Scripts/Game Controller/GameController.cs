@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour {
     }
 
     void Start() {
-        _camera = Camera.main.GetComponent<GameController>();
+        _camera = Camera.main.GetComponent<CameraController>();
         _ui = GetComponent<UiController>();
 
         StartStage();

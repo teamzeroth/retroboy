@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class CameraController : MonoBehaviour {
+    CameraController self;
+
     public Transform target;
     public Vector3 cameraOffset;
 
@@ -16,6 +18,7 @@ public class CameraController : MonoBehaviour {
 
     #region MonoBehaviour
     public void Awake() {
+        self = this;
         cam = GetComponent<Camera>();
     }
 

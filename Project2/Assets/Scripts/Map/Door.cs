@@ -69,7 +69,7 @@ namespace MapResources {
         }
 
         public void GetIn() {
-            Camera.main.GetComponent<SmoothFollow>().target = transform;
+            Camera.main.GetComponent<CameraController>().target = transform;
 
             _player = GameController.self.player;
             //_player.DisableColliders();
@@ -82,7 +82,7 @@ namespace MapResources {
 
         public void GetOut(Player player) {
             player.collisionLevel.Level = collisionLevel.Level;
-            Camera.main.GetComponent<SmoothFollow>().target = player.transform;
+            Camera.main.GetComponent<CameraController>().target = player.transform;
 
             _player = player;
             var direction = CalcInDirection("out");
