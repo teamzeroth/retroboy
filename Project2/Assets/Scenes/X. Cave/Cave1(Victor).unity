@@ -665,7 +665,7 @@ RectTransform:
   - {fileID: 752637545}
   - {fileID: 187318071}
   m_Father: {fileID: 569027751}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2015,7 +2015,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22483356, guid: e79cea5e6fab81a4e983f7191d9aa183, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 22483356, guid: e79cea5e6fab81a4e983f7191d9aa183, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -2061,6 +2061,18 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 569027754}
+    - target: {fileID: 183356, guid: e79cea5e6fab81a4e983f7191d9aa183, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9542498, guid: e79cea5e6fab81a4e983f7191d9aa183, type: 2}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9583360, guid: e79cea5e6fab81a4e983f7191d9aa183, type: 2}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e79cea5e6fab81a4e983f7191d9aa183, type: 2}
   m_IsPrefabParent: 0
@@ -2216,8 +2228,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 376212045}
-  - {fileID: 541133132}
   - {fileID: 100822592}
+  - {fileID: 541133132}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!92 &569027752
