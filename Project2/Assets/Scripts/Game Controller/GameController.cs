@@ -25,7 +25,7 @@ public static class Game {
     public const float DOOR_ANIMATION_TIME = 1.3f;
 
     public const float PLAYER_DIST_SHOOT = 0.8f;
-    public const int SPRITE_PPU = 32;
+    public const int SPRITE_PPU = 8;
 }
 
 public class GameController : MonoBehaviour {

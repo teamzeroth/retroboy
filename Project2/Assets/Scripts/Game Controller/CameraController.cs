@@ -10,6 +10,9 @@ public class CameraController : MonoBehaviour {
     public float smoothDampTime = 0.2f;
     public bool useFixedUpdate = false;
 
+    [Range(1, 10)]
+    public int pixelScale = 8;
+
     private Camera cam;
 
     private Vector3 _smoothDampVelocity;
@@ -36,6 +39,7 @@ public class CameraController : MonoBehaviour {
     }
 
     void OnUpdate() {
+        updatePixelPerfect();
         updateCameraPosition();
     }
 
@@ -44,7 +48,7 @@ public class CameraController : MonoBehaviour {
     #region Private Methods
 
     void updatePixelPerfect() {
-        cam.orthographicSize = cam.pixelHeight / (Game.SPRITE_PPU * 2);
+        cam.orthographicSize = cam.pixelHeight / (float)(Game.SPRITE_PPU * pixelScale * 2);
     }
 
     void updateCameraPosition() {
