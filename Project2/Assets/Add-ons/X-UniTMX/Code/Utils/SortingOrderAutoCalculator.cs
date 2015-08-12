@@ -23,7 +23,9 @@ namespace X_UniTMX.Utils
 		/// <summary>
 		/// Offsets this Transform's position to account for Pivot Points that are not centered in the sprite
 		/// </summary>
+#if UNITY_4_5 || UNITY_4_6 || UNITY_5
 		[Tooltip("Offsets this Transform's position to account for Pivot Points that are not centered in the sprite. This Offset is in Global Coordinates!")]
+#endif
 		public Vector2 Offset = Vector2.zero;
 
 		void OnEnable()
@@ -52,9 +54,10 @@ namespace X_UniTMX.Utils
 			if (_tiledMap == null && _tiledMapComponent != null)
 			{
 				_tiledMap = _tiledMapComponent.TiledMap;
-				if (_tiledMap == null)
-					return;
 			}
+			if (_tiledMap == null)
+				return;
+
 			if (_renderer == null)
 			{
 				_renderer = GetComponent<SpriteRenderer>();

@@ -1,6 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using TObject.Shared;
 using System.Collections.Generic;
 using X_UniTMX.Utils;
 
@@ -12,26 +11,22 @@ namespace X_UniTMX
 	public class TiledMapObjectsWindow : EditorWindow
 	{
 
-		static NanoXMLNode _objectLayerNode;
-		List<MapObject> _mapObjects;
+		static MapObjectLayer _objectLayer;
 		List<bool> _objFoldout;
 		List<bool> _objPropertiesFoldout;
 		bool _mainFoldout = true;
 		Vector2 _scrollPos = Vector2.zero;
 
 		/// <summary>
-		/// Initialize the Window
+		/// ParseMapXML the Window
 		/// </summary>
 		/// <param name="objectLayerNode">NanoXMLNode of the MapObjectLayer from with MapObject will be read</param>
-		public static void Init(NanoXMLNode objectLayerNode)
+		public static void Init(MapObjectLayer objectLayer)
 		{
 			// Get existing open window or if none, make a new one:
 			TiledMapObjectsWindow window = (TiledMapObjectsWindow)EditorWindow.GetWindow(typeof(TiledMapObjectsWindow));
-			_objectLayerNode = objectLayerNode;
-			string name = objectLayerNode.GetAttribute("name") != null ?
-				objectLayerNode.GetAttribute("name").Value :
-				"ObjectLayer";
-			window.title = name;
+			_objectLayer = objectLayer;
+			window.title = "Map Object Layer";
 			window.RebuildObjectsProperties();
 		}
 
@@ -40,22 +35,17 @@ namespace X_UniTMX
 		/// </summary>
 		public void RebuildObjectsProperties()
 		{
-			if (_objectLayerNode == null)
+			if (_objectLayer == null)
 				return;
-			if (_mapObjects == null)
+			if (_objFoldout == null)
 			{
-				_mapObjects = new List<MapObject>();
 				_objFoldout = new List<bool>();
 				_objPropertiesFoldout = new List<bool>();
 			}
-			_mapObjects.Clear();
 			_objFoldout.Clear();
 			_objPropertiesFoldout.Clear();
-			foreach (NanoXMLNode objectNode in _objectLayerNode.SubNodes)
+			for (int i = 0; i < _objectLayer.Objects.Count; i++)
 			{
-				if (!objectNode.Name.Equals("object"))
-					continue;
-				_mapObjects.Add(new MapObject(objectNode, null));
 				_objFoldout.Add(true);
 				_objPropertiesFoldout.Add(false);
 			}
@@ -65,7 +55,7 @@ namespace X_UniTMX
 
 		void OnGUI()
 		{
-			if (_objectLayerNode == null)
+			if (_objectLayer == null)
 			{
 				EditorGUILayout.HelpBox("No Object Layer was selected!", MessageType.Error, true);
 				return;
@@ -75,20 +65,20 @@ namespace X_UniTMX
 			if (_mainFoldout)
 			{
 				_scrollPos = GUILayout.BeginScrollView(_scrollPos);
-				for (int i = 0; i < _mapObjects.Count; i++)
+				for (int i = 0; i < _objectLayer.Objects.Count; i++)
 				{
-					_objFoldout[i] = EditorGUILayout.Foldout(_objFoldout[i], _mapObjects[i].Name);
+					_objFoldout[i] = EditorGUILayout.Foldout(_objFoldout[i], _objectLayer.Objects[i].Name);
 					if (_objFoldout[i])
 					{
 						EditorGUI.indentLevel++;
 						using (new FixedWidthLabel("Type:"))
 						{
-							EditorGUILayout.SelectableLabel(_mapObjects[i].Type, GUILayout.MaxHeight(_labelHeight));
+							EditorGUILayout.SelectableLabel(_objectLayer.Objects[i].Type, GUILayout.MaxHeight(_labelHeight));
 						}
 
 						using (new FixedWidthLabel("Object Type:"))
 						{
-							switch (_mapObjects[i].ObjectType)
+							switch (_objectLayer.Objects[i].ObjectType)
 							{
 								case ObjectType.Ellipse:
 									EditorGUILayout.LabelField(new GUIContent(TiledMapComponentEditor.objectTypeIcon_Ellipse), GUILayout.MaxWidth(_labelHeight));
@@ -103,20 +93,20 @@ namespace X_UniTMX
 									EditorGUILayout.LabelField(new GUIContent(TiledMapComponentEditor.objectTypeIcon_Box), GUILayout.MaxWidth(_labelHeight));
 									break;
 							}
-							EditorGUILayout.SelectableLabel(_mapObjects[i].ObjectType.ToString(), GUILayout.MaxHeight(_labelHeight));
+							EditorGUILayout.SelectableLabel(_objectLayer.Objects[i].ObjectType.ToString(), GUILayout.MaxHeight(_labelHeight));
 						}
 
 						using (new FixedWidthLabel("Rotation:"))
 						{
-							EditorGUILayout.SelectableLabel(_mapObjects[i].Rotation.ToString(), GUILayout.MaxHeight(_labelHeight));
+							EditorGUILayout.SelectableLabel(_objectLayer.Objects[i].Rotation.ToString(), GUILayout.MaxHeight(_labelHeight));
 						}
 
 						using (new FixedWidthLabel("Bounds:"))
 						{
-							EditorGUILayout.SelectableLabel(_mapObjects[i].Bounds.ToString(), GUILayout.MaxHeight(_labelHeight));
+							EditorGUILayout.SelectableLabel(_objectLayer.Objects[i].Bounds.ToString(), GUILayout.MaxHeight(_labelHeight));
 						}
 
-						if (_mapObjects[i].Properties != null)
+						if (_objectLayer.Objects[i].Properties != null)
 						{
 							_objPropertiesFoldout[i] = EditorGUILayout.Foldout(_objPropertiesFoldout[i], "Properties");
 							if (_objPropertiesFoldout[i])
@@ -126,7 +116,7 @@ namespace X_UniTMX
 								EditorGUILayout.LabelField("Name", EditorStyles.boldLabel);
 								EditorGUILayout.LabelField("Value", EditorStyles.boldLabel);
 								EditorGUILayout.EndHorizontal();
-								foreach (var property in _mapObjects[i].Properties)
+								foreach (var property in _objectLayer.Objects[i].Properties)
 								{
 									EditorGUILayout.BeginHorizontal(GUILayout.MaxWidth(Screen.width - EditorGUI.indentLevel * 15));
 									EditorGUILayout.SelectableLabel(property.Name, GUILayout.MaxHeight(_labelHeight));

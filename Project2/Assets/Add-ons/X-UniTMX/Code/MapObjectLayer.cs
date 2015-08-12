@@ -31,14 +31,19 @@ namespace X_UniTMX
 		public List<MapObject> Objects { get; private set; }
 
 		/// <summary>
+		/// Gets the tile objects on the current layer.
+		/// </summary>
+		public List<GameObject> TileObjects { get; private set; }
+
+		/// <summary>
 		/// Creates a Map Object Layer from node
 		/// </summary>
 		/// <param name="node">XML node to parse</param>
 		/// <param name="tiledMap">MapObjectLayer parent Map</param>
 		/// <param name="layerDepth">This Layer's zDepth</param>
 		/// <param name="materials">List of Materials containing the TileSet textures</param>
-		public MapObjectLayer(NanoXMLNode node, Map tiledMap, int layerDepth, List<Material> materials)
-            : base(node)
+		public MapObjectLayer(NanoXMLNode node, Map tiledMap, int layerDepth)
+            : base(node, tiledMap)
         {
             if (node.GetAttribute("color") != null)
             {
@@ -57,11 +62,6 @@ namespace X_UniTMX
                     (byte)int.Parse(b, NumberStyles.AllowHexSpecifier));
             }
 
-			LayerGameObject.transform.parent = tiledMap.MapObject.transform;
-			LayerGameObject.transform.localPosition = new Vector3(0, 0, this.LayerDepth);
-			LayerGameObject.isStatic = true;
-			LayerGameObject.SetActive(Visible);
-
 			Objects = new List<MapObject>();
 
 			foreach (NanoXMLNode objectNode in node.SubNodes)
@@ -71,8 +71,8 @@ namespace X_UniTMX
 
 				MapObject mapObjectContent = new MapObject(objectNode, this);
 
-				mapObjectContent.ScaleObject(tiledMap.TileWidth, tiledMap.TileHeight, tiledMap.Orientation);
-				mapObjectContent.Name = this.Name + "_" + mapObjectContent.Name;
+				mapObjectContent = mapObjectContent.ScaleObject(tiledMap.MapRenderParameter) as MapObject;
+				
 				// Object names need to be unique for our lookup system, but Tiled
 				// doesn't require unique names.
 				string objectName = mapObjectContent.Name;
@@ -94,17 +94,55 @@ namespace X_UniTMX
 					// save that name
 					mapObjectContent.Name = objectName;
 				}
-				mapObjectContent.CreateTileObject(tiledMap, Name, layerDepth, materials);
+				//mapObjectContent.CreateTileObject(tiledMap, Name, layerDepth, materials);
 
 				AddObject(mapObjectContent);
 			}
         }
 
-		internal MapObjectLayer(string name, int width, int height, int layerDepth, bool visible, float opacity, PropertyCollection properties, List<MapObject> initialObjects)
-			: base(name, width, height, layerDepth, visible, opacity, properties)
+		internal MapObjectLayer(string name, int width, int height, int layerDepth, bool visible, float opacity, string tag, int physicsLayer, PropertyCollection properties, List<MapObject> initialObjects)
+			: base(name, width, height, layerDepth, visible, opacity, tag, physicsLayer, properties)
 		{
 			Objects = new List<MapObject>();
 			initialObjects.ForEach(AddObject);
+		}
+
+		public void Generate(List<Material> materials, Action<Layer> onGeneratedMapObjectLayer = null, string tag = "", int physicsLayer = 0)
+		{
+			if (IsGenerated)
+			{
+				if (OnGeneratedLayer != null)
+					OnGeneratedLayer(this);
+				return;
+			}
+			OnGeneratedLayer = onGeneratedMapObjectLayer;
+
+			base.Generate(tag, physicsLayer);
+			LayerGameObject.transform.localPosition = Vector3.zero;
+			LayerGameObject.isStatic = true;
+
+			TileObjects = new List<GameObject>();
+
+			foreach (var mapObject in Objects)
+			{
+				TileObjects.Add(mapObject.CreateTileObject(BaseMap, Name, LayerDepth, materials));
+			}
+
+			LayerGameObject.SetActive(Visible);
+
+			if (OnGeneratedLayer != null)
+				OnGeneratedLayer(this);
+		}
+
+		protected override void Delete()
+		{
+			base.Delete();
+
+			foreach (var mapTileObject in TileObjects)
+			{
+				GameObject.Destroy(mapTileObject);
+			}
+			TileObjects.Clear();
 		}
 
 		/// <summary>
@@ -128,7 +166,9 @@ namespace X_UniTMX
 		/// <returns>The MapObject with the given name.</returns>
 		public MapObject GetObject(string objectName)
 		{
-			return namedObjects[objectName];
+			MapObject obj = null;
+			namedObjects.TryGetValue(objectName, out obj);
+			return obj;
 		}
 
 		/// <summary>

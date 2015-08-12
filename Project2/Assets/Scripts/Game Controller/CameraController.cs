@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SmoothFollow : MonoBehaviour {
+public class CameraController : MonoBehaviour {
     public Transform target;
     public Vector3 cameraOffset;
 
@@ -20,11 +20,9 @@ public class SmoothFollow : MonoBehaviour {
         if (!useFixedUpdate) updateCameraPosition();
     }
 
-
     void FixedUpdate() {
         if (useFixedUpdate) updateCameraPosition();
     }
-
 
     public void Quake(float level) {
         onQuake = level;
