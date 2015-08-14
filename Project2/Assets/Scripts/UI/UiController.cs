@@ -65,7 +65,7 @@ public class UiController : MonoBehaviour {
     }
 
         private void loadPoolObject(){
-            if (LifePoint == null) LifePoint = Resources.Load<GameObject>("GUI/life-point");
+            if (LifePoint == null) LifePoint = Resources.Load<GameObject>("GUI/life-point(new)");
             LifePoint.CreatePool();
         }
 
