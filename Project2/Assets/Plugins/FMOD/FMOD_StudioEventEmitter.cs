@@ -10,8 +10,8 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 	public string path = "";
 	public bool startEventOnAwake = true;
 
-	protected FMOD.Studio.EventInstance evt;
-	protected bool hasStarted = false;
+	FMOD.Studio.EventInstance evt;
+	bool hasStarted = false;
 	
 	Rigidbody cachedRigidBody;
 
@@ -64,7 +64,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 		return FMOD.Studio.PLAYBACK_STATE.STOPPED;
 	}
 
-	protected void Start() 
+	void Start() 
 	{
 		if (evt == null || !evt.isValid())
 		{
@@ -77,7 +77,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 			StartEvent();
 	}
 	
-	protected void CacheEventInstance()
+	void CacheEventInstance()
 	{
 		if (asset != null)
 		{
@@ -100,7 +100,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 		isShuttingDown = true;
 	}
 
-	protected void OnDestroy() 
+	void OnDestroy() 
 	{
 		if (isShuttingDown)
 			return;
@@ -178,7 +178,8 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
     #if (UNITY_EDITOR)
 	void OnDrawGizmosSelected() 
 	{
-        if (asset != null && enabled)
+        if (asset != null && enabled &&
+            (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode || UnityEditor.EditorApplication.isPlaying))
         {
             FMOD.Studio.EventDescription desc = null;
             desc = FMODEditorExtension.GetEventDescription(asset.id);
@@ -197,7 +198,7 @@ public class FMOD_StudioEventEmitter : MonoBehaviour
 	}
     #endif
 	
-	protected FMOD.RESULT ERRCHECK(FMOD.RESULT result)
+	FMOD.RESULT ERRCHECK(FMOD.RESULT result)
 	{
 		FMOD.Studio.UnityUtil.ERRCHECK(result);
 		return result;

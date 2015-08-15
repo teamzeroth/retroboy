@@ -5,7 +5,7 @@ public class SoundTrackController : MonoBehaviour {
 
     public static SoundTrackController self;
 
-    public FMODAsset soundTrack;
+    //public FMODAsset soundTrack;
 
     private FMOD_CustonEmitter soundTrackEmitter;
 
@@ -25,7 +25,7 @@ public class SoundTrackController : MonoBehaviour {
         gameObject.transform.parent = transform;
 
         soundTrackEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        soundTrackEmitter.Init(soundTrack);
+        //soundTrackEmitter.Init(soundTrack);
     }
 
     public void Update() {

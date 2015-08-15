@@ -3,9 +3,9 @@ using System.Collections;
 
 public class StingerSSFX : MonoBehaviour {
 
-    public FMODAsset laser;
-    public FMODAsset voo;
-    public FMODAsset explosion;
+    //public FMODAsset laser;
+    //public FMODAsset voo;
+    //public FMODAsset explosion;
 
     private FMOD_CustonEmitter laserEmitter;
     private FMOD_CustonEmitter vooEmitter;
@@ -14,24 +14,24 @@ public class StingerSSFX : MonoBehaviour {
     private StingerShooter _enemy;
 
     void Awake() {
-		return;
+        return;
         GameObject gameObject = (GameObject)Instantiate(new GameObject("SFX"), transform.TransformPoint(Vector3.zero), Quaternion.identity);
         gameObject.transform.parent = transform;
 
         laserEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        laserEmitter.Init(laser);
+        //laserEmitter.Init(laser);
 
         vooEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        vooEmitter.Init(voo);
+        //vooEmitter.Init(voo);
 
         explosionEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        explosionEmitter.Init(explosion);
+        //explosionEmitter.Init(explosion);
 
         _enemy = GetComponent<StingerShooter>();
     }
 
     public void Laser() {
-		return;
+        return;
         laserEmitter.SetParameter("laser", 1f);
 
         laserEmitter.Play();
@@ -39,7 +39,7 @@ public class StingerSSFX : MonoBehaviour {
 
     bool inFleing = false;
     public void Voo() {
-		return;
+        return;
         vooEmitter.SetParameter("voo", 1f);
 
         if (!inFleing) {
@@ -49,7 +49,7 @@ public class StingerSSFX : MonoBehaviour {
     }
 
     public void Explosion() {
-		return;
+        return;
         vooEmitter.Stop();
         explosionEmitter.SetParameter("Attack", 1f);
         explosionEmitter.Play();

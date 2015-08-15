@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-using FMOD.Studio;
+//using FMOD.Studio;
 
 public class PlayerSFX : MonoBehaviour {
 
-    public FMODAsset shoot;
-    public FMODAsset footstep;
-    public FMODAsset hurt;
+    //public FMODAsset shoot;
+    //public FMODAsset footstep;
+    //public FMODAsset hurt;
 
     private Coroutine watchCharge;
     private bool inCharge = false;
@@ -20,26 +20,26 @@ public class PlayerSFX : MonoBehaviour {
     private FMOD_CustonEmitter hurtEmitter;
 
     private Player _player;
-    
+
     void Awake() {
-		return;
-        GameObject gameObject = (GameObject) Instantiate(new GameObject("SFX"), Vector3.zero, Quaternion.identity);
+        return;
+        GameObject gameObject = (GameObject)Instantiate(new GameObject("SFX"), Vector3.zero, Quaternion.identity);
         gameObject.transform.parent = transform;
 
         shootEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        shootEmitter.Init(shoot);
+        //shootEmitter.Init(shoot);
 
         footstepEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        footstepEmitter.Init(footstep);
+        //footstepEmitter.Init(footstep);
 
         hurtEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        hurtEmitter.Init(hurt);
+        //hurtEmitter.Init(hurt);
 
         _player = GetComponent<Player>();
     }
 
     public void Charge() {
-		return;
+        return;
         if (inCharge) return;
 
         inCharge = true;
@@ -52,7 +52,7 @@ public class PlayerSFX : MonoBehaviour {
     }
 
     public void UnCharge() {
-		return;
+        return;
         if (!inCharge) return;
 
         inCharge = false;
@@ -61,22 +61,22 @@ public class PlayerSFX : MonoBehaviour {
     }
 
     public void Shoot(float forceTime) {
-		return;
+        return;
         inShoot = true;
         shootEmitter.SetParameter("Shoot", forceTime >= 1.5f ? forceTime >= 3f ? 3 : 2 : 1);
 
         playShoot();
     }
-    
+
     public void Footstep(bool walking, int surface = 1) {
-		return;
+        return;
         if (_player.OnHurt) return;
 
         if (walking && inWalking != walking) {
             inWalking = true;
 
             footstepEmitter.Play();
-            footstepEmitter.SetParameter("walk", (float) surface);
+            footstepEmitter.SetParameter("walk", (float)surface);
         }
 
         if (!walking && inWalking != walking) {
@@ -89,7 +89,7 @@ public class PlayerSFX : MonoBehaviour {
 
 
     public void Hurt() {
-		return;
+        return;
         if (!haveHurt) {
             haveHurt = true;
             hurtEmitter.SetParameter("hurt", 1f);
@@ -98,7 +98,7 @@ public class PlayerSFX : MonoBehaviour {
         //hurtEmitter.Release();
         hurtEmitter.Play(0.5f);
     }
-    
+
     void playShoot() { if (shootEmitter.HasStoped()) shootEmitter.Play(); }
 
     IEnumerator WaitPlayerConfirm() {

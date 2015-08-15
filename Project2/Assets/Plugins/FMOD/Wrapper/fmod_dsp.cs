@@ -782,7 +782,7 @@ namespace FMOD
     ]
     */
     [StructLayout(LayoutKind.Sequential)]
-    public struct DSP_METERING_INFO
+    public class DSP_METERING_INFO
     {
         public int   numsamples;        /* [r] The number of samples considered for this metering info. */
         [MarshalAs(UnmanagedType.ByValArray, SizeConst=32)]

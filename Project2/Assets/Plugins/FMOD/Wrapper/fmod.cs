@@ -16,7 +16,7 @@ namespace FMOD
     */
     public class VERSION
     {
-        public const int    number = 0x00010607;
+        public const int    number = 0x00010608;
 #if UNITY_IPHONE && !UNITY_EDITOR
         public const string dll    = "__Internal";
 #elif (UNITY_PS4) && !UNITY_EDITOR
@@ -3879,10 +3879,10 @@ namespace FMOD
             return FMOD5_DSP_GetMeteringEnabled(rawPtr, out inputEnabled, out outputEnabled);
         }
 
-        public RESULT getMeteringInfo(out DSP_METERING_INFO info)
-        {
-            return FMOD5_DSP_GetMeteringInfo(rawPtr, out info);
-        }
+        public RESULT getMeteringInfo(DSP_METERING_INFO inputInfo, DSP_METERING_INFO outputInfo)
+		{
+			return FMOD5_DSP_GetMeteringInfo(rawPtr, inputInfo, outputInfo);
+		}
 
         #region importfunctions
 
@@ -3963,7 +3963,7 @@ namespace FMOD
         [DllImport(VERSION.dll)]
         public static extern RESULT FMOD5_DSP_GetMeteringEnabled         (IntPtr dsp, out bool inputEnabled, out bool outputEnabled);
         [DllImport(VERSION.dll)]
-        public static extern RESULT FMOD5_DSP_GetMeteringInfo            (IntPtr dsp, out DSP_METERING_INFO dspInfo);
+        public static extern RESULT FMOD5_DSP_GetMeteringInfo            (IntPtr dsp, [Out]DSP_METERING_INFO inputInfo, [Out]DSP_METERING_INFO outputInfo);
         #endregion
 
         #region wrapperinternal

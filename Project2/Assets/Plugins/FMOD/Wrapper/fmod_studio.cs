@@ -426,18 +426,41 @@ namespace Studio
         public IntPtr name;                           /* The name of the plugin effect or sound (set in FMOD Studio). */
         public IntPtr dsp;                            /* The DSP plugin instance. This can be cast to/from FMOD::DSP* type. */
     }
+	
+    [StructLayout(LayoutKind.Sequential)]
+    public struct TIMELINE_MARKER_PROPERTIES
+    {
+        public IntPtr name;                         /* The marker name */
+        public int position;                        /* The position of the marker on the timeline in milliseconds. */
+    }
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct TIMELINE_BEAT_PROPERTIES
+    {
+        public int bar;                                    /* The bar number (starting from 1). */
+        public int beat;                                   /* The beat number within the bar (starting from 1). */
+        public int position;                               /* The position of the beat on the timeline in milliseconds. */
+        public float tempo;                                /* The current tempo in beats per minute. */
+        public int timeSignatureUpper;                     /* The current time signature upper number (beats per bar). */
+        public int timeSignatureLower;                     /* The current time signature lower number (beat unit). */
+    }
+	
     [Flags]
     public enum EVENT_CALLBACK_TYPE : uint
     {
-        STARTED                  = 0x00000001,  /* Called when an instance starts. Parameters = unused. */
-        RESTARTED                = 0x00000002,  /* Called when an instance is restarted. Parameters = unused. */
-        STOPPED                  = 0x00000004,  /* Called when an instance stops. Parameters = unused. */
-        CREATE_PROGRAMMER_SOUND  = 0x00000008,  /* Called when a programmer sound needs to be created in order to play a programmer instrument. Parameters = FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES. */
-        DESTROY_PROGRAMMER_SOUND = 0x00000010,  /* Called when a programmer sound needs to be destroyed. Parameters = FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES. */
-        PLUGIN_CREATED           = 0x00000020,  /* Called when a DSP plugin instance has just been created. Parameters = FMOD_STUDIO_PLUGIN_INSTANCE_PROPERTIES. */
-        PLUGIN_DESTROYED         = 0x00000040,  /* Called when a DSP plugin instance is about to be destroyed. Parameters = FMOD_STUDIO_PLUGIN_INSTANCE_PROPERTIES. */
-        ALL                      = 0xFFFFFFFF,  /* Pass this mask to Studio::EventDescription::setCallback or Studio::EventInstance::setCallback to receive all callback types. */
+        STARTED                   = 0x00000001,  /* Called when an instance starts. Parameters = unused. */
+        RESTARTED                 = 0x00000002,  /* Called when an instance is restarted. Parameters = unused. */
+        STOPPED                   = 0x00000004,  /* Called when an instance stops. Parameters = unused. */
+        CREATE_PROGRAMMER_SOUND   = 0x00000008,  /* Called when a programmer sound needs to be created in order to play a programmer instrument. Parameters = FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES. */
+        DESTROY_PROGRAMMER_SOUND  = 0x00000010,  /* Called when a programmer sound needs to be destroyed. Parameters = FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES. */
+        PLUGIN_CREATED            = 0x00000020,  /* Called when a DSP plugin instance has just been created. Parameters = FMOD_STUDIO_PLUGIN_INSTANCE_PROPERTIES. */
+        PLUGIN_DESTROYED          = 0x00000040,  /* Called when a DSP plugin instance is about to be destroyed. Parameters = FMOD_STUDIO_PLUGIN_INSTANCE_PROPERTIES. */
+        CREATED                   = 0x00000080,  /* Called when an instance is fully created. Parameters = unused. */
+        DESTROYED                 = 0x00000100,  /* Called when an instance is just about to be destroyed. Parameters = unused. */
+        START_FAILED              = 0x00000200,  /* Called when an instance did not start, e.g. due to polyphony. Parameters = unused. */
+        TIMELINE_MARKER           = 0x00000400,  /* Called when the timeline passes a named marker.  Parameters = FMOD_STUDIO_TIMELINE_MARKER_PROPERTIES. */
+        TIMELINE_BEAT             = 0x00000800,  /* Called when the timeline hits a beat in a tempo section.  Parameters = FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES. */
+        ALL                       = 0xFFFFFFFF,  /* Pass this mask to Studio::EventDescription::setCallback or Studio::EventInstance::setCallback to receive all callback types. */
     }
 
     public delegate RESULT EVENT_CALLBACK(EVENT_CALLBACK_TYPE type, IntPtr eventInstance, IntPtr parameters);
