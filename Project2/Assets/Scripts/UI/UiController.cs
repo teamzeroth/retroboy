@@ -13,11 +13,11 @@ public class UiController : MonoBehaviour {
     private static GameObject LifePoint;
 
     private int _life;
-    public int Life{
-        get{
+    public int Life {
+        get {
             return _life;
         }
-        set{
+        set {
             _life = Mathf.Max(0, value);
             changeLifeCounter();
         }
@@ -61,26 +61,27 @@ public class UiController : MonoBehaviour {
         Life = 4;
         Charge = 0;
 
-        self = this;       
+        self = this;
+        print(self);
     }
 
-        private void loadPoolObject(){
-            if (LifePoint == null) LifePoint = Resources.Load<GameObject>("GUI/life-point(new)");
-            LifePoint.CreatePool();
-        }
+    private void loadPoolObject() {
+        if (LifePoint == null) LifePoint = Resources.Load<GameObject>("GUI/life-point(new)");
+        LifePoint.CreatePool();
+    }
 
-        private void loadprivateObject() {
-            _ui = GameObject.FindWithTag("UI").transform;
-            _lifeHud = _ui.Find("Health Panel/life");
-            _chargeHud = _ui.Find("Health Panel/charge-slider(new)");
-            _coinsHud = _ui.Find("Coins Panel");
+    private void loadprivateObject() {
+        _ui = GameObject.FindWithTag("UI").transform;
+        _lifeHud = _ui.Find("Health Panel/life");
+        _chargeHud = _ui.Find("Health Panel/charge-slider(new)");
+        _coinsHud = _ui.Find("Coins Panel");
 
-            _pausePanel = _ui.parent.Find("Pause Menu");
-        }
+        _pausePanel = _ui.parent.Find("Pause Menu");
+    }
 
     #region UI Buttons messegens
 
-    public void OnClickResume(){
+    public void OnClickResume() {
         print("Resume");
     }
 
@@ -103,20 +104,20 @@ public class UiController : MonoBehaviour {
     }
 
     private void changeCharge() {
+        return;
+
         RectTransform chargeTransform = _chargeHud.transform as RectTransform;
         chargeTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, TOTAL_SIZE_CHARGE * _charge);
     }
 
-    private void changeLifeCounter(){
+    private void changeLifeCounter() {
         var lifePoints = _lifeHud.childCount;
 
         if (Life > lifePoints)
             for (var i = 0; i < _life - lifePoints; i++) {
                 GameObject lp = LifePoint.Spawn(_lifeHud);
                 lp.transform.localScale = Vector3.one;
-            }
-        
-        else if (Life < lifePoints)
+            } else if (Life < lifePoints)
             for (var i = 1; i <= _lifeHud.childCount - _life; i++) {
                 _lifeHud.GetChild(_lifeHud.childCount - i).gameObject.Recycle();
             }
@@ -127,14 +128,14 @@ public class UiController : MonoBehaviour {
         if (coinsToween != null) {
             coinsToween.Kill();
         }
-        
+
         int delta = before;
-        coinsToween = DOTween.To(() => delta, x => delta = x, current, 0.5f).OnUpdate(()=>{
-            
+        coinsToween = DOTween.To(() => delta, x => delta = x, current, 0.5f).OnUpdate(() => {
+
             Transform countText = _coinsHud.Find("coins-count");
-                countText.GetComponent<Text>().text = delta.ToString();
+            countText.GetComponent<Text>().text = delta.ToString();
             countText = _coinsHud.Find("coins-count-shadow");
-                countText.GetComponent<Text>().text = delta.ToString();
+            countText.GetComponent<Text>().text = delta.ToString();
 
         });
 
