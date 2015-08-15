@@ -72,7 +72,7 @@ public class UiController : MonoBehaviour {
         private void loadprivateObject() {
             _ui = GameObject.FindWithTag("UI").transform;
             _lifeHud = _ui.Find("Health Panel/life");
-            _chargeHud = _ui.Find("Health Panel/charge-slider");
+            _chargeHud = _ui.Find("Health Panel/charge-slider(new)");
             _coinsHud = _ui.Find("Coins Panel");
 
             _pausePanel = _ui.parent.Find("Pause Menu");
