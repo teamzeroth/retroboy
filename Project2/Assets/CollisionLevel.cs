@@ -7,16 +7,16 @@ public class CollisionLevel : MonoBehaviour {
 
     public SpriteRenderer renderer;
 
-	[SerializeField]
-	private int level;
-	
-	public int Level {
-		get { return level; }
-		set {
-			level = value;
-			setSorthingOrder();
-		}
-	}
+    [SerializeField]
+    private int level;
+
+    public int Level {
+        get { return level; }
+        set {
+            level = value;
+            setSorthingOrder();
+        }
+    }
 
     bool inicialized = false;
 
