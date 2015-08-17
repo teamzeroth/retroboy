@@ -22,6 +22,10 @@ public class FMOD_CustonEmitter : FMOD_StudioEventEmitter {
             transform.position = transform.parent.TransformPoint(Vector3.zero);
     }
 
+    void StartOnNextFrame() {
+        StartCoroutine(WaitNextFrame(() => { Start(); }));
+    }
+
     public void SetParameter(string name, float value) {
         FMOD.Studio.ParameterInstance parameter = getParameter(name);
         parameter.setValue(value);
@@ -65,7 +69,10 @@ public class FMOD_CustonEmitter : FMOD_StudioEventEmitter {
         set { evt.setVolume(value); }
     }
 
-    public void StartEvent() { }
-    public void Play() { }
-    public void Stop() { }
+    IEnumerator WaitNextFrame(Action action) {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+        action();
+    }
 }
