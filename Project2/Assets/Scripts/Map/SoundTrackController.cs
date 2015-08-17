@@ -5,7 +5,7 @@ public class SoundTrackController : MonoBehaviour {
 
     public static SoundTrackController self;
 
-    //public FMODAsset soundTrack;
+    public FMODAsset soundTrack;
 
     private FMOD_CustonEmitter soundTrackEmitter;
 
@@ -16,20 +16,19 @@ public class SoundTrackController : MonoBehaviour {
     void Start() {
         self = this;
 
-        return;
-
         Vector3 emitterPosition = transform.TransformPoint(Vector3.zero);
         emitterPosition.z = 0;
 
-        GameObject gameObject = (GameObject)Instantiate(new GameObject("SFX"), emitterPosition, Quaternion.identity);
+        GameObject gameObject = new GameObject("SFX");
+        gameObject.transform.position = emitterPosition;
         gameObject.transform.parent = transform;
 
         soundTrackEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        //soundTrackEmitter.Init(soundTrack);
+        soundTrackEmitter.Init(soundTrack);
+        soundTrackEmitter.Start();
     }
 
     public void Update() {
-        return;
         if (lastChange + 2 < Time.time && latParameter != 0) {
             SetBackgroundSound(latParameter);
             latParameter = 0;
@@ -37,7 +36,6 @@ public class SoundTrackController : MonoBehaviour {
     }
 
     public void SetBackgroundSound(float soundTrack) {
-        return;
         if (!init) {
             soundTrackEmitter.Play();
             init = true;
