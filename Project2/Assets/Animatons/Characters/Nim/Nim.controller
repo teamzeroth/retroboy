@@ -2578,7 +2578,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_Motion: {fileID: 20652564}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: Horizontal
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
 --- !u!1102 &110255432
@@ -2950,7 +2950,10 @@ AnimatorStateMachine:
   - {fileID: 110133594}
   - {fileID: 110105410}
   m_EntryTransitions: []
-  m_StateMachineTransitions: {}
+  m_StateMachineTransitions:
+    data:
+      first: {fileID: 110775420}
+      second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 372, y: -408, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
