@@ -4,6 +4,8 @@ X-UniTMX/.git/
 X-UniTMX/.gitignore
 FMOD/Retroboy/.cache
 
+__*/
+
 #################
 
 [Ll]ibrary/
