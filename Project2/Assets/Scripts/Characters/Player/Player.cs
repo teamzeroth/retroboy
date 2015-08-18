@@ -7,8 +7,6 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
-    public static Vector2 PLAYER_SHOOT_DIFERENCE = new Vector2(0, 0.03f);
-
     private class ControllerStates {
 
         public Transform _player;
@@ -119,6 +117,8 @@ public class Player : MonoBehaviour {
     private Rigidbody2D _rigidbody;
     private PlayerSFX _sfx;
 
+    private Transform _charge;
+
     #region Getters and Setters
 
     [HideInInspector]
@@ -176,6 +176,7 @@ public class Player : MonoBehaviour {
         _sprite = (SpriteRenderer)GetComponent<Renderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _sfx = GetComponent<PlayerSFX>();
+        _charge = transform.Find("Charge");
 
         collisionLevel = GetComponent<CollisionLevel>();
         _life = UiController.self.Life; /*To Do: Pog*/
@@ -202,17 +203,27 @@ public class Player : MonoBehaviour {
         }
 
         //Checa o estado de carregar e atirar
-        if (controller.OnCharging && !waitShootFinish && !waitToNewShoot) {
-            _anim.SetTrigger("OnDraw");
+        if (controller.OnCharging) {
+            enableAnimationCharge();
 
-            if (watchShoot != null) StopCoroutine(watchShoot);
-            watchShoot = StartCoroutine(WaitShootAnimationFinish());
+            if (!waitShootFinish && !waitToNewShoot) {
+                _anim.SetTrigger("OnDraw");
+
+
+                if (watchShoot != null) StopCoroutine(watchShoot);
+                watchShoot = StartCoroutine(WaitShootAnimationFinish());
+            }
         }
-        if (controller.OnShooting && !waitToNewShoot) {
-            StartCoroutine(WaitShootAnimationStart());
 
-            _anim.SetTrigger("OnShoot");
-            _anim.SetBool("OnDraw", false);
+        if (controller.OnShooting) {
+            disableAnimationCharge();
+
+            if (!waitToNewShoot) {
+                StartCoroutine(WaitShootAnimationStart());
+
+                _anim.SetTrigger("OnShoot");
+                _anim.SetBool("OnDraw", false);
+            }
         }
         //Checa o estado de se machucar
         if (OnHurt) {
@@ -242,7 +253,7 @@ public class Player : MonoBehaviour {
 
         if (watchDash == null && controller.InDash && !waitToMove) {
             Vector2 normal = controller.Direction.normalized;
-            float time = getDashTime(normal, dashSpeed, Game.TOTAL_TIME_DASH);
+            float time = getDashTime(normal, dashSpeed, Game.TOTAL_TIME_PLAYER_DASH);
 
             if (time > 0.011f) {
                 StartFixedMove((normal * dashSpeed), (normal * dashSpeed) / 2, time, Ease.InExpo);
@@ -383,6 +394,33 @@ public class Player : MonoBehaviour {
 
     #region Private Methods
 
+    public void enableAnimationCharge() {
+        GameObject charge = _charge.GetChild(0).gameObject;
+
+        if (controller.TimeInCharge < Game.TIME_PLAYER_COMPLET_CHARGE) {
+            charge.SetActive(true);
+
+        } else {
+            if (charge.activeSelf) {
+                _charge.GetChild(2).gameObject.SetActive(true);
+                _charge.GetChild(2).GetComponent<SimpleAnimatior>().enabled = true;
+            }
+
+            _charge.GetChild(1).gameObject.SetActive(true);
+            charge.SetActive(false);
+        }
+
+
+        Vector2 angle = Helper.GetDirectionVector((Direction)Helper.getGeoDirection(controller.Direction));
+        _charge.localPosition = angle * (Game.PLAYER_DIST_SHOOT * Mathf.Max(Mathf.Abs(angle.x), Mathf.Abs(angle.y)));
+    }
+
+    public void disableAnimationCharge() {
+        _charge.GetChild(0).gameObject.SetActive(false);
+        _charge.GetChild(1).gameObject.SetActive(false);
+        _charge.GetChild(2).gameObject.SetActive(false);
+    }
+
     public void checkFlip() {
         Vector2 targetVector = fixedMove != Vector2.zero ? fixedMove : controller.Direction;
 
@@ -399,19 +437,15 @@ public class Player : MonoBehaviour {
     private void instaceShoot(Vector3 v) {
         Vector3 d = v.normalized;
         Vector3 spawn = transform.position + d * (Game.PLAYER_DIST_SHOOT * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
-        spawn += (Vector3)PLAYER_SHOOT_DIFERENCE;
-        /*
-        GameObject shootGO = (GameObject)Instantiate(
-            Resources.Load<GameObject>("Shoots/Nim/shoot_1"),
-            spawn, Quaternion.identity
-        );*/
+        spawn += (Vector3)Game.PLAYER_SHOOT_DIFERENCE;
+
         GameObject shootGO = (GameObject)Instantiate(
             shootPrefab,
             spawn, Quaternion.identity
         );
         ShootMove shoot = shootGO.GetComponent<ShootMove>();
         shoot.collisionLevel.Level = collisionLevel.Level;
-        shoot.damage = controller.LastTimeInCharge >= 1.5f ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
+        shoot.damage = controller.LastTimeInCharge >= Game.TIME_PLAYER_COMPLET_CHARGE ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
         var x = Mathf.Clamp(controller.LastTimeInCharge, 1, 3);
         shoot.Direction = v;
         shoot.Distance = 8 * (x / 3);
@@ -499,19 +533,19 @@ public class Player : MonoBehaviour {
         length = array.Length - 1;
 
         while (/* time + Game.TOTAL_TIME_DASH > Time.time && */ controller.InDash) {
-            float i = (Time.time - time) / Game.TOTAL_TIME_DASH;
+            float i = (Time.time - time) / Game.TOTAL_TIME_PLAYER_DASH;
             i = -i * (i - 2);
 
             cloneMethod(array[(int)UnityEngine.Random.Range(i * length, length)]);
             yield return new WaitForSeconds(Game.FRAMETIME_PLAYER_DASH);
         }
 
-        while (time + Game.TOTAL_TIME_DASH + Game.EXTRA_DASH_TIME > Time.time) {
+        while (time + Game.TOTAL_TIME_PLAYER_DASH + Game.EXTRA_DASH_TIME > Time.time) {
             cloneMethod(_sprite.sprite, 0.5f);
             yield return new WaitForSeconds(Game.FRAMETIME_PLAYER_DASH * 2.5f);
         }
 
-        yield return new WaitForSeconds(Game.TIME_TO_NEW_DASH);
+        yield return new WaitForSeconds(Game.TIME_PLAYER_NEW_DASH);
 
         watchDash = null;
     }

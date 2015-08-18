@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (SpriteRenderer))]
+[RequireComponent(typeof(SpriteRenderer))]
 [ExecuteInEditMode]
 public class SimpleAnimatior : MonoBehaviour {
 
@@ -41,7 +41,7 @@ public class SimpleAnimatior : MonoBehaviour {
         if (curr >= animation.Length && playOnce && Application.isPlaying) {
             _renderer.sprite = null;
             SendMessageUpwards("OnFinishSimpleAnimation", SendMessageOptions.DontRequireReceiver);
-            
+
             enabled = false;
             return;
         }
@@ -50,6 +50,12 @@ public class SimpleAnimatior : MonoBehaviour {
 
         _renderer.sprite = animation[curr];
     }
+
+    public void OnEnable() {
+        timer = 0;
+        curr = -1;
+    }
+
 
 #if UNITY_EDITOR
     void OnRenderObject() {
