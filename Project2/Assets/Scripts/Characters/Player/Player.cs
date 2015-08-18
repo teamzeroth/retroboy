@@ -124,14 +124,23 @@ public class Player : MonoBehaviour {
     [HideInInspector]
     public bool OnDie;
 
+    #region Hurt States
+
     private bool _onHurt = false;
     private bool afterOnHurt = false;
-    public bool OnHurt {
-        get { return _onHurt; }
+    private Coroutine waitInvunerabity;
 
+    /// <summary>
+    /// Flag set when the player recebeive some damage
+    /// </summary>
+    public bool OnHurt {
+        get {
+            return _onHurt;
+        }
         set {
             if (_onHurt && !value) {
-                Invoke("SetAfterOnHurt", 1f);
+                if (waitInvunerabity != null) StopCoroutine(waitInvunerabity);
+                waitInvunerabity = StartCoroutine(SetAfterOnHurt());
                 _onHurt = value;
             } else {
                 _onHurt = afterOnHurt = value;
@@ -139,9 +148,12 @@ public class Player : MonoBehaviour {
         }
     }
 
-    public void SetAfterOnHurt() {
+    public IEnumerator SetAfterOnHurt() {
+        yield return new WaitForSeconds(Game.TIME_PLAYER_INVULNERABILITY);
         afterOnHurt = _onHurt;
     }
+
+    #endregion
 
     public Vector2 DeadDirection {
         get { return controller.deadDirection; }
@@ -185,7 +197,6 @@ public class Player : MonoBehaviour {
     public void Update() {
         if (GameController.self.Pause || GameController.self.stopPlayer) return;
 
-
         UpdateMove();
         UpdateAnimation();
         UpdateSound();
@@ -225,6 +236,7 @@ public class Player : MonoBehaviour {
                 _anim.SetBool("OnDraw", false);
             }
         }
+
         //Checa o estado de se machucar
         if (OnHurt) {
             waitToMove = true;
@@ -251,7 +263,8 @@ public class Player : MonoBehaviour {
     public void UpdateMove() {
         Vector2 deltaMovement = controller.Update(this);
 
-        if (watchDash == null && controller.InDash && !waitToMove) {
+        //Check if the player can use the dash
+        if (controller.InDash && !waitToMove) {
             Vector2 normal = controller.Direction.normalized;
             float time = getDashTime(normal, dashSpeed, Game.TOTAL_TIME_PLAYER_DASH);
 
@@ -273,22 +286,22 @@ public class Player : MonoBehaviour {
             deltaMovement = fixedMove;
         }
 
-        //_sfx.Footstep(deltaMovement != Vector2.zero);
+        _sfx.Footstep(deltaMovement != Vector2.zero);
         Move(deltaMovement);
     }
 
-    public void OnCollisionEnter2D(Collision2D coll) {
+    /*public void OnCollisionEnter2D(Collision2D coll) {
         if (coll.gameObject.tag == "Coin")
             getCoin(coll.gameObject.GetComponent<CoinMove>());
 
-        /*if (coll.gameObject.layer == LayerMask.NameToLayer("Level") && controller.InDash) {
+        //if (coll.gameObject.layer == LayerMask.NameToLayer("Level") && controller.InDash) {
             print("OK GO");
 
             //StopCoroutine(watchDash);
             CancelFixedMove();
-        }*/
+        }//
 
-    }
+    }*/
 
     #endregion
 
@@ -351,6 +364,11 @@ public class Player : MonoBehaviour {
         Life -= damage;
 
         if (Life > 0) {
+            if (watchDash != null) {
+                StopCoroutine(watchDash);
+                watchDash = null;
+            }
+
             OnHurt = true;
             StartFixedMove(direction.normalized * damage * 4, Vector2.zero, Game.TIME_PLAYER_DAMAGE);
         } else {
@@ -371,13 +389,6 @@ public class Player : MonoBehaviour {
         OnGetHit((int)enemy.damage, d, other);
     }
 
-    /*public void OnGetHit(Enemy enemy, Collider2D other) {
-        if (afterOnHurt) return;
-
-        Vector2 d = (collider2D.bounds.center - other.bounds.center).normalized;
-        OnGetHit((int) enemy.damage, d, other);
-    }*/
-
     public void OnGetHit(ShootMove shoot, Collider2D other) {
         if (afterOnHurt) return;
 
@@ -394,6 +405,9 @@ public class Player : MonoBehaviour {
 
     #region Private Methods
 
+    /// <summary>
+    /// Active the right animation of charge by the time of charge
+    /// </summary>
     public void enableAnimationCharge() {
         GameObject charge = _charge.GetChild(0).gameObject;
 
@@ -415,6 +429,10 @@ public class Player : MonoBehaviour {
         _charge.localPosition = angle * (Game.PLAYER_DIST_SHOOT * Mathf.Max(Mathf.Abs(angle.x), Mathf.Abs(angle.y)));
     }
 
+
+    /// <summary>
+    /// Disable All animations of charge
+    /// </summary>
     public void disableAnimationCharge() {
         _charge.GetChild(0).gameObject.SetActive(false);
         _charge.GetChild(1).gameObject.SetActive(false);
@@ -457,6 +475,13 @@ public class Player : MonoBehaviour {
         Destroy(coin.gameObject);
     }
 
+    /// <summary>
+    /// Check the time of collision in some determined vector and velocity, return the clamp of this time and the gived time
+    /// </summary>
+    /// <param name="vector">The Motion Vector</param>
+    /// <param name="velocity">The velocity by the time</param>
+    /// <param name="time">The time to clamp</param>
+    /// <returns></returns>
     private float getDashTime(Vector2 vector, float velocity, float time) {
         Vector2 sPoint = (Vector2)FeetCollider.bounds.center;// + vector * (transform.collider2D as CircleCollider2D).radius;
         float radius = (FeetCollider as CircleCollider2D).radius * 2.5f;
@@ -464,8 +489,7 @@ public class Player : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(sPoint, vector, time * velocity, 1 << LayerMask.NameToLayer("Level"));
 
         float r = hit.distance != 0 ? (hit.distance - radius) / velocity : time;
-        //print(r);
-        return r;//time * (hit.distance / time * velocity);
+        return r;
     }
 
     /*public void OnDrawGizmos() {

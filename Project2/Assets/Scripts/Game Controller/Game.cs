@@ -23,6 +23,7 @@ public static class Game {
     public const float TIME_PLAYER_NEW_DASH = 0.5f;
     public const float PLAYER_DIST_SHOOT = 0.8f;
     public const float TIME_PLAYER_COMPLET_CHARGE = 1.5f;
+    public const float TIME_PLAYER_INVULNERABILITY = 1.0f;
 
     public static Vector2 PLAYER_SHOOT_DIFERENCE = new Vector2(0, 0.03f);
 
