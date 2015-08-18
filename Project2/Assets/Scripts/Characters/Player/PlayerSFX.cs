@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//using FMOD.Studio;
+using FMOD.Studio;
 
 public class PlayerSFX : MonoBehaviour {
 
-    //public FMODAsset shoot;
-    //public FMODAsset footstep;
-    //public FMODAsset hurt;
+    public FMODAsset shoot;
+    public FMODAsset footstep;
+    public FMODAsset hurt;
 
     private Coroutine watchCharge;
     private bool inCharge = false;
@@ -22,24 +22,23 @@ public class PlayerSFX : MonoBehaviour {
     private Player _player;
 
     void Awake() {
-        return;
-        GameObject gameObject = (GameObject)Instantiate(new GameObject("SFX"), Vector3.zero, Quaternion.identity);
+        GameObject gameObject = new GameObject("SFX");
         gameObject.transform.parent = transform;
+        gameObject.transform.localPosition = Vector3.zero;
 
         shootEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        //shootEmitter.Init(shoot);
+        shootEmitter.Init(shoot);
 
         footstepEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        //footstepEmitter.Init(footstep);
+        footstepEmitter.Init(footstep);
 
         hurtEmitter = gameObject.AddComponent<FMOD_CustonEmitter>();
-        //hurtEmitter.Init(hurt);
+        hurtEmitter.Init(hurt);
 
         _player = GetComponent<Player>();
     }
 
     public void Charge() {
-        return;
         if (inCharge) return;
 
         inCharge = true;
@@ -52,7 +51,6 @@ public class PlayerSFX : MonoBehaviour {
     }
 
     public void UnCharge() {
-        return;
         if (!inCharge) return;
 
         inCharge = false;
@@ -61,7 +59,6 @@ public class PlayerSFX : MonoBehaviour {
     }
 
     public void Shoot(float forceTime) {
-        return;
         inShoot = true;
         shootEmitter.SetParameter("Shoot", forceTime >= 1.5f ? forceTime >= 3f ? 3 : 2 : 1);
 
@@ -69,7 +66,6 @@ public class PlayerSFX : MonoBehaviour {
     }
 
     public void Footstep(bool walking, int surface = 1) {
-        return;
         if (_player.OnHurt) return;
 
         if (walking && inWalking != walking) {
@@ -89,7 +85,6 @@ public class PlayerSFX : MonoBehaviour {
 
 
     public void Hurt() {
-        return;
         if (!haveHurt) {
             haveHurt = true;
             hurtEmitter.SetParameter("hurt", 1f);

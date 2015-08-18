@@ -11,12 +11,10 @@ GameObject:
   - 95: {fileID: 9569194}
   - 212: {fileID: 21235906}
   - 50: {fileID: 5071802}
-  - 58: {fileID: 5899034}
   - 114: {fileID: 11424710}
   - 114: {fileID: 11479104}
   - 114: {fileID: 11402948}
   - 114: {fileID: 11471884}
-  - 114: {fileID: 11415176}
   m_Layer: 0
   m_Name: Nim (Unity5)
   m_TagString: Player
@@ -32,9 +30,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 450846}
-  m_Layer: 0
+  - 58: {fileID: 5826836}
+  - 114: {fileID: 11412370}
+  m_Layer: 15
   m_Name: Feets
-  m_TagString: Untagged
+  m_TagString: NimFeet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,6 +68,23 @@ GameObject:
   - 114: {fileID: 11432176}
   m_Layer: 0
   m_Name: Collider Detector
+  m_TagString: PlayerCollider
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &198334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 422526}
+  - 114: {fileID: 11479308}
+  - 114: {fileID: 11428804}
+  m_Layer: 0
+  m_Name: Ears
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,6 +102,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 464834}
   m_RootOrder: 1
+--- !u!4 &422526
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 464834}
+  m_RootOrder: 3
 --- !u!4 &450846
 Transform:
   m_ObjectHideFlags: 1
@@ -116,12 +145,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.1599998, y: -14.6000004, z: 0}
+  m_LocalPosition: {x: 29.1299992, y: -21.1599998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 453980}
   - {fileID: 400158}
   - {fileID: 450846}
+  - {fileID: 422526}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!50 &5071802
@@ -140,6 +170,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!58 &5826836
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161194}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .280000001
 --- !u!58 &5861946
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -153,19 +196,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 6
---- !u!58 &5899034
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147730}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -.800000012}
-  serializedVersion: 2
-  m_Radius: .327925682
 --- !u!61 &6114546
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -208,19 +238,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer: {fileID: 21235906}
-  level: 4
---- !u!114 &11415176
+  level: 2
+--- !u!114 &11412370
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147730}
+  m_GameObject: {fileID: 161194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b53f9f56d3aa10428633e1b0a7ca552, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c5fbadb9f116704291de9e255a8d20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pluginPaths: []
 --- !u!114 &11424710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -237,6 +266,18 @@ MonoBehaviour:
   ignoreRenderer: 0
   shadow: {fileID: 0}
   initialOrder: 0
+--- !u!114 &11428804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8336b22d6d3af4da2712827e9ad333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pluginPaths: []
 --- !u!114 &11432176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -270,9 +311,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4f08a41b76b3c4b8519801a3eea891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shoot: {fileID: 11400000, guid: 1167ef6056d917e4a881357441696316, type: 2}
-  footstep: {fileID: 11400000, guid: a48ea9eec91471d41b1376340bfa3f07, type: 2}
-  hurt: {fileID: 11400000, guid: 912fcaa0e92cf8049adb6fa2fb97e2ab, type: 2}
+  shoot: {fileID: 11400000, guid: 73b843592d0e4694f971d01179c277a1, type: 2}
+  footstep: {fileID: 11400000, guid: 9698563f15474094da76ef8741725bb1, type: 2}
+  hurt: {fileID: 11400000, guid: 890190cfe36b307488a0ace142e68053, type: 2}
 --- !u!114 &11479104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,6 +327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   dashSpeed: 30
+  FeetCollider: {fileID: 5826836}
+  BodyCollider: {fileID: 6114546}
   ss_E:
   - {fileID: 21300448, guid: 12576537fdf5c194f92a7d5cbb065883, type: 3}
   - {fileID: 21300458, guid: 12576537fdf5c194f92a7d5cbb065883, type: 3}
@@ -326,6 +369,18 @@ MonoBehaviour:
   fixedMove: {x: 0, y: 0}
   collisionLevel: {fileID: 0}
   OnDie: 0
+--- !u!114 &11479308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1141a2c8b5154b8498008f8016554203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundTrack: {fileID: 11400000, guid: e593572b948e0a14796890cb9d9f0fc2, type: 2}
 --- !u!212 &21235906
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -358,7 +413,17 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: footstep
+      value: 
+      objectReference: {fileID: 11400000, guid: 9698563f15474094da76ef8741725bb1,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: hurt
+      value: 
+      objectReference: {fileID: 11400000, guid: 890190cfe36b307488a0ace142e68053,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 147730}
