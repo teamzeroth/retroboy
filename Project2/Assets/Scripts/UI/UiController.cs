@@ -45,10 +45,25 @@ public class UiController : MonoBehaviour {
         }
     }
 
+    private int _quest;
+    public int Quest
+    {
+        get
+        {
+            return _quest;
+        }
+        set
+        {
+            _quest = value;
+            changeQuestCount(value);
+        }
+    }
+
     private Transform _ui;
     private Transform _lifeHud;
     private Transform _chargeHud;
     private Transform _coinsHud;
+    private Transform _questHud;
 
     private Transform _pausePanel;
 
@@ -75,6 +90,7 @@ public class UiController : MonoBehaviour {
         _lifeHud = _ui.Find("Health Panel/life");
         _chargeHud = _ui.Find("Health Panel/charge-slider(new)");
         _coinsHud = _ui.Find("Coins Panel");
+        _questHud = _ui.Find("Quest HUD");
 
         _pausePanel = _ui.parent.Find("Pause Menu");
     }
@@ -103,6 +119,13 @@ public class UiController : MonoBehaviour {
         }
     }
 
+    public void ToogleQuestHUD(bool show) {
+        if (show)
+            _questHud.gameObject.GetComponent<Animator>().SetBool("hidden", false);
+        else
+            _questHud.gameObject.GetComponent<Animator>().SetBool("done", true);
+    }
+
     private void changeCharge() {
         return;
 
@@ -121,6 +144,10 @@ public class UiController : MonoBehaviour {
             for (var i = 1; i <= _lifeHud.childCount - _life; i++) {
                 _lifeHud.GetChild(_lifeHud.childCount - i).gameObject.Recycle();
             }
+    }
+
+    private void changeQuestCount(int amount) {
+        _questHud.gameObject.GetComponentInChildren<Text>().text = amount.ToString();
     }
 
     Tween coinsToween;

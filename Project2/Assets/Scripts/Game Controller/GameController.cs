@@ -60,6 +60,14 @@ public class GameController : MonoBehaviour {
             Pause = !Pause;
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+            _ui.Quest = _ui.Quest + 1;
+        if (Input.GetKeyDown(KeyCode.O))
+            _ui.Quest = 0;
+        if (Input.GetKeyDown(KeyCode.L))
+            _ui.ToogleQuestHUD(true);
+        if (Input.GetKeyDown(KeyCode.K))
+            _ui.ToogleQuestHUD(false);
     }
 
     public void StartStage() {
