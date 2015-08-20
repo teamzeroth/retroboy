@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class CollisionLevel : MonoBehaviour {
 
@@ -47,7 +50,7 @@ public class CollisionLevel : MonoBehaviour {
 
 #if UNITY_EDITOR
     public void OnDrawGizmosSelected() {
-        Vector3 p = /*renderer != null ? renderer.bounds.max : */transform.position + Vector3.one * 0.75f;
+        Vector3 p = transform.position + Vector3.one * 0.75f;
 
         GUIStyle style = new GUIStyle();
         style.fontSize = 20;
