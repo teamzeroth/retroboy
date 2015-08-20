@@ -121,10 +121,16 @@ public class UiController : MonoBehaviour {
 
     public void ToogleQuestHUD(bool show) {
         if (show)
+		{
             _questHud.gameObject.GetComponent<Animator>().SetBool("hidden", false);
+			_questHud.gameObject.GetComponent<Animator>().SetBool("done", false);
+		}
         else
-            _questHud.gameObject.GetComponent<Animator>().SetBool("done", true);
-    }
+		{
+			_questHud.gameObject.GetComponent<Animator>().SetBool("done", true);
+			_questHud.gameObject.GetComponent<Animator>().SetBool("hidden", true);
+		}
+	}
 
     private void changeCharge() {
         return;
