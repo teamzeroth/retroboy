@@ -65,7 +65,7 @@ public class Player : MonoBehaviour {
             OnShooting = false;
             OnCharging = false;
 
-            if (OnCharging && !Input.GetButton("Action")) {
+            if (OnCharging && !Input.GetButton("Action")) { ///TODO: Isso numca vai ocorrer
                 OnShooting = true;
                 OnCharging = false;
             } else {
@@ -73,8 +73,9 @@ public class Player : MonoBehaviour {
                 OnShooting = Input.GetButtonUp("Action");
             }
 
-            TimeInCharge = OnCharging ? TimeInCharge + Time.deltaTime : 0;
+
             if (OnCharging) LastTimeInCharge = TimeInCharge;
+            TimeInCharge = OnCharging ? TimeInCharge + Time.deltaTime : 0;
         }
 
         public void registreTime() {
@@ -205,7 +206,7 @@ public class Player : MonoBehaviour {
 
     public void UpdateAnimation() {
 
-        if (!(waitShootFinish && !waitToMove)) {
+        if (!waitShootFinish && !waitToMove) {
 
             Vector2 targetVector = fixedMove != Vector2.zero ? fixedMove : controller.Direction;
             _anim.SetFloat("Horizontal", targetVector.x);
@@ -318,7 +319,7 @@ public class Player : MonoBehaviour {
     }
 
     public void DisableColliders(bool disable = false) {
-        FeetCollider.enabled = disable;
+        //FeetCollider.enabled = disable;
         BodyCollider.enabled = disable;
     }
 

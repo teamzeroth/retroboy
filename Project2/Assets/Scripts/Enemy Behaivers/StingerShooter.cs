@@ -6,6 +6,7 @@ public class StingerShooter : BaseEnemy {
     protected float DISTANCE_TO_TARGET = 4f;
     protected float MAX_VELOCITY = 2f;
     protected float START_DISTANCE_OF_SHOOT = 0.6f;
+    protected float DISTANCE_OF_SMOKE = -0.5f;
     protected float BROKEN = 0.4f; /*Relative damege to look broken */
 
     protected StingerSSFX _sfx;
@@ -114,17 +115,14 @@ public class StingerShooter : BaseEnemy {
         /* Controlhe de angulo do Stinger Shooter */
         {
             if (target.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
-                // ----O que seria o DeadDirection?----
                 toIntercept = target.GetComponent<Player>().DeadDirection.normalized;
 
-            // ----toIntercept é o qua falta para chegar em Intercept, e Intercept seria o que?----
             float currAngle = Mathf.LerpAngle(
                 (360 + Mathf.Atan2(intercept.y, intercept.x) * Mathf.Rad2Deg) % 360,
                 (360 + Mathf.Atan2(toIntercept.y, toIntercept.x) * Mathf.Rad2Deg) % 360,
                 Time.deltaTime
             );
 
-            // ----Set é muito melhor que o "= new Vector2" ?----
             intercept.Set(Mathf.Cos(currAngle * Mathf.Deg2Rad), Mathf.Sin(currAngle * Mathf.Deg2Rad));
         }
 
@@ -136,26 +134,20 @@ public class StingerShooter : BaseEnemy {
         if (impulseForce != Vector3.zero) direction += (Vector2)impulseForce * 0.3f;
 
         velocity = (direction - lastDirection);
-        // ----Porque zerar a velocidade se a magnitude dela ja é pequena d+?----
         velocity = velocity.magnitude > 0.01f ? velocity.normalized : Vector2.zero;
         lastDirection = direction;
 
-        // ----Porque usar o target.position + direction? O target.positio nao seria suficiente?----
         direction = Vector2.Lerp(transform.position, (Vector2)target.position + direction, Time.deltaTime / 2);
 
 
         GetComponent<Rigidbody2D>().MovePosition(direction);
-        //rigidbody2D.velocity = (((Vector2)target.position + direction) - (Vector2) transform.position).normalized * speed;
     }
 
     void UpdateMoveSleep() {
         velocity = Vector2.ClampMagnitude(velocity, MAX_VELOCITY);
 
         velocity = Vector2.Lerp(velocity, Vector2.zero, Time.deltaTime);
-        // ----Apesar de diminuir a velocidade linearmente, voce ainda mantem a força aplicada, né isso?----
         GetComponent<Rigidbody2D>().velocity = velocity + (Vector2)impulseForce * 0.5f;
-
-        //Vector2 direction = Vector2.Lerp(transform.position, (Vector2)target.position + velocity, Time.deltaTime * speed);            
     }
 
     void UpdateAnimation() {
@@ -164,11 +156,10 @@ public class StingerShooter : BaseEnemy {
             intercept * -1;
 
         if (life <= initLife * BROKEN) {
-            // ----Porque ficar atualizando a posição (no plano e no frame) da fumaça se ela ainda não vai ser usada?----
             float time = _smoke.GetComponent<SimpleAnimatior>().NormalizeTime;
 
-            _smoke.localPosition = (Vector3)direction * -.6f + Vector3.up * 1 * time;
-            _smoke.GetComponent<SortingOrder>().Position = transform.Find("feets").position.y + direction.y * -.6f;
+            _smoke.localPosition = (Vector3)direction * DISTANCE_OF_SMOKE + Vector3.up * 1 * time;
+            _smoke.GetComponent<SortingOrder>().Position = transform.Find("feet").position.y + direction.y * DISTANCE_OF_SMOKE;
         }
 
         _anim.SetFloat("Horizontal", direction.x);
@@ -210,9 +201,7 @@ public class StingerShooter : BaseEnemy {
     public override void OnDestroyIt() {
         OnDie = true;
 
-        // ----Porque dividir o vetor.up por 4?----
         GetComponent<Rigidbody2D>().velocity = -Vector2.up / 2;
-        //collider.enabled = false;
 
         _anim.SetTrigger("Die");
         _smoke.gameObject.SetActive(false);
@@ -237,13 +226,12 @@ public class StingerShooter : BaseEnemy {
         _anim.SetTrigger("Shoot");
 
         Vector3 d = new Vector3(_anim.GetFloat("Horizontal"), _anim.GetFloat("Vertical"));
-        //----Porque usar o Max entre o x e y de d? Nao seria melhor usar o _shootspawn direto como o lugar que o tiro deveria aparecer?
         Vector3 spawn = _shootspawn.position + d * (START_DISTANCE_OF_SHOOT * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
 
         /*Spawn a shoot */
         {
             GameObject shootGO = (GameObject)Instantiate(
-                Resources.Load<GameObject>("Shoots/Enemies/Simple"),
+                Resources.Load<GameObject>("Shoots/Enemies/StingerShooter"),
                 spawn, Quaternion.identity
             );
 
@@ -259,7 +247,7 @@ public class StingerShooter : BaseEnemy {
     #region CoRoutines
 
     IEnumerator StopAndShoot() {
-        //----Ele nao fica chamando essa corotina o tempo todo não?----
+
         bool fistTime = true;
         Coroutine self = null;
 
@@ -281,7 +269,6 @@ public class StingerShooter : BaseEnemy {
                     shoot();
                 }
 
-                // ----Isso faz alguma coisa?----
                 yield return null;
             }
 

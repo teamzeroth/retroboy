@@ -4,17 +4,18 @@ using System.Collections;
 public class SortingOrder : MonoBehaviour {
 
     public Transform positionPoint;
-    public bool forcePosition = false;
+    public float initialOrder;
     public bool ignoreRenderer = false;
     public Sprite shadow;
 
-    [SerializeField]
-    public float initialOrder;
-
     private float position;
-    private Transform _shadow;
+    private bool forcePosition = false;
 
-    Transform _renderer;
+    private Transform _shadow;
+    private Transform _renderer;
+    private SpriteRenderer _sRenderer;
+
+    #region Getters And Setters
 
     public float Position {
         set {
@@ -23,22 +24,26 @@ public class SortingOrder : MonoBehaviour {
         }
     }
 
+    public SpriteRenderer getRenderer() {
+        return _sRenderer;
+    }
+
     public float InitialOrder {
         set {
             initialOrder = value;
         }
     }
 
+    #endregion
+
     void Awake() {
-        if (ignoreRenderer) _renderer = transform;
+        _renderer = transform.Find("renderer");
+        if (ignoreRenderer || _renderer == null)
+            _renderer = transform;
 
-        if (_renderer == null) _renderer = transform.Find("Renderer");
-        if (_renderer == null) _renderer = transform.Find("renderer");
-        if (_renderer == null) _renderer = transform;
+        _sRenderer = _renderer.GetComponent<SpriteRenderer>();
 
-        if (positionPoint == null) positionPoint = transform.Find("Feets");
-        if (positionPoint == null) positionPoint = transform.Find("feets");
-        if (positionPoint == null) positionPoint = transform;
+        positionPoint = transform.Find("feet") ?? transform;
 
         if (positionPoint == null) {
             Debug.LogError("No Transform Coponente found to " + name);
@@ -49,38 +54,36 @@ public class SortingOrder : MonoBehaviour {
         if (shadow != null) CastShadow();
     }
 
-    float timer;
-
+    /// <summary>
+    /// Set the Z position of the object, if the position is set out of here whit the set atributte Position the flag forcePosition will be setted
+    /// </summary>
     void Update() {
-        //if (name == "Stinger-S") print(initialOrder);
         _renderer.position = new Vector3(
-            _renderer.position.x, _renderer.position.y,
-            initialOrder + positionPoint.position.y
+            _renderer.position.x, _renderer.position.y, initialOrder + (!forcePosition ? positionPoint.position.y : position)
         );
 
         if (_shadow != null) _shadow.position.Set(
-            _shadow.position.x, _shadow.position.y,
-            _renderer.position.z - 4
+            _shadow.position.x, _shadow.position.y, _renderer.position.z - 1
         );
     }
 
-    void OnDrawGizmosSelected() {
 #if UNITY_EDITOR
-        Transform testPositionPoint = positionPoint;
+    /// <summary>
+    /// Draw a small mangenta circle in the feet point of the object
+    /// </summary>
+    void OnDrawGizmosSelected() {
 
-        if (testPositionPoint == null) testPositionPoint = transform.Find("Feets");
-        if (testPositionPoint == null) testPositionPoint = transform.Find("feets");
-        if (testPositionPoint == null) testPositionPoint = GetComponent<Transform>();
+        Transform testPositionPoint = transform.Find("feet") ?? transform;
 
         if (testPositionPoint != null) {
+            Vector3 point = testPositionPoint.position;
+            if (forcePosition) point.y = position;
+
             Gizmos.color = Color.magenta;
-            if (!forcePosition)
-                Gizmos.DrawWireSphere(testPositionPoint.position, 0.1f);
-            else
-                Gizmos.DrawWireSphere(new Vector3(testPositionPoint.position.x, position), 0.1f);
+            Gizmos.DrawWireSphere(point, 0.1f);
         }
-#endif
     }
+#endif
 
     public void CastShadow() {
         float dist = Vector2.Distance(transform.position, positionPoint.position);

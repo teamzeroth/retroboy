@@ -11,12 +11,12 @@ public class CollisionListener : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.layer == LayerMask.NameToLayer(layer))
+        if (string.IsNullOrEmpty(layer) || other.gameObject.layer == LayerMask.NameToLayer(layer))
             father.SendMessage("OnTriggerListener", other, SendMessageOptions.DontRequireReceiver);
     }
 
     public void OnCollisionEnter2D(Collision2D coll) {
-        if (coll.gameObject.layer == LayerMask.NameToLayer(layer))
+        if (string.IsNullOrEmpty(layer) || coll.gameObject.layer == LayerMask.NameToLayer(layer))
             father.SendMessage("OnCollisionListener", coll, SendMessageOptions.DontRequireReceiver);
     }
 }

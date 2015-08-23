@@ -23,6 +23,14 @@ public class MovableBehaviour : MonoBehaviour {
         get { return _sortingOrder.positionPoint; }
     }
 
+    public Transform Collider {
+        get { return transform.Find("collider"); }
+    }
+
+    public SpriteRenderer Renderer {
+        get { return _sortingOrder.getRenderer(); }
+    }
+
     public int Level {
         get { return _collisionLevel.Level; }
         set { _collisionLevel.Level = value; }
@@ -30,12 +38,12 @@ public class MovableBehaviour : MonoBehaviour {
 
     #endregion
 
-    public void Awake() {
+    void Awake() {
         _collisionLevel = gameObject.TryAddComponent<CollisionLevel>();
         _sortingOrder = gameObject.TryAddComponent<SortingOrder>();
     }
 
-    public void Flip() {
+    protected void Flip() {
         flipped = !flipped;
 
         Vector3 localScale = transform.localScale;

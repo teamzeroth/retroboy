@@ -57,11 +57,11 @@ public class ShootMove : MonoBehaviour {
 
         _anim = GetComponent<Animator>();
 
-        if (transform.Find("Particles"))
-            _particles = transform.Find("Particles").GetComponent<ParticleSystem>();
+        if (transform.Find("particles"))
+            _particles = transform.Find("particles").GetComponent<ParticleSystem>();
 
-        if (transform.Find("Collision Particles"))
-            _collisionParticles = transform.Find("Collision Particles").GetComponent<ParticleSystem>();
+        if (transform.Find("collisionParticles"))
+            _collisionParticles = transform.Find("collisionParticles").GetComponent<ParticleSystem>();
     }
 
     void Start() {
@@ -103,11 +103,15 @@ public class ShootMove : MonoBehaviour {
         }
     }
 
-    public void OnTriggerListener(Collider2D trigger) {
+    public void OnCollisionEnter2D(Collision2D coll) {
+        DestroyMove();
+    }
+
+    /*public void OnTriggerListener(Collider2D trigger) {
         if (trigger.gameObject.tag == "Wall") {
             DestroyMove();
         }
-    }
+    }*/
 
     #endregion
 

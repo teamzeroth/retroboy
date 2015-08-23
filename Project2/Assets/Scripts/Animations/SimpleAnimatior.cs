@@ -35,6 +35,8 @@ public class SimpleAnimatior : MonoBehaviour {
     }
 
     void Update() {
+        if (animation.Length == 0) return;
+
         timer += Time.deltaTime;
         curr = Mathf.FloorToInt(sample * timer);
 
@@ -59,6 +61,8 @@ public class SimpleAnimatior : MonoBehaviour {
 
 #if UNITY_EDITOR
     void OnRenderObject() {
+        if (animation.Length == 0) return;
+
         if (Application.isEditor && !Application.isPlaying) {
             timer += Time.fixedDeltaTime;
             curr = Mathf.FloorToInt(sample * timer);
