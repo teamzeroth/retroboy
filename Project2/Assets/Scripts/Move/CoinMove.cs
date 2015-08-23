@@ -8,13 +8,13 @@ public class CoinMove : MovableBehaviour {
 
     const float TIME_OF_FALLING = 1;
 
-    /*static public float TOTAL_TIME_OF_LIVE = 10f; //+ 3 
+    static public float TOTAL_TIME_OF_LIVE = 10f; //+ 3 
 
     public int quant = 10;
     public Transform feet;
     public float fallingDuration;
     public float extraX;
-    public float movingDuration;*/
+    public float movingDuration;
 
     float startY;
     float curY;
@@ -25,7 +25,7 @@ public class CoinMove : MovableBehaviour {
     }
 
     private void Move() {
-        startY = transform.position.y;
+        /*startY = transform.position.y;
         Vector3 toPosition = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         DG.Tweening.Core.DOGetter<float> getter = () => curY;
         DG.Tweening.Core.DOSetter<float> setter = x => {
@@ -37,7 +37,7 @@ public class CoinMove : MovableBehaviour {
             curY = x;
             toPosition * t.ElapsedPercentage;
             transform.position = new Vector3();
-        }, Feet.localPosition, 1);
+        }, Feet.localPosition, 1);*/
 
         Vector3 endValue = feet.position + new Vector3(Random.value, Random.value, 0);
         transform.DOMove(endValue, fallingDuration, false).SetEase(Ease.OutBounce);
