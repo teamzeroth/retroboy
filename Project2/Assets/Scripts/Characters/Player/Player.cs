@@ -205,8 +205,8 @@ public class Player : MonoBehaviour {
     }
 
     public void UpdateAnimation() {
-
-        if (!waitShootFinish && !waitToMove) {
+        if (!waitToMove || (waitToMove && waitShootFinish)) {
+            //if (!waitShootFinish && !waitToMove) {
 
             Vector2 targetVector = fixedMove != Vector2.zero ? fixedMove : controller.Direction;
             _anim.SetFloat("Horizontal", targetVector.x);
