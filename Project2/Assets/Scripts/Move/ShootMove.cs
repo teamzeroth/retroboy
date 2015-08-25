@@ -104,7 +104,15 @@ public class ShootMove : MonoBehaviour {
     }
 
     public void OnCollisionEnter2D(Collision2D coll) {
-        DestroyMove();
+		CollisionLevel collision = coll.gameObject.GetComponent<CollisionLevel>();
+
+		if (collision == null) return;
+		if (collision.Level != collisionLevel.Level) {
+			coll.gameObject.GetComponent<Collider2D>().isTrigger = true;
+			return;
+		}
+        
+		DestroyMove();
     }
 
     /*public void OnTriggerListener(Collider2D trigger) {
