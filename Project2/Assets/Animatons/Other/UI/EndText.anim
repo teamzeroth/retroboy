@@ -6,8 +6,8 @@ AnimationClip:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: EndText
-  serializedVersion: 4
-  m_AnimationType: 2
+  serializedVersion: 6
+  m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
@@ -19,14 +19,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1099
-        inSlope: -849
-        outSlope: -849
+        value: 523
+        inSlope: -1141
+        outSlope: -1141
         tangentMode: 10
       - time: 1
-        value: 250
-        inSlope: -849
-        outSlope: -849
+        value: -618
+        inSlope: -1141
+        outSlope: -1141
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -58,8 +58,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: -80
-        inSlope: 0
-        outSlope: 0
+        inSlope: -25
+        outSlope: -25
+        tangentMode: 10
+      - time: 1
+        value: -105
+        inSlope: -25
+        outSlope: -25
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -116,14 +121,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1099
-        inSlope: -849
-        outSlope: -849
+        value: 523
+        inSlope: -1141
+        outSlope: -1141
         tangentMode: 10
       - time: 1
-        value: 250
-        inSlope: -849
-        outSlope: -849
+        value: -618
+        inSlope: -1141
+        outSlope: -1141
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -155,8 +160,13 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: -80
-        inSlope: 0
-        outSlope: 0
+        inSlope: -25
+        outSlope: -25
+        tangentMode: 10
+      - time: 1
+        value: -105
+        inSlope: -25
+        outSlope: -25
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -165,4 +175,7 @@ AnimationClip:
     classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_GenerateMotionCurves: 0
   m_Events: []
