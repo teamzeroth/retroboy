@@ -68,6 +68,8 @@ public class GameController : MonoBehaviour {
             _ui.ToogleQuestHUD(true);
         if (Input.GetKeyDown(KeyCode.K))
             _ui.ToogleQuestHUD(false);
+        if (Input.GetKeyDown(KeyCode.Q))
+            Application.LoadLevel(Application.levelCount - 1);
     }
 
     public void StartStage() {
