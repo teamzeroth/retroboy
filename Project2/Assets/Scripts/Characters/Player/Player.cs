@@ -108,6 +108,12 @@ public class Player : MovableBehaviour {
     void Awake() {
         base.Awake();
 
+        onChargeState = false;
+        onShootState = false;
+        onDashState = false;
+        onHurtState = false;
+        onDieState = false;
+
         _anim = GetComponent<Animator>();
         _sfx = GetComponent<PlayerSFX>();
 
@@ -391,7 +397,7 @@ public class Player : MovableBehaviour {
         shoot.Direction = v;
         shoot.damage = damage;
 
-        var x = Mathf.Clamp(_input.LastTimeInCharge, 0.3f, Game.PLAYER_TOTAL_CHARGE_TIME) / Game.PLAYER_TOTAL_CHARGE_TIME;
+        var x = Mathf.Clamp(_input.LastTimeInCharge, 0.5f, Game.PLAYER_TOTAL_CHARGE_TIME) / Game.PLAYER_TOTAL_CHARGE_TIME;
         shoot.Distance = 8 * x * x;
 
         _sfx.Shoot(_input.LastTimeInCharge);

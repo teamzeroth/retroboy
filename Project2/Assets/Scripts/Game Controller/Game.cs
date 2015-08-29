@@ -6,7 +6,7 @@ public static class Game {
     // Game Variables
     public const float TIME = 0;
     public const float DOOR_ANIMATION_TIME = 1.3f;
-    public const int SPRITE_PPU = 8;
+    public const int SPRITE_PPU = 16;
 
     // Level Name SHootcuts
 
