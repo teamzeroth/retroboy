@@ -1,435 +1,351 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+using UnityEngine;
 using System;
+using System.Collections;
 
 using DG.Tweening;
-using System.Collections.Generic;
 
-public class Player : MonoBehaviour {
+public class Player : MovableBehaviour {
 
-    private class ControllerStates {
+    #region Attributes
 
-        public Transform _player;
-
-        public Vector2 deltaDirection = new Vector2(1, 0);
-        public Vector2 deadDirection = new Vector2(1, 0);
-
-        public Vector2 Direction;
-
-        public bool InMoving;
-        public bool InDash;
-
-        public bool OnCharging;
-        public bool OnShooting;
-        public bool OnSimulateMove;
-
-        public float TimeInCharge;
-        //public float TimeLastShoot;
-        public float LastTimeInCharge;
-        public Vector3 Update(Player player) {
-            setupDirection(player);
-            setupShoot(player);
-
-            return deltaDirection;
-        }
-
-        public void setupDirection(Player player) {
-            if (!Input.GetKey(KeyCode.Mouse0)) {
-                deltaDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-                if (deltaDirection.magnitude > 1)
-                    deltaDirection.Normalize();
-
-                if (deltaDirection.magnitude > 0.1f) {
-                    deadDirection = deltaDirection;
-                }
-            } else {
-                Camera camera = Camera.main;
-                Vector3 pos = camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane));
-
-                deltaDirection = pos - _player.transform.position;
-                deltaDirection.Normalize();
-
-                deadDirection = deltaDirection;
-            }
-
-            Direction = deadDirection;
-
-            InMoving = deltaDirection != Vector2.zero;
-            if (!OnCharging) {
-                if (player.watchDash == null) InDash = InDash || Input.GetButtonDown("Dash");
-            }
-        }
-
-        public void setupShoot(Player player) {
-            OnShooting = false;
-            OnCharging = false;
-
-            if (OnCharging && !Input.GetButton("Action")) { ///TODO: Isso numca vai ocorrer
-                OnShooting = true;
-                OnCharging = false;
-            } else {
-                OnCharging = Input.GetButton("Action");
-                OnShooting = Input.GetButtonUp("Action");
-            }
-
-
-            if (OnCharging) LastTimeInCharge = TimeInCharge;
-            TimeInCharge = OnCharging ? TimeInCharge + Time.deltaTime : 0;
-        }
-
-        public void registreTime() {
-            LastTimeInCharge = 0;
-        }
-
-    }
-
+    /// Publics 
     public float speed = 3;
     public float dashSpeed = 50;
 
     public Collider2D FeetCollider;
     public Collider2D BodyCollider;
+
     public Sprite[] ss_E;
     public Sprite[] ss_S;
     public Sprite[] ss_N;
     public Sprite[] ss_NE;
     public Sprite[] ss_SE;
-    public GameObject shootPrefab;
-    [HideInInspector]
-    public bool flipped = false;
-    [HideInInspector]
-    public Vector2 fixedMove = Vector2.zero;
-    [HideInInspector]
-    public CollisionLevel collisionLevel;
 
-    private bool waitToMove = false;
-    private bool waitShootFinish = false;
-    private bool waitToNewShoot = false;
+    /// Childrens
+    PlayerInput _input = new PlayerInput();
+    PlayerSFX _sfx;
+    Animator _anim;
 
-    private Tween lastFixedTween;
+    Transform _charge;
 
-    private ControllerStates controller = new ControllerStates();
+    /// Privates
+    bool inSimulateMoviment; // Sinalized when the player are a simulated Moviment
+    bool invulnerable = false; //Sinalized when the player can't receive hit
 
-    private Coroutine watchShoot = null;
-    private Coroutine watchDash = null;
+    Vector2 simulatedVector;
+    Vector2 LastDirection;
 
-    private Animator _anim;
-    private SpriteRenderer _sprite;
-    private Rigidbody2D _rigidbody;
-    private PlayerSFX _sfx;
+    bool onChargeState = false;
+    bool onShootState = false;
+    bool onDashState = false;
+    bool onHurtState = false;
+    bool onDieState = false;
 
-    private Transform _charge;
-
-    #region Getters and Setters
-
-    [HideInInspector]
-    public bool OnDie;
-
-    #region Hurt States
-
-    private bool _onHurt = false;
-    private bool afterOnHurt = false;
-    private Coroutine waitInvunerabity;
-
-    /// <summary>
-    /// Flag set when the player recebeive some damage
-    /// </summary>
-    public bool OnHurt {
-        get {
-            return _onHurt;
-        }
-        set {
-            if (_onHurt && !value) {
-                if (waitInvunerabity != null) StopCoroutine(waitInvunerabity);
-                waitInvunerabity = StartCoroutine(SetAfterOnHurt());
-                _onHurt = value;
-            } else {
-                _onHurt = afterOnHurt = value;
-            }
-        }
-    }
-
-    public IEnumerator SetAfterOnHurt() {
-        yield return new WaitForSeconds(Game.TIME_PLAYER_INVULNERABILITY);
-        afterOnHurt = _onHurt;
-    }
+    /// Coroutines
+    Coroutine watchDash;
+    Coroutine watchShoot;
 
     #endregion
 
-    public Vector2 DeadDirection {
-        get { return controller.deadDirection; }
-        set { controller.deadDirection = value; }
+
+    #region Getters And Setters
+
+    bool lockDirection = false;
+    bool lockMoviment = false; /// Sinalized when player need is stopped 
+    public bool LockMoviment {
+        get {
+            return lockMoviment;
+        }
+        set {
+            lockMoviment = value;
+        }
     }
 
+    /// Return the dead direction of the player in the player input
+    public Vector2 DeadDirection { get { return _input.deadDirection; } }
+
+    /// Return true if the player is in some state that the Beta can be visible
+    bool hideBeta;
     public bool BetaVisible {
         get {
-            bool colorTest = ((SpriteRenderer)GetComponent<Renderer>()).color != Color.clear;
-            bool animationTest = _anim.CurrentAnimState().StartsWith("Nim-idle") || _anim.CurrentAnimState().StartsWith("Nim-run");
-
-            return !OnHurt && !controller.OnSimulateMove && colorTest && animationTest;
+            return hideBeta;
         }
-    }
-
-    private int _life;
-    public int Life {
-        get { return _life; }
-
         set {
-            _life = value;
-            UiController.self.Life = value;
+            hideBeta = value;
         }
     }
+
+    int life = 4;
+    public int Life {
+        get {
+            return life;
+        }
+        set {
+            life = value;
+        }
+    }
+
+    public bool Dead {
+        get { return onDieState; }
+    }
+
+    public bool Hurt {
+        get { return onHurtState; }
+    }
+
+    [Range(0, 100)]
+    public float actionPoints = 100;
 
     #endregion
 
-    #region MonoBehaviour
-    public void Start() {
-        controller._player = transform;
-        _anim = GetComponent<Animator>();
-        _sprite = (SpriteRenderer)GetComponent<Renderer>();
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _sfx = GetComponent<PlayerSFX>();
-        _charge = transform.Find("Charge");
 
-        collisionLevel = GetComponent<CollisionLevel>();
-        _life = UiController.self.Life; /*To Do: Pog*/
+    #region MonoBehaviour
+
+    void Awake() {
+        base.Awake();
+
+        _anim = GetComponent<Animator>();
+        _sfx = GetComponent<PlayerSFX>();
+
+        _charge = transform.Find("Charge");
+    }
+
+    public void UpdateMove(Vector2 deltaMovement) {
+        if (LockMoviment) {
+            Move(Vector2.zero);
+            return;
+        }
+
+        if (inSimulateMoviment) {
+            Move(simulatedVector);
+            return;
+        }
+
+        Move(deltaMovement * speed);
+    }
+
+    public void Move(Vector3 move) {
+        GetComponent<Rigidbody2D>().velocity = move;
+    }
+
+    public void UpdateAnimation(Vector2 deltaMovement) {
+        Vector2 targetVector = inSimulateMoviment ?
+            simulatedVector : _input.Direction;
+
+        _anim.SetFloat("Horizontal", targetVector.x);
+        _anim.SetFloat("Vertical", targetVector.y);
+
+        checkFlip();
+
+        if (_input.InCharging)
+            LastDirection = targetVector;
+
+        if (_input.InCharging && !onChargeState) {
+            lockMoviment = true;
+            onChargeState = true;
+
+            _anim.SetTrigger("OnDraw");
+            KillAndStartCoroutine(ref watchShoot, shootRoutine());
+        }
+
+        if (_input.InShooting && !onShootState) {
+            _input.LockDirection = LastDirection;  // Lock Player Direction Look
+            onShootState = true;
+
+            _anim.SetBool("OnDraw", false);
+            _anim.SetTrigger("OnShoot");
+        }
+
+
+        _anim.SetBool("OnHurt", onHurtState);
+        _anim.SetBool("OnDie", onDieState);
+
+        //Check if the player can use the dash
+        _anim.SetBool("OnDash", _input.InDashing ? ActionDash() : false);
+
+        _anim.SetBool("InMoving", _input.InMoving && !LockMoviment);
+    }
+
+    public void UpdateSound(Vector2 deltaMovement) {
+        if (_input.InCharging)
+            _sfx.Charge();
+        else
+            _sfx.UnCharge();
     }
 
     public void Update() {
         if (GameController.self.Pause || GameController.self.stopPlayer) return;
 
-        UpdateMove();
-        UpdateAnimation();
-        UpdateSound();
+        if (Input.GetKeyDown(KeyCode.Space)) OnGetHit(1, Vector2.right);
 
+        Vector2 deltaMovement = _input.Update(this);
+
+        UpdateAnimation(deltaMovement);
+        UpdateMove(deltaMovement);
+        UpdateSound(deltaMovement);
+
+        AccumulateActionPoints(Time.deltaTime * Game.PLAYER_ACTION_POINTS_BY_TIME);
     }
 
-    public void UpdateAnimation() {
-        if (!waitToMove || (waitToMove && waitShootFinish)) {
-            //if (!waitShootFinish && !waitToMove) {
+#if UNITY_EDITOR
+    public void OnDrawGizmos() {
+        Vector3 p = transform.position - Vector3.one * 0.75f;
 
-            Vector2 targetVector = fixedMove != Vector2.zero ? fixedMove : controller.Direction;
-            _anim.SetFloat("Horizontal", targetVector.x);
-            _anim.SetFloat("Vertical", targetVector.y);
-            checkFlip();
-        }
+        GUIStyle style = new GUIStyle();
+        style.fontSize = 20;
+        style.normal.textColor = Color.red;
+        style.border = new RectOffset(1, 1, 1, 1);
 
-        //Checa o estado de carregar e atirar
-        if (controller.OnCharging) {
-            enableAnimationCharge();
-
-            if (!waitShootFinish && !waitToNewShoot) {
-                _anim.SetTrigger("OnDraw");
-
-
-                if (watchShoot != null) StopCoroutine(watchShoot);
-                watchShoot = StartCoroutine(WaitShootAnimationFinish());
-            }
-        }
-
-        if (controller.OnShooting) {
-            disableAnimationCharge();
-
-            if (!waitToNewShoot) {
-                StartCoroutine(WaitShootAnimationStart());
-
-                _anim.SetTrigger("OnShoot");
-                _anim.SetBool("OnDraw", false);
-            }
-        }
-
-        //Checa o estado de se machucar
-        if (OnHurt) {
-            waitToMove = true;
-
-            _anim.SetBool("OnShoot", false);
-            _anim.SetBool("OnDraw", false);
-        }
-
-        _anim.SetBool("OnHurt", OnHurt);
-        _anim.SetBool("OnDash", controller.InDash);
-
-        //Checa se o jogador move
-        _anim.SetBool("InMoving", (controller.InMoving || controller.OnSimulateMove) && !waitToMove);
+        Handles.Label(p, actionPoints.ToString(), style);
     }
-
-    public void UpdateSound() {
-        if (controller.OnCharging && _anim.CurrentAnimState().StartsWith("Nim-draw"))
-            _sfx.Charge();
-        else
-            _sfx.UnCharge();
-
-    }
-
-    public void UpdateMove() {
-        Vector2 deltaMovement = controller.Update(this);
-
-        //Check if the player can use the dash
-        if (controller.InDash && !waitToMove) {
-            Vector2 normal = controller.Direction.normalized;
-            float time = getDashTime(normal, dashSpeed, Game.TOTAL_TIME_PLAYER_DASH);
-
-            if (time > 0.011f) {
-                StartFixedMove((normal * dashSpeed), (normal * dashSpeed) / 2, time, Ease.InExpo);
-                watchDash = StartCoroutine(Clone());
-            } else {
-                controller.InDash = false;
-            }
-        }
-
-        if (fixedMove == Vector2.zero) {
-            if (controller.OnCharging || controller.OnShooting || waitToMove)
-                deltaMovement = Vector2.zero;
-            else {
-                deltaMovement *= speed;
-            }
-        } else {
-            deltaMovement = fixedMove;
-        }
-
-        _sfx.Footstep(deltaMovement != Vector2.zero);
-        Move(deltaMovement);
-    }
-
-    /*public void OnCollisionEnter2D(Collision2D coll) {
-        if (coll.gameObject.tag == "Coin")
-            getCoin(coll.gameObject.GetComponent<CoinMove>());
-
-        //if (coll.gameObject.layer == LayerMask.NameToLayer("Level") && controller.InDash) {
-            print("OK GO");
-
-            //StopCoroutine(watchDash);
-            CancelFixedMove();
-        }//
-
-    }*/
+#endif
 
     #endregion
 
 
     #region Messages
 
-    public void Move(Vector3 deltaMovement) {
-        GetComponent<Rigidbody2D>().velocity = deltaMovement;
+    public void UnlockInvulnerability() {
+        invulnerable = false;
     }
 
-    public void Move2(Vector3 deltaMovement) {
-        Vector3 move = transform.position + deltaMovement * Time.deltaTime;
-        GetComponent<Rigidbody2D>().MovePosition(move);
-    }
+    /// <summary>
+    /// Make a player take a hit. This is the main OnGetHit method
+    /// </summary>
+    /// <param name="damage">The damage that the player will take</param>
+    /// <param name="direction">The direction that the player will go to "fell" the hit</param>
+    public void OnGetHit(int damage, Vector2 direction) {
+        if (onHurtState) return;
 
-    public void DisableColliders(bool disable = false) {
-        //FeetCollider.enabled = disable;
-        BodyCollider.enabled = disable;
-    }
-
-    public void StartFixedMove(Vector2 start, Vector2 to, float time, Color color, Ease ease = Ease.Linear) {
-        StartFixedMove(start, to, time, ease);
-        waitToMove = false;
-        ((SpriteRenderer)GetComponent<Renderer>()).DOColor(color, time);
-        //((SpriteRenderer)transform.Find("Shadow").GetComponent<Renderer>()).DOColor(color, time);
-    }
-
-    public void StartFixedMove(Vector2 start, Vector2 to, float time, Ease ease = Ease.OutCirc) {
-        if (fixedMove != Vector2.zero)
-            lastFixedTween.Kill();
-
-        waitToMove = true;
-        fixedMove = fixedMove + start;
-        controller.OnSimulateMove = true;
-
-        lastFixedTween = DOTween.To(() => fixedMove, x => fixedMove = x, to, time).SetEase(ease).OnComplete(() => {
-            OnHurt = false;
-            fixedMove = Vector2.zero;
-
-            DisableColliders(true);
-            controller.InDash = false;
-            controller.OnSimulateMove = false;
-
-            waitShootFinish = false;
-            waitToNewShoot = false;
-            waitToMove = false;
-        });
-    }
-
-    public void CancelFixedMove() {
-        if (lastFixedTween == null) return;
-        lastFixedTween.Kill(true);
-    }
-
-    public void OnGetHit(int damage, Vector2 direction, Collider2D other) {
-        _sfx.Hurt();
-
-        StopAllCoroutines();
-
-        Life -= damage;
-
-        if (Life > 0) {
-            if (watchDash != null) {
-                StopCoroutine(watchDash);
-                watchDash = null;
-            }
-
-            OnHurt = true;
-            StartFixedMove(direction.normalized * damage * 4, Vector2.zero, Game.TIME_PLAYER_DAMAGE);
-        } else {
-            DisableColliders();
-
-            OnDie = true;
-            waitToMove = true;
-
-            _anim.SetBool("OnHurt", false);
-            _anim.SetTrigger("OnDie");
+        Life = Mathf.Max(Life - damage, 0);
+        if (Life > 0)
+            ActionHurt(direction * damage * 3);
+        else {
+            LockMoviment = true;
+            onDieState = true;
         }
     }
 
     public void OnGetHit(BaseEnemy enemy, Collider2D other) {
-        if (afterOnHurt) return;
-
-        Vector2 d = (FeetCollider.bounds.center - other.bounds.center).normalized;
-        OnGetHit((int)enemy.damage, d, other);
+        OnGetHit((int)enemy.damage, (FeetCollider.bounds.center - other.bounds.center).normalized);
     }
 
     public void OnGetHit(ShootMove shoot, Collider2D other) {
-        if (afterOnHurt) return;
-
-        Vector2 d = shoot.direction;
-        OnGetHit((int)shoot.damage, d, other);
+        OnGetHit((int)shoot.damage, shoot.direction);
     }
 
-    public void OnAnimationFinish() {
-        if (OnDie) GameController.self.CanRestartTheGame = true;
+    public bool PrepareActionPoints(float points) {
+        return (actionPoints - points) > 0;
+    }
+
+    public bool ConsumeActionPoints(float points) {
+        if (actionPoints - points > 0) {
+            actionPoints -= points;
+            return true;
+        }
+        return false;
+    }
+
+    public void AccumulateActionPoints(float points) {
+        if (actionPoints + points < Game.PLAYER_MAX_ACTION_POINTS)
+            actionPoints += points;
+        else
+            actionPoints = Game.PLAYER_MAX_ACTION_POINTS;
     }
 
     #endregion
 
 
-    #region Private Methods
+    #region Methods
+
+    private void SimulateMove(Vector2 force, Vector2 final, float time, Color color, Ease ease = Ease.Linear) { }
+    private void SimulateMove(Vector2 force, Vector2 final, float time, Ease ease = Ease.Linear) { }
+
+    private void ActionHurt(Vector2 direction) {
+        if (onHurtState) return;
+
+        lockMoviment = false;
+
+        onHurtState = true;
+        invulnerable = true;
+
+        inSimulateMoviment = true;
+        simulatedVector = direction;
+
+        DOTween.To(() => simulatedVector, x => simulatedVector = x, Vector2.zero, Game.PLAYER_HURT_TIME)
+            .SetEase(Ease.OutExpo)
+            .OnComplete(() => {
+                onHurtState = false;
+                inSimulateMoviment = false;
+                Invoke("UnlockInvulnerability", Game.PLAYER_INVULNERABILITY_TIME);
+            });
+    }
+
+    public void OnAnimationFinish() {
+
+    }
+
+    /// <summary>
+    /// Check if the player can use the dash in his current position and,
+    /// if true, make a dash animation
+    /// </summary>
+    private bool ActionDash() {
+        if (onDashState) return true;
+
+        Vector2 normal = _input.Direction.normalized;
+        float time = getDashTime(normal, dashSpeed, Game.TOTAL_TIME_PLAYER_DASH);
+
+        if (time < 0.02f || !ConsumeActionPoints(50)) {
+            _input.InDashing = false;
+            return false;
+        }
+
+        lockMoviment = false;
+
+        onDashState = true;
+        inSimulateMoviment = true;
+        simulatedVector = normal * dashSpeed;
+
+        KillAndStartCoroutine(ref watchDash, dashRoutine());
+
+        DOTween.To(() => simulatedVector, x => simulatedVector = x, Vector2.zero, time)
+            .SetEase(Ease.InCirc)
+            .OnComplete(() => {
+                onDashState = false;
+                inSimulateMoviment = false;
+                _input.InDashing = false;
+            });
+
+        return true;
+    }
 
     /// <summary>
     /// Active the right animation of charge by the time of charge
     /// </summary>
     public void enableAnimationCharge() {
-        GameObject charge = _charge.GetChild(0).gameObject;
+        GameObject energy = _charge.GetChild(0).gameObject;
 
-        if (controller.TimeInCharge < Game.TIME_PLAYER_COMPLET_CHARGE) {
-            charge.SetActive(true);
+        if (_input.TimeInCharge < Game.TIME_PLAYER_COMPLET_CHARGE) {
+            energy.SetActive(true);
 
         } else {
-            if (charge.activeSelf) {
+            if (energy.activeSelf) {
                 _charge.GetChild(2).gameObject.SetActive(true);
                 _charge.GetChild(2).GetComponent<SimpleAnimatior>().enabled = true;
             }
 
             _charge.GetChild(1).gameObject.SetActive(true);
-            charge.SetActive(false);
+            energy.SetActive(false);
         }
 
 
-        Vector2 angle = Helper.GetDirectionVector((Direction)Helper.getGeoDirection(controller.Direction));
+        Vector2 angle = Helper.GetDirectionVector((Direction)Helper.getGeoDirection(_input.Direction));
         _charge.localPosition = angle * (Game.PLAYER_DIST_SHOOT * Mathf.Max(Mathf.Abs(angle.x), Mathf.Abs(angle.y)));
     }
-
 
     /// <summary>
     /// Disable All animations of charge
@@ -440,40 +356,119 @@ public class Player : MonoBehaviour {
         _charge.GetChild(2).gameObject.SetActive(false);
     }
 
-    public void checkFlip() {
-        Vector2 targetVector = fixedMove != Vector2.zero ? fixedMove : controller.Direction;
+    /// <summary>
+    /// Spawn a shoot in a v direction
+    /// </summary>
+    /// <param name="v">the direction of the shoot</param>
+    private void instantiateShoot(Vector3 v) {
+        //Consume points of the shoot
+        if (!ConsumeActionPoints(25)) return;
 
-        if (targetVector.x < 0 && Mathf.Abs(targetVector.x) >= Mathf.Abs(targetVector.y * 0.4f)) {
-            if (!flipped)
-                transform.Flip(ref flipped);
-
-        } else {
-            if (flipped)
-                transform.Flip(ref flipped);
-        }
-    }
-
-    private void instaceShoot(Vector3 v) {
         Vector3 d = v.normalized;
         Vector3 spawn = transform.position + d * (Game.PLAYER_DIST_SHOOT * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
         spawn += (Vector3)Game.PLAYER_SHOOT_DIFERENCE;
 
-        GameObject shootGO = (GameObject)Instantiate(
-            shootPrefab,
-            spawn, Quaternion.identity
+        GameObject shootObject = Instantiate<GameObject>(
+            Resources.Load<GameObject>("Shoots/Nim/Shoot")
         );
-        ShootMove shoot = shootGO.GetComponent<ShootMove>();
-        shoot.collisionLevel.Level = collisionLevel.Level;
-        shoot.damage = controller.LastTimeInCharge >= Game.TIME_PLAYER_COMPLET_CHARGE ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
-        var x = Mathf.Clamp(controller.LastTimeInCharge, 1, 3);
+
+        shootObject.transform.position = spawn;
+
+        // Setting the paramethes of the shoot
+        ShootMove shoot = shootObject.GetComponent<ShootMove>();
+        shoot.collisionLevel.Level = Level; /// TODO: Set it to shoot.Level = Level
         shoot.Direction = v;
+
+        if (_input.LastTimeInCharge >= Game.TIME_PLAYER_COMPLET_CHARGE)
+            shoot.damage = 3;
+        else if (_input.LastTimeInCharge >= Game.TIME_PLAYER_COMPLET_CHARGE / 2)
+            shoot.damage = 2;
+        else
+            shoot.damage = 1;
+
+        var x = Mathf.Clamp(_input.LastTimeInCharge, 1, 3);
+
         shoot.Distance = 8 * (x / 3);
-        _sfx.Shoot(controller.LastTimeInCharge);
+
+        _sfx.Shoot(_input.LastTimeInCharge);
     }
 
-    private void getCoin(CoinMove coin) {
-        UiController.self.Coins += coin.quant;
-        Destroy(coin.gameObject);
+    #endregion
+
+    #region CoRoutines
+
+    IEnumerator shootRoutine() {
+        // Waithing for the draw animation (or shoot)
+        while (!_anim.CurrentAnimState().StartsWith("Nim-draw") &&
+            !_anim.CurrentAnimState().StartsWith("Nim-shoot")) {
+            yield return null;
+        }
+
+        // Active charge animation
+        while (_anim.CurrentAnimState().StartsWith("Nim-draw")) {
+            enableAnimationCharge();
+            yield return null;
+        }
+
+        disableAnimationCharge(); // Disable charge animation
+        instantiateShoot(LastDirection); // Instatiate shoot
+
+        while (_anim.CurrentAnimState().StartsWith("Nim-shoot")) {
+            yield return null;
+        }
+
+        // Unlock movimatation
+
+        lockMoviment = false;
+        onShootState = false;
+        onChargeState = false;
+
+        _input.LockDirection = Vector2.zero;
+    }
+
+    IEnumerator dashRoutine() {
+        Sprite[] array = null;
+
+        float time = Time.time;
+        float length = 4;
+
+        switch (Helper.getGeoDirection(_input.Direction)) {
+            case (int)Direction.E: array = ss_E; break;
+            case (int)Direction.NE: array = ss_NE; break;
+            case (int)Direction.N: array = ss_N; break;
+            case (int)Direction.SE: array = ss_SE; break;
+            case (int)Direction.S: array = ss_S; break;
+        }
+
+        length = array.Length - 1;
+
+        while (_input.InDashing) {
+            float i = (Time.time - time) / Game.TOTAL_TIME_PLAYER_DASH;
+            i = -i * (i - 2);
+
+            getDashClone(array[(int)UnityEngine.Random.Range(i * length, length)]);
+            yield return new WaitForSeconds(Game.FRAMETIME_PLAYER_DASH);
+        }
+
+        while (time + Game.TOTAL_TIME_PLAYER_DASH + Game.EXTRA_DASH_TIME > Time.time) {
+            getDashClone(renderer.sprite, 0.5f);
+            yield return new WaitForSeconds(Game.FRAMETIME_PLAYER_DASH * 2.5f);
+        }
+    }
+
+    #endregion
+
+    #region PlayerUtils
+
+    public void checkFlip() {
+        Vector2 targetVector = inSimulateMoviment ?
+           simulatedVector : _input.Direction;
+
+        if (targetVector.x < 0 && Mathf.Abs(targetVector.x) >= Mathf.Abs(targetVector.y * 0.4f)) {
+            if (!flipped) transform.Flip(ref flipped);
+        } else {
+            if (flipped) transform.Flip(ref flipped);
+        }
     }
 
     /// <summary>
@@ -484,98 +479,25 @@ public class Player : MonoBehaviour {
     /// <param name="time">The time to clamp</param>
     /// <returns></returns>
     private float getDashTime(Vector2 vector, float velocity, float time) {
-        Vector2 sPoint = (Vector2)FeetCollider.bounds.center;// + vector * (transform.collider2D as CircleCollider2D).radius;
-        float radius = (FeetCollider as CircleCollider2D).radius * 2.5f;
+        Vector2 sPoint = (Vector2)Feet.position;
+        float radius = Feet.GetComponent<CircleCollider2D>().radius;
 
-        RaycastHit2D hit = Physics2D.Raycast(sPoint, vector, time * velocity, 1 << LayerMask.NameToLayer("Level"));
+        int level = 1 << LayerMask.NameToLayer("Level");
+        level |= 1 << LayerMask.NameToLayer("Wall");
+        level |= 1 << LayerMask.NameToLayer("Floor");
+
+        RaycastHit2D hit = Physics2D.Raycast(sPoint, vector, time * velocity, level);
 
         float r = hit.distance != 0 ? (hit.distance - radius) / velocity : time;
         return r;
     }
 
-    /*public void OnDrawGizmos() {
-        Vector2 vector = controller.Direction.normalized;
-        float time = Game.TOTAL_TIME_DASH;
-        float velocity = dashSpeed;
-
-        Vector2 sPoint = (Vector2) transform.collider2D.bounds.center;
-        float radius = (transform.collider2D as CircleCollider2D).radius * 2.5f;
-
-        RaycastHit2D hit = Physics2D.Raycast(sPoint, vector, time * velocity, 1 << LayerMask.NameToLayer("Level"));
-
-        float r = hit.distance != 0 ? (hit.distance - radius) : time * velocity;
-
-        print(r);
-
-        Gizmos.DrawLine(sPoint, sPoint + vector * time * velocity);
-        Gizmos.DrawWireSphere(sPoint + vector * r, 0.1f);
-    }*/
-
-    #endregion
-
-
-    #region CoRotinnes
-
-    IEnumerator WaitShootAnimationFinish() {
-        waitShootFinish = true;
-        waitToMove = true;
-
-        while (waitShootFinish)
-            yield return null;
-
-        yield return new WaitForSeconds(0.5f);
-        waitToMove = false;
-        watchShoot = null;
-    }
-
-    IEnumerator WaitShootAnimationStart() {
-        waitToNewShoot = true;
-
-        while (!_anim.CurrentAnimState().StartsWith("Nim-shoot"))
-            yield return null;
-
-        instaceShoot(new Vector2(_anim.GetFloat("Horizontal"), _anim.GetFloat("Vertical")));
-        waitShootFinish = false;
-
-        yield return new WaitForSeconds(0.35f);
-        waitToNewShoot = false;
-    }
-
-    IEnumerator Clone() {
-        Sprite[] array = null;
-
-        float time = Time.time;
-        float length = 4;
-
-        switch (Helper.getGeoDirection(controller.Direction)) {
-            case (int)Direction.E: array = ss_E; break;
-            case (int)Direction.NE: array = ss_NE; break;
-            case (int)Direction.N: array = ss_N; break;
-            case (int)Direction.SE: array = ss_SE; break;
-            case (int)Direction.S: array = ss_S; break;
-        }
-
-        length = array.Length - 1;
-
-        while (/* time + Game.TOTAL_TIME_DASH > Time.time && */ controller.InDash) {
-            float i = (Time.time - time) / Game.TOTAL_TIME_PLAYER_DASH;
-            i = -i * (i - 2);
-
-            cloneMethod(array[(int)UnityEngine.Random.Range(i * length, length)]);
-            yield return new WaitForSeconds(Game.FRAMETIME_PLAYER_DASH);
-        }
-
-        while (time + Game.TOTAL_TIME_PLAYER_DASH + Game.EXTRA_DASH_TIME > Time.time) {
-            cloneMethod(_sprite.sprite, 0.5f);
-            yield return new WaitForSeconds(Game.FRAMETIME_PLAYER_DASH * 2.5f);
-        }
-
-        yield return new WaitForSeconds(Game.TIME_PLAYER_NEW_DASH);
-
-        watchDash = null;
-    }
-
-    void cloneMethod(Sprite sprite, float alpha = 1) {
+    /// <summary>
+    /// Create a clone og the <arg>sprite</arg> in the same position of the player
+    /// </summary>
+    /// <param name="sprite">The sprite to create</param>
+    /// <param name="alpha">The start alpha of the sprite</param>
+    void getDashClone(Sprite sprite, float alpha = 1) {
         GameObject clone = new GameObject("Clone", typeof(SpriteRenderer));
         SpriteRenderer cloneSprite = (clone.GetComponent<Renderer>() as SpriteRenderer);
 
@@ -583,8 +505,8 @@ public class Player : MonoBehaviour {
         clone.transform.localScale = transform.localScale;
 
         cloneSprite.sprite = sprite;
-        cloneSprite.sortingLayerID = _sprite.sortingLayerID;
-        cloneSprite.sortingOrder = _sprite.sortingOrder - 4;
+        cloneSprite.sortingLayerID = renderer.sortingLayerID;
+        cloneSprite.sortingOrder = renderer.sortingOrder - 4;
         cloneSprite.color = new Color(1, 1, 1, alpha);
 
         cloneSprite.DOColor(new Color(1, 1, 1, 0), Game.DASH_SHADOW_TIME).SetEase(Ease.InQuint).OnComplete(() => {
@@ -592,6 +514,9 @@ public class Player : MonoBehaviour {
         });
     }
 
+    void KillAndStartCoroutine(ref Coroutine routine, IEnumerator method) {
+        if (routine != null) StopCoroutine(routine);
+        StartCoroutine(method);
+    }
     #endregion
-
 }
