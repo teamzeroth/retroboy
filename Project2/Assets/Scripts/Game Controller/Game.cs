@@ -19,13 +19,13 @@ public static class Game {
     public const float PLAYER_HURT_TIME = 0.6f;
     public const float PLAYER_DIST_SHOOT = 0.8f;
     public const float PLAYER_INVULNERABILITY_TIME = 1.0f;
+    public const float PLAYER_TOTAL_CHARGE_TIME = 1.5f;
 
 
     public const float TIME_PLAYER_SHOOTING = 0.5f;
     public const float FRAMETIME_PLAYER_DASH = 0.018f;
     public const float TOTAL_TIME_PLAYER_DASH = 0.1f;
     public const float TIME_PLAYER_NEW_DASH = 0.5f;
-    public const float TIME_PLAYER_COMPLET_CHARGE = 1.3f;
 
     public static Vector2 PLAYER_SHOOT_DIFERENCE = new Vector2(0, 0.03f);
 

@@ -412,7 +412,7 @@ public class OldPLayer2 : MonoBehaviour {
     public void enableAnimationCharge() {
         GameObject charge = _charge.GetChild(0).gameObject;
 
-        if (controller.TimeInCharge < Game.TIME_PLAYER_COMPLET_CHARGE) {
+        if (controller.TimeInCharge < Game.PLAYER_TOTAL_CHARGE_TIME) {
             charge.SetActive(true);
 
         } else {
@@ -464,7 +464,7 @@ public class OldPLayer2 : MonoBehaviour {
         );
         ShootMove shoot = shootGO.GetComponent<ShootMove>();
         shoot.collisionLevel.Level = collisionLevel.Level;
-        shoot.damage = controller.LastTimeInCharge >= Game.TIME_PLAYER_COMPLET_CHARGE ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
+        shoot.damage = controller.LastTimeInCharge >= Game.PLAYER_TOTAL_CHARGE_TIME ? controller.LastTimeInCharge >= 3f ? 3 : 2 : 1;
         var x = Mathf.Clamp(controller.LastTimeInCharge, 1, 3);
         shoot.Direction = v;
         shoot.Distance = 8 * (x / 3);

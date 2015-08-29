@@ -188,7 +188,7 @@ public class Player : MovableBehaviour {
         UpdateMove(deltaMovement);
         UpdateSound(deltaMovement);
 
-        AccumulateActionPoints(Time.deltaTime * Game.PLAYER_ACTION_POINTS_BY_TIME);
+        if (!onChargeState) AccumulateActionPoints(Time.deltaTime * Game.PLAYER_ACTION_POINTS_BY_TIME);
     }
 
 #if UNITY_EDITOR
@@ -329,7 +329,7 @@ public class Player : MovableBehaviour {
     public void enableAnimationCharge() {
         GameObject energy = _charge.GetChild(0).gameObject;
 
-        if (_input.TimeInCharge < Game.TIME_PLAYER_COMPLET_CHARGE) {
+        if (_input.TimeInCharge < Game.PLAYER_TOTAL_CHARGE_TIME) {
             energy.SetActive(true);
 
         } else {
@@ -362,7 +362,18 @@ public class Player : MovableBehaviour {
     /// <param name="v">the direction of the shoot</param>
     private void instantiateShoot(Vector3 v) {
         //Consume points of the shoot
-        if (!ConsumeActionPoints(25)) return;
+        int damage = 0;
+
+        if (_input.LastTimeInCharge >= Game.PLAYER_TOTAL_CHARGE_TIME) {
+            if (!ConsumeActionPoints(25)) return;
+            damage = 3;
+        } else if (_input.LastTimeInCharge >= Game.PLAYER_TOTAL_CHARGE_TIME / 2) {
+            if (!ConsumeActionPoints(25 / 2)) return;
+            damage = 2;
+        } else {
+            if (!ConsumeActionPoints(25 / 4)) return;
+            damage = 1;
+        }
 
         Vector3 d = v.normalized;
         Vector3 spawn = transform.position + d * (Game.PLAYER_DIST_SHOOT * Mathf.Max(Mathf.Abs(d.x), Mathf.Abs(d.y)));
@@ -378,17 +389,10 @@ public class Player : MovableBehaviour {
         ShootMove shoot = shootObject.GetComponent<ShootMove>();
         shoot.collisionLevel.Level = Level; /// TODO: Set it to shoot.Level = Level
         shoot.Direction = v;
+        shoot.damage = damage;
 
-        if (_input.LastTimeInCharge >= Game.TIME_PLAYER_COMPLET_CHARGE)
-            shoot.damage = 3;
-        else if (_input.LastTimeInCharge >= Game.TIME_PLAYER_COMPLET_CHARGE / 2)
-            shoot.damage = 2;
-        else
-            shoot.damage = 1;
-
-        var x = Mathf.Clamp(_input.LastTimeInCharge, 1, 3);
-
-        shoot.Distance = 8 * (x / 3);
+        var x = Mathf.Clamp(_input.LastTimeInCharge, 0.3f, Game.PLAYER_TOTAL_CHARGE_TIME) / Game.PLAYER_TOTAL_CHARGE_TIME;
+        shoot.Distance = 8 * x * x;
 
         _sfx.Shoot(_input.LastTimeInCharge);
     }
@@ -407,6 +411,9 @@ public class Player : MovableBehaviour {
         // Active charge animation
         while (_anim.CurrentAnimState().StartsWith("Nim-draw")) {
             enableAnimationCharge();
+
+            var x = Mathf.Min(_input.LastTimeInCharge, Game.PLAYER_TOTAL_CHARGE_TIME) / Game.PLAYER_TOTAL_CHARGE_TIME;
+            PrepareActionPoints(x);
             yield return null;
         }
 
