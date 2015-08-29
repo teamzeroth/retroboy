@@ -76,7 +76,7 @@ namespace MapResources {
 
             var direction = CalcInDirection("in");
 
-            _player.StartFixedMove(direction, direction, Game.DOOR_ANIMATION_TIME, new Color(0, 0, 0, 0.0f));
+            //_player.StartFixedMove(direction, direction, Game.DOOR_ANIMATION_TIME, new Color(0, 0, 0, 0.0f));
             Invoke("AfterEnter", Game.DOOR_ANIMATION_TIME + 0.1f);
         }
 
@@ -87,8 +87,8 @@ namespace MapResources {
             _player = player;
             var direction = CalcInDirection("out");
 
-            _player.StartFixedMove(direction, direction, Game.DOOR_ANIMATION_TIME, new Color(1, 1, 1, 1));
-            _player.DeadDirection = direction;
+            //_player.StartFixedMove(direction, direction, Game.DOOR_ANIMATION_TIME, new Color(1, 1, 1, 1));
+            //_player.DeadDirection = direction;
 
             Vector3 colliderCenter = _player.FeetCollider.transform.localPosition;
             _player.transform.position = GetComponent<Collider2D>().bounds.center - colliderCenter;

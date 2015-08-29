@@ -66,7 +66,7 @@ public class PlayerSFX : MonoBehaviour {
     }
 
     public void Footstep(bool walking, int surface = 1) {
-        if (_player.OnHurt) return;
+        if (_player.Hurt) return;
 
         if (walking && inWalking != walking) {
             inWalking = true;
