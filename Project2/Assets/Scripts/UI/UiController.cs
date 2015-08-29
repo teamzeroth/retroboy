@@ -42,7 +42,7 @@ public class UiController : MonoBehaviour {
 		}
 		set {
 			_collectedCoinsHud.GetComponent<Animator>().SetTrigger("Collected");
-			changeCoinsCollected(_coinsCollected, value);
+//			changeCoinsCollected(_coinsCollected, value);
 			_coinsCollected = value;
 		}
 	}
