@@ -11,6 +11,7 @@ public class UiController : MonoBehaviour {
     public static UiController self;
 
     private static GameObject LifePoint;
+	private static GameObject CoinSecured;
 
     private int _life;
     public int Life {
@@ -34,10 +35,22 @@ public class UiController : MonoBehaviour {
         }
     }
 
-    private int _coins;
-    public int Coins {
-        get {
-            return _coins;
+	private int _coinsCollected;
+	public int CoinsCollected {
+		get {
+			return _coinsCollected;
+		}
+		set {
+			_collectedCoinsHud.GetComponent<Animator>().SetTrigger("Collected");
+			changeCoinsCollected(_coinsCollected, value);
+			_coinsCollected = value;
+		}
+	}
+	
+	private int _coins;
+	public int Coins {
+		get {
+			return _coins;
         }
         set {
             changeCoins(_coins, value);
@@ -64,6 +77,7 @@ public class UiController : MonoBehaviour {
     private Transform _chargeHud;
     private Transform _coinsHud;
     private Transform _questHud;
+	private Transform _collectedCoinsHud;
 
     private Transform _pausePanel;
 
@@ -75,6 +89,8 @@ public class UiController : MonoBehaviour {
 
         Life = 4;
         Charge = 0;
+		//CoinsCollected = 0;
+		_coinsCollected = 0;
 
         self = this;
         print(self);
@@ -91,6 +107,7 @@ public class UiController : MonoBehaviour {
         _chargeHud = _ui.Find("Health Panel/charge-slider(new)");
         _coinsHud = _ui.Find("Coins Panel");
         _questHud = _ui.Find("Quest HUD");
+		_collectedCoinsHud = _ui.Find("CoinsCollected");
 
         _pausePanel = _ui.parent.Find("Pause Menu");
     }
@@ -111,7 +128,12 @@ public class UiController : MonoBehaviour {
 
     #endregion
 
-    public void TogglePauseGame(bool show) {
+	public void moveCoinsCollectedUI()
+	{
+		//_collectedCoinsHud.localPosition += new Vector3(-10, 20, 0);
+	}
+
+	public void TogglePauseGame(bool show) {
         if (show) {
             _pausePanel.gameObject.SetActive(true);
         } else {
@@ -153,10 +175,12 @@ public class UiController : MonoBehaviour {
     }
 
     private void changeQuestCount(int amount) {
-        _questHud.gameObject.GetComponentInChildren<Text>().text = amount.ToString();
-    }
+		_questHud.gameObject.GetComponentInChildren<Text>().text = amount.ToString();
+	}
 
-    Tween coinsToween;
+
+		
+	Tween coinsToween;
     private void changeCoins(int before, int current) {
         if (coinsToween != null) {
             coinsToween.Kill();

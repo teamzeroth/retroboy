@@ -10,6 +10,8 @@ public class CoinMove : MovableBehaviour {
 
     static public float TOTAL_TIME_OF_LIVE = 10f; //+ 3 
 
+	Animator _anim;
+
     public int quant = 10;
     public Transform feet;
     public float fallingDuration;
@@ -20,7 +22,8 @@ public class CoinMove : MovableBehaviour {
     float curY;
 
     void Start() {
-
+		_anim = GetComponent<Animator>();
+		print ("coin: " + _anim);
         Move();
     }
 
@@ -44,4 +47,10 @@ public class CoinMove : MovableBehaviour {
         //transform.DOMove (transform.position + transform.right *(extraX * (Random.value-0.5f)),movingDuration,false).SetEase(Ease.Linear);
     }
 
+	public void secureCoin()
+	{
+		print ("Anim: " + _anim);
+		GetComponent<BoxCollider2D>().enabled = false;
+		_anim.SetBool("get",true);
+	}
 }
