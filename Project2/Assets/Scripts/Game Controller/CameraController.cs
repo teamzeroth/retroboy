@@ -50,8 +50,9 @@ public class CameraController : MonoBehaviour {
     void updatePixelPerfect() {
         cam.orthographicSize = Screen.height / (float)(Game.SPRITE_PPU * pixelScale * 2);
 
-        float z = Screen.width % 8;
-        cam.rect = new Rect(-z / Screen.width, 0, 1, 1);
+        float height = Screen.height % 8;
+        float width = Screen.width % 8;
+        cam.rect = new Rect(-width / Screen.width, -height / Screen.height, 1, 1);
     }
 
     void updateCameraPosition() {
