@@ -8524,7 +8524,7 @@ MonoBehaviour:
   cameraOffset: {x: 0, y: 0, z: 50}
   smoothDampTime: .200000003
   useFixedUpdate: 1
-  pixelScale: 8
+  pixelScale: 5
 --- !u!213 &2087984028
 Sprite:
   m_ObjectHideFlags: 0
