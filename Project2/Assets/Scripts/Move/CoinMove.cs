@@ -23,7 +23,6 @@ public class CoinMove : MovableBehaviour {
 
     void Start() {
 		_anim = GetComponent<Animator>();
-		print ("coin: " + _anim);
         Move();
     }
 
@@ -49,7 +48,6 @@ public class CoinMove : MovableBehaviour {
 
 	public void secureCoin()
 	{
-		print ("Anim: " + _anim);
 		GetComponent<BoxCollider2D>().enabled = false;
 		_anim.SetBool("get",true);
 	}

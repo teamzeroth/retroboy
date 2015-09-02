@@ -5,8 +5,8 @@ public class CoinCollector : MonoBehaviour {
 
 	private CoinsSecured _collector;
 
-	void start() {
-		_collector = transform.parent.gameObject.GetComponent<CoinsSecured>();
+	void Start() {
+		_collector = transform.parent.Find("CoinsCollected").GetComponent<CoinsSecured>();
 	}
 
     public void OnCollisionEnter2D(Collision2D coll) {
@@ -17,7 +17,6 @@ public class CoinCollector : MonoBehaviour {
     private void getCoin(CoinMove coin) {
         UiController.self.Coins += coin.quant;
 		_collector.CoinsCollected += coin.quant;
-		//UiController.self.moveCoinsCollectedUI();
 		coin.secureCoin();
     }
 }

@@ -7,6 +7,12 @@ using DG.Tweening;
 public class CoinsSecured : MonoBehaviour {
 
 	private Animator _anim;
+    private Transform countText;
+
+    void Start()
+    {
+        countText = transform.Find("Amount");
+    }
 
 	private int _coinsCollected;
 	public int CoinsCollected {
@@ -28,9 +34,7 @@ public class CoinsSecured : MonoBehaviour {
 		
 		int delta = before;
 		coinsCollectedToween = DOTween.To(() => delta, x => delta = x, after, 0.5f).OnUpdate(() => {
-			
-			Transform countText = transform.Find("Amount");
-			countText.GetComponent<Text>().text = delta.ToString();
+			countText.GetComponent<TextMesh>().text = delta.ToString();
 		});
 	}
 }
