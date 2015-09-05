@@ -6,8 +6,8 @@ AnimationClip:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: StartLogoNew
-  serializedVersion: 4
-  m_AnimationType: 2
+  serializedVersion: 6
+  m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
@@ -173,12 +173,12 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 4.3166666
+      - time: 5
         value: 1
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 4.36666679
+      - time: 5.0666666
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -253,9 +253,9 @@ AnimationClip:
       value: {fileID: 21300000, guid: de85381af5413b14a93ac0d735f517c0, type: 3}
     - time: 4.2166667
       value: {fileID: 21300000, guid: de85381af5413b14a93ac0d735f517c0, type: 3}
-    - time: 4.3166666
+    - time: 5
       value: {fileID: 21300000, guid: 71aef29fdce33584ca2fc5a74e6c93c4, type: 3}
-    - time: 4.36666679
+    - time: 5.0666666
       value: {fileID: 21300000, guid: 14092fa973efccb4c98f9c5d79f2dc12, type: 3}
     attribute: m_Sprite
     path: 
@@ -317,7 +317,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: 4.38333368
+    m_StopTime: 5.08333349
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -490,12 +490,12 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 4.3166666
+      - time: 5
         value: 1
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 4.36666679
+      - time: 5.0666666
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -507,4 +507,7 @@ AnimationClip:
     classID: 114
     script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_GenerateMotionCurves: 0
   m_Events: []
