@@ -69,7 +69,7 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.K))
             _ui.ToogleQuestHUD(false);
         if (Input.GetKeyDown(KeyCode.Q))
-            Application.LoadLevel(Application.levelCount - 1);
+			GameOver = !GameOver;
     }
 
     public void StartStage() {
@@ -96,6 +96,18 @@ public class GameController : MonoBehaviour {
         }
     }
 
+	public void EndGame(bool gg) {
+		if (gg) {
+			Time.timeScale = 0;
+			_ui.ToggleGameOver(gg);			
+			//pauseRoutine = StartCoroutine(IgnoreTimeUpdate());
+		} else {
+			Time.timeScale = 1;
+			_ui.ToggleGameOver(gg);			
+			//StopCoroutine(pauseRoutine);
+		}
+	}
+
     IEnumerator IgnoreTimeUpdate() {
         yield return new WaitForSeconds(0.1f);
 
@@ -119,6 +131,20 @@ public class GameController : MonoBehaviour {
             }
         }
     }
+
+	private bool _gameover;
+	public bool GameOver {
+		get {
+			return _gameover;
+		}
+		set {
+			if (_gameover != value) {
+				_gameover = value;
+				EndGame(value);
+			}
+		}
+	}
+
 
     public bool CanRestartTheGame = false;
 
