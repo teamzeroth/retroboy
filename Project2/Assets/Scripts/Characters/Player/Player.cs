@@ -31,6 +31,7 @@ public class Player : MovableBehaviour {
     Animator _anim;
 
     Transform _charge;
+    Transform _weapon;
 
     /// Privates
     bool inSimulateMoviment; // Sinalized when the player are a simulated Moviment
@@ -108,16 +109,13 @@ public class Player : MovableBehaviour {
     void Awake() {
         base.Awake();
 
-        onChargeState = false;
-        onShootState = false;
-        onDashState = false;
-        onHurtState = false;
-        onDieState = false;
+        onChargeState = onShootState = onDashState = onHurtState = onDieState = false;
 
         _anim = GetComponent<Animator>();
         _sfx = GetComponent<PlayerSFX>();
 
         _charge = transform.Find("Charge");
+        _weapon = transform.Find("Weapon");
     }
 
     public void UpdateMove(Vector2 deltaMovement) {
@@ -403,6 +401,21 @@ public class Player : MovableBehaviour {
         _sfx.Shoot(_input.LastTimeInCharge);
     }
 
+    /// <summary>
+    /// Show the Weapon and transtale it to the right direction
+    /// </summary>
+    public void showWeapon() {
+        _weapon.gameObject.SetActive(true);
+
+        float dir = Mathf.Atan2(_input.Direction.y, (flipped ? -1 : 1) * _input.Direction.x) * Mathf.Rad2Deg;
+        _weapon.transform.rotation = Quaternion.Euler(0, 0, dir);
+
+    }
+
+    public void hideWeapon() {
+        _weapon.gameObject.SetActive(false);
+    }
+
     #endregion
 
     #region CoRoutines
@@ -417,12 +430,14 @@ public class Player : MovableBehaviour {
         // Active charge animation
         while (_anim.CurrentAnimState().StartsWith("Nim-draw")) {
             enableAnimationCharge();
+            if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f) showWeapon();
 
             var x = Mathf.Min(_input.LastTimeInCharge, Game.PLAYER_TOTAL_CHARGE_TIME) / Game.PLAYER_TOTAL_CHARGE_TIME;
             PrepareActionPoints(x);
             yield return null;
         }
 
+        hideWeapon();
         disableAnimationCharge(); // Disable charge animation
         instantiateShoot(LastDirection); // Instatiate shoot
 

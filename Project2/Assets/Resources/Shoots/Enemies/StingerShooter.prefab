@@ -58,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.5200005, y: -20.3500004, z: 0}
+  m_LocalPosition: {x: 50.0616608, y: -21.0014725, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 446930}
@@ -92,7 +92,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .161290318
+  m_Radius: .130001068
 --- !u!58 &5823516
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -101,7 +101,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 100286}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ee4943fb71f3642a67df9b2fba3392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipped: 0
   distance: 0
   speed: 7
   damage: 1
@@ -167,8 +168,6 @@ MonoBehaviour:
   hasCollider: 0
   hasLostForce: 0
   direction: {x: 0, y: 0}
-  collisionLevel: {fileID: 0}
-  flipped: 0
   destroied: 0
 --- !u!114 &11491346
 MonoBehaviour:
