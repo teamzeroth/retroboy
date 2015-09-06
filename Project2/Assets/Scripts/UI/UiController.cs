@@ -42,7 +42,6 @@ public class UiController : MonoBehaviour {
 		}
 		set {
 			_collectedCoinsHud.GetComponent<Animator>().SetTrigger("Collected");
-//			changeCoinsCollected(_coinsCollected, value);
 			_coinsCollected = value;
 		}
 	}
@@ -80,6 +79,7 @@ public class UiController : MonoBehaviour {
 	private Transform _collectedCoinsHud;
 
     private Transform _pausePanel;
+	private Transform _gameOverPanel;
 
     private int hideLifePoints = 0;
 
@@ -109,7 +109,8 @@ public class UiController : MonoBehaviour {
         _questHud = _ui.Find("Quest HUD");
 		_collectedCoinsHud = _ui.Find("CoinsCollected");
 
-        _pausePanel = _ui.parent.Find("Pause Menu");
+        _pausePanel = _ui.parent.Find("Pause Menu");		
+		_gameOverPanel = _ui.parent.Find("EndScreen");
     }
 
     #region UI Buttons messegens
@@ -140,6 +141,14 @@ public class UiController : MonoBehaviour {
             _pausePanel.gameObject.SetActive(false);
         }
     }
+
+	public void ToggleGameOver(bool show) {
+		if (show) {
+			_gameOverPanel.gameObject.SetActive(true);
+		} else {
+			_gameOverPanel.gameObject.SetActive(false);
+		}
+	}
 
     public void ToogleQuestHUD(bool show) {
         if (show)

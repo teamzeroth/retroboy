@@ -7,18 +7,14 @@ using DG.Tweening;
 public class CoinsSecured : MonoBehaviour {
 
 	private Animator _anim;
-    private Transform countText, child;
+    private Transform countText;
     
-    void Start()
-    {
+    void Start() {
         countText = transform.Find("Amount");
-        child = transform.GetChild(0);
     }
 
-    void Update()
-    {
-        child.localPosition = (transform.parent.localScale.x < 0)? new Vector3(-0.33f,0.33f,0) : new Vector3(0.33f,0.33f,0);
-        child.localScale = transform.parent.localScale;
+    void LateUpdate() {
+        transform.localScale = transform.parent.localScale;
     }
 
 	private int _coinsCollected;
