@@ -110,7 +110,7 @@ public class UiController : MonoBehaviour {
 		_collectedCoinsHud = _ui.Find("CoinsCollected");
 
         _pausePanel = _ui.parent.Find("Pause Menu");		
-		_gameOverPanel = _ui.parent.Find("EndScreen");
+		_gameOverPanel = _ui.parent.Find("GameOver");
     }
 
     #region UI Buttons messegens
