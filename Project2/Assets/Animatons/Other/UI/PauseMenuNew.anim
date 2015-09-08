@@ -20,99 +20,99 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 0
-        inSlope: -255
-        outSlope: -255
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: .200000003
         value: -51
-        inSlope: -127.5
-        outSlope: -127.5
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: .400000006
         value: -51
-        inSlope: -127.499992
-        outSlope: -127.499992
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: .600000024
         value: -102
-        inSlope: -127.499992
-        outSlope: -127.499992
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: .800000012
         value: -102
-        inSlope: -127.500008
-        outSlope: -127.500008
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1
         value: -153
-        inSlope: -127.500008
-        outSlope: -127.500008
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1.20000005
         value: -153
-        inSlope: -127.500046
-        outSlope: -127.500046
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1.39999998
         value: -204
-        inSlope: -127.500046
-        outSlope: -127.500046
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1.60000002
         value: -204
-        inSlope: -127.500046
-        outSlope: -127.500046
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1.79999995
         value: -255
-        inSlope: -127.500046
-        outSlope: -127.500046
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 2
         value: -255
-        inSlope: -127.499969
-        outSlope: -127.499969
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 2.20000005
         value: -306
-        inSlope: -127.499969
-        outSlope: -127.499969
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 2.4000001
         value: -306
-        inSlope: -127.500122
-        outSlope: -127.500122
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 2.5999999
         value: -357
-        inSlope: -127.500122
-        outSlope: -127.500122
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 2.79999995
         value: -357
-        inSlope: -127.499969
-        outSlope: -127.499969
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 3
         value: -408
-        inSlope: -127.499969
-        outSlope: -127.499969
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 3.20000005
         value: -408
-        inSlope: -127.499969
-        outSlope: -127.499969
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 3.4000001
         value: -459
-        inSlope: -129.999969
-        outSlope: -129.999969
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 3.5999999
         value: -460
-        inSlope: -5.00000477
-        outSlope: -5.00000477
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_AnchoredPosition.x
@@ -157,99 +157,99 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: 0
-        inSlope: -255
-        outSlope: -255
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: .200000003
         value: -51
-        inSlope: -127.5
-        outSlope: -127.5
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: .400000006
         value: -51
-        inSlope: -127.499992
-        outSlope: -127.499992
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: .600000024
         value: -102
-        inSlope: -127.499992
-        outSlope: -127.499992
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: .800000012
         value: -102
-        inSlope: -127.500008
-        outSlope: -127.500008
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1
         value: -153
-        inSlope: -127.500008
-        outSlope: -127.500008
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1.20000005
         value: -153
-        inSlope: -127.500046
-        outSlope: -127.500046
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1.39999998
         value: -204
-        inSlope: -127.500046
-        outSlope: -127.500046
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1.60000002
         value: -204
-        inSlope: -127.500046
-        outSlope: -127.500046
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 1.79999995
         value: -255
-        inSlope: -127.500046
-        outSlope: -127.500046
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 2
         value: -255
-        inSlope: -127.499969
-        outSlope: -127.499969
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 2.20000005
         value: -306
-        inSlope: -127.499969
-        outSlope: -127.499969
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 2.4000001
         value: -306
-        inSlope: -127.500122
-        outSlope: -127.500122
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 2.5999999
         value: -357
-        inSlope: -127.500122
-        outSlope: -127.500122
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 2.79999995
         value: -357
-        inSlope: -127.499969
-        outSlope: -127.499969
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 3
         value: -408
-        inSlope: -127.499969
-        outSlope: -127.499969
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 3.20000005
         value: -408
-        inSlope: -127.499969
-        outSlope: -127.499969
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 3.4000001
         value: -459
-        inSlope: -129.999969
-        outSlope: -129.999969
-        tangentMode: 1
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       - time: 3.5999999
         value: -460
-        inSlope: -5.00000477
-        outSlope: -5.00000477
-        tangentMode: 10
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 31
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_AnchoredPosition.x
