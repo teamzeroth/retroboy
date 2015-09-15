@@ -3,7 +3,7 @@ using System.Collections;
 
 using DG.Tweening;
 
-public class BaseEnemy : MonoBehaviour {
+public class BaseEnemy : MovableBehaviour {
 
     protected float TIME_IN_DAMAGE = 2;
     protected float DAMAGE_INFLUENCE = 1;
@@ -19,7 +19,7 @@ public class BaseEnemy : MonoBehaviour {
     public float rangeAtack = 1f;
 
     [HideInInspector]
-    public Transform target;
+    public MovableBehaviour target;
     [HideInInspector]
     public bool dead = false;
 
@@ -27,17 +27,15 @@ public class BaseEnemy : MonoBehaviour {
     protected Tween impulseTween;
 
     protected Animator _anim;
-    protected Transform _renderer;
-    protected Rigidbody2D _rigidbody;
+    //protected Transform _renderer;
+    //protected Rigidbody2D _rigidbody;
 
-    protected CollisionLevel _collisionLevel;
+    //protected CollisionLevel _collisionLevel;
     protected CollisionLevel player;
 
     public void Awake() {
+        base.Awake();
         _anim = GetComponent<Animator>();
-        _renderer = transform.Find("renderer");
-        _collisionLevel = GetComponent<CollisionLevel>();
-        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     public void Start() {
@@ -46,16 +44,16 @@ public class BaseEnemy : MonoBehaviour {
         target = null;
     }
 
-    public void OnDrawGizmosSelected() {
 #if UNITY_EDITOR
-        Gizmos.color = Color.green;
+    public void OnDrawGizmosSelected() {
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, rangeAtack);
-#endif
     }
+#endif
 
-    public virtual void FindPlayer(Transform player) { if (target != player) { target = player; } }
+    public virtual void FindPlayer(MovableBehaviour player) { if (target != player) { target = player; } }
 
-    public virtual void LostPlayer(Transform player) { if (target == player) target = null; }
+    public virtual void LostPlayer(MovableBehaviour player) { if (target == player) target = null; }
 
     public virtual void OnEnemyBehavior() { }
 
@@ -93,12 +91,12 @@ public class BaseEnemy : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public virtual void OnDistanceWithPlayer(Transform player, float distance) {
-        if (_renderer != null) {
-            if (GameController.self.player.collisionLevel.Level == _collisionLevel.Level && (distance <= rangeAtack)) {
-                FindPlayer(player.parent);
+    public virtual void OnDistanceWithPlayer(MovableBehaviour player, float distance) {
+        if (renderer != null) {
+            if (player.Level == Level && (distance <= rangeAtack)) {
+                FindPlayer(player);
             } else
-                LostPlayer(player.parent);
+                LostPlayer(player);
         }
     }
 }

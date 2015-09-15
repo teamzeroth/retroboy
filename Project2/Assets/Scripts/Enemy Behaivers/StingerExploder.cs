@@ -23,15 +23,15 @@ public class StingerExploder : BaseEnemy {
     public void Start() {
         base.Start();
 
-        initialPos = _renderer.localPosition;
+        initialPos = renderer.transform.localPosition;
         randomTime = Random.value * 3;
     }
 
     void Update() {
         if (dead) return;
 
-        if (GameController.self.player.collisionLevel.Level != _collisionLevel.Level) target = null;
-        float currDistance = target != null ? Vector2.Distance(target.position, transform.position) : rangeAtack;
+        if (GameController.self.player.collisionLevel.Level != Level) target = null;
+        float currDistance = target != null ? Vector2.Distance(target.Feet.position, Feet.position) : rangeAtack;
 
         applySenoide();
         UpdateMove();
@@ -39,7 +39,7 @@ public class StingerExploder : BaseEnemy {
 
         //_renderer.localRotation = Quaternion.Inverse(transform.localRotation);
 
-        //if (currDistance <= 0.1f) OnDestroyIt();
+        if (currDistance <= distanceExplosion) OnDestroyHimself();
     }
 
     void applySenoide() {
@@ -47,19 +47,19 @@ public class StingerExploder : BaseEnemy {
 
         GetComponent<CircleCollider2D>().offset = senoid;
 
-        _renderer.localPosition = Helper.IgnoreZ(_renderer.localPosition, senoid);
+        renderer.transform.localPosition = Helper.IgnoreZ(renderer.transform.localPosition, senoid);
         _explosion.localPosition = Helper.IgnoreZ(_explosion.localPosition, senoid);
     }
 
     void UpdateMove() {
         Vector3 direction = Vector3.zero;
 
-        if (target != null) direction = (target.position - transform.position).normalized * speed;
+        if (target != null) direction = (target.transform.position - transform.position).normalized * speed;
         Vector3 currentDirection = impulseForce != Vector3.zero ? (direction + impulseForce * 0.75f) / 2 : direction;
 
         //GetComponent<Rigidbody2D>().MovePosition(transform.position + currentDirection * Time.deltaTime);
         //GetComponent<Rigidbody2D>().AddForce(direction);
-        _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, currentDirection, Time.deltaTime);
+        Rigidbody.velocity = Vector3.Lerp(Rigidbody.velocity, currentDirection, Time.deltaTime);
 
     }
 
@@ -77,7 +77,7 @@ public class StingerExploder : BaseEnemy {
 #if UNITY_EDITOR
         Gizmos.color = Color.red;
         if (!Application.isPlaying) Gizmos.DrawWireSphere(transform.position, distanceExplosion);
-        else Gizmos.DrawWireSphere(transform.position + _renderer.localPosition, distanceExplosion);
+        else Gizmos.DrawWireSphere(transform.position + renderer.transform.localPosition, distanceExplosion);
 #endif
     }
 
@@ -90,14 +90,14 @@ public class StingerExploder : BaseEnemy {
         if (life > 0) _sfx.Hit();
     }
 
-    public override void FindPlayer(Transform player) {
+    public override void FindPlayer(MovableBehaviour player) {
         if (target != player) {
             target = player;
             _sfx.Explosion(1);
         }
     }
 
-    public override void LostPlayer(Transform player) { }
+    public override void LostPlayer(MovableBehaviour player) { }
 
     public override void OnDestroyIt() {
         DropCoins();
@@ -105,8 +105,8 @@ public class StingerExploder : BaseEnemy {
     }
 
     public override void OnFinishAnimationBehavior() {
-        if (Vector2.Distance(target.position, transform.position + _renderer.localPosition) <= distanceExplosion)
-            OnDestroyHimself();
+        /*if (Vector2.Distance(target.Feet.position, Feet.position) <= distanceExplosion)
+            OnDestroyHimself();*/
     }
 
     #endregion
@@ -114,9 +114,9 @@ public class StingerExploder : BaseEnemy {
     public void OnDestroyHimself() {
         dead = true;
 
-        _rigidbody.velocity = Vector2.zero;
+        Rigidbody.velocity = Vector2.zero;
 
-        _renderer.gameObject.SetActive(false);
+        renderer.gameObject.SetActive(false);
         _explosion.gameObject.SetActive(true);
 
         _sfx.Explosion(0.06f);

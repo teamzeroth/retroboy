@@ -274,7 +274,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.2900009, y: -23.6800003, z: 0}
+  m_LocalPosition: {x: 18.3700008, y: -20.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 493666}
@@ -658,7 +658,7 @@ MonoBehaviour:
   flipped: 0
   speed: 5
   dashSpeed: 30
-  FeetCollider: {fileID: 0}
+  FeetCollider: {fileID: 5826836}
   BodyCollider: {fileID: 6114546}
   ss_E:
   - {fileID: 21300448, guid: 12576537fdf5c194f92a7d5cbb065883, type: 3}
