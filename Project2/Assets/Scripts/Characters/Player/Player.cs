@@ -29,6 +29,7 @@ public class Player : MovableBehaviour {
     PlayerInput _input = new PlayerInput();
     PlayerSFX _sfx;
     Animator _anim;
+    EnemiesRadar _radar;
 
     Transform _charge;
     Transform _weapon;
@@ -116,6 +117,8 @@ public class Player : MovableBehaviour {
 
         _charge = transform.Find("Charge");
         _weapon = transform.Find("Weapon");
+
+        _radar = transform.FindChild("Radar").GetComponent<EnemiesRadar>();
     }
 
     public void UpdateMove(Vector2 deltaMovement) {
@@ -389,7 +392,7 @@ public class Player : MovableBehaviour {
 
         shootObject.transform.position = spawn;
 
-        // Setting the paramethes of the shoot
+        // Setting the parameters of the shoot
         ShootMove shoot = shootObject.GetComponent<ShootMove>();
         shoot.collisionLevel.Level = Level; /// TODO: Set it to shoot.Level = Level
         shoot.Direction = v;
@@ -399,10 +402,11 @@ public class Player : MovableBehaviour {
         shoot.Distance = 8 * x * x;
 
         _sfx.Shoot(_input.LastTimeInCharge);
+        _radar.increaseRadius(damage, 2f);
     }
 
     /// <summary>
-    /// Show the Weapon and transtale it to the right direction
+    /// Show the Weapon and translate it to the right direction
     /// </summary>
     public void showWeapon() {
         _weapon.gameObject.SetActive(true);
