@@ -7,6 +7,5 @@ public class ListenDestroy : MonoBehaviour {
 
     public void OnDestroy() {
         radar.OnDestroyEnemy(GetComponent<BaseEnemy>());
-        //Destroy(this);
     }
 }

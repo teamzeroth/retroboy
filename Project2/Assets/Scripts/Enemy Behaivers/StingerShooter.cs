@@ -47,7 +47,7 @@ public class StingerShooter : BaseEnemy {
         intercept = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         velocity = lastDirection = Vector2.zero;
 
-        initPos = _renderer.localPosition;
+        initPos = renderer.transform.localPosition;
         initLife = life;
         randomTime = Random.value * 3;
 
@@ -68,8 +68,8 @@ public class StingerShooter : BaseEnemy {
         UpdateAnimation();
     }
 
-    public void OnDrawGizmosSelected() {
 #if UNITY_EDITOR
+    public void OnDrawGizmosSelected() {
         base.OnDrawGizmosSelected();
 
         Gizmos.color = Color.red;
@@ -87,8 +87,8 @@ public class StingerShooter : BaseEnemy {
 
             Gizmos.DrawLine(a, b);
         }
-#endif
     }
+#endif
 
     void FixedUpdate() {
         if (OnDie) return;
@@ -102,7 +102,7 @@ public class StingerShooter : BaseEnemy {
 
         GetComponent<CircleCollider2D>().offset = senoid;
 
-        _renderer.localPosition = Helper.IgnoreZ(_renderer.localPosition, senoid);
+        renderer.transform.localPosition = Helper.IgnoreZ(renderer.transform.localPosition, senoid);
     }
 
     Vector2 toIntercept;
@@ -137,7 +137,7 @@ public class StingerShooter : BaseEnemy {
         velocity = velocity.magnitude > 0.01f ? velocity.normalized : Vector2.zero;
         lastDirection = direction;
 
-        direction = Vector2.Lerp(transform.position, (Vector2)target.position + direction, Time.deltaTime / 2);
+        direction = Vector2.Lerp(transform.position, (Vector2)target.transform.position + direction, Time.deltaTime / 2);
 
 
         GetComponent<Rigidbody2D>().MovePosition(direction);
@@ -152,7 +152,7 @@ public class StingerShooter : BaseEnemy {
 
     void UpdateAnimation() {
         Vector2 direction = target != null ?
-            (Vector2)(target.position - transform.position).normalized :
+            (Vector2)(target.transform.position - transform.position).normalized :
             intercept * -1;
 
         if (life <= initLife * BROKEN) {
@@ -171,7 +171,7 @@ public class StingerShooter : BaseEnemy {
 
     #region BaseEnemy
 
-    public override void FindPlayer(Transform player) {
+    public override void FindPlayer(MovableBehaviour player) {
         if (target == player) return;
 
         getTimetoShootAgain();
@@ -180,7 +180,7 @@ public class StingerShooter : BaseEnemy {
         target = player;
     }
 
-    public override void LostPlayer(Transform player) {
+    public override void LostPlayer(MovableBehaviour player) {
         if (target == player)
             OnLostPlayer = true;
     }
@@ -209,6 +209,7 @@ public class StingerShooter : BaseEnemy {
         _sfx.Explosion();
 
         DropCoins();
+        StopAllCoroutines();
     }
 
     #endregion
@@ -237,7 +238,7 @@ public class StingerShooter : BaseEnemy {
 
             ShootMove shoot = shootGO.GetComponent<ShootMove>();
             shoot.Direction = d;
-            shoot.collisionLevel.Level = _collisionLevel.Level;
+            shoot.Level = Level;
         }
     }
 
@@ -282,7 +283,7 @@ public class StingerShooter : BaseEnemy {
             self = watchTarget;
         }
 
-        intercept = (Vector2)(target.position - transform.position).normalized * -1;
+        intercept = (Vector2)(target.transform.position - transform.position).normalized * -1;
 
         OnLostPlayer = false;
         watchTarget = null;

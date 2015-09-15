@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StingerS : BaseEnemy
-{
+public class StingerS : BaseEnemy {
     public float distPlayerPoint;
 
     private Vector3 _center;
@@ -13,12 +12,11 @@ public class StingerS : BaseEnemy
     private int pointIndex;
     private bool destroyed;
 
-    void Start()
-    {
+    void Start() {
         base.Start();
 
         _center = transform.Find("center").position;
-        initialPos = _renderer.localPosition;
+        initialPos = renderer.transform.localPosition;
         randomTime = Random.value * 3;
         points = new Vector3[4];
         pointIndex = -1;
@@ -26,13 +24,11 @@ public class StingerS : BaseEnemy
         targetDirection = Vector3.zero;
     }
 
-    void Update()
-    {
+    void Update() {
         if (destroyed) return;
         float currDistance = 0f;
 
-        if (target != null)
-        {
+        if (target != null) {
             updatePoints();
 
             Vector3 heading = target.transform.position - transform.position;
@@ -48,38 +44,33 @@ public class StingerS : BaseEnemy
 
         Vector3 senoid = initialPos + new Vector3(0, 0.2f, 0) * Mathf.Sin((randomTime + Time.time) * 2);
 
-        _renderer.localPosition = senoid;
+        renderer.transform.localPosition = senoid;
 
         print(" | " + pointIndex + " | ");
         UpdateMove();
         UpdateAnimation();
     }
 
-    protected void updatePoints()
-    {
+    protected void updatePoints() {
         Vector3 t = new Vector3(-1, 1, 0);
         points[0] = target.transform.position + (Vector3)Vector2.one * distPlayerPoint;
         points[1] = target.transform.position + t * distPlayerPoint;
         points[2] = target.transform.position - (Vector3)Vector2.one * distPlayerPoint;
         points[3] = target.transform.position - t * distPlayerPoint;
     }
-    
-    void nearestPoint()
-    {
+
+    void nearestPoint() {
         float minDistance = 10000f, d;
-        for (int i = 0; i < points.GetLength(0); i++)
-        {
+        for (int i = 0; i < points.GetLength(0); i++) {
             d = (transform.position - points[i]).sqrMagnitude;
-            if (d < minDistance)
-            {
+            if (d < minDistance) {
                 minDistance = d;
                 pointIndex = i;
             }
         }
     }
 
-    void UpdateMove()
-    {
+    void UpdateMove() {
         //pointDirection = Vector3.zero;
 
         if (target != null) pointDirection = (points[pointIndex] - transform.position).normalized * speed / distPlayerPoint;
@@ -89,22 +80,20 @@ public class StingerS : BaseEnemy
         GetComponent<Rigidbody2D>().MovePosition(transform.position + currentDirection * Time.deltaTime);
     }
 
-    void UpdateAnimation()
-    {
+    void UpdateAnimation() {
         //if (target != null) _anim.SetTrigger("Tracking");
         _anim.SetFloat("Vertical", targetDirection.y);
         _anim.SetFloat("Horizontal", -targetDirection.x);
     }
 
-    public void OnDrawGizmosSelected()
-    {
+    public void OnDrawGizmosSelected() {
         Gizmos.color = Color.blue;
         for (int i = 0; i < 4; i++)
-            Gizmos.DrawWireCube(points[i],Vector3.one);
+            Gizmos.DrawWireCube(points[i], Vector3.one);
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, points[pointIndex]);
         Gizmos.DrawWireSphere(transform.position, rangeAtack);
     }
 
-    public override void LostPlayer(Transform player) { }
+    public override void LostPlayer(MovableBehaviour player) { }
 }

@@ -13,37 +13,48 @@ public class EnemiesRadar : MonoBehaviour {
         findedEnemys = new List<BaseEnemy>();
         _player = transform.parent.GetComponent<Player>();
     }
-    public void Update() {
-        for (int i = 0; i < findedEnemys.Count; i++) {
-            if (!_player.Dead) {
-                findedEnemys[i].OnDistanceWithPlayer(
-                    transform,
-                    Vector2.Distance(transform.parent.position, findedEnemys[i].transform.position)
-                    );
-            } else {
-                findedEnemys[i].LostPlayer(_player.transform);
-            }
+
+    private void setEnemyDistance() {
+        if (_player.Dead) return;
+
+        foreach (BaseEnemy enemy in findedEnemys) {
+            float dist = Vector2.Distance(_player.transform.position, enemy.transform.position);
+            enemy.OnDistanceWithPlayer(_player, dist);
         }
+    }
+
+    public void Update() {
+        setEnemyDistance();
+
         if (findedEnemys.Count == 0) {
             SoundTrackController.self.SetBackgroundSound(3);
             return;
         }
+
+
         bool findedPlayer = findedEnemys.Exists(enemy => enemy.target != null);
+
         if (findedPlayer && !findPlayer) {
             findPlayer = findedPlayer;
             SoundTrackController.self.SetBackgroundSound(2);
+
             return;
         }
+
         if (!findedPlayer && findPlayer) {
             findPlayer = findedPlayer;
             SoundTrackController.self.SetBackgroundSound(3);
             return;
         }
+
         SoundTrackController.self.SetBackgroundSound(1);
     }
+
     public void OnTriggerEnter2D(Collider2D other) {
         BaseEnemy enemy = other.GetComponent<BaseEnemy>();
+
         if (enemy == null) return;
+
         if (findedEnemys.IndexOf(enemy) == -1) {
             findedEnemys.Add(enemy);
             ListenDestroy listenDestroy = enemy.gameObject.AddComponent<ListenDestroy>();
