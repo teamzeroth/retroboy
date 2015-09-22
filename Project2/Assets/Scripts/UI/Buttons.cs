@@ -51,9 +51,10 @@ public class Buttons : MonoBehaviour {
         if (Input.anyKeyDown)
         {
             if (Application.loadedLevel == 0)
-                Application.LoadLevel(Application.levelCount-2);
+                Application.LoadLevel(Application.levelCount-1);
             else
                 Application.LoadLevel(0);
+            Time.timeScale = 1f;            
         }
     }
 }
