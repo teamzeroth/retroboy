@@ -44,12 +44,15 @@ public class BaseEnemy : MovableBehaviour {
         target = null;
     }
 
+
+    public void OnDrawGizmosSelected()
+    {
 #if UNITY_EDITOR
-    public void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, rangeAtack);
-    }
 #endif
+    }
+
 
     public virtual void FindPlayer(MovableBehaviour player) { if (target != player) { target = player; } }
 
