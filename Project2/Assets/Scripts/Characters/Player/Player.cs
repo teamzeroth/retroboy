@@ -33,6 +33,9 @@ public class Player : MovableBehaviour {
 
     Transform _charge;
     Transform _weapon;
+	Transform _arm;
+	public Sprite[] armSprites;
+	SpriteRenderer armSR;
 
     /// Privates
     bool inSimulateMoviment; // Sinalized when the player are a simulated Moviment
@@ -117,9 +120,14 @@ public class Player : MovableBehaviour {
 
         _charge = transform.Find("Charge");
         _weapon = transform.Find("Weapon");
+		_arm = transform.Find("Arm");
 
         _radar = transform.FindChild("Radar").GetComponent<EnemiesRadar>();
     }
+
+	void Start(){
+		armSR = _arm.gameObject.GetComponent<SpriteRenderer> ();
+	}
 
     public void UpdateMove(Vector2 deltaMovement) {
         if (LockMoviment) {
@@ -196,6 +204,32 @@ public class Player : MovableBehaviour {
         UpdateSound(deltaMovement);
 
         if (!onChargeState) AccumulateActionPoints(Time.deltaTime * Game.PLAYER_ACTION_POINTS_BY_TIME);
+
+		Debug.Log ("weapon z:"+_weapon.transform.rotation.z);
+
+		float tz = _weapon.transform.rotation.z;
+
+		if (tz > 0.8f) {
+			armSR.sprite = armSprites[0];
+		} else if (tz > 0.6f) {
+			armSR.sprite = armSprites[1];
+		} else if (tz > 0.4f) {
+			armSR.sprite = armSprites[2];
+		} else if (tz > 0.2f) {
+			armSR.sprite = armSprites[3];
+		} else if (tz >= 0.0f) {
+			armSR.sprite = armSprites[4];
+		} else if (tz > -0.1f) {
+			armSR.sprite = armSprites[5];
+		} else if (tz > -0.2f) {
+			armSR.sprite = armSprites[6];
+		} else if (tz > -0.4f) {
+			armSR.sprite = armSprites[7];
+		} else if (tz > -0.6f) {
+			armSR.sprite = armSprites[8];
+		}else if (tz > -0.8f) {
+			armSR.sprite = armSprites[9];
+		}
     }
 
 #if UNITY_EDITOR
