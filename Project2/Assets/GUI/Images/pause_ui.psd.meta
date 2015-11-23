@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: 9611e82b137d34a4fb2b53a093fa4aa4
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: pause_label
+    21300002: level_ico
+    21300004: pause_select_ico
+    21300006: pause_box
+    21300008: level_bar
+    21300010: level_name
+    21300012: pause_ui_resume_label
+    21300014: pause_ui_restarte_label
+    21300016: pause_ui_quit_label
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: pause_label
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 465
+        width: 357
+        height: 80
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: level_ico
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 483
+        width: 52
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pause_select_ico
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 525
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pause_box
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 90
+        width: 457
+        height: 375
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: level_bar
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 39
+        width: 856
+        height: 51
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: level_name
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 527
+        height: 39
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pause_ui_resume_label
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 514
+        width: 195
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pause_ui_restarte_label
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 459
+        width: 225
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: pause_ui_quit_label
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 404
+        width: 119
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

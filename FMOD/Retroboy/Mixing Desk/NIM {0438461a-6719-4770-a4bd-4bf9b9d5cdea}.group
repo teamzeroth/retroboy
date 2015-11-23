@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="MixerGroup" id="{0438461a-6719-4770-a4bd-4bf9b9d5cdea}">
+        <property name="name">
+            <value>NIM</value>
+        </property>
+        <relationship name="effectChain">
+            <destination>{a33684f7-1629-455c-a588-c7e6c1e3047d}</destination>
+        </relationship>
+        <relationship name="panner">
+            <destination>{e3ce7249-9b4d-4913-94e8-919e444ab8a4}</destination>
+        </relationship>
+        <relationship name="output">
+            <destination>{c79afe5b-5d3f-48c5-b924-6b44984b8f0c}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusEffectChain" id="{a33684f7-1629-455c-a588-c7e6c1e3047d}">
+        <relationship name="effects">
+            <destination>{088b818f-3f4e-4222-adc9-b70c4ca2a2b9}</destination>
+            <destination>{487a696b-9f5e-4ca2-8721-957a04fda6a0}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusPanner" id="{e3ce7249-9b4d-4913-94e8-919e444ab8a4}"/>
+    <object class="MixerBusFader" id="{088b818f-3f4e-4222-adc9-b70c4ca2a2b9}"/>
+    <object class="MixerSend" id="{487a696b-9f5e-4ca2-8721-957a04fda6a0}">
+        <property name="level">
+            <value>0</value>
+        </property>
+        <relationship name="return">
+            <destination>{83fd4d6e-60a2-4040-9b68-dd9c1b2f7d1f}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="Folder" id="{28a7e8fc-dbd6-4198-9469-4dc4cdaae4c9}">
+        <property name="name">
+            <value>NIM</value>
+        </property>
+        <relationship name="folder">
+            <destination>{6d5cea8a-3869-456e-9824-3ecc53c1d96e}</destination>
+        </relationship>
+    </object>
+</objects>

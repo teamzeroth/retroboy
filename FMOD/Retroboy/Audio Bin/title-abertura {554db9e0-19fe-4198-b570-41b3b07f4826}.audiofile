@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{554db9e0-19fe-4198-b570-41b3b07f4826}">
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>9.0800000000000001</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/title-abertura {b367d69d-74e6-4f01-8902-cc95bc527dbc}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{cce38d45-d359-4555-b564-a3cbd5f2e043}</destination>
+        </relationship>
+    </object>
+</objects>

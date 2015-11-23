@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{d84b7fad-29db-4167-8d16-976fddd53a15}">
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>8</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>1429384750</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/Retroboy Cave - Arpejo tenso R {6646a710-2622-4ca7-b8f5-34fbaaab70a8}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{22744a62-a7c0-4c27-996e-9251f76b9a23}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{f1e08a66-8391-4851-b140-afc80be0cd34}">
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/loooooooooooooooooooooooooooooooooooooooooooooooooooop {272ced50-e8fe-4aef-860a-43cfbb3e6b5b}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{00e1a145-0ef9-4cf0-a88b-b63ca94c6150}</destination>
+        </relationship>
+    </object>
+</objects>

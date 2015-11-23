@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{6f14e354-a5d0-43b9-abb2-8d22df918c01}">
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.1986041666666667</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/Tiro 3 {a5b0de60-3093-4110-9e3f-497d9c0ac2db}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{00e1a145-0ef9-4cf0-a88b-b63ca94c6150}</destination>
+        </relationship>
+    </object>
+</objects>

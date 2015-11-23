@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{f7a09cd3-c3f9-4baf-912d-1cc20245a228}">
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>3.4981666666666666</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/StingerS_voo {c493f46c-cb1a-442d-b170-96c7c6d8cb72}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{86d7a7d0-dd1b-4448-a206-df7006a20980}</destination>
+        </relationship>
+    </object>
+</objects>
