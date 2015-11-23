@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using X_UniTMX.Utils;
 
+using MapResources;
+
 namespace X_UniTMX
 {
 	/// <summary>
@@ -22,15 +24,19 @@ namespace X_UniTMX
 			switch (map.MapRenderParameter.MapRenderOrder)
 			{
 				case RenderOrder.Right_Down:
+				Debug.Log("right down");
 					sortingOrder = y * map.MapRenderParameter.Width + x;
 					break;
 				case RenderOrder.Right_Up:
+				Debug.Log("right up");
 					sortingOrder = (map.MapRenderParameter.Height - y) * map.MapRenderParameter.Width + x;
 					break;
 				case RenderOrder.Left_Down:
+				Debug.Log("left down");
 					sortingOrder = y * map.MapRenderParameter.Width + map.MapRenderParameter.Height - x;
 					break;
 				case RenderOrder.Left_Up:
+				Debug.Log("left up");
 					sortingOrder = (map.MapRenderParameter.Height - y) * map.MapRenderParameter.Width + map.MapRenderParameter.Height - x;
 					break;
 			}
@@ -2333,6 +2339,7 @@ namespace X_UniTMX
 				try
 				{
 					gameObject.AddComponent(properties.GetPropertyAsString(Map.Property_AddComponent + c));
+
 				}
 				catch (System.Exception e)
 				{
@@ -2341,6 +2348,68 @@ namespace X_UniTMX
 				c++;
 			}
 			c = 1;
+#else
+			// Add Components for this gameObject
+			while (properties.HasProperty(Map.Property_AddComponent + c))
+			{
+				try
+				{
+					//gameObject.AddComponent(System.Type.GetType(properties.GetPropertyAsString(Map.Property_AddComponent + c)));
+					//gameObject.AddComponent(System.Type.GetType("Door")) as Door;
+
+					if(properties.GetPropertyAsString(Map.Property_AddComponent + c) == "Door"){
+						gameObject.AddComponent<Door>();
+					}else if(properties.GetPropertyAsString(Map.Property_AddComponent + c) == "CollisionLevel"){
+						gameObject.AddComponent<CollisionLevel>();
+					}else if(properties.GetPropertyAsString(Map.Property_AddComponent + c) == "HidePlayer"){
+						gameObject.AddComponent<HidePlayer>();
+					}
+
+				}
+				catch (System.Exception e)
+				{
+					Debug.LogError(e);
+				}
+				c++;
+			}
+			c = 1;
+
+			//Set variables for Component Door
+			Door door;
+			if(door = gameObject.GetComponent<Door>()){
+
+				Debug.Log("HAS DOOR");
+
+				Property force;
+
+				//Debug.Log(gameObject.name+" FORCE "+force.RawValue.ToString());
+
+				if(properties.TryGetValue(Map.Property_ForceIn, out force)){
+					door.ForceIn = float.Parse(force.RawValue);
+					Debug.Log("ForceIn "+force.RawValue);
+				}
+
+				if(properties.TryGetValue(Map.Property_ForceOut, out force)){
+					door.ForceOut = float.Parse(force.RawValue);
+					Debug.Log("ForceOut "+force.RawValue);
+				}
+
+				if(properties.TryGetValue(Map.Property_Goto, out force)){
+					door.GoTo = force.RawValue;
+					Debug.Log("Goto "+force.RawValue);
+				}
+
+				if(properties.TryGetValue(Map.Property_In, out force)){
+					door.In = (Direction) System.Enum.Parse(typeof(Direction), force.RawValue, true);
+					Debug.Log("In "+force.RawValue);
+				}
+
+				if(properties.TryGetValue(Map.Property_Out, out force)){
+					door.Out = (Direction) System.Enum.Parse(typeof(Direction), force.RawValue, true);
+					Debug.Log("Out "+force.RawValue);
+				}
+			}
+
 #endif
 			// Can only send messages while playing
 			if (Application.isPlaying)

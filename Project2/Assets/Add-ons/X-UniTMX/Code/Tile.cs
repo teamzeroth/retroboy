@@ -167,7 +167,8 @@ namespace X_UniTMX
         protected void CreateSprite()
         {
             // Create Sprite
-            _tileSprite = Sprite.Create(TileSet.Texture, Source, _spritePivot, MapTileWidth, (uint)(TileSet.Spacing * 2));
+            //_tileSprite = Sprite.Create(TileSet.Texture, Source, _spritePivot, MapTileWidth, (uint)(TileSet.Spacing * 2));
+			_tileSprite = Sprite.Create(TileSet.Texture, Source, _spritePivot, MapTileWidth / 2, (uint)(TileSet.Spacing * 2));
             _tileSprite.name = OriginalID.ToString();
         }
 
@@ -215,10 +216,14 @@ namespace X_UniTMX
 
             // Use Layer's name as Sorting Layer
             tileRenderer.sortingLayerName = sortingLayerName;
-            tileRenderer.sortingOrder = sortingLayerOrder;
+            //tileRenderer.sortingOrder = sortingLayerOrder;
 
             TileGameObject.transform.localScale = new Vector2(1, 1);
-            TileGameObject.transform.localPosition = new Vector3(position.x, position.y, position.z);
+            //TileGameObject.transform.localPosition = new Vector3(position.x, position.y, position.z);
+			//TileGameObject.transform.localPosition = new Vector3(position.x * 2, position.y * 2, -(float)sortingLayerOrder/1000);
+
+			float newSorting = (position.x * 2) * 2f + (position.x * 2);
+			TileGameObject.transform.localPosition = new Vector3(position.x * 2, position.y * 2, newSorting / 100);
 
             if (this.SpriteEffects != null)
             {

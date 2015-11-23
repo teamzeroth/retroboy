@@ -66,7 +66,6 @@ namespace X_UniTMX.Utils
 			}
 			_pos = _tiledMap.WorldPointToTileIndex((Vector2)transform.position + Offset);
 			_renderer.sortingOrder = _tiledMap.GetSortingOrder(_pos.x, _pos.y);
-
 		}
 	}
 }

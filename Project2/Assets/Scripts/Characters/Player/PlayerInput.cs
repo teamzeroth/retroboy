@@ -26,9 +26,12 @@ class PlayerInput {
     /// <param name="player">The player</param>
     /// <returns>A delta direction of the player</returns>
     public Vector3 Update(Player player) {
-        setupShoot(player);
-        setupDirection(player);
-        setupDash(player);
+
+		if (!player.onCutscene) {
+			setupShoot (player);
+			setupDirection (player);
+			setupDash (player);
+		}
 
         return deltaDirection;
     }

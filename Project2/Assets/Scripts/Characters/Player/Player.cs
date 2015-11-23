@@ -50,6 +50,8 @@ public class Player : MovableBehaviour {
     bool onHurtState = false;
     bool onDieState = false;
 
+	public bool onCutscene = false;
+
     /// Coroutines
     Coroutine watchDash;
     Coroutine watchShoot;
@@ -185,7 +187,7 @@ public class Player : MovableBehaviour {
         _anim.SetBool("InMoving", _input.InMoving && !LockMoviment);
     }
 
-    public void UpdateSound(Vector2 deltaMovement) {
+	public void UpdateSound(Vector2 deltaMovement) {
         if (_input.InCharging)
             _sfx.Charge();
         else
@@ -197,11 +199,17 @@ public class Player : MovableBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space)) OnGetHit(1, Vector2.right);
 
-        Vector2 deltaMovement = _input.Update(this);
+		Vector2 deltaMovement = _input.Update(this);
 
-        UpdateAnimation(deltaMovement);
-        UpdateMove(deltaMovement);
-        UpdateSound(deltaMovement);
+        if (onCutscene) {
+			UpdateMove (Vector2.zero);
+			_anim.SetBool("InMoving", false);
+		} else {
+			UpdateAnimation(deltaMovement);
+			UpdateMove (deltaMovement);
+		}
+        
+		UpdateSound(deltaMovement);
 
         if (!onChargeState) AccumulateActionPoints(Time.deltaTime * Game.PLAYER_ACTION_POINTS_BY_TIME);
 
@@ -209,7 +217,7 @@ public class Player : MovableBehaviour {
 
 		float tz = _weapon.transform.rotation.z;
 
-		if (tz > 0.8f) {
+		/*if (tz > 0.8f) {
 			armSR.sprite = armSprites[0];
 		} else if (tz > 0.6f) {
 			armSR.sprite = armSprites[1];
@@ -229,7 +237,7 @@ public class Player : MovableBehaviour {
 			armSR.sprite = armSprites[8];
 		}else if (tz > -0.8f) {
 			armSR.sprite = armSprites[9];
-		}
+		}*/
     }
 
 #if UNITY_EDITOR
@@ -249,6 +257,25 @@ public class Player : MovableBehaviour {
 
 
     #region Messages
+
+	/* CUTSCENES ANIMATIONS */
+	
+	public void NimAssusta(){
+		//_anim.SetTrigger ("OnAfraid");
+		
+		//play from any state
+		_anim.CrossFade ("Afraid", 0f);
+	}
+	
+	public void NimStop(){
+		onCutscene = true;
+	}
+	
+	public void NimMoves(){
+		onCutscene = false;
+	}
+
+	/*  */
 
     public void UnlockInvulnerability() {
         invulnerable = false;
@@ -454,6 +481,18 @@ public class Player : MovableBehaviour {
         _weapon.gameObject.SetActive(false);
     }
 
+	public void Lock(){
+		lockMoviment = true;
+		onShootState = false;
+		onChargeState = false;
+	}
+	
+	public void Unlock(){
+		lockMoviment = false;
+		onShootState = false;
+		onChargeState = false;
+	}
+
     #endregion
 
     #region CoRoutines
@@ -483,11 +522,8 @@ public class Player : MovableBehaviour {
             yield return null;
         }
 
-        // Unlock movimatation
-
-        lockMoviment = false;
-        onShootState = false;
-        onChargeState = false;
+        // Unlock movement
+		Unlock ();
 
         _input.LockDirection = Vector2.zero;
     }

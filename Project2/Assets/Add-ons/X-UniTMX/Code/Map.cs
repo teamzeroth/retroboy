@@ -376,7 +376,15 @@ namespace X_UniTMX
 		///// Custom Property for Colliders defining to add a component to the collider's GameObject
 		///// </summary>
 		public static string Property_AddComponent = "add component";
+#else
+		public static string Property_AddComponent = "add component";
 #endif
+		public static string Property_ForceIn = "force in";
+		public static string Property_ForceOut = "force out";
+		public static string Property_Goto = "go to";
+		public static string Property_In = "in";
+		public static string Property_Out = "out";
+
 		/// <summary>
 		/// Custom Property for Colliders defining to send a message to all scripts attached to the collider's GameObject
 		/// </summary>

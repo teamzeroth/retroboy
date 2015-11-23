@@ -117,5 +117,8 @@ namespace MapResources {
                 return Helper.GetDirectionVector(d) * f;
             }
         }
+
+		/* MESSAGES */
+
     }
 }

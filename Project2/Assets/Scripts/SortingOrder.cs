@@ -9,7 +9,7 @@ public class SortingOrder : MonoBehaviour {
     public Sprite shadow;
 
     private float position;
-    private bool forcePosition = false;
+    public bool forcePosition = false;
 
     private Transform _shadow;
     private Transform _renderer;

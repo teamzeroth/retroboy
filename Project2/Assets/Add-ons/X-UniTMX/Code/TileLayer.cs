@@ -392,9 +392,11 @@ namespace X_UniTMX
 				CreateLayerMesh(startX, endX, startY, endY, directionX, directionY);
 			else
 				CreateUniqueTiles(startX, endX, startY, endY, directionX, directionY);
+
 			Transform t = LayerGameObject.transform;
 			t.parent = BaseMap.MapGameObject.transform;
-			t.localPosition = new Vector3(0, 0, this.LayerDepth);
+			//t.localPosition = new Vector3(0, 0, this.LayerDepth);
+			t.localPosition = new Vector3(0, 0, (float)this.LayerDepth / 20);
 			LayerGameObject.isStatic = true;
 
 			LayerGameObject.SetActive(Visible);

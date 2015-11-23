@@ -2,7 +2,8 @@
 
 X-UniTMX/.git/
 X-UniTMX/.gitignore
-FMOD/Retroboy/.cache
+*/.cache/
+*/*/.cache/
 
 __*/
 sh.exe.stackdump

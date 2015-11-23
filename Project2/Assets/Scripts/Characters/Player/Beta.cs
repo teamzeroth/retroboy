@@ -30,6 +30,8 @@ public class Beta : MonoBehaviour {
 
     Tween DoDisappear;
 
+	bool onProcessing = false;
+
     void Awake() {
         distance = totalDistance;
         canAppear = true;
@@ -54,6 +56,12 @@ public class Beta : MonoBehaviour {
     void Update() {
         UpdateAnimation();
         UpdateMove();
+
+		if (onProcessing) {
+			_renderer.GetComponent<SpriteRenderer> ().color = Color.blue;
+		} else {
+			_renderer.GetComponent<SpriteRenderer> ().color = Color.white;
+		}
     }
 
     void UpdateAnimation() {
@@ -159,6 +167,15 @@ public class Beta : MonoBehaviour {
 
         distance = totalDistance * delta;
     }
+
+	public void BetaProcessando(){
+		onProcessing = true;
+		Invoke ("StopProcessing",1f);
+	}
+
+	public void StopProcessing(){
+		onProcessing = false;
+	}
 
     IEnumerator WaitToAppear() {
         canAppear = false;
