@@ -223,7 +223,6 @@ namespace X_UniTMX.Utils
 		/// <param name="point">point to be flipped</param>
 		/// <param name="anchorX">Anchor X position</param>
 		/// <param name="anchorY">Anchor Y position</param>
-		/// <param name="anchorZ">Anchor Z position</param>
 		/// <param name="flipX">true to flip horizontally</param>
 		/// <param name="flipY">true to flip vertically</param>
 		/// <param name="flipZ">true to flip in the z-axis</param>

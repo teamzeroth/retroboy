@@ -14,6 +14,7 @@ class PlayerInput {
     public bool InDashing;
     public bool InCharging;
     public bool InShooting;
+	public bool InClimbing;
 
     public float TimeInCharge;
     public float LastTimeInCharge;
@@ -28,9 +29,16 @@ class PlayerInput {
     public Vector3 Update(Player player) {
 
 		if (!player.onCutscene) {
-			setupShoot (player);
+
+			if(!player.climbing){
+				setupShoot (player);
+			}
+
 			setupDirection (player);
-			setupDash (player);
+
+			if(!player.climbing){
+				setupDash (player);
+			}
 		}
 
         return deltaDirection;

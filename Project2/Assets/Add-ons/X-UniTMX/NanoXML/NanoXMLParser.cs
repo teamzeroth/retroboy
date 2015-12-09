@@ -261,14 +261,9 @@ namespace TObject.Shared
     {
       get
       {
-		  for (int i = 0; i < subNodes.Count; i++)
-		  {
-			  if (subNodes[i].name.Equals(nodeName))
-				  return subNodes[i];
-		  }
-		  //foreach (NanoXMLNode nanoXmlNode in subNodes)
-		  //	if (string.Equals(nanoXmlNode.name, nodeName))
-		  //		return nanoXmlNode;
+        foreach (NanoXMLNode nanoXmlNode in subNodes)
+          if (nanoXmlNode.name == nodeName)
+            return nanoXmlNode;
 
         return null;
       }
@@ -280,14 +275,9 @@ namespace TObject.Shared
     /// <returns><see cref="NanoXMLAttribute"/> with given name or null if no such attribute</returns>
     public NanoXMLAttribute GetAttribute(string attributeName)
     {
-		for (int i = 0; i < attributes.Count; i++)
-		{
-			if (attributes[i].Name.Equals(attributeName))
-				return attributes[i];
-		}
-		//foreach (NanoXMLAttribute nanoXmlAttribute in attributes)
-		//	if (string.Equals(nanoXmlAttribute.Name, attributeName))
-		//		return nanoXmlAttribute;
+      foreach (NanoXMLAttribute nanoXmlAttribute in attributes)
+        if (nanoXmlAttribute.Name == attributeName)
+          return nanoXmlAttribute;
 
       return null;
     }

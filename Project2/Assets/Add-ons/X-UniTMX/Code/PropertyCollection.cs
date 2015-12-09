@@ -66,7 +66,7 @@ namespace X_UniTMX
 		{
 			string str = string.Empty;
 			Property p = null;
-			if (TryGetValue(property, out p))
+			if (TryGetValue(property.ToLowerInvariant(), out p))
 				str = p.RawValue;
 			
 			return str;
@@ -81,7 +81,7 @@ namespace X_UniTMX
 			bool b = false;
 			string str = string.Empty;
 			Property p = null;
-			if (TryGetValue(property, out p))
+			if (TryGetValue(property.ToLowerInvariant(), out p))
 				str = p.RawValue;
 			
 			Boolean.TryParse(str, out b);
@@ -100,7 +100,7 @@ namespace X_UniTMX
 			int b = 0;
 			string str = string.Empty;
 			Property p = null;
-			if (TryGetValue(property, out p))
+			if (TryGetValue(property.ToLowerInvariant(), out p))
 				str = p.RawValue;
 			
 			Int32.TryParse(str, out b);
@@ -117,7 +117,7 @@ namespace X_UniTMX
 			float b = 0;
 			string str = string.Empty;
 			Property p = null;
-			if (TryGetValue(property, out p))
+			if (TryGetValue(property.ToLowerInvariant(), out p))
 				str = p.RawValue;
 			
 			float.TryParse(str, out b);
@@ -135,19 +135,6 @@ namespace X_UniTMX
 		{
 			return values.TryGetValue(name, out property);
 		}
-
-        /// <summary>
-        /// Checks if a property exists
-        /// </summary>
-        /// <param name="property">Name of the property inside Tiled</param>
-        /// <returns>true if property exists, false otherwise</returns>
-        public bool HasProperty(string property)
-        {
-            Property p;
-            if (TryGetValue(property, out p))
-                return true;
-            return false;
-        }
 
 		/// <summary>
 		/// Removes a property with the given name.

@@ -40,14 +40,9 @@ namespace X_UniTMX
 
 
 		int SortingOrder = 0;
-		int _ppu = 0;
+		int TileWidth = 0;
 
 		bool useWWWToLoad = false;
-
-		/// <summary>
-		/// Material to be specifically used in this layer
-		/// </summary>
-		public Material LayerMaterial = null;
 
 		/// <summary>
 		/// Creates an Image Layer from node
@@ -64,11 +59,11 @@ namespace X_UniTMX
 
 			if (node.GetAttribute("x") != null)
 			{
-				Position.x = float.Parse(node.GetAttribute("x").Value, NumberStyles.Float) / (float)map.MapRenderParameter.TileWidth;
+				Position.x = float.Parse(node.GetAttribute("x").Value, NumberStyles.Float) / (float)map.TileWidth;
 			}
 			if (node.GetAttribute("y") != null)
 			{
-				Position.y = -float.Parse(node.GetAttribute("y").Value, NumberStyles.Float) / (float)map.MapRenderParameter.TileHeight;
+				Position.y = -float.Parse(node.GetAttribute("y").Value, NumberStyles.Float) / (float)map.TileHeight;
 			}
 			// if the image is in any director up from us, just take the filename
 			//if (this.Image.StartsWith(".."))
@@ -84,14 +79,43 @@ namespace X_UniTMX
 			}
 
 			SortingOrder = map.DefaultSortingOrder - LayerDepth;
-			_ppu = map.MapRenderParameter.TileWidth;
+			TileWidth = map.TileWidth;
 
 			useWWWToLoad = map.UsingStreamingAssetsPath;
 
 			string texturePath = mapPath;
 			if (!useWWWToLoad)
 			{
-				texturePath = Utils.XUniTMXHelpers.ParsePath(mapPath, Image);
+				// Parse the path
+				if (Image.StartsWith("../"))
+				{
+					string path = Image;
+					string rootPath = Directory.GetParent(mapPath).FullName;
+					string appPath = Path.GetFullPath(Application.dataPath.Replace("/Assets", ""));
+
+					while (path.StartsWith("../"))
+					{
+						rootPath = Directory.GetParent(rootPath).FullName;
+						path = path.Remove(0, 3);
+					}
+					rootPath = rootPath.Replace(appPath, "");
+					
+					path = Path.GetDirectoryName(path) + Path.AltDirectorySeparatorChar + Path.GetFileNameWithoutExtension(path);
+
+					if (path.StartsWith("/"))
+						path = path.Remove(0, 1);
+					rootPath = rootPath.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+					if (rootPath.Length > 0)
+						rootPath += Path.AltDirectorySeparatorChar;
+					texturePath = rootPath + path;
+					
+				}
+				else
+				{
+					if (Path.GetDirectoryName(this.Image).Length > 0)
+						texturePath += Path.GetDirectoryName(this.Image) + Path.AltDirectorySeparatorChar;
+					texturePath += Path.GetFileNameWithoutExtension(this.Image);
+				}
 			}
 			else
 			{
@@ -102,7 +126,7 @@ namespace X_UniTMX
 			Image = texturePath;
 		}
 
-		public void Generate(Material baseMaterial, Action<Layer> onGeneratedImageLayer = null, string tag = "", int physicsLayer = 0)
+		public void Generate(Material baseMaterial, Action<Layer> onGeneratedImageLayer = null)
 		{
 			if (IsGenerated)
 			{
@@ -110,12 +134,9 @@ namespace X_UniTMX
 					OnGeneratedLayer(this);
 				return;
 			}
-			base.Generate(tag, physicsLayer);
+			base.Generate();
 
 			OnGeneratedLayer = onGeneratedImageLayer;
-
-            if(LayerMaterial == null)
-			    LayerMaterial = baseMaterial;
 
 			if (useWWWToLoad)
 			{
@@ -145,24 +166,13 @@ namespace X_UniTMX
 			LayerGameObject.SetActive(Visible);
 
 			SpriteRenderer tileRenderer = LayerGameObject.AddComponent<SpriteRenderer>();
-			tileRenderer.sprite = Sprite.Create(Texture, new Rect(0, 0, Texture.width, Texture.height), Vector2.up, _ppu);
+			tileRenderer.sprite = Sprite.Create(Texture, new Rect(0, 0, Texture.width, Texture.height), Vector2.up, TileWidth);
 			tileRenderer.sprite.name = Texture.name;
 			tileRenderer.sortingOrder = SortingOrder;
 			// Use Layer's name as Sorting Layer
 			tileRenderer.sortingLayerName = this.Name;
-
-            if (LayerMaterial != null)
-			{
-				//_material.mainTexture = tileRenderer.sprite.texture;
-				//tileRenderer.sharedMaterial = _material;
-                //tileRenderer.sharedMaterial = new Material(LayerMaterial);
-                //tileRenderer.sharedMaterial.mainTexture = tileRenderer.sprite.texture;
-                tileRenderer.sharedMaterial = LayerMaterial;
-			}
 			//tileRenderer.material = new Material(baseMaterial);
 			//tileRenderer.material.mainTexture = Texture;
-
-            MapExtensions.ApplyCustomProperties(LayerGameObject, this);
 
 			if (OnGeneratedLayer != null)
 				OnGeneratedLayer(this);

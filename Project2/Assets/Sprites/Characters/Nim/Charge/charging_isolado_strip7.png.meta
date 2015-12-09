@@ -50,7 +50,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .389999986}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 64
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -126,7 +126,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .5, y: .389999986}
       border: {x: 0, y: 0, z: 0, w: 0}
-  spritePackingTag:
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

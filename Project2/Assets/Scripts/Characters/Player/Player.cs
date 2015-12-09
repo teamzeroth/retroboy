@@ -50,11 +50,16 @@ public class Player : MovableBehaviour {
     bool onHurtState = false;
     bool onDieState = false;
 
+	public bool climbing;
+
 	public bool onCutscene = false;
 
     /// Coroutines
     Coroutine watchDash;
     Coroutine watchShoot;
+
+	public bool exitEscadaLeft = false;
+	public bool exitEscadaRight = false;
 
     #endregion
 
@@ -142,7 +147,8 @@ public class Player : MovableBehaviour {
             return;
         }
 
-        Move(deltaMovement * speed);
+		//if (!climbing)
+		Move (deltaMovement * speed);
     }
 
     public void Move(Vector3 move) {
@@ -184,8 +190,18 @@ public class Player : MovableBehaviour {
         //Check if the player can use the dash
         _anim.SetBool("OnDash", _input.InDashing ? ActionDash() : false);
 
-        _anim.SetBool("InMoving", _input.InMoving && !LockMoviment);
+        _anim.SetBool("InMoving", _input.InMoving && !LockMoviment && !climbing);
+
+		_anim.SetBool("InClimbing", climbing);
     }
+
+	public void GoLeft(){
+		exitEscadaLeft = true;
+	}
+
+	public void GoRight(){
+		exitEscadaRight = true;
+	}
 
 	public void UpdateSound(Vector2 deltaMovement) {
         if (_input.InCharging)
@@ -200,6 +216,17 @@ public class Player : MovableBehaviour {
         if (Input.GetKeyDown(KeyCode.Space)) OnGetHit(1, Vector2.right);
 
 		Vector2 deltaMovement = _input.Update(this);
+		if (climbing) {
+			deltaMovement = Vector2.zero;
+		}
+		if (exitEscadaLeft) {
+			exitEscadaLeft = false;
+			deltaMovement = Vector2.left * 0.1f;
+		}
+		if (exitEscadaRight) {
+			exitEscadaRight = false;
+			deltaMovement = Vector2.right * 0.1f;
+		}
 
         if (onCutscene) {
 			UpdateMove (Vector2.zero);
@@ -211,7 +238,7 @@ public class Player : MovableBehaviour {
         
 		UpdateSound(deltaMovement);
 
-        if (!onChargeState) AccumulateActionPoints(Time.deltaTime * Game.PLAYER_ACTION_POINTS_BY_TIME);
+        if (!onChargeState) AccumulateActionPoints (Time.deltaTime * Game.PLAYER_ACTION_POINTS_BY_TIME);
 
 		Debug.Log ("weapon z:"+_weapon.transform.rotation.z);
 
@@ -620,5 +647,18 @@ public class Player : MovableBehaviour {
         if (routine != null) StopCoroutine(routine);
         StartCoroutine(method);
     }
+
+	public bool Moving(){
+		return _input.InMoving;
+	}
+
+	public bool Climbing(){
+		return _input.InClimbing;
+	}
+
+	public void InputDirection(Vector2 newDirection){
+		_input.deltaDirection = newDirection;
+	}
+
     #endregion
 }

@@ -50,7 +50,7 @@ public class Beta : MonoBehaviour {
 
         visible = false;
         transform.position = target.position;
-        _lightParticle.GetComponent<ParticleSystem>().maxParticles = 0;
+        _lightParticle.GetComponent<ParticleSystem>().maxParticles = 50;
     }
 
     void Update() {

@@ -17,7 +17,8 @@ public static class Game {
 
     // Player Variables
     public const float PLAYER_HURT_TIME = 0.6f;
-    public const float PLAYER_DIST_SHOOT = 0.8f;
+    //public const float PLAYER_DIST_SHOOT = 0.8f;
+	public const float PLAYER_DIST_SHOOT = 0.4f;
     public const float PLAYER_INVULNERABILITY_TIME = 1.0f;
     public const float PLAYER_TOTAL_CHARGE_TIME = 1.5f;
 

@@ -18,12 +18,12 @@ public class TemSorting : MonoBehaviour {
 
 	void Awake () {
 		tr = GetComponent<SpriteRenderer> ();
-		Sort ();
+		//Sort ();
 	}
 
 	void OnEnable () {
 		tr = GetComponent<SpriteRenderer> ();
-		Sort ();
+		//Sort ();
 	}
 	
 	void LateUpdate () {

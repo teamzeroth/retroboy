@@ -16,7 +16,7 @@ namespace X_UniTMX
 	/// <summary>
 	/// An abstract base for a Layer in a Map.
 	/// </summary>
-	public abstract class Layer : PropertyContainer
+	public abstract class Layer
 	{
 		/// <summary>
 		/// Gets the name of the layer.
@@ -49,9 +49,14 @@ namespace X_UniTMX
 		public float Opacity { get; set; }
 
 		/// <summary>
+		/// Gets the list of properties for the layer.
+		/// </summary>
+		public PropertyCollection Properties { get; private set; }
+
+		/// <summary>
 		/// Base Map this Layer is inside
 		/// </summary>
-		public Map BaseMap { get; protected set; }
+		protected Map BaseMap;
 
 		/// <summary>
 		/// Layer's Game Object
@@ -63,39 +68,9 @@ namespace X_UniTMX
 		/// </summary>
 		public bool IsGenerated { get; protected set; }
 
-		protected string _tag = "Untagged";
-		/// <summary>
-		/// This LayerGameObject's Tag
-		/// </summary>
-		public string Tag
-		{
-			get { return _tag; }
-			set
-			{
-				_tag = value;
-				if (LayerGameObject != null)
-					LayerGameObject.tag = _tag;
-			}
-		}
-
-		protected int _physicsLayer = 0;
-		/// <summary>
-		/// This LayerGameObject's Physics Layer
-		/// </summary>
-		public int PhysicsLayer
-		{
-			get { return _physicsLayer; }
-			set
-			{
-				_physicsLayer = value;
-				if (LayerGameObject != null)
-					LayerGameObject.layer = _physicsLayer;
-			}
-		}
-
 		protected Action<Layer> OnGeneratedLayer = null;
 
-		internal Layer(string name, int width, int height, int layerDepth, bool visible, float opacity, string tag, int physicsLayer, PropertyCollection properties)
+		internal Layer(string name, int width, int height, int layerDepth, bool visible, float opacity, PropertyCollection properties)
 		{
 			this.Name = name;
 			this.Width = width;
@@ -104,9 +79,7 @@ namespace X_UniTMX
 			this.Visible = visible;
 			this.Opacity = opacity;
 			this.Properties = properties;
-			Tag = tag;
-			PhysicsLayer = physicsLayer;
-			//LayerGameObject = new GameObject(Name);
+			LayerGameObject = new GameObject(Name);
 		}
 
 		protected Layer(NanoXMLNode node, Map tileMap)
@@ -148,32 +121,80 @@ namespace X_UniTMX
 			BaseMap = tileMap;
         }
 
-		protected virtual void Generate(string tag = "", int physicsLayer = 0)
+		protected virtual void Generate()
 		{
 			IsGenerated = true;
 			LayerGameObject = new GameObject(Name);
-			Transform t = LayerGameObject.transform;
 			if (BaseMap != null)
 			{
-				t.parent = BaseMap.MapGameObject.transform;
+				LayerGameObject.transform.parent = BaseMap.MapObject.transform;
 			}
-			t.localRotation = Quaternion.identity;
-			t.localScale = Vector3.one;
-			t.localPosition = new Vector3(0, 0, LayerDepth);
-
-			if (!string.IsNullOrEmpty(tag))
-				Tag = tag;
-			if (physicsLayer != 0)
-				PhysicsLayer = physicsLayer;
-			LayerGameObject.tag = Tag;
-			LayerGameObject.layer = PhysicsLayer;
-			LayerGameObject.isStatic = true;
 		}
 
 		protected virtual void Delete()
 		{
 			IsGenerated = false;
 			GameObject.Destroy(LayerGameObject);
+		}
+
+		/// <summary>
+		/// Gets a string property
+		/// </summary>
+		/// <param name="property">Name of the property inside Tiled</param>
+		/// <returns>The value of the property, String.Empty if property not found</returns>
+		public string GetPropertyAsString(string property)
+		{
+			if (Properties == null)
+				return string.Empty;
+			return Properties.GetPropertyAsString(property);
+		}
+		/// <summary>
+		/// Gets a boolean property
+		/// </summary>
+		/// <param name="property">Name of the property inside Tiled</param>
+		/// <returns>The value of the property</returns>
+		public bool GetPropertyAsBoolean(string property)
+		{
+			if (Properties == null)
+				return false;
+			return Properties.GetPropertyAsBoolean(property);
+		}
+		/// <summary>
+		/// Gets an integer property
+		/// </summary>
+		/// <param name="property">Name of the property inside Tiled</param>
+		/// <returns>The value of the property</returns>
+		public int GetPropertyAsInt(string property)
+		{
+			if (Properties == null)
+				return 0;
+			return Properties.GetPropertyAsInt(property);
+		}
+		/// <summary>
+		/// Gets a float property
+		/// </summary>
+		/// <param name="property">Name of the property inside Tiled</param>
+		/// <returns>The value of the property</returns>
+		public float GetPropertyAsFloat(string property)
+		{
+			if (Properties == null)
+				return 0;
+			return Properties.GetPropertyAsFloat(property);
+		}
+
+		/// <summary>
+		/// Checks if a property exists
+		/// </summary>
+		/// <param name="property">Name of the property inside Tiled</param>
+		/// <returns>true if property exists, false otherwise</returns>
+		public bool HasProperty(string property)
+		{
+			if (Properties == null)
+				return false;
+			Property p;
+			if (Properties.TryGetValue(property.ToLowerInvariant(), out p))
+				return true;
+			return false;
 		}
 	}
 }

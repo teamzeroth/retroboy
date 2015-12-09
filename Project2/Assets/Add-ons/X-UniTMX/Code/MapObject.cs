@@ -29,7 +29,12 @@ namespace X_UniTMX
 		public string Type { get; private set; }
 
 		/// <summary>
-		/// Gets the object TileID
+		/// Gets a list of the object's properties.
+		/// </summary>
+		public PropertyCollection Properties { get; private set; }
+
+		/// <summary>
+		/// Gets the object OriginalID
 		/// </summary>
 		public int GID { get; private set; }
 
@@ -70,7 +75,7 @@ namespace X_UniTMX
 		/// <param name="parentObjectLayer">This MapObject's MapObjectLayer parent</param>
 		/// <param name="points">This MapObject's Point list</param>
 		public MapObject(string name, string type, Rect bounds, PropertyCollection properties, int gid, List<Vector2> points, float rotation, MapObjectLayer parentObjectLayer)
-			: base(ObjectType.Box, bounds, rotation, points, properties)
+			: base(ObjectType.Box, bounds, rotation, points)
 		{
 			if (string.IsNullOrEmpty(name))
 				throw new ArgumentException(null, "name");
@@ -78,6 +83,7 @@ namespace X_UniTMX
 			Name = name;
 			Type = type;
 			Bounds = bounds;
+			Properties = properties ?? new PropertyCollection();
 			GID = gid;
 			Points = points;
 			Visible = true;
@@ -122,6 +128,104 @@ namespace X_UniTMX
 				GID = 0;
 
 			ParentObjectLayer = parentObjectLayer;
+
+            NanoXMLNode propertiesNode = node["properties"];
+            if (propertiesNode != null)
+            {
+                Properties = new PropertyCollection(propertiesNode);
+            }
         }
+
+		/// <summary>
+		/// Creates this Tile Object (an object that has OriginalID) if applicable
+		/// </summary>
+		/// <param name="tiledMap">The base Tile Map</param>
+		/// <param name="layerDepth">Layer's zDepth</param>
+		/// <param name="sortingLayerName">Layer's SortingLayerName</param>
+		/// <param name="parent">Transform to parent this object to</param>
+		/// <param name="materials">List of TileSet Materials</param>
+		public GameObject CreateTileObject(Map tiledMap, string sortingLayerName, int layerDepth, List<Material> materials, Transform parent = null)
+		{
+			if(GID > 0) {
+				Tile objTile = null;
+				if(tiledMap.Orientation != Orientation.Orthogonal)
+					objTile = tiledMap.Tiles[GID].Clone(new Vector2(0.5f, 0.5f));
+				else
+					objTile = tiledMap.Tiles[GID].Clone();
+
+				objTile.CreateTileObject(Name,
+					parent != null ? parent : ParentObjectLayer.LayerGameObject.transform,
+					sortingLayerName,
+					tiledMap.DefaultSortingOrder + tiledMap.GetSortingOrder(Bounds.x, Bounds.y),
+					tiledMap.TiledPositionToWorldPoint(Bounds.x, Bounds.y, layerDepth),
+					materials);
+				this.Bounds = new Rect(Bounds.x, Bounds.y - 1, 1, 1);
+			
+				objTile.TileGameObject.SetActive(Visible);
+				
+				return objTile.TileGameObject;
+			}
+			return null;
+		}
+
+		/// <summary>
+		/// Gets a string property
+		/// </summary>
+		/// <param name="property">Name of the property inside Tiled</param>
+		/// <returns>The value of the property, String.Empty if property not found</returns>
+		public string GetPropertyAsString(string property)
+		{
+			if (Properties == null)
+				return string.Empty;
+			return Properties.GetPropertyAsString(property);
+		}
+		/// <summary>
+		/// Gets a boolean property
+		/// </summary>
+		/// <param name="property">Name of the property inside Tiled</param>
+		/// <returns>The value of the property</returns>
+		public bool GetPropertyAsBoolean(string property)
+		{
+			if (Properties == null)
+				return false;
+			return Properties.GetPropertyAsBoolean(property);
+		}
+		/// <summary>
+		/// Gets an integer property
+		/// </summary>
+		/// <param name="property">Name of the property inside Tiled</param>
+		/// <returns>The value of the property</returns>
+		public int GetPropertyAsInt(string property)
+		{
+			if (Properties == null)
+				return 0;
+			return Properties.GetPropertyAsInt(property);
+		}
+		/// <summary>
+		/// Gets a float property
+		/// </summary>
+		/// <param name="property">Name of the property inside Tiled</param>
+		/// <returns>The value of the property</returns>
+		public float GetPropertyAsFloat(string property)
+		{
+			if (Properties == null)
+				return 0;
+			return Properties.GetPropertyAsFloat(property);
+		}
+
+		/// <summary>
+		/// Checks if a property exists
+		/// </summary>
+		/// <param name="property">Name of the property inside Tiled</param>
+		/// <returns>true if property exists, false otherwise</returns>
+		public bool HasProperty(string property)
+		{
+			if (Properties == null)
+				return false;
+			Property p;
+			if (Properties.TryGetValue(property.ToLowerInvariant(), out p))
+				return true;
+			return false;
+		}
 	}
 }

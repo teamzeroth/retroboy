@@ -21,6 +21,8 @@ namespace X_UniTMX
 	/// </summary>
 	public class TileLayer : Layer
 	{
+		float errorCorrection = 0.001f;
+
 		// The data coming in combines flags for whether the tile is flipped as well as
 		// the actual index. These flags are used to first figure out if it's flipped and
 		// then to remove those flags and get us the actual ID.
@@ -44,11 +46,6 @@ namespace X_UniTMX
 		protected List<Material> BaseMaterials;
 
 		/// <summary>
-		/// Material to be used in this TileLayer
-		/// </summary>
-		public Material LayerMaterial = null;
-
-		/// <summary>
 		/// Set as true to generate one GameObject per tile, false to generate a single Quad for this layer.
 		/// </summary>
 		public bool MakeUniqueTiles = false;
@@ -61,12 +58,7 @@ namespace X_UniTMX
 		/// <summary>
 		/// List of TileSet referenced in this TileLayer
 		/// </summary>
-		HashSet<TileSet> LayerTileSets = null;
-
-		/// <summary>
-		/// Reference to the TileCollision GameObject generated from this TileLayer
-		/// </summary>
-		public GameObject LayerTileCollisions = null;
+		List<TileSet> LayerTileSets = null;
 
 		/// <summary>
 		/// Creates a Tile Layer from node
@@ -185,7 +177,7 @@ namespace X_UniTMX
 		{
 			Tiles = new TileGrid(Width, Height);
 			
-			LayerTileSets = new HashSet<TileSet>();
+			LayerTileSets = new List<TileSet>();
 			// data is left-to-right, top-to-bottom
 			for (int x = 0; x < Width; x++)
 			{
@@ -224,7 +216,7 @@ namespace X_UniTMX
 						// otherwise we may need to clone if the tile doesn't have the correct effects
 						// in this world a flipped tile is different than a non-flipped one; just because
 						// they have the same source rect doesn't mean they're equal.
-						else if ((!t.SpriteEffects.Equals(spriteEffects)))
+						else if (t.SpriteEffects != spriteEffects)
 						{
 							t = t.Clone();
 							t.SpriteEffects = spriteEffects;
@@ -245,8 +237,7 @@ namespace X_UniTMX
 		/// 
 		/// </summary>
 		/// <param name="materials">List of Materials containing the TileSet textures</param>
-        /// <param name="onGeneratedTileLayer"></param>
-		public void Generate(List<Material> materials, Action<Layer> onGeneratedTileLayer = null, string tag = "", int physicsLayer = 0)
+		public void Generate(List<Material> materials, Action<Layer> onGeneratedTileLayer = null)
 		{
 			if (IsGenerated)
 			{
@@ -257,50 +248,11 @@ namespace X_UniTMX
 			
 			OnGeneratedLayer = onGeneratedTileLayer;
 
-			BaseMaterials = materials;
-
-			Generate(tag, physicsLayer);
-		}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="material"></param>
-        /// <param name="onGeneratedTileLayer"></param>
-		public void Generate(Material material, Action<Layer> onGeneratedTileLayer = null, string tag = "", int physicsLayer = 0)
-		{
-			if (IsGenerated)
-			{
-				if (OnGeneratedLayer != null)
-					OnGeneratedLayer(this);
-				return;
-			}
-
-			OnGeneratedLayer = onGeneratedTileLayer;
-
-			LayerMaterial = material;
-
-			Generate(tag, physicsLayer);
-		}
-
-		protected override void Generate(string tag = "", int physicsLayer = 0)
-		{
-			base.Generate(tag, physicsLayer);
-
 			GenerateTileGrid();
 
-			//LayerTileCollisions = new GameObject(Name + " Tile Collisions");
-			//Transform t = LayerTileCollisions.transform;
-			//if (BaseMap != null)
-			//{
-			//	t.parent = BaseMap.MapGameObject.transform;
-			//}
-			//t.localPosition = Vector3.zero;
-			//t.localRotation = Quaternion.identity;
-			//t.localScale = Vector3.one;
-			////LayerTileCollisions.tag = Tag;
-			////LayerTileCollisions.layer = PhysicsLayer;
-			//LayerTileCollisions.isStatic = true;
+			base.Generate();
+
+			BaseMaterials = materials;
 
 			GenerateLayer();
 		}
@@ -318,7 +270,7 @@ namespace X_UniTMX
 			//float zOffset = 0.001f;
 			// To create the tiles, we must follow the order dictated by map.MapRenderOrder
 			// Not unique tiles have inverted bottom-top top-bottom render order :X
-			switch (BaseMap.MapRenderParameter.MapRenderOrder)
+			switch (BaseMap.MapRenderOrder)
 			{
 				case RenderOrder.Right_Down:
 					if (MakeUniqueTiles)
@@ -393,15 +345,11 @@ namespace X_UniTMX
 			else
 				CreateUniqueTiles(startX, endX, startY, endY, directionX, directionY);
 
-			Transform t = LayerGameObject.transform;
-			t.parent = BaseMap.MapGameObject.transform;
-			//t.localPosition = new Vector3(0, 0, this.LayerDepth);
-			t.localPosition = new Vector3(0, 0, (float)this.LayerDepth / 20);
+			LayerGameObject.transform.parent = BaseMap.MapObject.transform;
+			LayerGameObject.transform.localPosition = new Vector3(0, 0, this.LayerDepth);
 			LayerGameObject.isStatic = true;
 
 			LayerGameObject.SetActive(Visible);
-
-            MapExtensions.ApplyCustomProperties(LayerGameObject, this);
 
 			if (OnGeneratedLayer != null)
 				OnGeneratedLayer(this);
@@ -430,149 +378,64 @@ namespace X_UniTMX
 		Vector3 GetTileWorldPosition(int tileX, int tileY, TileSet tileSet)
 		{
 			Vector3 pos = Vector3.zero;
-			MapRenderParameters renderParam = BaseMap.MapRenderParameter;
 			// Set Tile's position according to map orientation
 			// Can't use Map.TiledPositionToWorldPoint as sprites' anchors doesn't follow tile anchor point
-			if (renderParam.Orientation == Orientation.Orthogonal)
+			if (BaseMap.Orientation == Orientation.Orthogonal)
 			{
 				//pos = new Vector3(
 				//	tileX * (BaseMap.TileWidth / (float)tileSet.TileWidth),
 				//	(-tileY - 1) * (BaseMap.TileHeight / (float)tileSet.TileHeight) * ((float)tileSet.TileHeight / (float)tileSet.TileWidth),
 				//	0);
 				float ratio = tileSet.TileHeight / (float)tileSet.TileWidth;
-				float mapRatio = renderParam.TileHeight / (float)renderParam.TileWidth;
-				pos.x = tileX;
+				float mapRatio = BaseMap.TileHeight / (float)BaseMap.TileWidth;
+				pos = new Vector3(tileX, 1, 0);
 				if(ratio != 1)
-					pos.y = (-tileY - 1) * (renderParam.TileHeight / (float)tileSet.TileHeight) * ratio;
+					pos.y = (-tileY - 1) * (BaseMap.TileHeight / (float)tileSet.TileHeight) * ratio;
 				else
 					pos.y = (-tileY - 1) * mapRatio;
 					
 			}
-			else if (renderParam.Orientation == Orientation.Isometric)
+			else if (BaseMap.Orientation == Orientation.Isometric)
 			{
-				pos.x = (renderParam.TileWidth / 2.0f * (renderParam.Width - tileY + tileX) - tileSet.TileWidth / 2.0f) / (float)renderParam.TileWidth;
-				pos.y = -renderParam.Height + renderParam.TileHeight * (renderParam.Height - ((tileX + tileY) / (renderParam.TileWidth / (float)renderParam.TileHeight)) / 2.0f) / (float)renderParam.TileHeight - (renderParam.TileHeight / (float)renderParam.TileWidth);
+				pos = new Vector3(
+					(BaseMap.TileWidth / 2.0f * (BaseMap.Width - tileY + tileX) - tileSet.TileWidth / 2.0f) / (float)BaseMap.TileWidth,
+					-BaseMap.Height + BaseMap.TileHeight * (BaseMap.Height - ((tileX + tileY) / (BaseMap.TileWidth / (float)BaseMap.TileHeight)) / 2.0f) / (float)BaseMap.TileHeight - (BaseMap.TileHeight / (float)BaseMap.TileWidth),
+					0);
 			}
-			else if (renderParam.Orientation == Orientation.Staggered)
+			else if (BaseMap.Orientation == Orientation.Staggered)
 			{
 				// In Staggered maps, odd rows and even rows are handled differently
-				if (renderParam.MapStaggerAxis.Equals(StaggerAxis.Y))
+				if (tileY % 2 < 1)
 				{
-					if ((renderParam.MapStaggerIndex.Equals(StaggerIndex.Odd) && tileY % 2 < 1) ||
-						(renderParam.MapStaggerIndex.Equals(StaggerIndex.Even) && tileY % 2 > 0))
-					{
-						// Even row in Odd Staggered Maps
-						// Odd row in Even Staggered Maps
-						pos.x = tileX * (renderParam.TileWidth / (float)tileSet.TileWidth);
-						pos.y = (-tileY - 2) * (renderParam.TileHeight / 2.0f / (float)tileSet.TileHeight) * ((float)tileSet.TileHeight / (float)tileSet.TileWidth);
-					}
-					else
-					{
-						// Odd row in Odd Staggered Maps
-						// Even row in Even Staggered Maps
-						pos.x = tileX * (renderParam.TileWidth / (float)tileSet.TileWidth) + (renderParam.TileWidth / (float)tileSet.TileWidth) / 2.0f;
-						pos.y = (-tileY - 2) * (renderParam.TileHeight / 2.0f / (float)tileSet.TileHeight) * ((float)tileSet.TileHeight / (float)tileSet.TileWidth);
-					}
-					
+					// Even row
+					pos.x = tileX * (BaseMap.TileWidth / (float)tileSet.TileWidth);
+					pos.y = (-tileY - 2) * (BaseMap.TileHeight / 2.0f / (float)tileSet.TileHeight) * ((float)tileSet.TileHeight / (float)tileSet.TileWidth);
 				}
 				else
 				{
-					if ((renderParam.MapStaggerIndex.Equals(StaggerIndex.Odd) && tileX % 2 < 1) ||
-						(renderParam.MapStaggerIndex.Equals(StaggerIndex.Even) && tileX % 2 > 0))
-					{
-						// Even row in Odd Staggered Maps
-						// Odd row in Even Staggered Maps
-						pos.x = tileX * (renderParam.TileWidth / 2.0f / (float)tileSet.TileWidth);
-						pos.y = (-tileY - 1) * (renderParam.TileHeight / (float)tileSet.TileHeight) * ((float)tileSet.TileHeight / (float)tileSet.TileWidth);
-					}
-					else
-					{
-						// Odd row in Odd Staggered Maps
-						// Even row in Even Staggered Maps
-						pos.x = tileX * (renderParam.TileWidth / 2.0f / (float)tileSet.TileWidth);
-						pos.y = (-tileY - 1) * (renderParam.TileHeight / (float)tileSet.TileHeight) * ((float)tileSet.TileHeight / (float)tileSet.TileWidth) - (BaseMap.MapRenderParameter.TileHeight / (float)tileSet.TileHeight) / 2.0f * ((float)tileSet.TileHeight / (float)tileSet.TileWidth);
-					}
-				}
-			}
-			else if (renderParam.Orientation == Orientation.Hexagonal)
-			{
-				// In Staggered maps, odd rows and even rows are handled differently
-				if (renderParam.MapStaggerAxis.Equals(StaggerAxis.Y))
-				{
-					float halfGap = (renderParam.TileHeight - renderParam.HexSideLength) / 2.0f;
-					float tileDisplacement = halfGap + renderParam.HexSideLength;
-					if ((renderParam.MapStaggerIndex.Equals(StaggerIndex.Odd) && tileY % 2 < 1) ||
-						(renderParam.MapStaggerIndex.Equals(StaggerIndex.Even) && tileY % 2 > 0))
-					{
-						// Even row in Odd Staggered Maps
-						// Odd row in Even Staggered Maps
-						pos.x = tileX * (renderParam.TileWidth / (float)tileSet.TileWidth);
-						pos.y = (-tileY - 1) * (tileDisplacement / (float)tileSet.TileHeight) - halfGap / (float)tileSet.TileHeight;
-					}
-					else
-					{
-						// Odd row in Odd Staggered Maps
-						// Even row in Even Staggered Maps
-						pos.x = tileX * (renderParam.TileWidth / (float)tileSet.TileWidth) + (renderParam.TileWidth / (float)tileSet.TileWidth) / 2.0f;
-						pos.y = (-tileY - 1) * (tileDisplacement / (float)tileSet.TileHeight) - halfGap / (float)tileSet.TileHeight;
-					}
-
-				}
-				else
-				{
-					float halfGap = (renderParam.TileWidth - renderParam.HexSideLength) / 2.0f;
-					float tileDisplacement = halfGap + renderParam.HexSideLength;
-					if ((renderParam.MapStaggerIndex.Equals(StaggerIndex.Odd) && tileX % 2 < 1) ||
-						(renderParam.MapStaggerIndex.Equals(StaggerIndex.Even) && tileX % 2 > 0))
-					{
-						// Even row in Odd Staggered Maps
-						// Odd row in Even Staggered Maps
-						pos.x = tileX * (tileDisplacement / (float)tileSet.TileWidth);
-						pos.y = (-tileY - 1) * (renderParam.TileHeight / (float)tileSet.TileHeight) * ((float)tileSet.TileHeight / (float)tileSet.TileWidth);
-					}
-					else
-					{
-						// Odd row in Odd Staggered Maps
-						// Even row in Even Staggered Maps
-						pos.x = tileX * (tileDisplacement / (float)tileSet.TileWidth);
-						pos.y = (-tileY - 1) * (renderParam.TileHeight / (float)tileSet.TileHeight) * ((float)tileSet.TileHeight / (float)tileSet.TileWidth) - (BaseMap.MapRenderParameter.TileHeight / (float)tileSet.TileHeight) / 2.0f * ((float)tileSet.TileHeight / (float)tileSet.TileWidth);
-					}
+					// Odd row
+					pos.x = tileX * (BaseMap.TileWidth / (float)tileSet.TileWidth) + (BaseMap.TileWidth / (float)tileSet.TileWidth) / 2.0f;
+					pos.y = (-tileY - 2) * (BaseMap.TileHeight / 2.0f / (float)tileSet.TileHeight) * ((float)tileSet.TileHeight / (float)tileSet.TileWidth);
 				}
 			}
 
 			// Add TileSet Tile Offset
-			pos.x += tileSet.TileOffsetX / (float)renderParam.TileWidth;
-			pos.y += tileSet.TileOffsetY / (float)renderParam.TileHeight;
+			pos.x += tileSet.TileOffsetX / (float)BaseMap.TileWidth;
+			pos.y += tileSet.TileOffsetY / (float)BaseMap.TileWidth;
 
 			return pos;
 		}
 
 		void CreateTileGameObject(Tile t, int x, int y)
 		{
-			// if this tile contains the prefab porperty, then generate the prefab
-			if (t.HasProperty(Map.Property_PrefabName))
-			{
-				MapObject m = new MapObject(t.CurrentID.ToString(), string.Empty, new Rect(x, y, 1, 1), t.Properties, t.OriginalID, null, 0, null);
-				BaseMap.GeneratePrefab(m, XUniTMXConfiguration.Instance.GetTilePrefabsAnchorPoint(), LayerGameObject);
-				return;
-			}
 			// Create Tile's GameObject
-            if(LayerMaterial == null)
-			    t.CreateTileObject(Name + "[" + x + ", " + y + "]",
-				    LayerGameObject.transform,
-				    Name,
-				    BaseMap.DefaultSortingOrder + BaseMap.GetSortingOrder(x, y),
-				    GetTileWorldPosition(x, y, t.TileSet),
-				    BaseMaterials,
-				    Opacity);
-            else
-                t.CreateTileObject(Name + "[" + x + ", " + y + "]",
-                    LayerGameObject.transform,
-                    Name,
-                    BaseMap.DefaultSortingOrder + BaseMap.GetSortingOrder(x, y),
-                    GetTileWorldPosition(x, y, t.TileSet),
-                    LayerMaterial,
-                    Opacity);
+			t.CreateTileObject(Name + "[" + x + ", " + y + "]",
+				LayerGameObject.transform,
+				Name,
+				BaseMap.DefaultSortingOrder + BaseMap.GetSortingOrder(x, y),
+				GetTileWorldPosition(x, y, t.TileSet),
+				BaseMaterials,
+				Opacity);
 
 			if (t.TileSet.AnimatedTiles.ContainsKey(t.OriginalID))
 			{
@@ -592,18 +455,14 @@ namespace X_UniTMX
 					}
 				}
 			}
-
-			MapExtensions.ApplyCustomProperties(t.TileGameObject, t);
 		}
 
-		Vector3 forward = Vector3.forward;
-		
-		// It is ugly, but for a better performance, vertices, triangles and normals lists are globals :X
-		void GetVerticesForTile(Tile t, int x, int y, int preVertexCount)
+		void GetVerticesForTile(Tile t, int x, int y, int preVertexCount, out Vector3[] vertices, out int[] triangles)
 		{
+			vertices = new Vector3[4];
 			Vector3 tilePos = GetTileWorldPosition(x, y, t.TileSet);
-			float tileHeightInUnits = (t.Source.height + XUniTMXConfiguration.Instance.PixelCorrection) / (float)BaseMap.MapRenderParameter.TileWidth;
-			float tileWidthInUnits = (t.Source.width + XUniTMXConfiguration.Instance.PixelCorrection) / (float)BaseMap.MapRenderParameter.TileWidth;
+			float tileHeightInUnits = t.Source.height / (float)BaseMap.TileWidth;
+			float tileWidthInUnits = t.Source.width / (float)BaseMap.TileWidth;
 
 			// normal vertices:
 			// 1 ----- 3
@@ -611,23 +470,14 @@ namespace X_UniTMX
 			// |   \   |
 			// |     \ |
 			// 0 ----- 2
-			vertices.Add(tilePos);
-			vertices.Add(tilePos + new Vector3(0, tileHeightInUnits));
-			vertices.Add(tilePos + new Vector3(tileWidthInUnits, 0));
-			vertices.Add(tilePos + new Vector3(tileWidthInUnits, tileHeightInUnits));
-			
-			int preTrianglesCount = triangles.Count;
-			triangles.Add(preVertexCount);
-			triangles.Add(preVertexCount + 1);
-			triangles.Add(preVertexCount + 2);
-			triangles.Add(preVertexCount + 2);
-			triangles.Add(preVertexCount + 1);
-			triangles.Add(preVertexCount + 3);
-
-			normals.Add(forward);
-			normals.Add(forward);
-			normals.Add(forward);
-			normals.Add(forward);
+			vertices[0] = tilePos;
+			vertices[1] = tilePos + new Vector3(0, tileHeightInUnits);
+			vertices[2] = tilePos + new Vector3(tileWidthInUnits, 0);
+			vertices[3] = tilePos + new Vector3(tileWidthInUnits, tileHeightInUnits);
+			triangles = new int[] {
+					preVertexCount    , preVertexCount + 1, preVertexCount + 2,
+					preVertexCount + 2, preVertexCount + 1, preVertexCount + 3,
+				};
 
 			// Then, rotate / flip if needed
 			if (t.SpriteEffects != null)
@@ -641,47 +491,31 @@ namespace X_UniTMX
 					Vector3 flipAnchor = tilePos + new Vector3(0.5f, tileHeightInUnits / 2.0f);
 					Vector3 rotateAnchor = tilePos;
 
-					Vector3 z90Degrees = new Vector3(0, 0, 90);
-
 					if (t.SpriteEffects.flippedHorizontally == true &&
 					   t.SpriteEffects.flippedVertically == false &&
 					   t.SpriteEffects.flippedAntiDiagonally == false)
 					{
-						for (int i = preVertexCount; i < vertices.Count; i++)
+						for (int i = 0; i < vertices.Length; i++)
 						{
 							vertices[i] = vertices[i].FlipPointHorizontally(flipAnchor);
 						}
-						
-						triangles[preTrianglesCount] = preVertexCount + 1;
-						triangles[preTrianglesCount + 1] = preVertexCount;
-						triangles[preTrianglesCount + 2] = preVertexCount + 2;
-						triangles[preTrianglesCount + 3] = preVertexCount + 1;
-						triangles[preTrianglesCount + 4] = preVertexCount + 2;
-						triangles[preTrianglesCount + 5] = preVertexCount + 3;
 					}
 
 					if (t.SpriteEffects.flippedHorizontally == false &&
 					   t.SpriteEffects.flippedVertically == true &&
 					   t.SpriteEffects.flippedAntiDiagonally == false)
 					{
-						for (int i = preVertexCount; i < vertices.Count; i++)
+						for (int i = 0; i < vertices.Length; i++)
 						{
 							vertices[i] = vertices[i].FlipPointVertically(flipAnchor);
 						}
-						
-						triangles[preTrianglesCount] = preVertexCount + 1;
-						triangles[preTrianglesCount + 1] = preVertexCount;
-						triangles[preTrianglesCount + 2] = preVertexCount + 2;
-						triangles[preTrianglesCount + 3] = preVertexCount + 1;
-						triangles[preTrianglesCount + 4] = preVertexCount + 2;
-						triangles[preTrianglesCount + 5] = preVertexCount + 3;
 					}
 
 					if (t.SpriteEffects.flippedHorizontally == true &&
 					   t.SpriteEffects.flippedVertically == true &&
 					   t.SpriteEffects.flippedAntiDiagonally == false)
 					{
-						for (int i = preVertexCount; i < vertices.Count; i++)
+						for (int i = 0; i < vertices.Length; i++)
 						{
 							vertices[i] = vertices[i].FlipPointDiagonally(flipAnchor);
 						}
@@ -692,28 +526,20 @@ namespace X_UniTMX
 					   t.SpriteEffects.flippedAntiDiagonally == true)
 					{
 						flipAnchor = tilePos + new Vector3(0, 0.5f);
-
-						for (int i = preVertexCount; i < vertices.Count; i++)
+						for (int i = 0; i < vertices.Length; i++)
 						{
-							vertices[i] = vertices[i].RotatePoint(rotateAnchor, z90Degrees);
+							vertices[i] = vertices[i].RotatePoint(rotateAnchor, new Vector3(0, 0, 90));
 							vertices[i] = vertices[i].FlipPointVertically(flipAnchor) + new Vector3(ratioHW, 0);
 						}
-
-						triangles[preTrianglesCount] = preVertexCount + 1;
-						triangles[preTrianglesCount + 1] = preVertexCount;
-						triangles[preTrianglesCount + 2] = preVertexCount + 2;
-						triangles[preTrianglesCount + 3] = preVertexCount + 1;
-						triangles[preTrianglesCount + 4] = preVertexCount + 2;
-						triangles[preTrianglesCount + 5] = preVertexCount + 3;
 					}
 
 					if (t.SpriteEffects.flippedHorizontally == true &&
 					   t.SpriteEffects.flippedVertically == false &&
 					   t.SpriteEffects.flippedAntiDiagonally == true)
 					{
-						for (int i = preVertexCount; i < vertices.Count; i++)
+						for (int i = 0; i < vertices.Length; i++)
 						{
-							vertices[i] = vertices[i].RotatePoint(rotateAnchor, -z90Degrees) + Vector3.up;
+							vertices[i] = vertices[i].RotatePoint(rotateAnchor, new Vector3(0, 0, -90)) + Vector3.up;
 						}
 					}
 
@@ -721,9 +547,9 @@ namespace X_UniTMX
 					   t.SpriteEffects.flippedVertically == true &&
 					   t.SpriteEffects.flippedAntiDiagonally == true)
 					{
-						for (int i = preVertexCount; i < vertices.Count; i++)
+						for (int i = 0; i < vertices.Length; i++)
 						{
-							vertices[i] = vertices[i].RotatePoint(rotateAnchor, z90Degrees) + new Vector3(ratioHW, 0);
+							vertices[i] = vertices[i].RotatePoint(rotateAnchor, new Vector3(0, 0, 90)) + new Vector3(ratioHW, 0);
 						}
 					}
 
@@ -732,28 +558,15 @@ namespace X_UniTMX
 					   t.SpriteEffects.flippedAntiDiagonally == true)
 					{
 						flipAnchor = tilePos + new Vector3(0, -0.5f);
-
-						for (int i = preVertexCount; i < vertices.Count; i++)
+						for (int i = 0; i < vertices.Length; i++)
 						{
-							vertices[i] = vertices[i].RotatePoint(rotateAnchor, -z90Degrees);
+							vertices[i] = vertices[i].RotatePoint(rotateAnchor, new Vector3(0, 0, -90));
 							vertices[i] = vertices[i].FlipPointVertically(flipAnchor) + Vector3.up;
 						}
-
-						triangles[preTrianglesCount] = preVertexCount + 1;
-						triangles[preTrianglesCount + 1] = preVertexCount;
-						triangles[preTrianglesCount + 2] = preVertexCount + 2;
-						triangles[preTrianglesCount + 3] = preVertexCount + 1;
-						triangles[preTrianglesCount + 4] = preVertexCount + 2;
-						triangles[preTrianglesCount + 5] = preVertexCount + 3;
 					}
 				}
 			}
 		}
-
-		List<Vector3> vertices = new List<Vector3>();
-		List<int> triangles = new List<int>();
-		List<Vector2> uv = new List<Vector2>();
-		List<Vector3> normals = new List<Vector3>();
 
 		void CreateLayerMesh(int startX, int endX, int startY, int endY, int directionX, int directionY)
 		{
@@ -775,13 +588,11 @@ namespace X_UniTMX
 				MeshFilter tileSetMeshFilter = tileSetGameObject.AddComponent<MeshFilter>();
 				MeshRenderer tileSetMeshRenderer = tileSetGameObject.AddComponent<MeshRenderer>();
 
+				List<Vector3> vertices = new List<Vector3>();
+				List<int> triangles = new List<int>();
+				List<Vector2> uv = new List<Vector2>();
+				List<Vector3> normals = new List<Vector3>();
 				UInt16 vertexCount = 0;
-				Transform trans;
-
-				vertices.Clear();
-				triangles.Clear();
-				uv.Clear();
-				normals.Clear();
 
 				Tile t;
 				for (int x = startX;
@@ -802,22 +613,30 @@ namespace X_UniTMX
 								continue;
 							}
 
-							// if this tile contains the prefab porperty, then generate the prefab
-							if (t.HasProperty(Map.Property_PrefabName))
-							{
-								MapObject m = new MapObject(t.CurrentID.ToString(), string.Empty, new Rect(x, y, 1, 1), t.Properties, t.OriginalID, null, 0, null);
-								BaseMap.GeneratePrefab(m, XUniTMXConfiguration.Instance.GetTilePrefabsAnchorPoint(), LayerGameObject);
-								continue;
-							}
+							Vector3[] verts = new Vector3[4];
+							int[] tris = new int[6];
 
-							GetVerticesForTile(t, x, y, vertexCount);
+							GetVerticesForTile(t, x, y, vertexCount, out verts, out tris);
+
+							vertices.AddRange( verts );
+
+							triangles.AddRange( tris );
+
+							normals.AddRange(new Vector3[] {
+								Vector3.forward,
+								Vector3.forward,
+								Vector3.forward,
+								Vector3.forward
+							});
 
 							vertexCount += 4;
 
-							uv.Add(new Vector2(t.Source.xMin / (float)tileSet.Texture.width, t.Source.yMin / (float)tileSet.Texture.height));
-							uv.Add(new Vector2(t.Source.xMin / (float)tileSet.Texture.width, t.Source.yMax / (float)tileSet.Texture.height));
-							uv.Add(new Vector2(t.Source.xMax / (float)tileSet.Texture.width, t.Source.yMin / (float)tileSet.Texture.height));
-							uv.Add(new Vector2(t.Source.xMax / (float)tileSet.Texture.width, t.Source.yMax / (float)tileSet.Texture.height));
+							uv.AddRange(new Vector2[] {
+								new Vector2((t.Source.xMin + errorCorrection) / (float)tileSet.Texture.width, (t.Source.yMin + errorCorrection) / (float)tileSet.Texture.height),
+								new Vector2((t.Source.xMin + errorCorrection) / (float)tileSet.Texture.width, (t.Source.yMax - errorCorrection) / (float)tileSet.Texture.height),
+								new Vector2((t.Source.xMax - errorCorrection) / (float)tileSet.Texture.width, (t.Source.yMin + errorCorrection) / (float)tileSet.Texture.height),
+								new Vector2((t.Source.xMax - errorCorrection) / (float)tileSet.Texture.width, (t.Source.yMax - errorCorrection) / (float)tileSet.Texture.height)
+							});
 
 							// Check if we reached Unity's mesh maximum number of vertices
 							if (vertexCount >= maxVerticesNumber)
@@ -828,39 +647,21 @@ namespace X_UniTMX
 								tileSetMesh.triangles = triangles.ToArray();
 								tileSetMesh.normals = normals.ToArray();
 								tileSetMesh.Optimize();
-								tileSetMesh.RecalculateNormals();
 
 								tileSetMeshFilter.mesh = tileSetMesh;
 
-								trans = tileSetGameObject.transform;
-								trans.parent = LayerGameObject.transform;
-								trans.localPosition = Vector3.zero;
-								trans.localRotation = Quaternion.identity;
-								trans.localScale = Vector3.one;
+								tileSetGameObject.transform.parent = LayerGameObject.transform;
 								tileSetGameObject.isStatic = true;
-								MapExtensions.ApplyCustomProperties(tileSetGameObject, this);
 								LayerGameObjects.Add(tileSetGameObject);
 
-                                if (LayerMaterial == null)
-                                {
-                                    for (int k = 0; k < BaseMaterials.Count; k++)
-                                    {
-                                        if (BaseMaterials[k].mainTexture.name == tileSet.Texture.name)
-                                            tileSetMeshRenderer.sharedMaterial = BaseMaterials[k];
-                                    }
-                                }
-                                else
-                                {
-                                    tileSetMeshRenderer.sharedMaterial = LayerMaterial;
-                                }
+								for (int k = 0; k < BaseMaterials.Count; k++)
+								{
+									if (BaseMaterials[k].mainTexture.name == tileSet.Texture.name)
+										tileSetMeshRenderer.sharedMaterial = BaseMaterials[k];
+								}
 								// Use Layer's name as Sorting Layer
 								tileSetMeshRenderer.sortingLayerName = Name;
 								tileSetMeshRenderer.sortingOrder = BaseMap.DefaultSortingOrder;
-#if UNITY_5
-								tileSetMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-#else
-								tileSetMeshRenderer.castShadows = false;
-#endif
 
 								vertexCount = 0;
 								tileSetGameObject = new GameObject(string.Concat(Name, "_", tileSet.Name, "_", count.ToString()));
@@ -881,37 +682,20 @@ namespace X_UniTMX
 				tileSetMesh.triangles = triangles.ToArray();
 				tileSetMesh.normals = normals.ToArray();
 				tileSetMesh.Optimize();
-				tileSetMesh.RecalculateNormals();
 
 				tileSetMeshFilter.mesh = tileSetMesh;
 
-                if (LayerMaterial == null)
-                {
-                    for (int k = 0; k < BaseMaterials.Count; k++)
-                    {
-                        if (BaseMaterials[k].mainTexture.name == tileSet.Texture.name)
-                            tileSetMeshRenderer.sharedMaterial = BaseMaterials[k];
-                    }
-                }
-                else
-                {
-                    tileSetMeshRenderer.sharedMaterial = LayerMaterial;
-                }
+				for (int k = 0; k < BaseMaterials.Count; k++)
+				{
+					if (BaseMaterials[k].mainTexture.name == tileSet.Texture.name)
+						tileSetMeshRenderer.sharedMaterial = BaseMaterials[k];
+				}
 				// Use Layer's name as Sorting Layer
 				tileSetMeshRenderer.sortingLayerName = Name;
 				tileSetMeshRenderer.sortingOrder = BaseMap.DefaultSortingOrder;
-#if UNITY_5
-				tileSetMeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-#else
-				tileSetMeshRenderer.castShadows = false;
-#endif
-				trans = tileSetGameObject.transform;
-				trans.parent = LayerGameObject.transform;
-				trans.localPosition = Vector3.zero;
-				trans.localRotation = Quaternion.identity;
-				trans.localScale = Vector3.one;
+
 				tileSetGameObject.isStatic = true;
-				MapExtensions.ApplyCustomProperties(tileSetGameObject, this);
+				tileSetGameObject.transform.parent = LayerGameObject.transform;
 				LayerGameObjects.Add(tileSetGameObject);
 			}
 		}
@@ -944,8 +728,7 @@ namespace X_UniTMX
 				{
 					Tiles[x, y].TileSprite = t.TileSprite;
 					Tiles[x, y].CurrentID = t.OriginalID;
-					SpriteRenderer s = Tiles[x, y].TileGameObject.GetComponent<SpriteRenderer>();
-					s.sprite = t.TileSprite;
+					(Tiles[x, y].TileGameObject.GetComponent<Renderer>() as SpriteRenderer).sprite = t.TileSprite;
 				}
 				else
 				{
@@ -999,8 +782,7 @@ namespace X_UniTMX
 				{
 					Tiles[x, y].TileSprite = t.TileSprite;
 					Tiles[x, y].CurrentID = t.OriginalID;
-					SpriteRenderer s = Tiles[x, y].TileGameObject.GetComponent<SpriteRenderer>();
-					s.sprite = t.TileSprite;
+					(Tiles[x, y].TileGameObject.GetComponent<Renderer>() as SpriteRenderer).sprite = t.TileSprite;
 				}
 				else
 				{

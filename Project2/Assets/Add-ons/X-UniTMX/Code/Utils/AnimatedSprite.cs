@@ -83,28 +83,20 @@ namespace X_UniTMX.Utils
 		/// <summary>
 		/// This Animation's SpriteAnimationMode
 		/// </summary>
-#if UNITY_4_5 || UNITY_4_6 || UNITY_5
 		[Tooltip("Animation Loop Type")]
-#endif
 		public SpriteAnimationMode AnimationMode = SpriteAnimationMode.LOOP;
 		/// <summary>
 		/// This Animation's speed scale. 2 = 2 times faster, 0.5 = half-speed
 		/// </summary>
-#if UNITY_4_5 || UNITY_4_6 || UNITY_5
 		[Tooltip("Animation speed scale")]
-#endif
 		public float AnimationSpeedScale = 1;
 		/// <summary>
 		/// true to automatically play this AnimatedSprite when it enter scene
 		/// </summary>
-#if UNITY_4_5 || UNITY_4_6 || UNITY_5
 		[Tooltip("Automatically starts animation when this GameObject enters the scene?")]
-#endif
 		public bool PlayAutomatically = true;
 
-#if UNITY_4_5 || UNITY_4_6 || UNITY_5
 		[Tooltip("Automatically disables this GameObject when the animation finishes if set to true")]
-#endif
 		/// <summary>
 		/// Automatically disables this GameObject when the animation finishes if set to true
 		/// </summary>
@@ -115,12 +107,6 @@ namespace X_UniTMX.Utils
 		/// </summary>
 		public bool DestroyOnAutoRemove = false;
 
-		/// <summary>
-		/// If set to True, the script will use Time.realtimeSinceStartup instead of Time.deltaTime
-		/// </summary>
-		public bool IgnoreUnityTimeScale = false;
-
-		float _lastTime;
 
 		bool _canAnimate = true;
 		/// <summary>
@@ -214,7 +200,7 @@ namespace X_UniTMX.Utils
 		// Use this for initialization
 		void OnEnable()
 		{
-			_thisRenderer = GetComponent<SpriteRenderer>();
+			_thisRenderer = GetComponent<Renderer>() as SpriteRenderer;
 			_canAnimate = false;
 
 			if (AnimationMode == SpriteAnimationMode.BACKWARD || AnimationMode == SpriteAnimationMode.REVERSE_LOOP)
@@ -222,8 +208,6 @@ namespace X_UniTMX.Utils
 				_currentFrame = _spriteFrames.Count - 1;
 				_thisRenderer.sprite = _spriteFrames[_currentFrame].Sprite;
 			}
-
-			_lastTime = Time.realtimeSinceStartup;
 
 			if (PlayAutomatically)
 				Play();
@@ -234,12 +218,7 @@ namespace X_UniTMX.Utils
 		{
 			if (_canAnimate)
 			{
-				if (IgnoreUnityTimeScale)
-					_timer += (Time.realtimeSinceStartup - _lastTime) * AnimationSpeedScale;
-				else
-					_timer += Time.deltaTime * AnimationSpeedScale;
-				
-				_lastTime = Time.realtimeSinceStartup;
+				_timer += Time.deltaTime * AnimationSpeedScale;
 				if (_timer >= _spriteFrames[_currentFrame].GetDurationInSeconds())
 				{
 					_timer = 0;
@@ -289,7 +268,6 @@ namespace X_UniTMX.Utils
 		/// <summary>
 		/// Resets this animation, preparing it for a new play.
 		/// </summary>
-		[ContextMenu("Reset")]
 		public void Reset()
 		{
 			_canAnimate = true;
@@ -306,7 +284,6 @@ namespace X_UniTMX.Utils
 		/// <summary>
 		/// Starts this animation, calling Init event
 		/// </summary>
-		[ContextMenu("Play")]
 		public void Play()
 		{
 			Reset();
@@ -316,30 +293,22 @@ namespace X_UniTMX.Utils
 		/// <summary>
 		/// Completely stops this animation, calling End event. If AutoRemoveOnFinish is enabled this GameObject will also be disabled.
 		/// </summary>
-		[ContextMenu("Stop")]
 		public void Stop()
 		{
 			_canAnimate = false;
 			if (End != null) End(this);
-			if (Application.isEditor && !Application.isPlaying) // So the object does not get destroyed if running in the editor
-				return;
 			if (AutoRemoveOnFinish)
 			{
 				if (DestroyOnAutoRemove)
 					Destroy(gameObject);
 				else
-				{
 					gameObject.SetActive(false);
-					// Comment line above and use following line in case you are using UnityPatterns' ObjectPool
-					//ObjectPool.Recycle<AnimatedSprite>(this);
-				}
 			}
 		}
 
 		/// <summary>
 		/// Pause this animation
 		/// </summary>
-		[ContextMenu("Pause")]
 		public void Pause()
 		{
 			_canAnimate = false;
@@ -348,7 +317,6 @@ namespace X_UniTMX.Utils
 		/// <summary>
 		/// Resume this animation
 		/// </summary>
-		[ContextMenu("Resume")]
 		public void Resume()
 		{
 			// Can we resume?

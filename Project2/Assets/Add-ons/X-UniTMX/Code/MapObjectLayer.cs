@@ -71,8 +71,8 @@ namespace X_UniTMX
 
 				MapObject mapObjectContent = new MapObject(objectNode, this);
 
-				mapObjectContent = mapObjectContent.ScaleObject(tiledMap.MapRenderParameter) as MapObject;
-				
+				mapObjectContent.ScaleObject(tiledMap.TileWidth, tiledMap.TileHeight, tiledMap.Orientation);
+				mapObjectContent.Name = this.Name + "_" + mapObjectContent.Name;
 				// Object names need to be unique for our lookup system, but Tiled
 				// doesn't require unique names.
 				string objectName = mapObjectContent.Name;
@@ -100,14 +100,14 @@ namespace X_UniTMX
 			}
         }
 
-		internal MapObjectLayer(string name, int width, int height, int layerDepth, bool visible, float opacity, string tag, int physicsLayer, PropertyCollection properties, List<MapObject> initialObjects)
-			: base(name, width, height, layerDepth, visible, opacity, tag, physicsLayer, properties)
+		internal MapObjectLayer(string name, int width, int height, int layerDepth, bool visible, float opacity, PropertyCollection properties, List<MapObject> initialObjects)
+			: base(name, width, height, layerDepth, visible, opacity, properties)
 		{
 			Objects = new List<MapObject>();
 			initialObjects.ForEach(AddObject);
 		}
 
-		public void Generate(List<Material> materials, Action<Layer> onGeneratedMapObjectLayer = null, string tag = "", int physicsLayer = 0)
+		public void Generate(List<Material> materials, Action<Layer> onGeneratedMapObjectLayer = null)
 		{
 			if (IsGenerated)
 			{
@@ -117,8 +117,8 @@ namespace X_UniTMX
 			}
 			OnGeneratedLayer = onGeneratedMapObjectLayer;
 
-			base.Generate(tag, physicsLayer);
-			LayerGameObject.transform.localPosition = Vector3.zero;
+			base.Generate();
+			LayerGameObject.transform.localPosition = new Vector3(0, 0, this.LayerDepth);
 			LayerGameObject.isStatic = true;
 
 			TileObjects = new List<GameObject>();
@@ -166,9 +166,7 @@ namespace X_UniTMX
 		/// <returns>The MapObject with the given name.</returns>
 		public MapObject GetObject(string objectName)
 		{
-			MapObject obj = null;
-			namedObjects.TryGetValue(objectName, out obj);
-			return obj;
+			return namedObjects[objectName];
 		}
 
 		/// <summary>

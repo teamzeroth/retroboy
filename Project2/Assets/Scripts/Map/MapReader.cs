@@ -8,7 +8,7 @@ public class MapReader : MonoBehaviour {
 
     void Start() {
         TMComponent = GetComponent<TiledMapComponent>();
-        TMComponent.OnMapComplet = OnMapLoaded;
+        //TMComponent.OnMapComplet = OnMapLoaded;
     }
 
     void OnMapLoaded(Map map) {
